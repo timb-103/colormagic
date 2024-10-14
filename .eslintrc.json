@@ -1,0 +1,55 @@
+{
+  "root": true,
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "standard-with-typescript",
+    "plugin:vue/recommended",
+    "@vue/eslint-config-typescript"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "vue/no-v-model-argument": "off",
+    "vue/multi-word-component-names": "off",
+    "no-plusplus": "off",
+    "no-console": "error",
+    "prefer-template": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/semi": [
+      "error",
+      "always"
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^ignored?$"
+      }
+    ],
+    "@typescript-eslint/space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "import/order": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.test.ts",
+          "**/*.spec.ts",
+          "test/**/*",
+          "vite.config.ts"
+        ]
+      }
+    ]
+  }
+}

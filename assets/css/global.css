@@ -1,0 +1,20 @@
+body {
+    font-family: 'Inter', 'Body Fallback' !important;
+  }
+
+  h1 {
+    @apply text-4xl font-extrabold mb-4
+  }
+  h2 {
+    @apply text-4xl font-extrabold mb-4
+  }
+  h3 {
+    @apply mb-4
+  }
+  h4 {
+    @apply mb-4
+  }
+
+  body {
+    color: #3C424D;
+  }

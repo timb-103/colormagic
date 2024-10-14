@@ -1,0 +1,45 @@
+{
+  "name": "colormagic",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "start": "node .output/server/index.mjs",
+    "typecheck": "nuxi typecheck"
+  },
+  "dependencies": {
+    "@apideck/better-ajv-errors": "0.3.6",
+    "@nuxt/ui": "2.18.7",
+    "@nuxtjs/google-fonts": "3.2.0",
+    "@nuxtjs/plausible": "1.0.2",
+    "@sinclair/typebox": "0.33.12",
+    "@tanstack/vue-query": "5.56.2",
+    "@vueuse/core": "^11.1.0",
+    "ajv": "8.17.1",
+    "ajv-formats": "3.0.1",
+    "got": "11.8.6",
+    "mongodb": "^6.9.0",
+    "nuxt": "3.13.2",
+    "openai": "4.65.0",
+    "pino": "8.16.1",
+    "pino-pretty": "10.2.3",
+    "yup": "1.4.0"
+  },
+  "overrides": {
+    "vue": "latest"
+  },
+  "devDependencies": {
+    "@types/twitter-text": "3.1.10",
+    "@vue/eslint-config-typescript": "12.0.0",
+    "eslint": "8.56.0",
+    "eslint-config-standard-with-typescript": "43.0.1",
+    "eslint-plugin-vue": "9.20.1",
+    "nuxt-og-image": "3.0.2",
+    "typescript": "5.6.2",
+    "vue-tsc": "2.1.6"
+  }
+}
