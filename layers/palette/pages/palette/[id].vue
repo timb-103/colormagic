@@ -7,41 +7,64 @@
 
     <div v-else-if="data">
       <div>
+        <!-- title -->
         <h1>{{ data?.text }}</h1>
 
+        <!-- list of colors -->
         <ul class="flex overflow-hidden mb-8">
           <li
             v-for="(item, index) in colors"
             :key="index"
             class="w-full"
           >
-            <button
+            <!-- color button -->
+            <div
               :style="{ background: item }"
-              class="w-full h-48 shadow-md mb-2"
-            />
-            <p
-              class="text-base font-semibold mb-2"
-              :style="{color: item}"
+              class="w-full h-48 relative"
             >
-              {{ ntc.name(item)[1] }}
-            </p>
-            <UButton
-              size="2xs"
-              class="font-semibold mb-2"
-              icon="i-heroicons-document-duplicate"
-            >
-              {{ item }}
-            </UButton>
-            <UButton
-              size="2xs"
-              class="font-semibold"
-              icon="i-heroicons-document-duplicate"
-            >
-              {{ rgbToString(hexToRgb(item)) }}
-            </UButton>
+              <UTooltip
+                :text="`Generate a ${ntc.name(item)[1].toString()} palette`"
+                class="bottom-2 left-2 absolute"
+              >
+                <UButton
+                  size="2xs"
+
+                  icon="i-heroicons-sparkles"
+                  :label="ntc.name(item)[1].toString()"
+                />
+              </UTooltip>
+            </div>
+
+            <div class="border-l border-r border-b py-2">
+              <!-- hex color button -->
+              <UTooltip text="Click to copy hex code">
+                <UButton
+                  size="2xs"
+                  variant="ghost"
+                  color="gray"
+                  class="font-semibold"
+                >
+                  {{ item }}
+                </UButton>
+              </UTooltip>
+
+              <!-- rgb color button -->
+              <UTooltip text="Click to copy rgb code">
+                <UButton
+                  size="2xs"
+                  variant="ghost"
+                  color="gray"
+                  class="font-semibold"
+                >
+                  {{ rgbToString(hexToRgb(item)) }}
+                </UButton>
+              </UTooltip>
+            </div>
           </li>
         </ul>
 
+        <!-- arrange sliders-->
+        <!-- brightness -->
         <div>
           <p class="font-semibold text-sm">
             Brigthness
@@ -52,6 +75,8 @@
             :max="100"
           />
         </div>
+
+        <!-- saturation -->
         <div>
           <p class="font-semibold text-sm">
             Saturation
@@ -62,6 +87,8 @@
             :max="100"
           />
         </div>
+
+        <!-- warmth -->
         <div>
           <p class="font-semibold text-sm">
             Warmth
@@ -83,7 +110,7 @@ import ntc from '~/layers/palette/utils/ntc.util';
 const { params } = useRoute();
 const id = ref(typeof params.id === 'string' ? params.id : undefined);
 
-const { data, isFetching, isError } = usePalette(id);
+const { data, isError } = usePalette(id);
 
 const brightness = ref(0);
 const saturation = ref(0);
