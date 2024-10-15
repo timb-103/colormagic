@@ -1,7 +1,7 @@
 import { type Static, Type } from '@sinclair/typebox';
 
 export const PaletteDtoSchema = Type.Object({
-  id: Type.String(),
+  id: Type.String({ pattern: '^[0-9a-fA-F]{24}$' }),
   colors: Type.Array(Type.String(), { minItems: 5, maxItems: 5 }),
   text: Type.String()
 });
@@ -9,7 +9,7 @@ export const PaletteDtoSchema = Type.Object({
 export type PaletteDto = Static<typeof PaletteDtoSchema>;
 
 export const PaletteInputDtoSchema = Type.Object({
-  id: Type.String()
+  id: PaletteDtoSchema.properties.id
 });
 
 export type PaletteInputDto = Static<typeof PaletteInputDtoSchema>;

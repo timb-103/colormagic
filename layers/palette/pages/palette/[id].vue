@@ -236,6 +236,10 @@ const { copy } = useClipboard();
 
 await suspense();
 
+if (data.value === undefined) {
+  throw createError({ statusCode: 404 });
+}
+
 const title = computed(() => `${data.value?.text ?? 'Loading...'} | ColorMagic | AI Color Palette Generator`);
 const ogImageUrl = computed(() => (data.value !== undefined ? formatOgUrl(data.value.colors, data.value.text) : ''));
 const description = 'ColorMagic is a color palette generator with AI. Generate colors from a keyword or image you enter.';
@@ -280,18 +284,6 @@ const arrangedColors = computed(() => arrangeColors(state.value.colors, {
   warmth: warmth.value
 }));
 
-// function setArrangeColors(): void {
-//   if (state.value.colors === undefined) {
-//     return;
-//   }
-
-//   state.value.colors = arrangeColors(state.value.colors, {
-//     brightness: brightness.value,
-//     saturation: saturation.value,
-//     warmth: warmth.value
-//   });
-// }
-
 function resetArrange(): void {
   brightness.value = 0;
   saturation.value = 0;
@@ -303,7 +295,7 @@ function resetArrange(): void {
 }
 
 function onSubmit(event: FormSubmitEvent<Form>): void {
-  create({ prompt: event.data.name, colors: event.data.colors }, {
+  create({ prompt: event.data.name, colors: arrangedColors.value }, {
     onError: (err) => {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
