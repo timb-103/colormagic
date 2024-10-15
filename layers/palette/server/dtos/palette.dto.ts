@@ -2,18 +2,7 @@ import { type Static, Type } from '@sinclair/typebox';
 
 export const PaletteDtoSchema = Type.Object({
   id: Type.String(),
-  colors: Type.Tuple([
-    Type.String(),
-    Type.String(),
-    Type.String(),
-    Type.String(),
-    Type.String()
-  ]),
-  arrange: Type.Object({
-    brightness: Type.Number(),
-    saturation: Type.Number(),
-    warmth: Type.Number()
-  }),
+  colors: Type.Array(Type.String(), { minItems: 5, maxItems: 5 }),
   text: Type.String()
 });
 
@@ -26,7 +15,8 @@ export const PaletteInputDtoSchema = Type.Object({
 export type PaletteInputDto = Static<typeof PaletteInputDtoSchema>;
 
 export const CreatePaletteInputDtoSchema = Type.Object({
-  prompt: Type.String()
+  prompt: Type.String(),
+  colors: Type.Optional(PaletteDtoSchema.properties.colors)
 });
 
 export type CreatePaletteInputDto = Static<typeof CreatePaletteInputDtoSchema>;

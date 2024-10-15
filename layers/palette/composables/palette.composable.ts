@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useMutation, useQuery } from '@tanstack/vue-query';
+import type { CreatePaletteInputDto } from '../server/dtos/palette.dto';
 import { PlausibleEventName } from '~/layers/plausible/types';
 import { sendPlausibleEvent } from '~/layers/plausible/utils/plausible.util';
 
@@ -22,11 +23,12 @@ export function usePalette(id: Ref<string | undefined>) {
 
 export function useCreatePalette() {
   return useMutation({
-    mutationFn: async (prompt: string) => {
+    mutationFn: async (params: CreatePaletteInputDto) => {
       const response = await $fetch('/api/palette/create', {
         method: 'POST',
         body: {
-          prompt
+          prompt: params.prompt,
+          colors: params.colors
         }
       });
 

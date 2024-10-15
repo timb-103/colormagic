@@ -126,7 +126,7 @@ function generateSamplePrompt(): void {
 }
 
 function onSubmit(event: FormSubmitEvent<Form>): void {
-  create(event.data.prompt, {
+  create({ prompt: event.data.prompt }, {
     onError: (err) => {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
@@ -137,7 +137,7 @@ function onSubmit(event: FormSubmitEvent<Form>): void {
 }
 
 function onClickExample(prompt: string): void {
-  create(prompt, {
+  create({ prompt }, {
     onError: (err) => {
       notifications.addError(err.message ?? 'Error creating palette.');
     },

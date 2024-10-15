@@ -149,6 +149,45 @@
           />
         </div>
 
+        <!-- save form -->
+        <!-- form -->
+        <div
+          v-if="brightness !== 0 || saturation !== 0 || warmth !== 0"
+          class="mt-4"
+        >
+          <p class="text-base font-semibold">
+            Save these colors as a new palette:
+          </p>
+          <UForm
+            :state="state"
+            :schema="FormSchema"
+            class="space-y-4"
+            @submit="onSubmit"
+          >
+            <!-- prompt -->
+            <UFormGroup name="name">
+              <UInput
+                v-model="state.name"
+                placeholder="Enter name for new palette"
+              />
+            </UFormGroup>
+
+            <!-- submit button -->
+            <div class="flex gap-2 items-center">
+              <UButton
+                label="Reset"
+                @click="resetArrange()"
+              />
+              <UButton
+                type="submit"
+                color="primary"
+                label="Create Palette"
+                :loading="isPending"
+              />
+            </div>
+          </UForm>
+        </div>
+
         <!-- share buttons -->
         <div class="mt-8">
           <p class="text-sm font-semibold mb-2">
@@ -166,7 +205,9 @@
 </template>
 
 <script setup lang="ts">
+import { object, type InferType, string } from 'yup';
 import { useClipboard } from '@vueuse/core';
+import type { FormSubmitEvent } from '#ui/types';
 import ntc from '~/layers/palette/utils/ntc.util';
 import { PlausibleEventName } from '~/layers/plausible/types';
 
@@ -195,6 +236,16 @@ useSeoMeta({
   }
 });
 
+const state = ref({
+  name: ''
+});
+
+const FormSchema = object({
+  name: string().required()
+});
+
+export type Form = InferType<typeof FormSchema>;
+
 const brightness = ref(0);
 const saturation = ref(0);
 const warmth = ref(0);
@@ -209,8 +260,25 @@ const colors = computed(() =>
     : []
 );
 
+function resetArrange(): void {
+  brightness.value = 0;
+  saturation.value = 0;
+  warmth.value = 0;
+}
+
+function onSubmit(event: FormSubmitEvent<Form>): void {
+  create({ prompt: event.data.name, colors: colors.value }, {
+    onError: (err) => {
+      notifications.addError(err.message ?? 'Error creating palette.');
+    },
+    onSuccess: (value) => {
+      void navigateTo(`/palette/${value.id}`);
+    }
+  });
+}
+
 function onClickExample(prompt: string): void {
-  create(prompt, {
+  create({ prompt }, {
     onError: (err) => {
       notifications.addError(err.message ?? 'Error creating palette.');
     },

@@ -5,7 +5,6 @@ export function mapPaletteEntityToDto(entity: PaletteEntity): PaletteDto {
   return {
     id: entity._id.toHexString(),
     colors: entity.colors,
-    arrange: entity.arrange,
     text: entity.text
   };
 }
