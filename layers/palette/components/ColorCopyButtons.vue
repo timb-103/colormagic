@@ -30,7 +30,6 @@
 
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core';
-// import ntc from '~/layers/palette/utils/ntc.util';
 import { PlausibleEventName } from '~/layers/plausible/types';
 
 export interface Props {
