@@ -129,7 +129,7 @@ useSeoMeta({
   description,
   ogTitle: title.value,
   ogDescription: description,
-  ogImageUrl,
+  ogImageUrl: `${useRuntimeConfig().public.siteUrl}${ogImageUrl.value}`,
   robots: {
     noindex: true
   }

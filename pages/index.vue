@@ -97,14 +97,14 @@ import type { FormSubmitEvent } from '#ui/types';
 import { samplePalettes } from '~/layers/common/utils/sample-palettes.util';
 
 const title = 'ColorMagic | AI Color Palette Generator';
-const description = 'ColorMagic is a color palette generator with AI. Generate colors from keyword for image of color you enter.';
+const description = 'ColorMagic is a color palette generator with AI. Enter any keyword and we\'ll generate a matching color palette.';
 
 useSeoMeta({
   title,
   description,
   ogTitle: title,
   ogDescription: description,
-  ogImageUrl: '/img/og.png'
+  ogImageUrl: `${useRuntimeConfig().public.siteUrl}/img/og.png`
 });
 
 const notifications = useNotifications();
