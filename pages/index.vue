@@ -22,11 +22,21 @@
     >
       <!-- prompt -->
       <UFormGroup name="prompt">
-        <UInput
-          v-model="state.prompt"
+        <UButtonGroup
           size="xl"
-          placeholder="Enter keywords for image or mood of color"
-        />
+          class="w-full"
+        >
+          <UInput
+            v-model="state.prompt"
+            size="xl"
+            class="w-full"
+            placeholder="Enter keywords for image or mood of color"
+          />
+          <UButton
+            icon="i-heroicons-arrow-path"
+            @click="generateSamplePrompt()"
+          />
+        </UButtonGroup>
       </UFormGroup>
 
       <!-- submit button -->
@@ -109,6 +119,11 @@ const FormSchema = object({
 });
 
 export type Form = InferType<typeof FormSchema>;
+
+function generateSamplePrompt(): void {
+  const prompts = getSamplePrompt('en');
+  state.value.prompt = prompts[Math.floor(Math.random() * prompts.length)];
+}
 
 function onSubmit(event: FormSubmitEvent<Form>): void {
   create(event.data.prompt, {
