@@ -1,6 +1,7 @@
 import type { PaletteDto } from '../dtos/palette.dto';
 import { mapCreatePalettePrompt, mapPaletteEntityToDto } from '../helpers/palette.helper';
 import type { PaletteRepository } from '../repositories/palette.repository';
+import { arrangeColors } from '../../utils/color-arrange.util';
 import type { AIService } from '~/layers/ai/server/services/ai.service';
 
 export class PaletteService {
@@ -32,8 +33,10 @@ export class PaletteService {
         colors.push(...(colorText.match(/#[0-9a-fA-F]{6}/g) ?? []));
       }
 
-      colorsNew = [...new Set(colors)].sort((a, b) => {
-        return parseInt(a.slice(1), 16) - parseInt(b.slice(1), 16);
+      colorsNew = arrangeColors([...new Set(colors)], {
+        brightness: 0,
+        saturation: 0,
+        warmth: 0
       });
     }
 

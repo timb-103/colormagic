@@ -13,10 +13,25 @@
         <!-- list of colors -->
         <ul class="flex overflow-hidden mb-4 sm:mb-8">
           <li
-            v-for="(item, index) in colors"
+            v-for="(item, index) in arrangedColors"
             :key="index"
             class="w-full"
           >
+            <div class="flex gap-2 items-center mb-1">
+              <!-- color picker -->
+              <ColorPicker
+                :initial-color="item"
+                @select="value => state.colors !== undefined ? state.colors[index] = value : null"
+              />
+
+              <!-- reset color button -->
+              <UButton
+                v-if="state.colors[index] !== data.colors[index]"
+                icon="i-heroicons-arrow-path"
+                size="xs"
+                @click="state.colors[index] = data.colors[index]"
+              />
+            </div>
             <!-- color button -->
             <div
               :style="{ background: item }"
@@ -72,7 +87,7 @@
         <!-- mobile colors list -->
         <ul class="sm:hidden flex flex-col mb-4 divide-y">
           <li
-            v-for="(item, index) in colors"
+            v-for="(item, index) in state.colors"
             :key="index"
             class="w-full items-center flex gap-2 py-1"
           >
@@ -151,8 +166,8 @@
 
         <!-- save form -->
         <!-- form -->
-        <div
-          v-if="brightness !== 0 || saturation !== 0 || warmth !== 0"
+        <UCard
+          v-if="hasChanges"
           class="mt-4"
         >
           <p class="text-base font-semibold">
@@ -186,7 +201,7 @@
               />
             </div>
           </UForm>
-        </div>
+        </UCard>
 
         <!-- share buttons -->
         <div class="mt-8">
@@ -205,7 +220,7 @@
 </template>
 
 <script setup lang="ts">
-import { object, type InferType, string } from 'yup';
+import { object, type InferType, string, array } from 'yup';
 import { useClipboard } from '@vueuse/core';
 import type { FormSubmitEvent } from '#ui/types';
 import ntc from '~/layers/palette/utils/ntc.util';
@@ -236,38 +251,59 @@ useSeoMeta({
   }
 });
 
-const state = ref({
-  name: ''
-});
-
 const FormSchema = object({
-  name: string().required()
+  name: string().required(),
+  colors: array(string().required()).required()
 });
 
 export type Form = InferType<typeof FormSchema>;
+
+const state = ref<Form>({
+  name: '',
+  colors: []
+});
 
 const brightness = ref(0);
 const saturation = ref(0);
 const warmth = ref(0);
 
-const colors = computed(() =>
-  data.value?.colors !== undefined
-    ? arrangeColors(data.value.colors, {
-      brightness: brightness.value,
-      saturation: saturation.value,
-      warmth: warmth.value
-    })
-    : []
-);
+const hasChanges = computed(() => {
+  return brightness.value !== 0 ||
+  saturation.value !== 0 ||
+  warmth.value !== 0 ||
+  (data.value !== undefined && JSON.stringify(data.value.colors) !== JSON.stringify(state.value.colors));
+});
+
+const arrangedColors = computed(() => arrangeColors(state.value.colors, {
+  brightness: brightness.value,
+  saturation: saturation.value,
+  warmth: warmth.value
+}));
+
+// function setArrangeColors(): void {
+//   if (state.value.colors === undefined) {
+//     return;
+//   }
+
+//   state.value.colors = arrangeColors(state.value.colors, {
+//     brightness: brightness.value,
+//     saturation: saturation.value,
+//     warmth: warmth.value
+//   });
+// }
 
 function resetArrange(): void {
   brightness.value = 0;
   saturation.value = 0;
   warmth.value = 0;
+
+  if (data.value?.colors !== undefined) {
+    state.value.colors = [...data.value.colors];
+  }
 }
 
 function onSubmit(event: FormSubmitEvent<Form>): void {
-  create({ prompt: event.data.name, colors: colors.value }, {
+  create({ prompt: event.data.name, colors: event.data.colors }, {
     onError: (err) => {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
@@ -298,4 +334,10 @@ function onCopyRgb(value: string): void {
   notifications.addSuccess(`Copied rgb color code ${value}`);
   sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_COPIED_RGB);
 }
+
+watch(data, (newValue) => {
+  if (newValue !== undefined) {
+    state.value.colors = [...newValue.colors];
+  }
+}, { immediate: true });
 </script>

@@ -1,10 +1,15 @@
 import type { PaletteDto } from '../dtos/palette.dto';
 import type { PaletteEntity } from '../entities/palette.entity';
+import { arrangeColors } from '../../utils/color-arrange.util';
 
 export function mapPaletteEntityToDto(entity: PaletteEntity): PaletteDto {
   return {
     id: entity._id.toHexString(),
-    colors: entity.colors,
+    colors: arrangeColors(entity.colors, {
+      brightness: 0,
+      saturation: 0,
+      warmth: 0
+    }),
     text: entity.text
   };
 }
