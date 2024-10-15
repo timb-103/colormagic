@@ -31,6 +31,8 @@
                   icon="i-heroicons-sparkles"
                   truncate
                   class="max-w-full"
+                  :loading="isPending"
+                  @click="onClickExample(ntc.name(item)[1].toString())"
                 >
                   <span class="hidden sm:block">{{ ntc.name(item)[1].toString() }}</span>
                 </UButton>
@@ -172,6 +174,7 @@ const { params } = useRoute();
 const id = ref(typeof params.id === 'string' ? params.id : undefined);
 
 const { data, suspense, isError } = usePalette(id);
+const { mutate: create, isPending } = useCreatePalette();
 const notifications = useNotifications();
 const { copy } = useClipboard();
 
@@ -205,6 +208,18 @@ const colors = computed(() =>
     })
     : []
 );
+
+function onClickExample(prompt: string): void {
+  create(prompt, {
+    onError: (err) => {
+      notifications.addError(err.message ?? 'Error creating palette.');
+    },
+    onSuccess: (value) => {
+      notifications.addSuccess(`Successfully created ${prompt} palette.`);
+      void navigateTo(`/palette/${value.id}`);
+    }
+  });
+}
 
 function onCopyHex(value: string): void {
   notifications.addSuccess(`Copied hex color code ${value}`);
