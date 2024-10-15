@@ -7,6 +7,12 @@
 
       <div class="text-gray-400 text-sm flex gap-4 items-center">
         <NuxtLink
+          to="mailto:hello@colormagic.app"
+          class="hover:text-primary"
+        >
+          Contact
+        </NuxtLink>
+        <NuxtLink
           to="/terms"
           class="hover:text-primary"
         >
