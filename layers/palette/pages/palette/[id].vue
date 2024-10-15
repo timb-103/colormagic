@@ -11,7 +11,7 @@
         <h1>{{ data?.text }}</h1>
 
         <!-- list of colors -->
-        <ul class="flex overflow-hidden mb-8">
+        <ul class="flex overflow-hidden mb-4 sm:mb-8">
           <li
             v-for="(item, index) in colors"
             :key="index"
@@ -29,14 +29,15 @@
                 <UButton
                   size="2xs"
                   icon="i-heroicons-sparkles"
-                  :label="ntc.name(item)[1].toString()"
                   truncate
                   class="max-w-full"
-                />
+                >
+                  <span class="hidden sm:block">{{ ntc.name(item)[1].toString() }}</span>
+                </UButton>
               </UTooltip>
             </div>
 
-            <div class="border-l border-r border-b py-2">
+            <div class="border-l hidden sm:block border-r border-b py-2">
               <!-- hex color button -->
               <UTooltip text="Click to copy hex code">
                 <UButton
@@ -66,17 +67,48 @@
           </li>
         </ul>
 
-        <!-- share buttons -->
-        <div class="mb-8">
-          <p class="text-sm font-semibold mb-2">
-            Share this palette to:
-          </p>
-          <CommonSocialShareButtons
-            type="text"
-            orientation="horizontal"
-            :text="`I generated a color palette for ${data.text ?? ''} with ColorMagic AI!`"
-          />
-        </div>
+        <!-- mobile colors list -->
+        <ul class="sm:hidden flex flex-col mb-4 divide-y">
+          <li
+            v-for="(item, index) in colors"
+            :key="index"
+            class="w-full items-center flex gap-2 py-1"
+          >
+            <!-- color button -->
+            <div
+              :style="{ background: item }"
+              class="w-6 h-6 rounded-full relative"
+            />
+
+            <div class="flex flex-col">
+              <!-- hex color button -->
+              <UTooltip text="Click to copy hex code">
+                <UButton
+                  size="2xs"
+                  variant="ghost"
+                  color="gray"
+                  class="font-semibold"
+                  @click="copy(item); onCopyHex(item)"
+                >
+                  {{ item }}
+                </UButton>
+              </UTooltip>
+
+              <!-- rgb color button -->
+              <UTooltip text="Click to copy rgb code">
+                <UButton
+                  size="2xs"
+                  variant="ghost"
+                  color="gray"
+                  class="font-semibold"
+                  @click="copy(rgbToString(hexToRgb(item))); onCopyRgb(rgbToString(hexToRgb(item)))"
+                >
+                  {{ rgbToString(hexToRgb(item)) }}
+                </UButton>
+              </UTooltip>
+            </div>
+          </li>
+        </ul>
 
         <!-- arrange sliders-->
         <!-- brightness -->
@@ -112,6 +144,18 @@
             v-model="warmth"
             :min="-100"
             :max="100"
+          />
+        </div>
+
+        <!-- share buttons -->
+        <div class="mt-8">
+          <p class="text-sm font-semibold mb-2">
+            Share this palette to:
+          </p>
+          <CommonSocialShareButtons
+            type="text"
+            orientation="horizontal"
+            :text="`I generated a color palette for ${data.text ?? ''} with ColorMagic AI!`"
           />
         </div>
       </div>
