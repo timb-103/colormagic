@@ -128,7 +128,10 @@ useSeoMeta({
   description,
   ogTitle: title.value,
   ogDescription: description,
-  ogImageUrl
+  ogImageUrl,
+  robots: {
+    noindex: true
+  }
 });
 
 const brightness = ref(0);
