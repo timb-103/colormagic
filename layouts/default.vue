@@ -28,6 +28,14 @@
 <script setup lang="ts">
 import { useLocalStorage } from '@vueuse/core';
 
+const { siteUrl } = useRuntimeConfig().public;
+const { path } = useRoute();
+
+useServerSeoMeta({
+  ogUrl: `${siteUrl}${path}`,
+  ogType: 'website'
+});
+
 onMounted(() => {
   /** @description hack to always set to light mode until we add dark mode properly */
   const colorMode = useLocalStorage('nuxt-color-mode', 'light');

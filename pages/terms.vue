@@ -147,4 +147,7 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: 'Terms | ColorMagic | AI Color Palette Generator'
+});
 </script>

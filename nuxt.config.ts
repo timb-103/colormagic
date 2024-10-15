@@ -15,8 +15,7 @@ export default defineNuxtConfig({
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
         { name: 'bingbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
-        { property: 'og:site_name', content: 'ColorMagic' },
-        { property: 'og:image', content: '/img/og.png' }
+        { property: 'og:site_name', content: 'ColorMagic' }
       ]
     }
   },
@@ -34,12 +33,6 @@ export default defineNuxtConfig({
   tailwindcss: {
     viewer: false
   },
-  site: {
-    url: 'https://colormagic.app'
-  },
-  nitro: {
-    compressPublicAssets: true
-  },
   googleFonts: {
     families: {
       Inter: [300, 400, 500, 600, 700, 800, 900]
@@ -51,10 +44,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     nodeEnv: process.env.NODE_ENV,
-    logLevel: process.env.LOG_LEVEL ?? 'debug'
-  },
-  routeRules: {
-
+    logLevel: process.env.LOG_LEVEL ?? 'debug',
+    public: {
+      siteUrl: process.env.SITE_URL ?? 'http://localhost:3000'
+    }
   },
   compatibilityDate: '2024-09-23'
 });

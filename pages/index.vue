@@ -5,7 +5,7 @@
         Generate your ideal color palette
       </h1>
       <p class="text-xl font-medium mb-4 max-w-xl">
-        ColorMagic is a color palette generator with AI. Generate colors from keyword for image of color you enter.
+        {{ description }}
       </p>
     </div>
 
@@ -79,6 +79,17 @@
 import { object, type InferType, string } from 'yup';
 import type { FormSubmitEvent } from '#ui/types';
 import { samplePalettes } from '~/layers/common/utils/sample-palettes.util';
+
+const title = 'ColorMagic | AI Color Palette Generator';
+const description = 'ColorMagic is a color palette generator with AI. Generate colors from keyword for image of color you enter.';
+
+useSeoMeta({
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description,
+  ogImageUrl: '/img/og.png'
+});
 
 const notifications = useNotifications();
 const { mutate: create, isPending } = useCreatePalette();

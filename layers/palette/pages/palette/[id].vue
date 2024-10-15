@@ -110,7 +110,21 @@ import ntc from '~/layers/palette/utils/ntc.util';
 const { params } = useRoute();
 const id = ref(typeof params.id === 'string' ? params.id : undefined);
 
-const { data, isError } = usePalette(id);
+const { data, suspense, isError } = usePalette(id);
+
+await suspense();
+
+const title = computed(() => `${data.value?.text ?? 'Loading...'} | ColorMagic | AI Color Palette Generator`);
+const ogImageUrl = computed(() => (data.value !== undefined ? formatOgUrl(data.value.colors, data.value.text) : ''));
+const description = 'ColorMagic is a color palette generator with AI. Generate colors from a keyword or image you enter.';
+
+useSeoMeta({
+  title,
+  description,
+  ogTitle: title.value,
+  ogDescription: description,
+  ogImageUrl
+});
 
 const brightness = ref(0);
 const saturation = ref(0);
@@ -118,7 +132,11 @@ const warmth = ref(0);
 
 const colors = computed(() =>
   data.value?.colors !== undefined
-    ? arrangeColors(data.value.colors, { brightness: brightness.value, saturation: saturation.value, warmth: warmth.value })
+    ? arrangeColors(data.value.colors, {
+      brightness: brightness.value,
+      saturation: saturation.value,
+      warmth: warmth.value
+    })
     : []
 );
 </script>

@@ -73,4 +73,7 @@
 </template>
 
 <script setup lang="ts">
+useHead({
+  title: 'Privacy | ColorMagic | AI Color Palette Generator'
+});
 </script>
