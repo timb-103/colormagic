@@ -123,7 +123,7 @@ if (data.value === undefined) {
 
 const title = computed(() => `${data.value?.text ?? 'Loading...'} | ColorMagic | AI Color Palette Generator`);
 const ogImageUrl = computed(() => (data.value !== undefined ? formatOgUrl(data.value.colors, data.value.text) : ''));
-const description = 'ColorMagic is a color palette generator with AI. Generate colors from a keyword or image you enter.';
+const description = 'ColorMagic is a color palette generator with AI. Enter any keyword and we\'ll generate a matching color palette.';
 
 useSeoMeta({
   title,

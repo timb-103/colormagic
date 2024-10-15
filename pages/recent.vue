@@ -47,6 +47,11 @@
 import { useSessionStorage, StorageSerializers } from '@vueuse/core';
 import type { PaletteModel } from '~/layers/palette/models/palette.model';
 
+useSeoMeta({
+  title: 'Recent | ColorMagic | AI Color Palette Generator',
+  description: 'ColorMagic is a color palette generator with AI. Enter any keyword and we\'ll generate a matching color palette.'
+});
+
 const session = useSessionStorage<Map<string, PaletteModel>>(
   'palettes:created',
   new Map(),
