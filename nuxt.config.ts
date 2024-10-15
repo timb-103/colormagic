@@ -27,7 +27,6 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxtjs/google-fonts',
-    'nuxt-og-image',
     '@nuxt/ui'
   ],
   tailwindcss: {

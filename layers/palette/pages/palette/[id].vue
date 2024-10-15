@@ -24,12 +24,14 @@
             >
               <UTooltip
                 :text="`Generate a ${ntc.name(item)[1].toString()} palette`"
-                class="bottom-2 left-2 absolute"
+                class="bottom-0 left-0 absolute p-2"
               >
                 <UButton
                   size="2xs"
                   icon="i-heroicons-sparkles"
                   :label="ntc.name(item)[1].toString()"
+                  truncate
+                  class="max-w-full"
                 />
               </UTooltip>
             </div>
