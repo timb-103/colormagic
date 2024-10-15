@@ -16,6 +16,9 @@ export default defineNuxtConfig({
         { name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
         { name: 'bingbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
         { property: 'og:site_name', content: 'ColorMagic' }
+      ],
+      script: [
+        { src: 'https://plausible.io/js/plausible.js', defer: true, 'data-domain': 'pallyy.com' }
       ]
     }
   },
@@ -27,7 +30,8 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxtjs/google-fonts',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@nuxtjs/plausible'
   ],
   tailwindcss: {
     viewer: false
