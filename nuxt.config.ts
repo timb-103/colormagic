@@ -42,13 +42,13 @@ export default defineNuxtConfig({
     typeCheck: 'build'
   },
   plausible: {
-    domain: process.env.SITE_URL ?? 'http://colormagic.app'
+    domain: process.env.SITE_URL ?? 'https://colormagic.app'
   },
   runtimeConfig: {
     nodeEnv: process.env.NODE_ENV,
     logLevel: process.env.LOG_LEVEL ?? 'debug',
     public: {
-      siteUrl: process.env.SITE_URL ?? 'http://colormagic.app'
+      siteUrl: process.env.SITE_URL ?? 'https://colormagic.app'
     }
   },
   compatibilityDate: '2024-09-23'
