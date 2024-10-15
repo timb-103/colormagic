@@ -28,7 +28,6 @@
               >
                 <UButton
                   size="2xs"
-
                   icon="i-heroicons-sparkles"
                   :label="ntc.name(item)[1].toString()"
                 />
@@ -43,6 +42,7 @@
                   variant="ghost"
                   color="gray"
                   class="font-semibold"
+                  @click="copy(item); onCopyHex(item)"
                 >
                   {{ item }}
                 </UButton>
@@ -55,6 +55,7 @@
                   variant="ghost"
                   color="gray"
                   class="font-semibold"
+                  @click="copy(rgbToString(hexToRgb(item))); onCopyRgb(rgbToString(hexToRgb(item)))"
                 >
                   {{ rgbToString(hexToRgb(item)) }}
                 </UButton>
@@ -105,12 +106,16 @@
 </template>
 
 <script setup lang="ts">
+import { useClipboard } from '@vueuse/core';
 import ntc from '~/layers/palette/utils/ntc.util';
+import { PlausibleEventName } from '~/layers/plausible/types';
 
 const { params } = useRoute();
 const id = ref(typeof params.id === 'string' ? params.id : undefined);
 
 const { data, suspense, isError } = usePalette(id);
+const notifications = useNotifications();
+const { copy } = useClipboard();
 
 await suspense();
 
@@ -139,4 +144,14 @@ const colors = computed(() =>
     })
     : []
 );
+
+function onCopyHex(value: string): void {
+  notifications.addSuccess(`Copied hex color code ${value}`);
+  sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_COPIED_HEX);
+}
+
+function onCopyRgb(value: string): void {
+  notifications.addSuccess(`Copied rgb color code ${value}`);
+  sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_COPIED_RGB);
+}
 </script>

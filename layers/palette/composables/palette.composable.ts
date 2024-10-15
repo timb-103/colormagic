@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useMutation, useQuery } from '@tanstack/vue-query';
+import { PlausibleEventName } from '~/layers/plausible/types';
+import { sendPlausibleEvent } from '~/layers/plausible/utils/plausible.util';
 
 const PALETTE_ROOT_KEY = 'palette';
 
@@ -27,6 +29,8 @@ export function useCreatePalette() {
           prompt
         }
       });
+
+      sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_CREATED);
 
       return response;
     }
