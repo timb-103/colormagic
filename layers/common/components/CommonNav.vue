@@ -3,8 +3,9 @@
     <div class="max-w-3xl mx-auto flex items-center justify-between p-4">
       <NuxtLink to="/">
         <img
+          width="128px"
+          height="20.4px"
           src="/img/HorizontalLogo.svg"
-          class="max-w-32"
         >
       </NuxtLink>
     </div>

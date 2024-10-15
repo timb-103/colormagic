@@ -1,42 +1,45 @@
 <template>
   <div>
+    <!-- header-->
     <div class="mb-8">
+      <!-- title -->
       <h1>
         Generate your ideal color palette
       </h1>
+
+      <!-- description-->
       <p class="text-xl font-medium mb-4 max-w-xl">
         {{ description }}
       </p>
     </div>
 
-    <div>
-      <UForm
-        :state="state"
-        :schema="FormSchema"
-        class="space-y-4"
-        @submit="onSubmit"
-      >
-        <!-- name -->
-        <UFormGroup name="prompt">
-          <UInput
-            v-model="state.prompt"
-            size="xl"
-            placeholder="Enter keywords for image or mood of color"
-          />
-        </UFormGroup>
-
-        <!-- submit button -->
-        <UButton
-          type="submit"
-          block
+    <!-- form -->
+    <UForm
+      :state="state"
+      :schema="FormSchema"
+      class="space-y-4"
+      @submit="onSubmit"
+    >
+      <!-- prompt -->
+      <UFormGroup name="prompt">
+        <UInput
+          v-model="state.prompt"
           size="xl"
-          class="mt-4"
-          color="primary"
-          label="Create Palette"
-          :loading="isPending"
+          placeholder="Enter keywords for image or mood of color"
         />
-      </UForm>
-    </div>
+      </UFormGroup>
+
+      <!-- submit button -->
+      <UButton
+        type="submit"
+        block
+        size="xl"
+        class="mt-4"
+        color="primary"
+        label="Create Palette"
+        :loading="isPending"
+      />
+    </UForm>
 
     <!-- examples -->
     <div class="max-w-3xl mt-8">
@@ -55,10 +58,13 @@
             @click="onClickExample(item.text.en)"
           >
             <span class="w-full flex rounded-lg relative overflow-hidden">
+              <!-- color name label -->
               <span class="bottom-2 left-2 bg-white absolute rounded-md flex items-center gap-2 px-2 py-1 font-semibold text-sm">
                 <UIcon name="i-heroicons-sparkles" />
                 {{ item.text.en }}
               </span>
+
+              <!-- colors -->
               <span
                 v-for="(color, colorIndex) in item.colors"
                 :key="colorIndex"

@@ -52,5 +52,10 @@ export default defineNuxtConfig({
       siteUrl: process.env.SITE_URL ?? 'http://colormagic.app'
     }
   },
+  routeRules: {
+    '/': {
+      prerender: true
+    }
+  },
   compatibilityDate: '2024-09-23'
 });
