@@ -21,15 +21,15 @@
               <!-- color picker -->
               <ColorPicker
                 :initial-color="item"
-                @select="value => state.colors !== undefined ? state.colors[index] = value : null"
+                @select="value => colors[index] = value"
               />
 
               <!-- reset color button -->
               <UButton
-                v-if="state.colors[index] !== data.colors[index]"
+                v-if="colors[index] !== data.colors[index]"
                 icon="i-heroicons-arrow-path"
                 size="xs"
-                @click="state.colors[index] = data.colors[index]"
+                @click="colors[index] = data.colors[index]"
               />
             </div>
             <!-- color button -->
@@ -55,31 +55,7 @@
             </div>
 
             <div class="border-l hidden sm:block border-r border-b py-2">
-              <!-- hex color button -->
-              <UTooltip text="Click to copy hex code">
-                <UButton
-                  size="2xs"
-                  variant="ghost"
-                  color="gray"
-                  class="font-semibold"
-                  @click="copy(item); onCopyHex(item)"
-                >
-                  {{ item }}
-                </UButton>
-              </UTooltip>
-
-              <!-- rgb color button -->
-              <UTooltip text="Click to copy rgb code">
-                <UButton
-                  size="2xs"
-                  variant="ghost"
-                  color="gray"
-                  class="font-semibold"
-                  @click="copy(rgbToString(hexToRgb(item))); onCopyRgb(rgbToString(hexToRgb(item)))"
-                >
-                  {{ rgbToString(hexToRgb(item)) }}
-                </UButton>
-              </UTooltip>
+              <ColorCopyButtons :hex="item" />
             </div>
           </li>
         </ul>
@@ -87,7 +63,7 @@
         <!-- mobile colors list -->
         <ul class="sm:hidden flex flex-col mb-4 divide-y">
           <li
-            v-for="(item, index) in state.colors"
+            v-for="(item, index) in colors"
             :key="index"
             class="w-full items-center flex gap-2 py-1"
           >
@@ -97,111 +73,20 @@
               class="w-6 h-6 rounded-full relative"
             />
 
-            <div class="flex flex-col">
-              <!-- hex color button -->
-              <UTooltip text="Click to copy hex code">
-                <UButton
-                  size="2xs"
-                  variant="ghost"
-                  color="gray"
-                  class="font-semibold"
-                  @click="copy(item); onCopyHex(item)"
-                >
-                  {{ item }}
-                </UButton>
-              </UTooltip>
-
-              <!-- rgb color button -->
-              <UTooltip text="Click to copy rgb code">
-                <UButton
-                  size="2xs"
-                  variant="ghost"
-                  color="gray"
-                  class="font-semibold"
-                  @click="copy(rgbToString(hexToRgb(item))); onCopyRgb(rgbToString(hexToRgb(item)))"
-                >
-                  {{ rgbToString(hexToRgb(item)) }}
-                </UButton>
-              </UTooltip>
-            </div>
+            <!-- copy color buttons -->
+            <ColorCopyButtons :hex="item" />
           </li>
         </ul>
 
         <!-- arrange sliders-->
-        <!-- brightness -->
-        <div>
-          <p class="font-semibold text-sm">
-            Brigthness
-          </p>
-          <URange
-            v-model="brightness"
-            :min="-100"
-            :max="100"
-          />
-        </div>
-
-        <!-- saturation -->
-        <div>
-          <p class="font-semibold text-sm">
-            Saturation
-          </p>
-          <URange
-            v-model="saturation"
-            :min="-100"
-            :max="100"
-          />
-        </div>
-
-        <!-- warmth -->
-        <div>
-          <p class="font-semibold text-sm">
-            Warmth
-          </p>
-          <URange
-            v-model="warmth"
-            :min="-100"
-            :max="100"
-          />
-        </div>
+        <ColorArrangeSliders v-model="arrange" />
 
         <!-- save form -->
-        <!-- form -->
-        <UCard
+        <CreateColorPaletteFormCard
           v-if="hasChanges"
-          class="mt-4"
-        >
-          <p class="text-base font-semibold">
-            Save these colors as a new palette:
-          </p>
-          <UForm
-            :state="state"
-            :schema="FormSchema"
-            class="space-y-4"
-            @submit="onSubmit"
-          >
-            <!-- prompt -->
-            <UFormGroup name="name">
-              <UInput
-                v-model="state.name"
-                placeholder="Enter name for new palette"
-              />
-            </UFormGroup>
-
-            <!-- submit button -->
-            <div class="flex gap-2 items-center">
-              <UButton
-                label="Reset"
-                @click="resetArrange()"
-              />
-              <UButton
-                type="submit"
-                color="primary"
-                label="Create Palette"
-                :loading="isPending"
-              />
-            </div>
-          </UForm>
-        </UCard>
+          :colors="arrangedColors"
+          @reset="resetArrange()"
+        />
 
         <!-- share buttons -->
         <div class="mt-8">
@@ -220,11 +105,7 @@
 </template>
 
 <script setup lang="ts">
-import { object, type InferType, string, array } from 'yup';
-import { useClipboard } from '@vueuse/core';
-import type { FormSubmitEvent } from '#ui/types';
 import ntc from '~/layers/palette/utils/ntc.util';
-import { PlausibleEventName } from '~/layers/plausible/types';
 
 const { params } = useRoute();
 const id = ref(typeof params.id === 'string' ? params.id : undefined);
@@ -232,7 +113,6 @@ const id = ref(typeof params.id === 'string' ? params.id : undefined);
 const { data, suspense, isError } = usePalette(id);
 const { mutate: create, isPending } = useCreatePalette();
 const notifications = useNotifications();
-const { copy } = useClipboard();
 
 await suspense();
 
@@ -255,54 +135,35 @@ useSeoMeta({
   }
 });
 
-const FormSchema = object({
-  name: string().required(),
-  colors: array(string().required()).required()
+const colors = ref<string[]>([]);
+
+const arrange = ref({
+  brightness: 0,
+  saturation: 0,
+  warmth: 0
 });
-
-export type Form = InferType<typeof FormSchema>;
-
-const state = ref<Form>({
-  name: '',
-  colors: []
-});
-
-const brightness = ref(0);
-const saturation = ref(0);
-const warmth = ref(0);
 
 const hasChanges = computed(() => {
-  return brightness.value !== 0 ||
-  saturation.value !== 0 ||
-  warmth.value !== 0 ||
-  (data.value !== undefined && JSON.stringify(data.value.colors) !== JSON.stringify(state.value.colors));
+  return arrange.value.brightness !== 0 ||
+  arrange.value.saturation !== 0 ||
+  arrange.value.warmth !== 0 ||
+  (data.value !== undefined && JSON.stringify(data.value.colors) !== JSON.stringify(colors.value));
 });
 
-const arrangedColors = computed(() => arrangeColors(state.value.colors, {
-  brightness: brightness.value,
-  saturation: saturation.value,
-  warmth: warmth.value
+const arrangedColors = computed(() => arrangeColors(colors.value, {
+  brightness: arrange.value.brightness,
+  saturation: arrange.value.saturation,
+  warmth: arrange.value.warmth
 }));
 
 function resetArrange(): void {
-  brightness.value = 0;
-  saturation.value = 0;
-  warmth.value = 0;
+  arrange.value.brightness = 0;
+  arrange.value.saturation = 0;
+  arrange.value.warmth = 0;
 
   if (data.value?.colors !== undefined) {
-    state.value.colors = [...data.value.colors];
+    colors.value = [...data.value.colors];
   }
-}
-
-function onSubmit(event: FormSubmitEvent<Form>): void {
-  create({ prompt: event.data.name, colors: arrangedColors.value }, {
-    onError: (err) => {
-      notifications.addError(err.message ?? 'Error creating palette.');
-    },
-    onSuccess: (value) => {
-      void navigateTo(`/palette/${value.id}`);
-    }
-  });
 }
 
 function onClickExample(prompt: string): void {
@@ -317,19 +178,9 @@ function onClickExample(prompt: string): void {
   });
 }
 
-function onCopyHex(value: string): void {
-  notifications.addSuccess(`Copied hex color code ${value}`);
-  sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_COPIED_HEX);
-}
-
-function onCopyRgb(value: string): void {
-  notifications.addSuccess(`Copied rgb color code ${value}`);
-  sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_COPIED_RGB);
-}
-
 watch(data, (newValue) => {
   if (newValue !== undefined) {
-    state.value.colors = [...newValue.colors];
+    colors.value = [...newValue.colors];
   }
 }, { immediate: true });
 </script>
