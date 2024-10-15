@@ -45,9 +45,6 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: 'build'
   },
-  plausible: {
-    domain: process.env.SITE_URL ?? 'https://colormagic.app'
-  },
   runtimeConfig: {
     nodeEnv: process.env.NODE_ENV,
     logLevel: process.env.LOG_LEVEL ?? 'debug',
