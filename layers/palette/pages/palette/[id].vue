@@ -64,6 +64,18 @@
           </li>
         </ul>
 
+        <!-- share buttons -->
+        <div class="mb-8">
+          <p class="text-sm font-semibold mb-2">
+            Share this palette to:
+          </p>
+          <CommonSocialShareButtons
+            type="text"
+            orientation="horizontal"
+            :text="`I generated a color palette for ${data.text ?? ''} with ColorMagic AI!`"
+          />
+        </div>
+
         <!-- arrange sliders-->
         <!-- brightness -->
         <div>
