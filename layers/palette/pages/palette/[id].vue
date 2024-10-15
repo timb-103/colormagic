@@ -116,8 +116,9 @@ const notifications = useNotifications();
 
 await suspense();
 
+/** @description redirect home because old palettes will throw 404's otherwise */
 if (data.value === undefined) {
-  throw createError({ statusCode: 404 });
+  await navigateTo('/', { replace: true });
 }
 
 const title = computed(() => `${data.value?.text ?? 'Loading...'} | ColorMagic | AI Color Palette Generator`);
