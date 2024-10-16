@@ -26,7 +26,8 @@ export default defineI18nConfig(() => ({
         colorPaletteGenrator: 'Color Palette Generator',
         contact: 'Contact',
         terms: 'Terms',
-        privacy: 'Privacy'
+        privacy: 'Privacy',
+        suggestIdea: 'Suggest an Idea'
       },
       palette: {
         seoTitle: 'ColorMagic - AI Color Palette Generator',
@@ -72,7 +73,8 @@ export default defineI18nConfig(() => ({
         terms: '利用規約',
         privacy: 'プライバシー',
         randomColor: 'ランダムカラージェネレーター',
-        colorPaletteGenrator: 'カラーパレットジェネレーター'
+        colorPaletteGenrator: 'カラーパレットジェネレーター',
+        suggestIdea: 'アイデアを提案'
       },
       palette: {
         seoTitle: 'あなたの思い描く色をかんたんに',
@@ -118,7 +120,8 @@ export default defineI18nConfig(() => ({
         terms: 'Termini di utilizzo',
         privacy: 'Privacy',
         randomColor: 'Generatore di Colori Casuali',
-        colorPaletteGenrator: 'Generatore di Palette di Colori'
+        colorPaletteGenrator: 'Generatore di Palette di Colori',
+        suggestIdea: 'Suggerisci un\'idea'
       },
       palette: {
         seoTitle: 'Crea facilmente i colori che immagini',
