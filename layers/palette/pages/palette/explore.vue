@@ -64,6 +64,9 @@ const palettes = computed(() => list.value?.pages.flatMap((items) => items));
 
 useSeoMeta({
   title: t('explore.seoTitle'),
-  description: t('explore.seoDescription')
+  description: t('explore.seoDescription'),
+  ogTitle: t('explore.seoTitle'),
+  ogDescription: t('explore.seoDescription'),
+  ogImageUrl: `${useRuntimeConfig().public.siteUrl}/img/og.png`
 });
 </script>
