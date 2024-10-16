@@ -6,7 +6,7 @@ export default defineI18nConfig(() => ({
       home: {
         title: 'Generate your ideal color palette',
         seoTitle: 'ColorMagic - AI Color Palette Generator',
-        seoDescription: 'ColorMagic is a color palette generator with AI. Enter any keyword and we\'ll generate a matching color palette.',
+        seoDescription: 'ColorMagic is a color palette generator with AI. Enter any keyword and generate a matching color palette.',
         exampleLabel: 'Try an example:'
       },
       recent: {
@@ -30,7 +30,7 @@ export default defineI18nConfig(() => ({
       },
       palette: {
         seoTitle: 'ColorMagic - AI Color Palette Generator',
-        seoDescription: 'ColorMagic is a color palette generator with AI. Enter any keyword and we\'ll generate a matching color palette.',
+        seoDescription: 'ColorMagic is a color palette generator with AI. Enter any keyword and generate a matching color palette.',
         brightness: 'Brightness',
         saturation: 'Saturation',
         warmth: 'Warmth',
