@@ -34,6 +34,7 @@
           />
           <UButton
             icon="i-heroicons-arrow-path"
+            aria-label="Generate Sample Prompt"
             @click="generateSamplePrompt()"
           />
         </UButtonGroup>

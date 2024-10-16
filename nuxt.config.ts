@@ -52,6 +52,11 @@ export default defineNuxtConfig({
       siteUrl: process.env.SITE_URL ?? 'https://colormagic.app'
     }
   },
+  routeRules: {
+    /** @description add cache time for images to make pagespeed insights happy */
+    '/_nuxt/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    '/img/**': { headers: { 'cache-control': 'max-age=31536000' } }
+  },
   compatibilityDate: '2024-09-23',
   i18n: {
     strategy: 'prefix_except_default',

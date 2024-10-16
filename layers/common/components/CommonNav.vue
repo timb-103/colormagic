@@ -2,11 +2,15 @@
   <nav class="border-b border-gray-200">
     <div class="max-w-3xl mx-auto flex items-center justify-between h-16 px-4">
       <div class="flex gap-4 items-center">
-        <NuxtLinkLocale to="/">
+        <NuxtLinkLocale
+          to="/"
+          aria-label="Home"
+        >
           <img
             width="128px"
             height="20.4px"
             src="/img/HorizontalLogo.svg"
+            alt="ColorMagic - AI Color Palette generator"
           >
         </NuxtLinkLocale>
 
@@ -27,7 +31,7 @@
         </NuxtLinkLocale>
       </div>
 
-      <div class="flex gap-2 items-center">
+      <div class="flex gap-2.5 items-center">
         <NuxtLink
           v-for="item in locales"
           :key="item.code"
