@@ -3,5 +3,7 @@ export enum PlausibleEventName {
   COLOR_PALETTE_COPIED_HEX = 'color-palette:copied:hex',
   COLOR_PALETTE_COPIED_RGB = 'color-palette:copied:rgb',
 
-  SOCIAL_SHARE_LINK_CLICKED = 'SOCIAL_SHARE_LINK_CLICKED',
+  SOCIAL_SHARE_LINK_CLICKED = 'social-share:clicked',
+
+  RANDOM_COLOR_GENERATED = 'random-color:generated'
 }

@@ -99,6 +99,7 @@
 <script setup lang="ts">
 import { whenever, useMagicKeys, useSessionStorage, StorageSerializers } from '@vueuse/core';
 import ntc from '~/layers/palette/utils/ntc.util';
+import { PlausibleEventName } from '~/layers/plausible/types';
 
 const { t } = useI18n();
 
@@ -167,6 +168,8 @@ function generateColor(): void {
   }
 
   color.value = newColor;
+
+  sendPlausibleEvent(PlausibleEventName.RANDOM_COLOR_GENERATED);
 }
 
 function viewRecentColor(value: string): void {
