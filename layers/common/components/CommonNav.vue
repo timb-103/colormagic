@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-const { locales, locale, t } = useI18n();
+const { locales, locale } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 // const localePath = useLocalePath();
 
