@@ -70,15 +70,18 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'en',
-        language: 'en-US'
+        language: 'en-US',
+        name: 'English'
       },
       {
         code: 'ja',
-        language: 'ja-JP'
+        language: 'ja-JP',
+        name: 'Japanese'
       },
       {
         code: 'it',
-        language: 'it-IT'
+        language: 'it-IT',
+        name: 'Italian'
       }
     ]
   }

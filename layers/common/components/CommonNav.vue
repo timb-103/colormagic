@@ -70,27 +70,13 @@
         </UPopover> -->
       </div>
 
-      <div class="flex gap-2.5 items-center">
-        <NuxtLink
-          v-for="item in locales"
-          :key="item.code"
-          :to="switchLocalePath(item.code)"
-          class="font-medium text-sm hover:text-primary"
-          :class="{
-            'text-black': locale === item.code,
-            'text-gray-400': locale !== item.code
-          }"
-        >
-          {{ item.code }}
-        </NuxtLink>
-      </div>
+      <!-- lang switcher-->
+      <CommonLangSwitcher />
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-const { locales, locale } = useI18n();
-const switchLocalePath = useSwitchLocalePath();
 // const localePath = useLocalePath();
 
 // const isOpen = ref(false);

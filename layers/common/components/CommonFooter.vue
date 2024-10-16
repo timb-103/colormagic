@@ -89,11 +89,25 @@
         </div>
       </div>
 
-      <div class="flex items-center justify-between text-center">
+      <div class="flex items-center gap-4 text-center">
         <!-- copyright label -->
         <p class="text-sm text-gray-400">
           © 2024 ColorMagic
         </p>
+
+        <!-- languages -->
+        <NuxtLink
+          v-for="item in locales"
+          :key="item.code"
+          :to="switchLocalePath(item.code)"
+          class="font-medium text-sm hover:text-primary"
+          :class="{
+            'text-black': locale === item.code,
+            'text-gray-400': locale !== item.code
+          }"
+        >
+          {{ item.name }}
+        </NuxtLink>
       </div>
     </div>
 
@@ -133,6 +147,9 @@
 </template>
 
 <script setup lang="ts">
+const { locales, locale } = useI18n();
+const switchLocalePath = useSwitchLocalePath();
+
 const {
   isOpen: isModalOpen,
   open: openModal,
