@@ -98,6 +98,7 @@ import type { FormSubmitEvent } from '#ui/types';
 import { samplePalettes } from '~/layers/common/utils/sample-palettes.util';
 
 const { t, locale } = useI18n();
+const localePath = useLocalePath();
 
 const title = t('home.seoTitle');
 const description = t('home.seoDescription');
@@ -134,7 +135,7 @@ function onSubmit(event: FormSubmitEvent<Form>): void {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
     onSuccess: (value) => {
-      void navigateTo(`/${locale.value}/palette/${value.id}`);
+      void navigateTo(localePath(`/palette/${value.id}`));
     }
   });
 }
@@ -145,7 +146,7 @@ function onClickExample(prompt: string): void {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
     onSuccess: (value) => {
-      void navigateTo(`/${locale.value}/palette/${value.id}`);
+      void navigateTo(localePath(`/palette/${value.id}`));
     }
   });
 }

@@ -46,7 +46,7 @@ defineEmits<(e: 'reset') => void>();
 
 const props = defineProps<Props>();
 
-const { locale } = useI18n();
+const localePath = useLocalePath();
 const { mutate: create, isPending } = useCreatePalette();
 const notifications = useNotifications();
 
@@ -66,7 +66,7 @@ function onSubmit(event: FormSubmitEvent<Form>): void {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
     onSuccess: (value) => {
-      void navigateTo(`/${locale.value}/palette/${value.id}`);
+      void navigateTo(localePath(`/palette/${value.id}`));
     }
   });
 }

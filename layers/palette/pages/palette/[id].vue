@@ -106,11 +106,12 @@
 
 <script setup lang="ts">
 import ntc from '~/layers/palette/utils/ntc.util';
-const { t, locale } = useI18n();
 
 const { params } = useRoute();
 const id = ref(typeof params.id === 'string' ? params.id : undefined);
 
+const { t } = useI18n();
+const localePath = useLocalePath();
 const { data, suspense, isError } = usePalette(id);
 const { mutate: create, isPending } = useCreatePalette();
 const notifications = useNotifications();
@@ -175,7 +176,7 @@ function onClickExample(prompt: string): void {
     },
     onSuccess: (value) => {
       notifications.addSuccess(`Successfully created ${prompt} palette.`);
-      void navigateTo(`/${locale.value}/palette/${value.id}`);
+      void navigateTo(localePath(`/palette/${value.id}`));
     }
   });
 }
