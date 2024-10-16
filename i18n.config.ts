@@ -21,9 +21,9 @@ export default defineI18nConfig(() => ({
       bannerLabel: 'ColorMagic is now 100% free! Read more >>',
       nav: {
         home: 'Home',
-        recent: 'Recent'
-      },
-      footer: {
+        recent: 'Recent',
+        randomColor: 'Random Color Generator',
+        colorPaletteGenrator: 'Color Palette Generator',
         contact: 'Contact',
         terms: 'Terms',
         privacy: 'Privacy'
@@ -40,6 +40,12 @@ export default defineI18nConfig(() => ({
         resetLabel: 'Reset',
         shareLabel: 'Share this palette to:',
         shareText: 'I generated a color palette for'
+      },
+      randomColor: {
+        title: 'Random Color Generator',
+        seoTitle: 'Random Color Generator - ColorMagic',
+        seoDescription: 'Find interesting and random colors instantly with just a click (or space bar hit).',
+        generateLabel: 'Generate Random Color'
       }
     },
     ja: {
@@ -61,12 +67,12 @@ export default defineI18nConfig(() => ({
       bannerLabel: 'ColorMagicが今なら完全無料です！詳しくはこちら',
       nav: {
         home: 'ホーム',
-        recent: '最近'
-      },
-      footer: {
+        recent: '最近',
         contact: 'お問い合わせ',
         terms: '利用規約',
-        privacy: 'プライバシー'
+        privacy: 'プライバシー',
+        randomColor: 'ランダムカラージェネレーター',
+        colorPaletteGenrator: 'カラーパレットジェネレーター'
       },
       palette: {
         seoTitle: 'あなたの思い描く色をかんたんに',
@@ -80,6 +86,12 @@ export default defineI18nConfig(() => ({
         resetLabel: 'リセット',
         shareLabel: 'このパレットを共有する先：',
         shareText: '私は〜のためにカラーパレットを生成しました'
+      },
+      randomColor: {
+        title: 'ランダムカラージェネレーター',
+        seoTitle: 'ランダムカラージェネレーター - ColorMagic',
+        seoDescription: 'クリックまたはスペースバーを押すだけで、面白くてランダムな色を瞬時に見つけましょう。',
+        generateLabel: 'ランダムカラーを生成する'
       }
     },
     it: {
@@ -101,12 +113,12 @@ export default defineI18nConfig(() => ({
       bannerLabel: 'ColorMagic è ora completamente gratuito! Leggi di più qui',
       nav: {
         home: 'Home',
-        recent: 'Recenti'
-      },
-      footer: {
+        recent: 'Recenti',
         contact: 'Contatti',
         terms: 'Termini di utilizzo',
-        privacy: 'Privacy'
+        privacy: 'Privacy',
+        randomColor: 'Generatore di Colori Casuali',
+        colorPaletteGenrator: 'Generatore di Palette di Colori'
       },
       palette: {
         seoTitle: 'Crea facilmente i colori che immagini',
@@ -120,6 +132,12 @@ export default defineI18nConfig(() => ({
         resetLabel: 'Reimposta',
         shareLabel: 'Condividi questa palette a:',
         shareText: 'Ho generato una palette di colori per ~'
+      },
+      randomColor: {
+        title: 'Generatore di Colori Casuali',
+        seoTitle: 'Generatore di Colori Casuali - ColorMagic',
+        seoDescription: 'Trova colori interessanti e casuali all\'istante con un semplice clic (o una pressione della barra spaziatrice).',
+        generateLabel: 'Genera Colore Casuale'
       }
     }
   }
