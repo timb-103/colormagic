@@ -11,29 +11,11 @@
         v-for="([key, item]) in Array.from(session)"
         :key="key"
       >
-        <UButton
-          class="w-full"
-          :ui="{ rounded: 'rounded-xl'}"
-          :to="`/palette/${key}`"
-        >
-          <span class="w-full flex rounded-lg relative overflow-hidden">
-            <!-- color name label -->
-            <span class="bottom-2 left-2 bg-white absolute rounded-md flex items-center gap-2 px-2 py-1 font-semibold text-sm">
-              <UIcon name="i-heroicons-sparkles" />
-              {{ item.text }}
-            </span>
-
-            <!-- colors -->
-            <span
-              v-for="(color, colorIndex) in item.colors"
-              :key="colorIndex"
-              :style="{
-                'background': color
-              }"
-              class="w-full h-20 block"
-            />
-          </span>
-        </UButton>
+        <ColorPaletteButton
+          :colors="item.colors"
+          :name="item.text"
+          :to="localePath(`/palette/${key}`)"
+        />
       </li>
     </ul>
 
@@ -46,7 +28,9 @@
 <script setup lang="ts">
 import { useLocalStorage, StorageSerializers } from '@vueuse/core';
 import type { PaletteModel } from '~/layers/palette/models/palette.model';
+
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 useSeoMeta({
   title: t('recent.seoTitle'),

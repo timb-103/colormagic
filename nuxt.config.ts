@@ -52,7 +52,8 @@ export default defineNuxtConfig({
     nodeEnv: process.env.NODE_ENV,
     logLevel: process.env.LOG_LEVEL ?? 'debug',
     public: {
-      siteUrl: process.env.SITE_URL ?? 'https://colormagic.app'
+      siteUrl: process.env.SITE_URL ?? 'https://colormagic.app',
+      stripeDonatePaymentUrl: process.env.STRIPE_DONATE_PAYMENT_URL ?? 'https://buy.stripe.com/9AQbJE4cjgWHaSQeUU'
     }
   },
   routeRules: {

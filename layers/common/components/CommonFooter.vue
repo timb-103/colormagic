@@ -1,7 +1,7 @@
 <template>
   <footer class="border-t mt-8">
     <div class="max-w-3xl mx-auto px-4 py-8">
-      <div class="mb-8 grid grid-cols-2">
+      <div class="mb-8 grid grid-cols-2 sm:grid-cols-3">
         <div>
           <p class="text-sm font-semibold mb-2">
             Free Color Tools
@@ -71,6 +71,22 @@
             </li>
           </ul>
         </div>
+
+        <div>
+          <p class="text-sm font-semibold mb-2">
+            News
+          </p>
+          <ul class="flex flex-col gap-1">
+            <li>
+              <UButton
+                size="2xs"
+                @click="openModal()"
+              >
+                {{ $t('nav.free') }}
+              </UButton>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="flex items-center justify-between text-center">
@@ -80,7 +96,46 @@
         </p>
       </div>
     </div>
+
+    <!-- free modal -->
+    <UModal v-model="isModalOpen">
+      <UCard>
+        <template #header>
+          <p class="font-semibold">
+            ColorMagic is now 100% free to use!
+          </p>
+        </template>
+        <p class="mb-4">
+          We've just acquired this tool from the previous owners and have decided to make it 100% free to use.
+        </p>
+        <p class="mb-4">
+          If you were a previous subscriber, we've canceled your subscription so there will be no more payments. If you
+          require a prorated refund please reach out to us on <a
+            class="text-primary underline"
+            href="mailto:hello@colormagic.app"
+          >hello@colormagic.app</a>.
+        </p>
+        <p>
+          We're going to be making some improvements over the coming future, as well as adding other
+          cool free tools for you to use. If you have any suggestions, we'd love to hear them!
+        </p>
+        <template #footer>
+          <div class="flex justify-end">
+            <UButton
+              label="Close"
+              @click="closeModal()"
+            />
+          </div>
+        </template>
+      </UCard>
+    </UModal>
   </footer>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const {
+  isOpen: isModalOpen,
+  open: openModal,
+  close: closeModal
+} = useModalV2();
+</script>

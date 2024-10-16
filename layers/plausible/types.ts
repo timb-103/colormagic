@@ -5,5 +5,8 @@ export enum PlausibleEventName {
 
   SOCIAL_SHARE_LINK_CLICKED = 'social-share:clicked',
 
-  RANDOM_COLOR_GENERATED = 'random-color:generated'
+  RANDOM_COLOR_GENERATED = 'random-color:generated',
+
+  DONATE_BUTTON_FLOATING_CLICKED = 'donate-button:floating:clicked',
+  DONATE_BUTTON_BANNER_CLICKED = 'donate-button:banner:clicked',
 }

@@ -18,7 +18,7 @@ export default defineI18nConfig(() => ({
         placeholder: 'Enter keywords for image or mood of color',
         label: 'Create Palette'
       },
-      bannerLabel: 'ColorMagic is now 100% free! Read more >>',
+      bannerLabel: 'Donate to keep ColorMagic free >>',
       nav: {
         home: 'Home',
         recent: 'Recent',
@@ -27,7 +27,8 @@ export default defineI18nConfig(() => ({
         contact: 'Contact',
         terms: 'Terms',
         privacy: 'Privacy',
-        suggestIdea: 'Suggest an Idea'
+        suggestIdea: 'Suggest an Idea',
+        free: 'ColorMagic is now 100% free'
       },
       palette: {
         seoTitle: 'ColorMagic - AI Color Palette Generator',
@@ -65,7 +66,7 @@ export default defineI18nConfig(() => ({
         placeholder: '色の雰囲気やイメージを入力してください',
         label: '生成する'
       },
-      bannerLabel: 'ColorMagicが今なら完全無料です！詳しくはこちら',
+      bannerLabel: 'ColorMagic を無料で維持するために寄付してください',
       nav: {
         home: 'ホーム',
         recent: '最近',
@@ -74,7 +75,8 @@ export default defineI18nConfig(() => ({
         privacy: 'プライバシー',
         randomColor: 'ランダムカラージェネレーター',
         colorPaletteGenrator: 'カラーパレットジェネレーター',
-        suggestIdea: 'アイデアを提案'
+        suggestIdea: 'アイデアを提案',
+        free: 'ColorMagicが今なら完全無料です！詳しくはこちら'
       },
       palette: {
         seoTitle: 'あなたの思い描く色をかんたんに',
@@ -112,7 +114,7 @@ export default defineI18nConfig(() => ({
         placeholder: 'Inserisci l\'atmosfera o l\'immagine del colore',
         label: 'Genera'
       },
-      bannerLabel: 'ColorMagic è ora completamente gratuito! Leggi di più qui',
+      bannerLabel: 'Fai una donazione per mantenere ColorMagic gratuito',
       nav: {
         home: 'Home',
         recent: 'Recenti',
@@ -121,7 +123,8 @@ export default defineI18nConfig(() => ({
         privacy: 'Privacy',
         randomColor: 'Generatore di Colori Casuali',
         colorPaletteGenrator: 'Generatore di Palette di Colori',
-        suggestIdea: 'Suggerisci un\'idea'
+        suggestIdea: 'Suggerisci un\'idea',
+        free: 'ColorMagic è ora completamente gratuito! Leggi di più qui'
       },
       palette: {
         seoTitle: 'Crea facilmente i colori che immagini',
