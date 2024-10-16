@@ -3,7 +3,7 @@
     <!-- brightness -->
     <div>
       <p class="font-semibold text-sm">
-        Brigthness
+        {{ $t('palette.brightness') }}
       </p>
       <URange
         v-model="model.brightness"
@@ -15,7 +15,7 @@
     <!-- saturation -->
     <div>
       <p class="font-semibold text-sm">
-        Saturation
+        {{ $t('palette.saturation') }}
       </p>
       <URange
         v-model="model.saturation"
@@ -27,7 +27,7 @@
     <!-- warmth -->
     <div>
       <p class="font-semibold text-sm">
-        Warmth
+        {{ $t('palette.warmth') }}
       </p>
       <URange
         v-model="model.warmth"

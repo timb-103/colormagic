@@ -1,7 +1,7 @@
 <template>
   <UCard class="mt-4">
     <p class="text-base font-semibold">
-      Save these colors as a new palette:
+      {{ $t('palette.saveLabel') }}
     </p>
     <UForm
       :state="state"
@@ -13,20 +13,20 @@
       <UFormGroup name="name">
         <UInput
           v-model="state.name"
-          placeholder="Enter name for new palette"
+          :placeholder="$t('palette.createPlaceholder')"
         />
       </UFormGroup>
 
       <!-- submit button -->
       <div class="flex gap-2 items-center">
         <UButton
-          label="Reset"
+          :label="$t('palette.resetLabel')"
           @click="$emit('reset')"
         />
         <UButton
           type="submit"
           color="primary"
-          label="Create Palette"
+          :label="$t('palette.createLabel')"
           :loading="isPending"
         />
       </div>
@@ -46,6 +46,7 @@ defineEmits<(e: 'reset') => void>();
 
 const props = defineProps<Props>();
 
+const { locale } = useI18n();
 const { mutate: create, isPending } = useCreatePalette();
 const notifications = useNotifications();
 
@@ -65,7 +66,7 @@ function onSubmit(event: FormSubmitEvent<Form>): void {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
     onSuccess: (value) => {
-      void navigateTo(`/palette/${value.id}`);
+      void navigateTo(`/${locale.value}/palette/${value.id}`);
     }
   });
 }

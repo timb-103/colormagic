@@ -16,6 +16,7 @@
     "@ckpack/vue-color": "^1.6.0",
     "@nuxt/ui": "2.18.7",
     "@nuxtjs/google-fonts": "3.2.0",
+    "@nuxtjs/i18n": "^8.5.5",
     "@nuxtjs/plausible": "1.0.2",
     "@sinclair/typebox": "0.33.12",
     "@tanstack/vue-query": "5.56.2",

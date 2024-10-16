@@ -91,12 +91,12 @@
         <!-- share buttons -->
         <div class="mt-8">
           <p class="text-sm font-semibold mb-2">
-            Share this palette to:
+            {{ $t('palette.shareLabel') }}
           </p>
           <CommonSocialShareButtons
             type="text"
             orientation="horizontal"
-            :text="`I generated a color palette for ${data.text ?? ''} with ColorMagic AI!`"
+            :text="`${t('palette.shareText')} ${data.text ?? ''} with ColorMagic AI!`"
           />
         </div>
       </div>
@@ -106,6 +106,7 @@
 
 <script setup lang="ts">
 import ntc from '~/layers/palette/utils/ntc.util';
+const { t, locale } = useI18n();
 
 const { params } = useRoute();
 const id = ref(typeof params.id === 'string' ? params.id : undefined);
@@ -121,9 +122,9 @@ if (data.value === undefined) {
   await navigateTo('/', { replace: true });
 }
 
-const title = computed(() => `${data.value?.text ?? 'Loading...'} | ColorMagic | AI Color Palette Generator`);
+const title = computed(() => `${data.value?.text ?? 'Loading...'} - ${t('palette.seoTitle')}`);
 const ogImageUrl = computed(() => (data.value !== undefined ? formatOgUrl(data.value.colors, data.value.text) : ''));
-const description = 'ColorMagic is a color palette generator with AI. Enter any keyword and we\'ll generate a matching color palette.';
+const description = t('palette.seoDescription');
 
 useSeoMeta({
   title,
@@ -174,7 +175,7 @@ function onClickExample(prompt: string): void {
     },
     onSuccess: (value) => {
       notifications.addSuccess(`Successfully created ${prompt} palette.`);
-      void navigateTo(`/palette/${value.id}`);
+      void navigateTo(`/${locale.value}/palette/${value.id}`);
     }
   });
 }

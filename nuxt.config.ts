@@ -3,7 +3,6 @@ export default defineNuxtConfig({
     head: {
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
-      htmlAttrs: { lang: 'en' },
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/img/favicon.ico' },
         { rel: 'icon', type: 'image/svg+xml', href: '/img/icon.svg' },
@@ -31,7 +30,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/google-fonts',
     '@nuxt/ui',
-    '@nuxtjs/plausible'
+    '@nuxtjs/plausible',
+    '@nuxtjs/i18n'
   ],
   tailwindcss: {
     viewer: false
@@ -52,5 +52,25 @@ export default defineNuxtConfig({
       siteUrl: process.env.SITE_URL ?? 'https://colormagic.app'
     }
   },
-  compatibilityDate: '2024-09-23'
+  compatibilityDate: '2024-09-23',
+  i18n: {
+    strategy: 'prefix_except_default',
+    defaultLocale: 'en',
+    baseUrl: process.env.SITE_URL ?? 'https://colormagic.app',
+    detectBrowserLanguage: false,
+    locales: [
+      {
+        code: 'en',
+        language: 'en-US'
+      },
+      {
+        code: 'ja',
+        language: 'ja-JP'
+      },
+      {
+        code: 'it',
+        language: 'it-IT'
+      }
+    ]
+  }
 });

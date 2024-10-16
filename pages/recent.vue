@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="text-lg font-bold mb-4">
-      Recents:
+      {{ $t('recent.topLabel') }}
     </p>
     <ul
       v-if="session.size"
@@ -38,7 +38,7 @@
     </ul>
 
     <p v-else>
-      No recents.
+      {{ $t('recent.noneFound') }}
     </p>
   </div>
 </template>
@@ -46,10 +46,11 @@
 <script setup lang="ts">
 import { useSessionStorage, StorageSerializers } from '@vueuse/core';
 import type { PaletteModel } from '~/layers/palette/models/palette.model';
+const { t } = useI18n();
 
 useSeoMeta({
-  title: 'Recent | ColorMagic | AI Color Palette Generator',
-  description: 'ColorMagic is a color palette generator with AI. Enter any keyword and we\'ll generate a matching color palette.'
+  title: t('recent.seoTitle'),
+  description: t('home.seoDescription')
 });
 
 const session = useSessionStorage<Map<string, PaletteModel>>(

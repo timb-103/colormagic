@@ -7,7 +7,7 @@
       class="rounded-none border-b"
       variant="soft"
       color="primary"
-      label="ColorMagic is now 100% free! Read more >>"
+      :label="$t('bannerLabel')"
       @click="openModal()"
     />
 
@@ -72,6 +72,20 @@ import { useLocalStorage } from '@vueuse/core';
 
 const { siteUrl } = useRuntimeConfig().public;
 const { path } = useRoute();
+
+const head = useLocaleHead({
+  addDirAttribute: true,
+  identifierAttribute: 'id',
+  addSeoAttributes: true
+});
+
+useHead({
+  htmlAttrs: {
+    lang: head.value.htmlAttrs.lang
+  },
+  link: [...(head.value.link ?? [])],
+  meta: [...(head.value.meta ?? [])]
+});
 
 useServerSeoMeta({
   ogUrl: `${siteUrl}${path}`,
