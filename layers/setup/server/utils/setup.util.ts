@@ -29,6 +29,8 @@ export async function setup(): Promise<void> {
     const ai = getAIModule(logger, openai.service);
     const palette = getPaletteModule(db, logger, ai.service);
 
+    await palette.setup();
+
     modules = {
       ai,
       logger,

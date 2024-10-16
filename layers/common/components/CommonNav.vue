@@ -23,6 +23,14 @@
         </NuxtLinkLocale>
 
         <NuxtLinkLocale
+          to="/palette/explore"
+          active-class="text-primary"
+          class="font-semibold text-sm hover:text-primary"
+        >
+          {{ $t('nav.explore') }}
+        </NuxtLinkLocale>
+
+        <NuxtLinkLocale
           to="/recent"
           active-class="text-primary"
           class="font-semibold text-sm hover:text-primary"

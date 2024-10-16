@@ -28,7 +28,8 @@ export default defineI18nConfig(() => ({
         terms: 'Terms',
         privacy: 'Privacy',
         suggestIdea: 'Suggest an Idea',
-        free: 'ColorMagic is now 100% free'
+        free: 'ColorMagic is now 100% free',
+        explore: 'Explore'
       },
       palette: {
         seoTitle: 'ColorMagic - AI Color Palette Generator',
@@ -48,6 +49,11 @@ export default defineI18nConfig(() => ({
         seoTitle: 'Random Color Generator - ColorMagic',
         seoDescription: 'Find interesting and random colors instantly with just a click (or space bar hit).',
         generateLabel: 'Generate Random Color'
+      },
+      explore: {
+        title: 'Explore Color Palettes',
+        seoTitle: 'Explore Color Palettes - ColorMagic',
+        seoDescription: 'Explore all of the latest generated color palettes.'
       }
     },
     ja: {
@@ -76,7 +82,8 @@ export default defineI18nConfig(() => ({
         randomColor: 'ランダムカラージェネレーター',
         colorPaletteGenrator: 'カラーパレットジェネレーター',
         suggestIdea: 'アイデアを提案',
-        free: 'ColorMagicが今なら完全無料です！詳しくはこちら'
+        free: 'ColorMagicが今なら完全無料です！詳しくはこちら',
+        explore: '探検する'
       },
       palette: {
         seoTitle: 'あなたの思い描く色をかんたんに',
@@ -96,6 +103,11 @@ export default defineI18nConfig(() => ({
         seoTitle: 'ランダムカラージェネレーター - ColorMagic',
         seoDescription: 'クリックまたはスペースバーを押すだけで、面白くてランダムな色を瞬時に見つけましょう。',
         generateLabel: 'ランダムカラーを生成する'
+      },
+      explore: {
+        title: 'カラーパレットを探索する',
+        seoTitle: 'カラーパレットを探索する - ColorMagic',
+        seoDescription: '最新に生成されたすべてのカラー パレットを探索する.'
       }
     },
     it: {
@@ -124,7 +136,8 @@ export default defineI18nConfig(() => ({
         randomColor: 'Generatore di Colori Casuali',
         colorPaletteGenrator: 'Generatore di Palette di Colori',
         suggestIdea: 'Suggerisci un\'idea',
-        free: 'ColorMagic è ora completamente gratuito! Leggi di più qui'
+        free: 'ColorMagic è ora completamente gratuito! Leggi di più qui',
+        explore: 'Esplorare'
       },
       palette: {
         seoTitle: 'Crea facilmente i colori che immagini',
@@ -144,6 +157,11 @@ export default defineI18nConfig(() => ({
         seoTitle: 'Generatore di Colori Casuali - ColorMagic',
         seoDescription: 'Trova colori interessanti e casuali all\'istante con un semplice clic (o una pressione della barra spaziatrice).',
         generateLabel: 'Genera Colore Casuale'
+      },
+      explore: {
+        title: 'Esplora le tavolozze dei colori',
+        seoTitle: 'Esplora le tavolozze dei colori - ColorMagic',
+        seoDescription: 'Esplora tutte le tavolozze di colori generate più recenti.'
       }
     }
   }

@@ -20,3 +20,10 @@ export const CreatePaletteInputDtoSchema = Type.Object({
 });
 
 export type CreatePaletteInputDto = Static<typeof CreatePaletteInputDtoSchema>;
+
+export const ListPaletteInputDtoSchema = Type.Object({
+  page: Type.Number(),
+  size: Type.Number({ maximum: 100 })
+});
+
+export type ListPaletteInputDto = Static<typeof ListPaletteInputDtoSchema>;

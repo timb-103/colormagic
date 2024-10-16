@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { useMutation, useQuery } from '@tanstack/vue-query';
+import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/vue-query';
 import { useLocalStorage, StorageSerializers } from '@vueuse/core';
 import type { CreatePaletteInputDto } from '../server/dtos/palette.dto';
 import type { PaletteModel } from '../models/palette.model';
@@ -20,6 +20,34 @@ export function usePalette(id: Ref<string | undefined>) {
       });
     },
     enabled: () => id.value !== undefined
+  });
+}
+
+export function useListPalettes(size: number = 10) {
+  return useInfiniteQuery({
+    queryKey: [PALETTE_ROOT_KEY, size],
+    queryFn: async ({ pageParam: page = 0 }) => {
+      return await $fetch('/api/palette/list', {
+        method: 'POST',
+        body: {
+          page,
+          size
+        }
+      });
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+      if (lastPage.length < size) {
+        return undefined;
+      }
+      return lastPageParam + 1;
+    },
+    getPreviousPageParam: (_firstPage, _allPages, firstPageParam) => {
+      if (firstPageParam <= 1) {
+        return undefined;
+      }
+      return firstPageParam - 1;
+    }
   });
 }
 
