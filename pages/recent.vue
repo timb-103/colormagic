@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { useSessionStorage, StorageSerializers } from '@vueuse/core';
+import { useLocalStorage, StorageSerializers } from '@vueuse/core';
 import type { PaletteModel } from '~/layers/palette/models/palette.model';
 const { t } = useI18n();
 
@@ -53,7 +53,7 @@ useSeoMeta({
   description: t('home.seoDescription')
 });
 
-const session = useSessionStorage<Map<string, PaletteModel>>(
+const session = useLocalStorage<Map<string, PaletteModel>>(
   'palettes:created',
   new Map(),
   { serializer: StorageSerializers.map }

@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { whenever, useMagicKeys, useSessionStorage, StorageSerializers } from '@vueuse/core';
+import { whenever, useMagicKeys, useLocalStorage, StorageSerializers } from '@vueuse/core';
 import ntc from '~/layers/palette/utils/ntc.util';
 import { PlausibleEventName } from '~/layers/plausible/types';
 
@@ -116,7 +116,7 @@ useSeoMeta({
   ogImageUrl: `${useRuntimeConfig().public.siteUrl}${formatOgUrl([ogImageColor], ntc.name(ogImageColor)[1].toString())}`
 });
 
-const session = useSessionStorage<string[]>(
+const session = useLocalStorage<string[]>(
   'random-color:created',
   [],
   { serializer: StorageSerializers.object }

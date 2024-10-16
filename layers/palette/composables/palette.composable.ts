@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useMutation, useQuery } from '@tanstack/vue-query';
-import { useSessionStorage, StorageSerializers } from '@vueuse/core';
+import { useLocalStorage, StorageSerializers } from '@vueuse/core';
 import type { CreatePaletteInputDto } from '../server/dtos/palette.dto';
 import type { PaletteModel } from '../models/palette.model';
 import { PlausibleEventName } from '~/layers/plausible/types';
@@ -34,7 +34,7 @@ export function useCreatePalette() {
         }
       });
 
-      const session = useSessionStorage<Map<string, PaletteModel>>(
+      const session = useLocalStorage<Map<string, PaletteModel>>(
         'palettes:created',
         new Map(),
         { serializer: StorageSerializers.map }
