@@ -52,7 +52,8 @@ export default defineNuxtConfig({
     nodeEnv: process.env.NODE_ENV,
     logLevel: process.env.LOG_LEVEL ?? 'debug',
     public: {
-      siteUrl: process.env.SITE_URL ?? 'https://colormagic.app'
+      siteUrl: process.env.SITE_URL ?? 'https://colormagic.app',
+      stripeDonatePaymentUrl: process.env.STRIPE_DONATE_PAYMENT_URL ?? 'https://buy.stripe.com/9AQbJE4cjgWHaSQeUU'
     }
   },
   routeRules: {
@@ -69,15 +70,21 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'en',
-        language: 'en-US'
+        language: 'en-US',
+        name: 'English',
+        flag: '🇬🇧'
       },
       {
         code: 'ja',
-        language: 'ja-JP'
+        language: 'ja-JP',
+        name: 'Japanese',
+        flag: '🇯🇵'
       },
       {
         code: 'it',
-        language: 'it-IT'
+        language: 'it-IT',
+        name: 'Italian',
+        flag: '🇮🇹'
       }
     ]
   }

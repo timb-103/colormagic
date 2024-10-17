@@ -18,11 +18,11 @@
       class="h-44 w-full relative"
       :style="{ background: arrangedColor[0] }"
     >
-      <!-- color name label -->
-      <span class="bottom-2 left-2 bg-white absolute rounded-md flex items-center gap-2 px-2 py-1 font-semibold text-sm">
-        <UIcon name="i-heroicons-sparkles" />
-        {{ ntc.name(arrangedColor[0])[1].toString() }}
-      </span>
+      <!-- name -->
+      <ColorNameBadge
+        :name="ntc.name(arrangedColor[0])[1].toString()"
+        class="bottom-2 left-2 absolute"
+      />
 
       <!-- reset changes button -->
       <UButton
@@ -66,25 +66,11 @@
             v-for="(item, index) in session"
             :key="index"
           >
-            <UButton
-              class="w-full"
-              :ui="{ rounded: 'rounded-xl'}"
+            <ColorPaletteButton
+              :colors="[item]"
+              :name="ntc.name(item)[1].toString()"
               @click="viewRecentColor(item)"
-            >
-              <span class="w-full flex rounded-lg relative overflow-hidden">
-                <!-- color name label -->
-                <span class="bottom-2 left-2 bg-white absolute rounded-md flex items-center gap-2 px-2 py-1 font-semibold text-sm">
-                  <UIcon name="i-heroicons-sparkles" />
-                  {{ ntc.name(item)[1].toString() }}
-                </span>
-
-                <!-- color -->
-                <span
-                  :style="{ 'background': item }"
-                  class="w-full h-20 block"
-                />
-              </span>
-            </UButton>
+            />
           </li>
         </ul>
 

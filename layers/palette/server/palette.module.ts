@@ -10,6 +10,7 @@ import type { AIService } from '~/layers/ai/server/services/ai.service';
 export interface PaletteModule {
   service: PaletteService
   validation: PaletteValidation
+  setup: () => Promise<void>
 }
 
 /**
@@ -31,6 +32,9 @@ export function getPaletteModule(
 
   return {
     service,
-    validation
+    validation,
+    setup: async () => {
+      await repository.setup();
+    }
   };
 }

@@ -1,7 +1,8 @@
 <template>
   <nav class="border-b border-gray-200">
     <div class="max-w-3xl mx-auto flex items-center justify-between h-16 px-4">
-      <div class="flex gap-4 items-center">
+      <div class="flex items-center">
+        <!-- logo -->
         <NuxtLinkLocale
           to="/"
           aria-label="Home"
@@ -14,93 +15,154 @@
           >
         </NuxtLinkLocale>
 
-        <NuxtLinkLocale
-          to="/"
-          active-class="text-primary"
-          class="hidden sm:block font-semibold text-sm hover:text-primary"
-        >
-          {{ $t('nav.home') }}
-        </NuxtLinkLocale>
-
-        <NuxtLinkLocale
-          to="/recent"
-          active-class="text-primary"
-          class="font-semibold text-sm hover:text-primary"
-        >
-          {{ $t('nav.recent') }}
-        </NuxtLinkLocale>
-
-        <!-- popovers -->
-        <!-- <UPopover
-          v-model:open="isOpen"
-          mode="hover"
-        >
-          <UButton
-            variant="soft"
-            class="hover:text-primary font-semibold"
-            icon="i-heroicons-chevron-down-16-solid"
-            trailing
-            :padded="false"
-          >
-            Tools
-          </UButton>
-
-          <template #panel>
-            <div class="p-2">
-              <UHeaderPopoverLinks
-                :links="toolsLinks"
-                :ui="{
-                  base: 'text-left',
-                  wrapper: 'grid gap-2 max-w-xs space-y-0 items-start justify-start text-left',
-                  icon: {
-                    base: 'text-primary w-4 h-4 mt-2'
-                  },
-                }"
+        <div class="hidden sm:flex ml-4 items-center">
+          <!-- links -->
+          <ul class="flex items-center">
+            <li
+              v-for="(item, index) in links"
+              :key="index"
+            >
+              <UButton
+                :to="item.to"
+                :label="item.label"
+                active-class="text-primary"
+                variant="soft"
+                class="hover:text-primary font-semibold"
+                size="md"
               />
-            </div>
-          </template>
-        </UPopover> -->
+            </li>
+          </ul>
+
+          <!-- popover -->
+          <UPopover
+            v-model:open="isOpen"
+            mode="hover"
+          >
+            <UButton
+              variant="soft"
+              class="hover:text-primary font-semibold"
+              size="md"
+              icon="i-heroicons-chevron-down-16-solid"
+              trailing
+            >
+              {{ $t('nav.tools') }}
+            </UButton>
+
+            <template #panel>
+              <div class="p-2">
+                <UHeaderPopoverLinks
+                  :links="toolsLinks"
+                  :ui="{
+                    base: 'text-left',
+                    wrapper: 'grid gap-2 max-w-xs space-y-0 items-start justify-start text-left',
+                    icon: {
+                      base: 'text-primary w-4 h-4 mt-2'
+                    },
+                  }"
+                />
+              </div>
+            </template>
+          </UPopover>
+        </div>
       </div>
 
-      <div class="flex gap-2.5 items-center">
-        <NuxtLink
-          v-for="item in locales"
-          :key="item.code"
-          :to="switchLocalePath(item.code)"
-          class="font-medium text-sm hover:text-primary"
-          :class="{
-            'text-black': locale === item.code,
-            'text-gray-400': locale !== item.code
-          }"
-        >
-          {{ item.code }}
-        </NuxtLink>
+      <!-- right -->
+      <div class="flex items-center gap-4">
+        <!-- lang switcher-->
+        <CommonLangSwitcher />
+
+        <!-- mobile bars button -->
+        <UButton
+          icon="i-heroicons-bars-3"
+          class="sm:hidden"
+          aria-label="nav"
+          @click="openModal()"
+        />
       </div>
     </div>
+
+    <!-- mobile menu modal -->
+    <UModal
+      v-model="isModalOpen"
+      fullscreen
+    >
+      <div class="p-4 overflow-auto">
+        <div class="flex items-center justify-between mb-4">
+          <!-- logo -->
+          <NuxtLinkLocale
+            to="/"
+            aria-label="Home"
+          >
+            <img
+              width="128px"
+              height="20.4px"
+              src="/img/HorizontalLogo.svg"
+              alt="ColorMagic - AI Color Palette generator"
+            >
+          </NuxtLinkLocale>
+
+          <!-- close button -->
+          <UButton
+            icon="i-heroicons-x-mark"
+            @click="isModalOpen = false"
+          />
+        </div>
+
+        <!-- links -->
+        <UVerticalNavigation :links="[[...links],[...toolsLinks]]" />
+      </div>
+    </UModal>
   </nav>
 </template>
 
 <script setup lang="ts">
-const { locales, locale } = useI18n();
-const switchLocalePath = useSwitchLocalePath();
-// const localePath = useLocalePath();
+const { t } = useI18n();
+const localePath = useLocalePath();
 
-// const isOpen = ref(false);
+const isOpen = ref(false);
 
-// const toolsLinks = [{
-//   to: localePath('/'),
-//   label: t('nav.colorPaletteGenrator'),
-//   description: t('home.title'),
-//   icon: 'i-heroicons-paint-brush'
-// },
-// {
-//   to: localePath('/random-color'),
-//   label: t('nav.randomColor'),
-//   description: t('randomColor.seoDescription'),
-//   icon: 'i-heroicons-arrow-path'
-// }];
+const {
+  isOpen: isModalOpen,
+  open: openModal,
+  close: closeModal
+} = useModalV2();
 
-// watch(useRoute(), () => {
-//   isOpen.value = false;
-// });
+const links = computed(() => [
+  {
+    label: t('nav.home'),
+    to: localePath('/')
+  },
+  {
+    label: t('nav.explore'),
+    to: localePath('/palette/explore')
+  },
+  {
+    label: t('nav.recent'),
+    to: localePath('/recent')
+  }
+]);
+
+const toolsLinks = computed(() => [{
+  to: localePath('/'),
+  label: t('nav.colorPaletteGenrator'),
+  description: t('home.title'),
+  icon: 'i-heroicons-paint-brush'
+},
+{
+  to: localePath('/random-color'),
+  label: t('nav.randomColor'),
+  description: t('randomColor.seoDescription'),
+  icon: 'i-heroicons-arrow-path'
+},
+{
+  to: localePath('/image-color-picker'),
+  label: t('nav.imageColorPicker'),
+  description: t('imageColorPicker.seoDescription'),
+  icon: 'i-heroicons-photo'
+}]);
+
+watch(useRoute(), () => {
+  isOpen.value = false;
+  closeModal();
+});
 </script>

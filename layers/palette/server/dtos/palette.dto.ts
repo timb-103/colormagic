@@ -20,3 +20,26 @@ export const CreatePaletteInputDtoSchema = Type.Object({
 });
 
 export type CreatePaletteInputDto = Static<typeof CreatePaletteInputDtoSchema>;
+
+export const ListPaletteInputDtoSchema = Type.Object({
+  page: Type.Number(),
+  size: Type.Number({ maximum: 100 }),
+  filter: Type.Optional(Type.Object({
+    tag: Type.String()
+  }))
+});
+
+export type ListPaletteInputDto = Static<typeof ListPaletteInputDtoSchema>;
+
+export const ListPaletteDtoSchema = Type.Object({
+  items: Type.Array(PaletteDtoSchema),
+  count: Type.Number()
+});
+
+export type ListPaletteDto = Static<typeof ListPaletteDtoSchema>;
+
+export const CountPaletteDtoSchema = Type.Object({
+  count: Type.Number()
+});
+
+export type CountPaletteDto = Static<typeof CountPaletteDtoSchema>;

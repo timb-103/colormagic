@@ -1,6 +1,9 @@
 import { type H3Event } from 'h3';
-import { CreatePaletteInputDtoSchema, PaletteInputDtoSchema, type CreatePaletteInputDto, type PaletteInputDto } from '../dtos/palette.dto';
-import { validateBody } from '~/layers/common/utils/validate.util';
+import {
+  CreatePaletteInputDtoSchema, ListPaletteInputDtoSchema, PaletteInputDtoSchema,
+  type CreatePaletteInputDto, type ListPaletteInputDto, type PaletteInputDto
+} from '../dtos/palette.dto';
+import { validateBody, validateParams } from '~/layers/common/utils/validate.util';
 
 export class PaletteValidation {
   public async getCreateInputBody(event: H3Event): Promise<CreatePaletteInputDto> {
@@ -9,5 +12,13 @@ export class PaletteValidation {
 
   public async getInputBody(event: H3Event): Promise<PaletteInputDto> {
     return await validateBody(event, PaletteInputDtoSchema);
+  }
+
+  public async getInputParams(event: H3Event): Promise<PaletteInputDto> {
+    return validateParams(event, PaletteInputDtoSchema);
+  }
+
+  public async getListInputBody(event: H3Event): Promise<ListPaletteInputDto> {
+    return await validateBody(event, ListPaletteInputDtoSchema);
   }
 }

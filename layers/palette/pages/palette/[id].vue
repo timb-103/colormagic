@@ -32,6 +32,7 @@
                 @click="colors[index] = data.colors[index]"
               />
             </div>
+
             <!-- color button -->
             <div
               :style="{ background: item }"

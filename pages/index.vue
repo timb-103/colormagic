@@ -50,6 +50,11 @@
         :label="$t('generate.label')"
         :loading="isPending"
       />
+
+      <!-- count of palettes generated -->
+      <p class="italic text-xs text-center">
+        {{ count?.count.toLocaleString() ?? 0 }} color palettes generated since yesterday
+      </p>
     </UForm>
 
     <!-- examples -->
@@ -62,30 +67,12 @@
           v-for="(item, index) in samplePalettes"
           :key="index"
         >
-          <UButton
-            class="w-full"
-            :ui="{ rounded: 'rounded-xl'}"
+          <ColorPaletteButton
+            :colors="item.colors"
+            :name="item.text[getLocale(locale)]"
             :disabled="isPending"
             @click="onClickExample(item.text[getLocale(locale)])"
-          >
-            <span class="w-full flex rounded-lg relative overflow-hidden">
-              <!-- color name label -->
-              <span class="bottom-2 left-2 bg-white absolute rounded-md flex items-center gap-2 px-2 py-1 font-semibold text-sm">
-                <UIcon name="i-heroicons-sparkles" />
-                {{ item.text[getLocale(locale)] }}
-              </span>
-
-              <!-- colors -->
-              <span
-                v-for="(color, colorIndex) in item.colors"
-                :key="colorIndex"
-                :style="{
-                  'background': color
-                }"
-                class="w-full h-20 block"
-              />
-            </span>
-          </UButton>
+          />
         </li>
       </ul>
     </div>
@@ -113,6 +100,9 @@ useSeoMeta({
 
 const notifications = useNotifications();
 const { mutate: create, isPending } = useCreatePalette();
+const { data: count, suspense } = usePaletteCount();
+
+await suspense();
 
 const state = ref({
   prompt: ''

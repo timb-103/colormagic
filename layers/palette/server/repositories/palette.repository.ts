@@ -1,8 +1,28 @@
-import { ObjectId, type Collection, type OptionalUnlessRequiredId } from 'mongodb';
+import { ObjectId, type Collection, type Filter, type OptionalUnlessRequiredId } from 'mongodb';
 import type { CreatablePaletteEntity, PaletteEntity } from '../entities/palette.entity';
 
 export class PaletteRepository {
   constructor(private readonly collection: Collection<PaletteEntity>) {}
+
+  public async setup(): Promise<void> {
+    await this.collection.createIndexes([{
+      key: { createdAt: -1 }
+    }, {
+      key: { tags: -1 }
+    }], { background: true });
+  }
+
+  public async list(page: number, size: number, filter: Filter<PaletteEntity>): Promise<PaletteEntity[]> {
+    return await this.collection.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(page * size)
+      .limit(size)
+      .toArray();
+  }
+
+  public async count(filter?: Filter<PaletteEntity>): Promise<number> {
+    return await this.collection.countDocuments(filter);
+  }
 
   public async getById(id: string): Promise<PaletteEntity | null> {
     return await this.collection.findOne({ _id: new ObjectId(id) });

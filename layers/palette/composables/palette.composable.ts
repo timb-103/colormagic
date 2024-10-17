@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { useMutation, useQuery } from '@tanstack/vue-query';
+import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/vue-query';
 import { useLocalStorage, StorageSerializers } from '@vueuse/core';
-import type { CreatePaletteInputDto } from '../server/dtos/palette.dto';
+import type { CreatePaletteInputDto, ListPaletteInputDto } from '../server/dtos/palette.dto';
 import type { PaletteModel } from '../models/palette.model';
 import { PlausibleEventName } from '~/layers/plausible/types';
 import { sendPlausibleEvent } from '~/layers/plausible/utils/plausible.util';
@@ -12,14 +12,37 @@ export function usePalette(id: Ref<string | undefined>) {
   return useQuery({
     queryKey: [PALETTE_ROOT_KEY, id],
     queryFn: async () => {
-      return await $fetch('/api/palette/get', {
+      return await $fetch<PaletteModel>(`/api/palette/${id.value}`);
+    }
+  });
+}
+
+export function useListPalettes(size: number = 10, filter?: ListPaletteInputDto['filter']) {
+  return useInfiniteQuery({
+    queryKey: [PALETTE_ROOT_KEY, size, filter],
+    queryFn: async ({ pageParam: page = 0 }) => {
+      return await $fetch('/api/palette/list', {
         method: 'POST',
         body: {
-          id: id.value
+          page,
+          size,
+          filter
         }
       });
     },
-    enabled: () => id.value !== undefined
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+      if (lastPage.items.length < size) {
+        return undefined;
+      }
+      return lastPageParam + 1;
+    },
+    getPreviousPageParam: (_firstPage, _allPages, firstPageParam) => {
+      if (firstPageParam <= 1) {
+        return undefined;
+      }
+      return firstPageParam - 1;
+    }
   });
 }
 
@@ -53,6 +76,15 @@ export function useCreatePalette() {
       sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_CREATED);
 
       return response;
+    }
+  });
+}
+
+export function usePaletteCount() {
+  return useQuery({
+    queryKey: [PALETTE_ROOT_KEY, 'count'],
+    queryFn: async () => {
+      return await $fetch('/api/palette/count');
     }
   });
 }

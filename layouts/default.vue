@@ -1,14 +1,16 @@
 <template>
-  <div class="">
+  <!-- add padding at bottom for floating button -->
+  <div class="pb-16">
     <NuxtLoadingIndicator color="#5576ff" />
 
+    <!-- donate button -->
     <UButton
       block
       class="rounded-none border-b"
       variant="soft"
       color="primary"
       :label="$t('bannerLabel')"
-      @click="openModal()"
+      @click="donateClicked()"
     />
 
     <!-- nav -->
@@ -24,38 +26,8 @@
     <!-- footer -->
     <CommonFooter />
 
-    <!-- free modal -->
-    <UModal v-model="isModalOpen">
-      <UCard>
-        <template #header>
-          <p class="font-semibold">
-            ColorMagic is now 100% free to use!
-          </p>
-        </template>
-        <p class="mb-4">
-          We've just acquired this tool from the previous owners and have decided to make it 100% free to use.
-        </p>
-        <p class="mb-4">
-          If you were a previous subscriber, we've canceled your subscription so there will be no more payments. If you
-          require a prorated refund please reach out to us on <a
-            class="text-primary underline"
-            href="mailto:hello@colormagic.app"
-          >hello@colormagic.app</a>.
-        </p>
-        <p>
-          We're going to be making some improvements over the coming future, as well as adding other
-          cool free tools for you to use. If you have any suggestions, we'd love to hear them!
-        </p>
-        <template #footer>
-          <div class="flex justify-end">
-            <UButton
-              label="Close"
-              @click="closeModal()"
-            />
-          </div>
-        </template>
-      </UCard>
-    </UModal>
+    <!-- floating donate button -->
+    <CommonFloatingButton />
 
     <!-- global notifications -->
     <UNotifications>
@@ -69,6 +41,7 @@
 
 <script setup lang="ts">
 import { useLocalStorage } from '@vueuse/core';
+import { PlausibleEventName } from '~/layers/plausible/types';
 
 const { siteUrl } = useRuntimeConfig().public;
 const { path } = useRoute();
@@ -92,11 +65,10 @@ useServerSeoMeta({
   ogType: 'website'
 });
 
-const {
-  isOpen: isModalOpen,
-  open: openModal,
-  close: closeModal
-} = useModalV2();
+function donateClicked(): void {
+  void navigateTo(useRuntimeConfig().public.stripeDonatePaymentUrl, { external: true });
+  sendPlausibleEvent(PlausibleEventName.DONATE_BUTTON_BANNER_CLICKED);
+}
 
 onMounted(() => {
   /** @description hack to always set to light mode until we add dark mode properly */
