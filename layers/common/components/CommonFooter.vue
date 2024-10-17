@@ -76,7 +76,7 @@
           <p class="text-sm font-semibold mb-2">
             News
           </p>
-          <ul class="flex flex-col gap-1">
+          <ul>
             <li>
               <UButton
                 variant="soft"
@@ -93,7 +93,7 @@
       </div>
 
       <!-- copyright banner -->
-      <div class="flex items-center gap-4 justify-center flex-wrap">
+      <div class="flex items-center gap-4 sm:justify-center flex-wrap">
         <!-- copyright label -->
         <p class="text-sm text-gray-400">
           © 2024 ColorMagic
