@@ -1,77 +1,77 @@
 <template>
   <footer class="border-t mt-8">
     <div class="max-w-3xl mx-auto px-4 py-8">
-      <div class="mb-8 grid grid-cols-2 sm:grid-cols-3">
+      <div class="mb-8 grid grid-cols-2 sm:grid-cols-[repeat(4,auto)] gap-4 justify-between">
+        <!-- website -->
+        <div>
+          <p class="text-sm font-semibold mb-2">
+            Website
+          </p>
+          <ul class="flex flex-col gap-1">
+            <li
+              v-for="(item, index) in websiteLinks"
+              :key="index"
+            >
+              <UButton
+                :to="item.to"
+                :label="item.label"
+                :padded="false"
+                active-class="text-primary"
+                variant="soft"
+                class="text-gray-400 hover:text-primary"
+                size="md"
+              />
+            </li>
+          </ul>
+        </div>
+
+        <!-- free tools -->
         <div>
           <p class="text-sm font-semibold mb-2">
             Free Color Tools
           </p>
           <ul class="flex flex-col gap-1">
-            <li>
-              <NuxtLinkLocale
-                to="/"
-                class="hover:text-primary text-sm font-medium text-gray-400"
+            <li
+              v-for="(item, index) in toolsLinks"
+              :key="index"
+            >
+              <UButton
+                :to="item.to"
+                :label="item.label"
+                :padded="false"
                 active-class="text-primary"
-              >
-                {{ $t('nav.colorPaletteGenrator') }}
-              </NuxtLinkLocale>
-            </li>
-            <li>
-              <NuxtLinkLocale
-                to="/random-color"
-                class="hover:text-primary text-sm font-medium text-gray-400"
-                active-class="text-primary"
-              >
-                {{ $t('nav.randomColor') }}
-              </NuxtLinkLocale>
+                variant="soft"
+                class="text-gray-400 hover:text-primary"
+                size="md"
+              />
             </li>
           </ul>
         </div>
 
+        <!-- more -->
         <div>
           <p class="text-sm font-semibold mb-2">
             More
           </p>
           <ul class="flex flex-col gap-1">
-            <li>
-              <NuxtLinkLocale
-                to="https://colormagic.canny.io/"
-                class="hover:text-primary text-sm font-medium text-gray-400"
+            <li
+              v-for="(item, index) in moreLinks"
+              :key="index"
+            >
+              <UButton
+                :to="item.to"
+                :label="item.label"
+                :padded="false"
                 active-class="text-primary"
-              >
-                {{ $t('nav.suggestIdea') }}
-              </NuxtLinkLocale>
-            </li>
-            <li>
-              <NuxtLink
-                to="mailto:hello@colormagic.app"
-                class="hover:text-primary text-sm font-medium text-gray-400"
-                active-class="text-primary"
-              >
-                {{ $t('nav.contact') }}
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLinkLocale
-                to="/terms"
-                class="hover:text-primary text-sm font-medium text-gray-400"
-                active-class="text-primary"
-              >
-                {{ $t('nav.terms') }}
-              </NuxtLinkLocale>
-            </li>
-            <li>
-              <NuxtLinkLocale
-                to="/privacy"
-                class="hover:text-primary text-sm font-medium text-gray-400"
-                active-class="text-primary"
-              >
-                {{ $t('nav.privacy') }}
-              </NuxtLinkLocale>
+                variant="soft"
+                class="text-gray-400 hover:text-primary"
+                size="md"
+              />
             </li>
           </ul>
         </div>
 
+        <!-- news -->
         <div>
           <p class="text-sm font-semibold mb-2">
             News
@@ -79,7 +79,10 @@
           <ul class="flex flex-col gap-1">
             <li>
               <UButton
-                size="2xs"
+                variant="soft"
+                class="text-gray-400 hover:text-primary"
+                size="md"
+                :padded="false"
                 @click="openModal()"
               >
                 {{ $t('nav.free') }}
@@ -89,7 +92,8 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-4 text-center">
+      <!-- copyright banner -->
+      <div class="flex items-center gap-4 justify-center">
         <!-- copyright label -->
         <p class="text-sm text-gray-400">
           © 2024 ColorMagic
@@ -113,41 +117,14 @@
 
     <!-- free modal -->
     <UModal v-model="isModalOpen">
-      <UCard>
-        <template #header>
-          <p class="font-semibold">
-            ColorMagic is now 100% free to use!
-          </p>
-        </template>
-        <p class="mb-4">
-          We've just acquired this tool from the previous owners and have decided to make it 100% free to use.
-        </p>
-        <p class="mb-4">
-          If you were a previous subscriber, we've canceled your subscription so there will be no more payments. If you
-          require a prorated refund please reach out to us on <a
-            class="text-primary underline"
-            href="mailto:hello@colormagic.app"
-          >hello@colormagic.app</a>.
-        </p>
-        <p>
-          We're going to be making some improvements over the coming future, as well as adding other
-          cool free tools for you to use. If you have any suggestions, we'd love to hear them!
-        </p>
-        <template #footer>
-          <div class="flex justify-end">
-            <UButton
-              label="Close"
-              @click="closeModal()"
-            />
-          </div>
-        </template>
-      </UCard>
+      <CommonFreeInfoCard @cancel="closeModal()" />
     </UModal>
   </footer>
 </template>
 
 <script setup lang="ts">
-const { locales, locale } = useI18n();
+const { locales, locale, t } = useI18n();
+const localePath = useLocalePath();
 const switchLocalePath = useSwitchLocalePath();
 
 const {
@@ -155,4 +132,47 @@ const {
   open: openModal,
   close: closeModal
 } = useModalV2();
+
+const websiteLinks = computed(() => [
+  {
+    label: t('nav.home'),
+    to: localePath('/')
+  },
+  {
+    label: t('nav.explore'),
+    to: localePath('/palette/explore')
+  },
+  {
+    label: t('nav.recent'),
+    to: localePath('/recent')
+  },
+  {
+    label: t('nav.terms'),
+    to: localePath('/temrs')
+  },
+  {
+    label: t('nav.privacy'),
+    to: localePath('/privacy')
+  }
+]);
+
+const toolsLinks = computed(() => [{
+  to: localePath('/'),
+  label: t('nav.colorPaletteGenrator')
+},
+{
+  to: localePath('/random-color'),
+  label: t('nav.randomColor')
+}]);
+
+const moreLinks = computed(() => [
+  {
+    label: t('nav.contact'),
+    to: 'mailto:hello@colormagic.app'
+  },
+  {
+    label: t('nav.suggestIdea'),
+    to: 'https://colormagic.canny.io'
+  }
+]);
 </script>
