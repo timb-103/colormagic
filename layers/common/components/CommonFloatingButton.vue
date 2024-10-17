@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <Transition name="slide-up">
-      <div class="sticky bottom-0 flex justify-end p-8">
+      <div class="sticky bottom-0 flex justify-end mt-8">
         <UButton
           color="primary"
           label="Donate"
