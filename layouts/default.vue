@@ -1,5 +1,6 @@
 <template>
-  <div class="">
+  <!-- add padding at bottom for floating button -->
+  <div class="pb-16">
     <NuxtLoadingIndicator color="#5576ff" />
 
     <!-- donate button -->
