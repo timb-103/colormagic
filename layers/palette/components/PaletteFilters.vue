@@ -1,0 +1,51 @@
+<template>
+  <div class="flex">
+    <UButtonGroup>
+      <USelectMenu
+        v-model="selected"
+        size="sm"
+        by="id"
+        :placeholder="$t('explore.color')"
+        searchable
+        :options="colorLinks"
+        :popper="{
+          placement: 'bottom-start'
+        }"
+        :ui-menu="{container: 'w-36'}"
+        @change="value => navigateTo(value.to)"
+      />
+      <UButton
+        v-if="tag"
+        icon="i-heroicons-x-mark"
+        :to="localePath('/palette/explore')"
+      />
+    </UButtonGroup>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { type PaletteFilter } from '~/layers/palette/utils/palette-filters.util';
+
+export interface Props {
+  tag?: string
+  filter?: PaletteFilter
+}
+
+const props = defineProps<Props>();
+
+const localePath = useLocalePath();
+const { locale } = useI18n();
+
+const colorLinks = computed(() =>
+  getPaletteColorFilter().map(v => ({
+    label: v.label[getLocale(locale.value)],
+    id: v.id,
+    to: localePath(`/palette/explore/${v.id}`)
+  }))
+);
+
+const selected = ref({
+  ...props.filter,
+  label: props.filter?.label[getLocale(locale.value)]
+});
+</script>

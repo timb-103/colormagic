@@ -7,11 +7,13 @@ export class PaletteRepository {
   public async setup(): Promise<void> {
     await this.collection.createIndexes([{
       key: { createdAt: -1 }
+    }, {
+      key: { tags: -1 }
     }], { background: true });
   }
 
-  public async list(page: number, size: number): Promise<PaletteEntity[]> {
-    return await this.collection.find()
+  public async list(page: number, size: number, filter: Filter<PaletteEntity>): Promise<PaletteEntity[]> {
+    return await this.collection.find(filter)
       .sort({ createdAt: -1 })
       .skip(page * size)
       .limit(size)

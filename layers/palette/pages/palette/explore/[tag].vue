@@ -3,8 +3,8 @@
     <!-- header-->
     <div class="mb-8">
       <!-- title -->
-      <h1>
-        {{ $t('explore.title') }}
+      <h1 class="capitalize">
+        {{ title }}
       </h1>
 
       <!-- description-->
@@ -14,7 +14,7 @@
 
       <!-- count of palettes generated -->
       <p class="italic text-sm">
-        {{ count.toLocaleString() }} public color palettes generated
+        {{ count.toLocaleString() }} {{ tag }} color palettes generated
       </p>
     </div>
 
@@ -32,6 +32,14 @@
 
     <!-- palettes -->
     <div v-if="palettes">
+      <!-- filters -->
+      <div class="mb-4">
+        <PaletteFilters
+          :tag="tag"
+          :filter="filter"
+        />
+      </div>
+
       <ul class="grid sm:grid-cols-3 gap-4">
         <li
           v-for="(item, index) in palettes"
@@ -63,18 +71,32 @@
 const { t } = useI18n();
 const localePath = useLocalePath();
 
-const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100);
+const { locale } = useI18n();
+const { params } = useRoute();
+const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
+
+const listFilter = tag.value !== undefined
+  ? { tag: tag.value }
+  : undefined;
+
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100, listFilter);
 
 await suspense();
 
 const palettes = computed(() => list.value?.pages.flatMap((items) => items.items));
 const count = computed(() => list.value?.pages[0].count ?? 0);
 
+const filter = getPaletteColorFilter().find(v => v.id === tag.value);
+
+const title = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);
+const seoTitle = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} - ${t('explore.colorPalettes')}`);
+const seoDescription = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} - ${t('explore.seoDescription')}`);
+
 useSeoMeta({
-  title: t('explore.seoTitle'),
-  description: t('explore.seoDescription'),
-  ogTitle: t('explore.seoTitle'),
-  ogDescription: t('explore.seoDescription'),
-  ogImageUrl: `${useRuntimeConfig().public.siteUrl}/img/og.png`
+  title: seoTitle,
+  description: seoDescription,
+  ogTitle: seoTitle,
+  ogDescription: seoDescription,
+  ogImageUrl: `${useRuntimeConfig().public.siteUrl}/api/og/get?colors=${filter?.hex.replace('#', '')}&text=${filter?.label[getLocale(locale.value)]}`
 });
 </script>

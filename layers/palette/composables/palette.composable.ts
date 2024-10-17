@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/vue-query';
 import { useLocalStorage, StorageSerializers } from '@vueuse/core';
-import type { CreatePaletteInputDto } from '../server/dtos/palette.dto';
+import type { CreatePaletteInputDto, ListPaletteInputDto } from '../server/dtos/palette.dto';
 import type { PaletteModel } from '../models/palette.model';
 import { PlausibleEventName } from '~/layers/plausible/types';
 import { sendPlausibleEvent } from '~/layers/plausible/utils/plausible.util';
@@ -17,15 +17,16 @@ export function usePalette(id: Ref<string | undefined>) {
   });
 }
 
-export function useListPalettes(size: number = 10) {
+export function useListPalettes(size: number = 10, filter?: ListPaletteInputDto['filter']) {
   return useInfiniteQuery({
-    queryKey: [PALETTE_ROOT_KEY, size],
+    queryKey: [PALETTE_ROOT_KEY, size, filter],
     queryFn: async ({ pageParam: page = 0 }) => {
       return await $fetch('/api/palette/list', {
         method: 'POST',
         body: {
           page,
-          size
+          size,
+          filter
         }
       });
     },

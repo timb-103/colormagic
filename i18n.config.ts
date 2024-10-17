@@ -59,7 +59,9 @@ export default defineI18nConfig(() => ({
       explore: {
         title: 'Explore Color Palettes',
         seoTitle: 'Explore Color Palettes - ColorMagic',
-        seoDescription: 'Explore all of the latest generated color palettes.'
+        seoDescription: 'Explore all of the latest generated color palettes.',
+        colorPalettes: 'Color Palettes',
+        color: 'Color'
       },
       imageColorPicker: {
         title: 'Image Color Picker',
@@ -125,7 +127,9 @@ export default defineI18nConfig(() => ({
       explore: {
         title: 'カラーパレットを探索する',
         seoTitle: 'カラーパレットを探索する - ColorMagic',
-        seoDescription: '最新に生成されたすべてのカラー パレットを探索する.'
+        seoDescription: '最新に生成されたすべてのカラー パレットを探索する.',
+        colorPalettes: 'カラーパレット',
+        color: '色'
       },
       imageColorPicker: {
         title: '画像カラーピッカー',
@@ -191,7 +195,9 @@ export default defineI18nConfig(() => ({
       explore: {
         title: 'Esplora le tavolozze dei colori',
         seoTitle: 'Esplora le tavolozze dei colori - ColorMagic',
-        seoDescription: 'Esplora tutte le tavolozze di colori generate più recenti.'
+        seoDescription: 'Esplora tutte le tavolozze di colori generate più recenti.',
+        colorPalettes: 'Tavolozze di colori',
+        color: 'Colore'
       },
       imageColorPicker: {
         title: 'Selettore colore immagine',

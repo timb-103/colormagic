@@ -1,5 +1,5 @@
 import type { Filter } from 'mongodb';
-import type { ListPaletteDto, PaletteDto } from '../dtos/palette.dto';
+import type { ListPaletteDto, ListPaletteInputDto, PaletteDto } from '../dtos/palette.dto';
 import { mapCreatePalettePrompt, mapPaletteEntityToDto } from '../helpers/palette.helper';
 import type { PaletteRepository } from '../repositories/palette.repository';
 import { arrangeColors } from '../../utils/color-arrange.util';
@@ -12,10 +12,20 @@ export class PaletteService {
     private readonly aiService: AIService
   ) {}
 
-  public async list(page: number, size: number): Promise<ListPaletteDto> {
+  public async list(page: number, size: number, filter: ListPaletteInputDto['filter']): Promise<ListPaletteDto> {
+    let colFilter: Filter<PaletteEntity> = {};
+
+    if (filter !== undefined) {
+      colFilter = {
+        tags: {
+          $in: [filter.tag]
+        }
+      };
+    }
+
     const [entities, count] = await Promise.all([
-      this.repository.list(page, size),
-      this.repository.count()
+      this.repository.list(page, size, colFilter),
+      this.repository.count(colFilter)
     ]);
 
     return {
@@ -50,7 +60,7 @@ export class PaletteService {
       }
 
       name = response[0].match(/\[name:(.*?)\]/)?.[1] ?? 'Cool Palette';
-      tags = response[0].match(/\[tags:(.*?)\]/)?.[1]?.split(',') ?? [];
+      tags = response[0].match(/\[tags:(.*?)\]/)?.[1]?.toLowerCase().split(',') ?? [];
 
       colorsNew = arrangeColors([...new Set(colors)], {
         brightness: 0,
