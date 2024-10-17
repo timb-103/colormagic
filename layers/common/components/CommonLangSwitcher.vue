@@ -3,7 +3,27 @@
     v-model="selected"
     size="sm"
     :options="options"
-  />
+    :ui-menu="{container: 'w-32'}"
+  >
+    <!-- label -->
+    <template #label>
+      <span class="flex items-center gap-2">
+        <span>
+          {{ locales.find(v => v.code === selected)?.flag }}
+        </span>
+        <span>
+          {{ selected }}
+        </span>
+      </span>
+    </template>
+
+    <!-- option -->
+    <template #option="{ option }">
+      <span class="truncate">
+        {{ locales.find(v => v.code === option)?.name }}
+      </span>
+    </template>
+  </USelectMenu>
 </template>
 
 <script setup lang="ts">

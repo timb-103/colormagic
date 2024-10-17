@@ -71,17 +71,20 @@ export default defineNuxtConfig({
       {
         code: 'en',
         language: 'en-US',
-        name: 'English'
+        name: 'English',
+        flag: '🇬🇧'
       },
       {
         code: 'ja',
         language: 'ja-JP',
-        name: 'Japanese'
+        name: 'Japanese',
+        flag: '🇯🇵'
       },
       {
         code: 'it',
         language: 'it-IT',
-        name: 'Italian'
+        name: 'Italian',
+        flag: '🇮🇹'
       }
     ]
   }

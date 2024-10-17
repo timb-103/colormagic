@@ -93,7 +93,7 @@
       </div>
 
       <!-- copyright banner -->
-      <div class="flex items-center gap-4 justify-center">
+      <div class="flex items-center gap-4 justify-center flex-wrap">
         <!-- copyright label -->
         <p class="text-sm text-gray-400">
           © 2024 ColorMagic
@@ -110,7 +110,7 @@
             'text-gray-400': locale !== item.code
           }"
         >
-          {{ item.name }}
+          {{ item.flag }} {{ item.name }}
         </NuxtLink>
       </div>
     </div>
@@ -148,7 +148,7 @@ const websiteLinks = computed(() => [
   },
   {
     label: t('nav.terms'),
-    to: localePath('/temrs')
+    to: localePath('/terms')
   },
   {
     label: t('nav.privacy'),
