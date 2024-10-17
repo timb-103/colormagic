@@ -11,7 +11,7 @@
         :popper="{
           placement: 'bottom-start'
         }"
-        :ui-menu="{container: 'w-36'}"
+        :ui-menu="{container: 'min-w-36'}"
         @change="value => navigateTo(value.to)"
       />
       <UButton
