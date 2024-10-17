@@ -77,4 +77,28 @@ async function validateBody<T extends TSchema>(event: H3Event, schema: T, option
   return body;
 }
 
+export function validateQuery<T extends TSchema>(event: H3Event, schema: T, options?: ValidatorOptions): Static<T, []> {
+  const query = getQuery(event);
+  const validate = useValidator(options).compile(schema);
+
+  if (!validate(query)) {
+    const betterErrors = betterAjvErrors({ schema, data: query, errors: validate.errors, basePath: 'query' });
+    throw createError({ statusCode: 400, statusMessage: betterErrors[0].message });
+  }
+
+  return query as Static<T>;
+}
+
+export function validateParams<T extends TSchema>(event: H3Event, schema: T, options?: ValidatorOptions): Static<T, []> {
+  const query = getRouterParams(event);
+  const validate = useValidator(options).compile(schema);
+
+  if (!validate(query)) {
+    const betterErrors = betterAjvErrors({ schema, data: query, errors: validate.errors, basePath: 'query' });
+    throw createError({ statusCode: 400, statusMessage: betterErrors[0].message });
+  }
+
+  return query as Static<T>;
+}
+
 export { validateBody };

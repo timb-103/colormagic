@@ -1,8 +1,8 @@
 import type { PaletteDto } from '../../dtos/palette.dto';
 
 export default defineEventHandler(async (event): Promise<PaletteDto> => {
-  const body = await modules.palette.validation.getInputBody(event);
-  const response = await modules.palette.service.getById(body.id);
+  const params = await modules.palette.validation.getInputParams(event);
+  const response = await modules.palette.service.getById(params.id);
 
   return response;
 });
