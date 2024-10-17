@@ -4,6 +4,7 @@ export interface PaletteEntity {
   _id: ObjectId
   colors: [string, string, string, string, string]
   text: string
+  tags?: string[]
   createdAt: Date
 }
 

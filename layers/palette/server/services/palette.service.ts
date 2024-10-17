@@ -36,6 +36,7 @@ export class PaletteService {
   public async create(input: string, colors?: string[]): Promise<PaletteDto> {
     let colorsNew = colors;
     let name = 'Cool Palette';
+    let tags: string[] = [];
 
     /** @description get colors from ai */
     if (colorsNew === undefined) {
@@ -49,6 +50,7 @@ export class PaletteService {
       }
 
       name = response[0].match(/\[name:(.*?)\]/)?.[1] ?? 'Cool Palette';
+      tags = response[0].match(/\[tags:(.*?)\]/)?.[1]?.split(',') ?? [];
 
       colorsNew = arrangeColors([...new Set(colors)], {
         brightness: 0,
@@ -60,6 +62,7 @@ export class PaletteService {
     const entity = await this.repository.create({
       colors: [colorsNew[0], colorsNew[1], colorsNew[2], colorsNew[3], colorsNew[4]],
       text: name,
+      tags,
       createdAt: new Date()
     });
 
