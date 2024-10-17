@@ -12,7 +12,7 @@ export function usePalette(id: Ref<string | undefined>) {
   return useQuery({
     queryKey: [PALETTE_ROOT_KEY, id],
     queryFn: async () => {
-      return await $fetch(`/api/palette/${id.value}`);
+      return await $fetch<PaletteModel>(`/api/palette/${id.value}`);
     }
   });
 }
