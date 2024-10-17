@@ -45,7 +45,7 @@
               icon="i-heroicons-chevron-down-16-solid"
               trailing
             >
-              Tools
+              {{ $t('nav.tools') }}
             </UButton>
 
             <template #panel>
@@ -153,6 +153,12 @@ const toolsLinks = computed(() => [{
   label: t('nav.randomColor'),
   description: t('randomColor.seoDescription'),
   icon: 'i-heroicons-arrow-path'
+},
+{
+  to: localePath('/image-color-picker'),
+  label: t('nav.imageColorPicker'),
+  description: t('imageColorPicker.seoDescription'),
+  icon: 'i-heroicons-photo'
 }]);
 
 watch(useRoute(), () => {

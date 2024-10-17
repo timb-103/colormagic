@@ -5,7 +5,7 @@
         <!-- website -->
         <div>
           <p class="text-sm font-semibold mb-2">
-            Website
+            {{ $t('nav.website') }}
           </p>
           <ul class="flex flex-col gap-1">
             <li
@@ -28,7 +28,7 @@
         <!-- free tools -->
         <div>
           <p class="text-sm font-semibold mb-2">
-            Free Color Tools
+            {{ $t('nav.freeColorTools') }}
           </p>
           <ul class="flex flex-col gap-1">
             <li
@@ -51,7 +51,7 @@
         <!-- more -->
         <div>
           <p class="text-sm font-semibold mb-2">
-            More
+            {{ $t('nav.more') }}
           </p>
           <ul class="flex flex-col gap-1">
             <li
@@ -74,7 +74,7 @@
         <!-- news -->
         <div>
           <p class="text-sm font-semibold mb-2">
-            News
+            {{ $t('nav.news') }}
           </p>
           <ul>
             <li>
@@ -163,6 +163,10 @@ const toolsLinks = computed(() => [{
 {
   to: localePath('/random-color'),
   label: t('nav.randomColor')
+},
+{
+  to: localePath('/image-color-picker'),
+  label: t('nav.imageColorPicker')
 }]);
 
 const moreLinks = computed(() => [

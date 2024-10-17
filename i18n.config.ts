@@ -29,7 +29,13 @@ export default defineI18nConfig(() => ({
         privacy: 'Privacy',
         suggestIdea: 'Suggest an Idea',
         free: 'ColorMagic is now 100% free',
-        explore: 'Explore'
+        explore: 'Explore',
+        imageColorPicker: 'Image Color Picker',
+        tools: 'Tools',
+        website: 'Website',
+        freeColorTools: 'Free Color Tools',
+        more: 'More',
+        news: 'News'
       },
       palette: {
         seoTitle: 'ColorMagic - AI Color Palette Generator',
@@ -54,6 +60,12 @@ export default defineI18nConfig(() => ({
         title: 'Explore Color Palettes',
         seoTitle: 'Explore Color Palettes - ColorMagic',
         seoDescription: 'Explore all of the latest generated color palettes.'
+      },
+      imageColorPicker: {
+        title: 'Image Color Picker',
+        seoTitle: 'Image Color Picker - ColorMagic',
+        seoDescription: 'Extract and pick a beatiful color scheme from any image with AI.',
+        uploadPlaceholder: 'Upload an Image'
       }
     },
     ja: {
@@ -83,7 +95,13 @@ export default defineI18nConfig(() => ({
         colorPaletteGenrator: 'カラーパレットジェネレーター',
         suggestIdea: 'アイデアを提案',
         free: 'ColorMagicが今なら完全無料です！詳しくはこちら',
-        explore: '探検する'
+        explore: '探検する',
+        imageColorPicker: '画像カラーピッカー',
+        tools: 'ツール',
+        website: 'Webサイト',
+        freeColorTools: '無料のカラーツール',
+        more: 'もっと',
+        news: 'ニュース'
       },
       palette: {
         seoTitle: 'あなたの思い描く色をかんたんに',
@@ -108,6 +126,12 @@ export default defineI18nConfig(() => ({
         title: 'カラーパレットを探索する',
         seoTitle: 'カラーパレットを探索する - ColorMagic',
         seoDescription: '最新に生成されたすべてのカラー パレットを探索する.'
+      },
+      imageColorPicker: {
+        title: '画像カラーピッカー',
+        seoTitle: '画像カラーピッカー - ColorMagic',
+        seoDescription: 'AI を使用して、あらゆる画像から美しい配色を抽出して選択します。',
+        uploadPlaceholder: '画像をアップロードする'
       }
     },
     it: {
@@ -137,7 +161,13 @@ export default defineI18nConfig(() => ({
         colorPaletteGenrator: 'Generatore di Palette di Colori',
         suggestIdea: 'Suggerisci un\'idea',
         free: 'ColorMagic è ora completamente gratuito! Leggi di più qui',
-        explore: 'Esplorare'
+        explore: 'Esplorare',
+        imageColorPicker: 'Selettore colore immagine',
+        tools: 'Utensili',
+        website: 'Sito web',
+        freeColorTools: 'Strumenti di colore gratuiti',
+        more: 'Di più',
+        news: 'Notizia'
       },
       palette: {
         seoTitle: 'Crea facilmente i colori che immagini',
@@ -162,6 +192,12 @@ export default defineI18nConfig(() => ({
         title: 'Esplora le tavolozze dei colori',
         seoTitle: 'Esplora le tavolozze dei colori - ColorMagic',
         seoDescription: 'Esplora tutte le tavolozze di colori generate più recenti.'
+      },
+      imageColorPicker: {
+        title: 'Selettore colore immagine',
+        seoTitle: 'Selettore colore immagine - ColorMagic',
+        seoDescription: 'Estrai e scegli una bellissima combinazione di colori da qualsiasi immagine con l\'intelligenza artificiale.',
+        uploadPlaceholder: 'Carica un\'immagine'
       }
     }
   }
