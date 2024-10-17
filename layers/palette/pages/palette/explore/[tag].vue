@@ -88,6 +88,10 @@ const count = computed(() => list.value?.pages[0].count ?? 0);
 
 const filter = getPaletteColorFilter().find(v => v.id === tag.value);
 
+if (filter === undefined) {
+  throw createError({ statusCode: 404, statusMessage: 'Tag not found.' });
+}
+
 const title = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);
 const seoTitle = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} - ${t('explore.colorPalettes')}`);
 const seoDescription = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} - ${t('explore.seoDescription')}`);
