@@ -7,6 +7,5 @@ export enum PlausibleEventName {
 
   RANDOM_COLOR_GENERATED = 'random-color:generated',
 
-  DONATE_BUTTON_FLOATING_CLICKED = 'donate-button:floating:clicked',
-  DONATE_BUTTON_BANNER_CLICKED = 'donate-button:banner:clicked',
+  FEEDBACK_BUTTON_FLOATING_CLICKED = 'feedback-button:floating:clicked',
 }

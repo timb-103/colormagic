@@ -3,16 +3,6 @@
   <div class="pb-16">
     <NuxtLoadingIndicator color="#5576ff" />
 
-    <!-- donate button -->
-    <UButton
-      block
-      class="rounded-none border-b"
-      variant="soft"
-      color="primary"
-      :label="$t('bannerLabel')"
-      @click="donateClicked()"
-    />
-
     <!-- nav -->
     <CommonNav />
 
@@ -41,7 +31,6 @@
 
 <script setup lang="ts">
 import { useLocalStorage } from '@vueuse/core';
-import { PlausibleEventName } from '~/layers/plausible/types';
 
 const { siteUrl } = useRuntimeConfig().public;
 const { path } = useRoute();
@@ -64,11 +53,6 @@ useServerSeoMeta({
   ogUrl: `${siteUrl}${path}`,
   ogType: 'website'
 });
-
-function donateClicked(): void {
-  void navigateTo(useRuntimeConfig().public.stripeDonatePaymentUrl, { external: true });
-  sendPlausibleEvent(PlausibleEventName.DONATE_BUTTON_BANNER_CLICKED);
-}
 
 onMounted(() => {
   /** @description hack to always set to light mode until we add dark mode properly */
