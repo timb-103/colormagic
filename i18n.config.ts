@@ -140,13 +140,13 @@ export default defineI18nConfig(() => ({
     },
     it: {
       home: {
-        title: 'Crea facilmente i colori che immagini',
-        seoTitle: 'Crea facilmente i colori che immagini',
-        seoDescription: 'ColorMagic è un servizio che ti consente di creare palette di colori originali utilizzando l\'intelligenza artificiale.\nPuoi generare facilmente una combinazione di colori utilizzabile immediatamente, partendo da parole chiave di atmosfera o immagine.',
+        title: 'Genera la tua palette di colori ideale',
+        seoTitle: 'Genera la tua palette di colori ideale',
+        seoDescription: 'ColorMagic è un generatore di palette di colori con IA. Inserisci qualsiasi parola chiave e genera una palette corrispondente.',
         exampleLabel: 'Prova un esempio:'
       },
       recent: {
-        seoTitle: 'Recenti Crea facilmente i colori che immagini',
+        seoTitle: 'Recenti - ColorMagic - AI Color Palette Generator',
         topLabel: 'Recenti:',
         noneFound: 'Nessun elemento recente trovato'
       },
@@ -174,8 +174,8 @@ export default defineI18nConfig(() => ({
         news: 'Notizia'
       },
       palette: {
-        seoTitle: 'Crea facilmente i colori che immagini',
-        seoDescription: 'ColorMagic è un servizio che ti consente di creare palette di colori originali utilizzando l\'intelligenza artificiale.\nPuoi generare facilmente una combinazione di colori utilizzabile immediatamente, partendo da parole chiave di atmosfera o immagine.',
+        seoTitle: 'Genera la tua palette di colori ideale',
+        seoDescription: 'ColorMagic è un generatore di palette di colori con IA. Inserisci qualsiasi parola chiave e genera una palette corrispondente.',
         brightness: 'Luminosità',
         saturation: 'Saturazione',
         warmth: 'Calore',
@@ -189,7 +189,7 @@ export default defineI18nConfig(() => ({
       randomColor: {
         title: 'Generatore di Colori Casuali',
         seoTitle: 'Generatore di Colori Casuali - ColorMagic',
-        seoDescription: 'Trova colori interessanti e casuali all\'istante con un semplice clic (o una pressione della barra spaziatrice).',
+        seoDescription: 'Genera colori casuali all\'istante con un semplice clic (o con la barra spaziatrice).',
         generateLabel: 'Genera Colore Casuale'
       },
       explore: {
