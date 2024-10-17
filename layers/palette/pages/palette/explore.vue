@@ -14,7 +14,7 @@
 
       <!-- count of palettes generated -->
       <p class="italic text-sm">
-        {{ count }} public color palettes generated
+        {{ count.toLocaleString() }} public color palettes generated
       </p>
     </div>
 

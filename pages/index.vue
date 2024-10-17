@@ -53,7 +53,7 @@
 
       <!-- count of palettes generated -->
       <p class="italic text-xs text-center">
-        {{ count?.count ?? 0 }} color palettes generated since yesterday
+        {{ count?.count.toLocaleString() ?? 0 }} color palettes generated since yesterday
       </p>
     </UForm>
 
