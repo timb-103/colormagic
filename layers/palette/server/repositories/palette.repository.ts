@@ -1,4 +1,4 @@
-import { ObjectId, type Collection, type OptionalUnlessRequiredId } from 'mongodb';
+import { ObjectId, type Collection, type Filter, type OptionalUnlessRequiredId } from 'mongodb';
 import type { CreatablePaletteEntity, PaletteEntity } from '../entities/palette.entity';
 
 export class PaletteRepository {
@@ -16,6 +16,10 @@ export class PaletteRepository {
       .skip(page * size)
       .limit(size)
       .toArray();
+  }
+
+  public async count(filter: Filter<PaletteEntity>): Promise<number> {
+    return await this.collection.countDocuments(filter);
   }
 
   public async getById(id: string): Promise<PaletteEntity | null> {

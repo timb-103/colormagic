@@ -50,6 +50,10 @@
         :label="$t('generate.label')"
         :loading="isPending"
       />
+
+      <p class="italic text-xs text-center">
+        {{ count.count }} palettes generated since yesterday
+      </p>
     </UForm>
 
     <!-- examples -->
@@ -95,6 +99,9 @@ useSeoMeta({
 
 const notifications = useNotifications();
 const { mutate: create, isPending } = useCreatePalette();
+const { data: count, suspense } = usePaletteCount();
+
+await suspense();
 
 const state = ref({
   prompt: ''

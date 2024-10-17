@@ -27,3 +27,9 @@ export const ListPaletteInputDtoSchema = Type.Object({
 });
 
 export type ListPaletteInputDto = Static<typeof ListPaletteInputDtoSchema>;
+
+export const CountPaletteDtoSchema = Type.Object({
+  count: Type.Number()
+});
+
+export type CountPaletteDto = Static<typeof CountPaletteDtoSchema>;

@@ -84,3 +84,12 @@ export function useCreatePalette() {
     }
   });
 }
+
+export function usePaletteCount() {
+  return useQuery({
+    queryKey: [PALETTE_ROOT_KEY, 'count'],
+    queryFn: async () => {
+      return await $fetch('/api/palette/count');
+    }
+  });
+}

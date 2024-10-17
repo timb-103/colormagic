@@ -1,7 +1,9 @@
+import type { Filter } from 'mongodb';
 import type { PaletteDto } from '../dtos/palette.dto';
 import { mapCreatePalettePrompt, mapPaletteEntityToDto } from '../helpers/palette.helper';
 import type { PaletteRepository } from '../repositories/palette.repository';
 import { arrangeColors } from '../../utils/color-arrange.util';
+import type { PaletteEntity } from '../entities/palette.entity';
 import type { AIService } from '~/layers/ai/server/services/ai.service';
 
 export class PaletteService {
@@ -56,5 +58,19 @@ export class PaletteService {
     });
 
     return mapPaletteEntityToDto(entity);
+  }
+
+  public async count(from?: Date): Promise<number> {
+    let filter: Filter<PaletteEntity> = {};
+
+    if (from !== undefined) {
+      filter = {
+        createdAt: {
+          $gte: from
+        }
+      };
+    }
+
+    return await this.repository.count(filter);
   }
 }
