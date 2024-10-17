@@ -64,6 +64,12 @@
         />
       </div>
     </div>
+
+    <!-- tag links -->
+    <p class="font-semibold mt-8 mb-4">
+      {{ $t('explore.byTag') }}
+    </p>
+    <PaletteTagLinks />
   </div>
 </template>
 
