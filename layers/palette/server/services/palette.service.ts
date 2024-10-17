@@ -1,5 +1,5 @@
 import type { Filter } from 'mongodb';
-import type { PaletteDto } from '../dtos/palette.dto';
+import type { ListPaletteDto, PaletteDto } from '../dtos/palette.dto';
 import { mapCreatePalettePrompt, mapPaletteEntityToDto } from '../helpers/palette.helper';
 import type { PaletteRepository } from '../repositories/palette.repository';
 import { arrangeColors } from '../../utils/color-arrange.util';
@@ -12,10 +12,16 @@ export class PaletteService {
     private readonly aiService: AIService
   ) {}
 
-  public async list(page: number, size: number): Promise<PaletteDto[]> {
-    const entities = await this.repository.list(page, size);
+  public async list(page: number, size: number): Promise<ListPaletteDto> {
+    const [entities, count] = await Promise.all([
+      this.repository.list(page, size),
+      this.repository.count()
+    ]);
 
-    return entities.map(entity => mapPaletteEntityToDto(entity));
+    return {
+      items: entities.map(entity => mapPaletteEntityToDto(entity)),
+      count
+    };
   }
 
   public async getById(id: string): Promise<PaletteDto> {

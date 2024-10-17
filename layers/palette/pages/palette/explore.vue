@@ -11,6 +11,11 @@
       <p class="text-xl font-medium mb-4 max-w-xl">
         {{ $t('explore.seoDescription') }}
       </p>
+
+      <!-- count of palettes generated -->
+      <p class="italic text-sm">
+        {{ count }} public color palettes generated
+      </p>
     </div>
 
     <!-- loading skeletons -->
@@ -62,7 +67,8 @@ const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useList
 
 await suspense();
 
-const palettes = computed(() => list.value?.pages.flatMap((items) => items));
+const palettes = computed(() => list.value?.pages.flatMap((items) => items.items));
+const count = computed(() => list.value?.pages[0].count ?? 0);
 
 useSeoMeta({
   title: t('explore.seoTitle'),

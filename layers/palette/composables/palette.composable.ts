@@ -37,7 +37,7 @@ export function useListPalettes(size: number = 10) {
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
-      if (lastPage.length < size) {
+      if (lastPage.items.length < size) {
         return undefined;
       }
       return lastPageParam + 1;

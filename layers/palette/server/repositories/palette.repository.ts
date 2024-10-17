@@ -18,7 +18,7 @@ export class PaletteRepository {
       .toArray();
   }
 
-  public async count(filter: Filter<PaletteEntity>): Promise<number> {
+  public async count(filter?: Filter<PaletteEntity>): Promise<number> {
     return await this.collection.countDocuments(filter);
   }
 
