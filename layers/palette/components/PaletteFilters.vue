@@ -34,15 +34,21 @@ export interface Props {
 const props = defineProps<Props>();
 
 const localePath = useLocalePath();
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
-const colorLinks = computed(() =>
-  getPaletteColorFilter().map(v => ({
+const colorLinks = computed(() => [
+  /** @description stupid hack for nuxt ui bug */
+  {
+    label: t('explore.color'),
+    id: '',
+    to: localePath('/palette/explore')
+  },
+  ...getPaletteColorFilter().map(v => ({
     label: v.label[getLocale(locale.value)],
     id: v.id,
     to: localePath(`/palette/explore/${v.id}`)
   }))
-);
+]);
 
 const selected = ref({
   ...props.filter,
