@@ -52,7 +52,7 @@
       />
 
       <p class="italic text-xs text-center">
-        {{ count.count }} palettes generated since yesterday
+        {{ count?.count ?? 0 }} palettes generated since yesterday
       </p>
     </UForm>
 
