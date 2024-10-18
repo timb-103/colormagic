@@ -11,15 +11,21 @@ export interface PaletteFilter {
 export function getPaletteColorFilter(): PaletteFilter[] {
   return [
     { id: 'amber', label: { en: 'Amber', ja: 'アンバー', it: 'Ambra' }, hex: '#FFBF00' },
+    { id: 'aqua', label: { en: 'Aqua', ja: 'アクア', it: 'Acqua' }, hex: '#00FFFF' },
+    { id: 'apricot', label: { en: 'Apricot', ja: 'アプリコット', it: 'Albicocca' }, hex: '#FBCEB1' },
     { id: 'auburn', label: { en: 'Auburn', ja: '赤褐色', it: 'Auburn' }, hex: '#A52A2A' },
     { id: 'beige', label: { en: 'Beige', ja: 'ベージュ', it: 'Beige' }, hex: '#F5F5DC' },
     { id: 'black', label: { en: 'Black', ja: '黒', it: 'Nero' }, hex: '#000000' },
     { id: 'blue', label: { en: 'Blue', ja: '青', it: 'Blu' }, hex: '#0000FF' },
+    { id: 'brown', label: { en: 'Brown', ja: '茶色', it: 'Marrone' }, hex: '#964B00' },
     { id: 'burgundy', label: { en: 'Burgundy', ja: 'バーガンディ', it: 'Borgogna' }, hex: '#800020' },
     { id: 'coral', label: { en: 'Coral', ja: 'コーラル', it: 'Corallo' }, hex: '#FF7F50' },
     { id: 'cream', label: { en: 'Cream', ja: 'クリーム', it: 'Crema' }, hex: '#FFFDD0' },
+    { id: 'crimson', label: { en: 'Crimson', ja: 'クリムゾン', it: 'Cremisi' }, hex: '#DC143C' },
     { id: 'fuschia', label: { en: 'Fuschia', ja: 'フクシア', it: 'Fucsia' }, hex: '#FF00FF' },
     { id: 'gold', label: { en: 'Gold', ja: 'ゴールド', it: 'Oro' }, hex: '#FFD700' },
+    { id: 'gray', label: { en: 'Gray', ja: '灰色', it: 'Grigio' }, hex: '#808080' },
+    { id: 'green', label: { en: 'Green', ja: '緑', it: 'Verde' }, hex: '#008000' },
     { id: 'hazel', label: { en: 'Hazel', ja: 'ヘーゼル', it: 'Nocciola' }, hex: '#8E7618' },
     { id: 'indigo', label: { en: 'Indigo', ja: 'インディゴ', it: 'Indaco' }, hex: '#4B0082' },
     { id: 'ivory', label: { en: 'Ivory', ja: 'アイボリー', it: 'Avorio' }, hex: '#FFFFF0' },
@@ -27,6 +33,7 @@ export function getPaletteColorFilter(): PaletteFilter[] {
     { id: 'lilac', label: { en: 'Lilac', ja: 'ライラック', it: 'Lillà' }, hex: '#C8A2C8' },
     { id: 'magenta', label: { en: 'Magenta', ja: 'マゼンタ', it: 'Magenta' }, hex: '#FF00FF' },
     { id: 'maroon', label: { en: 'Maroon', ja: '栗色', it: 'Bordeaux' }, hex: '#800000' },
+    { id: 'mint', label: { en: 'Mint', ja: 'ミント', it: 'Menta' }, hex: '#98FF98' },
     { id: 'peach', label: { en: 'Peach', ja: 'ピーチ', it: 'Pesca' }, hex: '#FFDAB9' },
     { id: 'pink', label: { en: 'Pink', ja: 'ピンク', it: 'Rosa' }, hex: '#FFC0CB' },
     { id: 'purple', label: { en: 'Purple', ja: '紫', it: 'Viola' }, hex: '#800080' },
@@ -35,6 +42,8 @@ export function getPaletteColorFilter(): PaletteFilter[] {
     { id: 'tan', label: { en: 'Tan', ja: 'タン', it: 'Tan' }, hex: '#D2B48C' },
     { id: 'teal', label: { en: 'Teal', ja: 'ティール', it: 'Verde acqua' }, hex: '#008080' },
     { id: 'turquoise', label: { en: 'Turquoise', ja: 'ターコイズ', it: 'Turchese' }, hex: '#40E0D0' },
-    { id: 'white', label: { en: 'White', ja: '白', it: 'Bianco' }, hex: '#FFFFFF' }
+    { id: 'violet', label: { en: 'Violet', ja: 'スミレ', it: 'Viola' }, hex: '#EE82EE' },
+    { id: 'white', label: { en: 'White', ja: '白', it: 'Bianco' }, hex: '#FFFFFF' },
+    { id: 'yellow', label: { en: 'Yellow', ja: '黄色', it: 'Giallo' }, hex: '#FFFF00' }
   ];
 }
