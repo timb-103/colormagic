@@ -170,7 +170,7 @@ const toolsLinks = computed(() => [{
 },
 {
   to: localePath('/api'),
-  label: 'API'
+  label: t('nav.api')
 }]);
 
 const moreLinks = computed(() => [

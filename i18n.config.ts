@@ -35,7 +35,8 @@ export default defineI18nConfig(() => ({
         website: 'Website',
         freeColorTools: 'Free Color Tools',
         more: 'More',
-        news: 'News'
+        news: 'News',
+        api: 'Colors API'
       },
       palette: {
         seoTitle: 'ColorMagic - AI Color Palette Generator',
@@ -110,7 +111,8 @@ export default defineI18nConfig(() => ({
         website: 'Webサイト',
         freeColorTools: '無料のカラーツール',
         more: 'もっと',
-        news: 'ニュース'
+        news: 'ニュース',
+        api: 'カラーAPI'
       },
       palette: {
         seoTitle: 'あなたの思い描く色をかんたんに',
@@ -185,7 +187,8 @@ export default defineI18nConfig(() => ({
         website: 'Sito web',
         freeColorTools: 'Strumenti di colore gratuiti',
         more: 'Di più',
-        news: 'Notizia'
+        news: 'Notizia',
+        api: 'API dei colori'
       },
       palette: {
         seoTitle: 'Genera la tua palette di colori ideale',
