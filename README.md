@@ -2,7 +2,9 @@
 
 # 🎨 [ColorMagic](https://colormagic.app)
 
-ColorMagic is a free and open-source color palette generator, with many side-tools for all things color. It's built with [Nuxt](https://nuxt.com), [NuxtUI](https://ui.nuxt.com) and typescript.
+ColorMagic is a popular free and open-source color palette generator, with many side-tools for all things color. It's built with [Nuxt](https://nuxt.com), [NuxtUI](https://ui.nuxt.com) and typescript.
+
+ColorMagic gets around ~500k pageview per month, with 12K palettes generated daily. You can view our [live website analytics here](https://plausible.io/colormagic.app).
 
 Most of the tools run with the assitance of AI using [openai](https://openai.com).
 
