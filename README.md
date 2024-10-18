@@ -6,15 +6,15 @@ ColorMagic is a popular free and open-source color palette generator, with many 
 
 ColorMagic gets around ~500k pageview per month, with 12K palettes generated daily. You can view our [live website analytics here](https://plausible.io/colormagic.app).
 
-Most of the tools run with the assitance of AI using [openai](https://openai.com).
+Most of the tools run with the assistance of AI using [openai](https://openai.com).
 
 The site has translations for [english](https://colormagic.app), [japanese](https://colormagic.app/ja) and [italian](https://colormagic.app/it) using [nuxtjs/i18n](https://i18n.nuxtjs.org/).
 
 ## <a name="layers">🏗️ Layers</a>
 
-ColorMagic utilizes Nuxt's in-built layer system to seperate domains of the app. 
+ColorMagic utilizes Nuxt's in-built layer system to separate domains of the app. 
 
-Each layer creates it's own seperate module ([example](/layers/palette/server/palette.module.ts)) which we then declare in the [setup util](/layers/setup/server/utils/setup.util.ts). The modules are then available to use globally.
+Each layer creates it's own separate module ([example](/layers/palette/server/palette.module.ts)) which we then declare in the [setup util](/layers/setup/server/utils/setup.util.ts). The modules are then available to use globally.
 
 ## <a name="getting-started">🚀 Getting Started</a>
 
