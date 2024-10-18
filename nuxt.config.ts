@@ -49,8 +49,8 @@ export default defineNuxtConfig({
     nodeEnv: process.env.NODE_ENV,
     logLevel: process.env.LOG_LEVEL ?? 'debug',
     public: {
-      siteUrl: process.env.SITE_URL ?? 'https://colormagic.app',
-      apiUrl: process.env.API_URL ?? 'https://colormagic.app/api'
+      siteUrl: process.env.SITE_URL ?? 'http://localhost:3000',
+      apiUrl: process.env.API_URL ?? `${process.env.SITE_URL ?? 'http://localhost:3000'}/api`
     }
   },
   routeRules: {
@@ -62,7 +62,7 @@ export default defineNuxtConfig({
   i18n: {
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
-    baseUrl: process.env.SITE_URL ?? 'https://colormagic.app',
+    baseUrl: process.env.SITE_URL ?? 'http://localhost:3000',
     detectBrowserLanguage: false,
     locales: [
       {

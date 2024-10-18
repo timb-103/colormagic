@@ -6,5 +6,5 @@ services:
       MONGO_INITDB_ROOT_USERNAME: colormagic
       MONGO_INITDB_ROOT_PASSWORD: secret
     ports:
-      - "27018:27018"
+      - "27018:27017"
     restart: always

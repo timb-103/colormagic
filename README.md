@@ -8,31 +8,33 @@ Most of the tools run with the assitance of AI using [openai](https://openai.com
 
 The site has translations for [english](https://colormagic.app), [japanese](https://colormagic.app/ja) and [italian](https://colormagic.app/it) using [nuxtjs/i18n](https://i18n.nuxtjs.org/).
 
-## <a name="structure">🏗️ Structure</a>
+## <a name="layers">🏗️ Layers</a>
 
-ColorMagic utilize Nuxt's in-built layers system to seperate domains of the app. 
+ColorMagic utilizes Nuxt's in-built layer system to seperate domains of the app. 
 
 Each layer creates it's own seperate module ([example](/layers/palette/server/palette.module.ts)) which we then declare in the [setup util](/layers/setup/server/utils/setup.util.ts). The modules are then available to use globally.
 
-## <a name="database">📦 Database</a>
+## <a name="getting-started">🚀 Getting Started</a>
 
-All of ColorMagic's palettes are stored in MongoDB. You can setup a local mongoDB instance by using the following:
+All of ColorMagic's palettes are stored using MongoDB. Setup a local MongoDB instance by using the following:
 
 ```bash
 docker compose up
 ```
-
 For more details check out the [mongo layer](/layers/mongo/server/mongo.module.ts).
 
-## <a name="getting-started">🚀 Getting Started</a>
-Create a .env in the root of the project and add the following values:
+Create a .env in the root of the project and add the following values
 ```env
 OPENAI_API_KEY=[sk_srf4s...]
 ```
 
-Use the following command to start it up locally
+Install dependencies
 ```bash
 npm install
+```
+
+Run locally
+```bash
 npm run dev
 ```
 
