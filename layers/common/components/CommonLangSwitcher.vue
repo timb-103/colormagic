@@ -11,7 +11,7 @@
         <span>
           {{ locales.find(v => v.code === selected)?.flag }}
         </span>
-        <span>
+        <span class="hidden sm:block">
           {{ selected }}
         </span>
       </span>

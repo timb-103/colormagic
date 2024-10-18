@@ -181,6 +181,10 @@ const moreLinks = computed(() => [
   {
     label: t('nav.suggestIdea'),
     to: 'https://colormagic.canny.io'
+  },
+  {
+    label: 'GitHub',
+    to: 'https://github.com/timb-103/colormagic'
   }
 ]);
 </script>

@@ -67,7 +67,12 @@
       </div>
 
       <!-- right -->
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 sm:gap-4">
+        <UButton
+          icon="i-fa6-brands-github"
+          to="https://github.com/timb-103/colormagic"
+        />
+
         <!-- lang switcher-->
         <CommonLangSwitcher />
 
