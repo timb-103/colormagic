@@ -69,6 +69,12 @@ export default defineI18nConfig(() => ({
         seoTitle: 'Image Color Picker - ColorMagic',
         seoDescription: 'Extract and pick a beatiful color scheme from any image with AI.',
         uploadPlaceholder: 'Upload an Image'
+      },
+      api: {
+        title: 'Color API',
+        seoTitle: 'Color API - ColorMagic',
+        seoDescription: 'A free and simple API you can use to integrate with our color palettes.',
+        disclaimer: 'This API may be removed or changed at anytime, without warning. Use at your own risk.'
       }
     },
     ja: {
@@ -138,6 +144,12 @@ export default defineI18nConfig(() => ({
         seoTitle: '画像カラーピッカー - ColorMagic',
         seoDescription: 'AI を使用して、あらゆる画像から美しい配色を抽出して選択します。',
         uploadPlaceholder: '画像をアップロードする'
+      },
+      api: {
+        title: 'カラーAPI',
+        seoTitle: 'カラーAPI - ColorMagic',
+        seoDescription: 'カラーパレットと統合するために使用できる無料のシンプルな API。',
+        disclaimer: 'この API は、予告なくいつでも削除または変更される場合があります。ご自身の責任でご使用ください。'
       }
     },
     it: {
@@ -207,6 +219,12 @@ export default defineI18nConfig(() => ({
         seoTitle: 'Selettore colore immagine - ColorMagic',
         seoDescription: 'Estrai e scegli una bellissima combinazione di colori da qualsiasi immagine con l\'intelligenza artificiale.',
         uploadPlaceholder: 'Carica un\'immagine'
+      },
+      api: {
+        title: 'API dei colori',
+        seoTitle: 'API dei colori - ColorMagic',
+        seoDescription: 'Un\'API semplice e gratuita che puoi utilizzare per l\'integrazione con le nostre tavolozze di colori.',
+        disclaimer: 'Questa API può essere rimossa o modificata in qualsiasi momento, senza preavviso. Utilizzare a proprio rischio.'
       }
     }
   }
