@@ -50,7 +50,9 @@ export default defineNuxtConfig({
     logLevel: process.env.LOG_LEVEL ?? 'debug',
     public: {
       siteUrl: process.env.SITE_URL ?? 'http://localhost:3000',
-      apiUrl: process.env.API_URL ?? `${process.env.SITE_URL ?? 'http://localhost:3000'}/api`
+      apiUrl: process.env.SITE_URL !== undefined
+        ? `${process.env.SITE_URL}/api`
+        : 'http://localhost:3000/api'
     }
   },
   routeRules: {
