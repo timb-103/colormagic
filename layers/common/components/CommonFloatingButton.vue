@@ -3,9 +3,9 @@
     <Transition name="slide-up">
       <div class="fixed bottom-0 right-0 flex justify-end mt-4 p-4">
         <UButton
-          color="primary"
-          :label="$t('nav.suggestIdea')"
-          size="xl"
+          label="Star on GitHub"
+          icon="i-fa6-brands-github"
+          size="lg"
           @click="onClick()"
         />
       </div>
@@ -17,7 +17,7 @@
 import { PlausibleEventName } from '~/layers/plausible/types';
 
 function onClick(): void {
-  void navigateTo('https://colormagic.canny.io', { external: true });
-  sendPlausibleEvent(PlausibleEventName.FEEDBACK_BUTTON_FLOATING_CLICKED);
+  void navigateTo('https://github.com/timb-103/colormagic', { external: true });
+  sendPlausibleEvent(PlausibleEventName.GITHUB_BUTTON_FLOATING_CLICKED);
 }
 </script>
