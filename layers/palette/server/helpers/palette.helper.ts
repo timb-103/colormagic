@@ -2,6 +2,7 @@ import type { PaletteDto } from '../dtos/palette.dto';
 import type { PaletteEntity } from '../entities/palette.entity';
 import { arrangeColors } from '../../utils/color-arrange.util';
 import paletteConfig from '../palette.config';
+import { getPaletteColorFilter } from '../../utils/palette-filters.util';
 
 export function mapPaletteEntityToDto(entity: PaletteEntity): PaletteDto {
   return {
