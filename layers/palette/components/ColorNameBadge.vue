@@ -1,10 +1,10 @@
 <template>
   <UBadge
     color="white"
-    class="flex gap-1 items-center"
+    class="inline-flex items-center gap-1 truncate max-w-[90%]"
   >
     <UIcon name="i-heroicons-sparkles" />
-    {{ name }}
+    <span class="truncate">{{ name }}</span>
   </UBadge>
 </template>
 
