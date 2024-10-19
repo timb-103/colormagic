@@ -215,8 +215,8 @@ import ntc from '~/layers/palette/utils/ntc.util';
 
 const { t } = useI18n();
 
-const title = t('imageColorPicker.seoTitle');
-const description = t('imageColorPicker.seoDescription');
+const title = t('contrastChecker.seoTitle');
+const description = t('contrastChecker.seoDescription');
 
 useSeoMeta({
   title,
