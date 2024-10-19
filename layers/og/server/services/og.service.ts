@@ -1,42 +1,62 @@
-import path from 'path';
-import { createCanvas, loadImage } from 'canvas';
+import * as fs from 'fs';
+import * as path from 'path';
+import sharp from 'sharp';
 
 export class OgService {
-  public async generateImage(colors: string[], prompt: string): Promise<Buffer> {
+  private async loadLogo(): Promise<string> {
+    return await new Promise((resolve, reject) => {
+      fs.readFile(path.resolve('public/img/HorizontalLogo.svg'), 'utf8', (err, data) => {
+        if (err !== null) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+    });
+  }
+
+  private async generateSVG(colors: string[], prompt: string): Promise<string> {
     const width = 1200;
     const height = 630;
-
-    const canvas = createCanvas(width, height);
-    const ctx = canvas.getContext('2d');
-
-    /** @description add background color bars */
-    colors.forEach((color, i) => {
-      ctx.fillStyle = `#${color}`;
-      ctx.fillRect((i * (width / colors.length)), 0, width / colors.length, height);
-    });
-
-    /** @description dar the rounded rectangle */
     const cardWidth = 480;
     const cardHeight = 200;
     const cardX = (width - cardWidth) / 2;
     const cardY = (height - cardHeight) / 2;
+    const logoSvg = await this.loadLogo();
 
-    ctx.fillStyle = '#fff';
-    ctx.beginPath();
-    ctx.roundRect(cardX, cardY, cardWidth, cardHeight, 24);
-    ctx.fill();
+    /** @description build color rectangles */
+    const colorBars = colors.map((color, i) => {
+      const rectWidth = width / colors.length;
+      const x = i * rectWidth;
+      return `<rect x="${x}" y="0" width="${rectWidth}" height="${height}" fill="#${color}" />`;
+    }).join('');
 
-    /** @description styles */
-    ctx.font = 'bold 56px -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Nimbus Sans L", Roboto, Noto, "Segoe UI", Arial, Helvetica, "Helvetica Neue", sans-serif';
-    ctx.fillStyle = '#4E5460';
-    ctx.textAlign = 'center';
-    ctx.fillText(prompt, width / 2, height / 2 + 60);
+    /** @description build the svg */
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
+        <!-- Background color bars -->
+        ${colorBars}
+        
+        <!-- Card (Rounded Rectangle) -->
+        <rect x="${cardX}" y="${cardY}" rx="24" ry="24" width="${cardWidth}" height="${cardHeight}" fill="#fff" />
 
-    /** @description draw the logo */
-    const logoPath = path.resolve('public/img/HorizontalLogo.svg');
-    const logoImg = await loadImage(logoPath);
-    ctx.drawImage(logoImg, width / 2 - 152, cardY + 40, 304, 48);
+        <!-- Text -->
+        <text x="50%" y="54%" font-size="56" font-weight="bold" font-family="-apple-system, BlinkMacSystemFont, 'Avenir Next', Avenir, 'Nimbus Sans L', Roboto, Noto, 'Segoe UI', Arial, Helvetica, 'Helvetica Neue', sans-serif" fill="#4E5460" text-anchor="middle" dy=".35em">${prompt}</text>
 
-    return canvas.toBuffer('image/png');
+        <!-- Inline Logo -->
+        <g transform="translate(${width / 2 - 125}, ${cardY + 30})">
+          ${logoSvg}
+        </g>
+      </svg>
+    `;
+
+    return svg;
+  }
+
+  public async generateImage(colors: string[], prompt: string): Promise<Buffer> {
+    const svg = await this.generateSVG(colors, prompt);
+    const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
+
+    return pngBuffer;
   }
 }

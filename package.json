@@ -24,7 +24,6 @@
     "@vueuse/core": "11.1.0",
     "ajv": "8.17.1",
     "ajv-formats": "3.0.1",
-    "canvas": "2.11.2",
     "color.js": "1.2.0",
     "got": "11.8.6",
     "mongodb": "6.9.0",
@@ -32,6 +31,7 @@
     "openai": "4.65.0",
     "pino": "8.16.1",
     "pino-pretty": "10.2.3",
+    "sharp": "0.33.5",
     "yup": "1.4.0"
   },
   "overrides": {
