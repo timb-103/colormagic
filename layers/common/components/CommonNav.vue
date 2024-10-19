@@ -164,6 +164,12 @@ const toolsLinks = computed(() => [{
   label: t('nav.imageColorPicker'),
   description: t('imageColorPicker.seoDescription'),
   icon: 'i-heroicons-photo'
+},
+{
+  to: localePath('/contrast-checker'),
+  label: t('nav.contrastChecker'),
+  description: t('contrastChecker.seoDescription'),
+  icon: 'i-heroicons-sun'
 }]);
 
 watch(useRoute(), () => {

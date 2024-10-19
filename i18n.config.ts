@@ -36,7 +36,8 @@ export default defineI18nConfig(() => ({
         freeColorTools: 'Free Color Tools',
         more: 'More',
         news: 'News',
-        api: 'Colors API'
+        api: 'Colors API',
+        contrastChecker: 'Contrast Checker'
       },
       palette: {
         seoTitle: 'ColorMagic - AI Color Palette Generator',
@@ -76,6 +77,20 @@ export default defineI18nConfig(() => ({
         seoTitle: 'Color API - ColorMagic',
         seoDescription: 'A free and simple API you can use to integrate with our color palettes.',
         disclaimer: 'This API may be removed or changed at anytime, without warning. Use at your own risk.'
+      },
+      contrastChecker: {
+        title: 'Contrast Checker',
+        seoTitle: 'Contrast Checker - ColorMagic',
+        seoDescription: 'Check the contrast between primary and secondary colors to ensure legibility and accessibility.',
+        legibilityDescription: 'ColorMagic\'s contrast checker follows the web content accesibility guidelines (WCAG) as to ensure legibility:',
+        primaryLabel: 'Primary (foreground/text)',
+        secondaryLabel: 'Secondary (background)',
+        contrastRatio: 'Contrast Ratio',
+        normalText: 'Normal Text',
+        largeText: 'Large Text',
+        uiComponents: 'UI Components',
+        exampleText: 'Example Primary text',
+        failText: 'Fail'
       }
     },
     ja: {
@@ -112,7 +127,8 @@ export default defineI18nConfig(() => ({
         freeColorTools: '無料のカラーツール',
         more: 'もっと',
         news: 'ニュース',
-        api: 'カラーAPI'
+        api: 'カラーAPI',
+        contrastChecker: 'コントラストチェッカー'
       },
       palette: {
         seoTitle: 'あなたの思い描く色をかんたんに',
@@ -152,6 +168,20 @@ export default defineI18nConfig(() => ({
         seoTitle: 'カラーAPI - ColorMagic',
         seoDescription: 'カラーパレットと統合するために使用できる無料のシンプルな API。',
         disclaimer: 'この API は、予告なくいつでも削除または変更される場合があります。ご自身の責任でご使用ください。'
+      },
+      contrastChecker: {
+        title: 'コントラストチェッカー',
+        seoTitle: 'コントラストチェッカー - ColorMagic',
+        seoDescription: 'プライマリカラーとセカンダリカラーのコントラストを確認し、可読性を確保します。',
+        legibilityDescription: 'ColorMagicのコントラストチェッカーは、可読性を確保するためにWebコンテンツアクセシビリティガイドライン（WCAG）に準拠しています:',
+        primaryLabel: 'プライマリ（前景/テキスト）',
+        secondaryLabel: 'セカンダリ（背景）',
+        contrastRatio: 'コントラスト比',
+        normalText: '通常のテキスト',
+        largeText: '大きなテキスト',
+        uiComponents: 'UIコンポーネント',
+        exampleText: 'プライマリテキストの例',
+        failText: '不合格'
       }
     },
     it: {
@@ -188,7 +218,8 @@ export default defineI18nConfig(() => ({
         freeColorTools: 'Strumenti di colore gratuiti',
         more: 'Di più',
         news: 'Notizia',
-        api: 'API dei colori'
+        api: 'API dei colori',
+        contrastChecker: 'Controllo Contrasto'
       },
       palette: {
         seoTitle: 'Genera la tua palette di colori ideale',
@@ -228,6 +259,20 @@ export default defineI18nConfig(() => ({
         seoTitle: 'API dei colori - ColorMagic',
         seoDescription: 'Un\'API semplice e gratuita che puoi utilizzare per l\'integrazione con le nostre tavolozze di colori.',
         disclaimer: 'Questa API può essere rimossa o modificata in qualsiasi momento, senza preavviso. Utilizzare a proprio rischio.'
+      },
+      contrastChecker: {
+        title: 'Controllo Contrasto',
+        seoTitle: 'Controllo Contrasto - ColorMagic',
+        seoDescription: 'Controlla il contrasto tra un colore primario e secondario per garantire la leggibilità.',
+        legibilityDescription: 'Il controllo del contrasto di ColorMagic segue le linee guida per l\'accessibilità dei contenuti web (WCAG) per garantire la leggibilità:',
+        primaryLabel: 'Primario (testo in primo piano)',
+        secondaryLabel: 'Secondario (sfondo)',
+        contrastRatio: 'Rapporto di Contrasto',
+        normalText: 'Testo normale',
+        largeText: 'Testo grande',
+        uiComponents: 'Componenti UI',
+        exampleText: 'Esempio di testo primario',
+        failText: 'Non riuscito'
       }
     }
   }

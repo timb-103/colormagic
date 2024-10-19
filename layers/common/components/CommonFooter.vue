@@ -169,6 +169,10 @@ const toolsLinks = computed(() => [{
   label: t('nav.imageColorPicker')
 },
 {
+  to: localePath('/contrast-checker'),
+  label: t('nav.contrastChecker')
+},
+{
   to: localePath('/api'),
   label: t('nav.api')
 }]);
