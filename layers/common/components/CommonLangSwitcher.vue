@@ -3,7 +3,7 @@
     v-model="selected"
     size="sm"
     :options="options"
-    :ui-menu="{container: 'w-32'}"
+    :ui-menu="{ container: '!w-40' }"
   >
     <!-- label -->
     <template #label>
