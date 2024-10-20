@@ -19,7 +19,6 @@
     "@nuxtjs/google-fonts": "3.2.0",
     "@nuxtjs/i18n": "8.5.5",
     "@nuxtjs/plausible": "1.0.2",
-    "@nuxtjs/sitemap": "^6.1.2",
     "@sinclair/typebox": "0.33.12",
     "@tanstack/vue-query": "5.56.2",
     "@vueuse/core": "11.1.0",
