@@ -1,3 +1,5 @@
+import { getPaletteColorFilter } from './layers/palette/utils/palette-filters.util';
+
 export default defineNuxtConfig({
   app: {
     head: {
@@ -31,7 +33,8 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxt/ui',
     '@nuxtjs/plausible',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@nuxtjs/sitemap'
   ],
   tailwindcss: {
     viewer: false
@@ -55,10 +58,36 @@ export default defineNuxtConfig({
         : 'http://localhost:3000/api'
     }
   },
+  site: {
+    url: process.env.SITE_URL ?? 'http://localhost:3000',
+    name: process.env.SITE_NAME ?? 'ColorMagic'
+  },
+  sitemap: {
+    /** @description include all translations in sitemap */
+    urls: getPaletteColorFilter()
+      .map(v => [
+        `/palette/explore/${v.id}`,
+        `/ja/palette/explore/${v.id}`,
+        `/it/palette/explore/${v.id}`
+      ])
+      .flat()
+  },
+  nitro: {
+    prerender: {
+      crawlLinks: true
+    }
+  },
   routeRules: {
     /** @description add cache time for images to make pagespeed insights happy */
     '/_nuxt/**': { headers: { 'cache-control': 'max-age=31536000' } },
-    '/img/**': { headers: { 'cache-control': 'max-age=31536000' } }
+    '/img/**': { headers: { 'cache-control': 'max-age=31536000' } },
+
+    /** @description prerender all pages */
+    '/*': { prerender: true },
+
+    /** @description don't prerender because they are dynamically created */
+    '/*/palette/**': { prerender: false },
+    '/palette/**': { prerender: false }
   },
   compatibilityDate: '2024-09-23',
   i18n: {
