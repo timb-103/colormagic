@@ -56,7 +56,7 @@
                     truncate
                     class="max-w-[90%]"
                     :loading="isCreating"
-                    @click="onClickExample(ntc.name(item)[1].toString())"
+                    @click="onClickExample(`${ntc.name(item)[1].toString()} (${ntc.name(item)[0]})`)"
                   >
                     <span class="hidden sm:block truncate">{{ ntc.name(item)[1].toString() }}</span>
                   </UButton>
