@@ -32,3 +32,13 @@ export function mapCreatePalettePrompt(prompt: string): string {
 
   return value;
 }
+
+export function mapTagsPrompt(colors: string[]): string {
+  let value = 'Create up to 10 tags we can use for filtering, including a tag for each color and format like this: [tags:beach,sand,blue,warm,dark] etc.';
+  /** @description use the filter color tags so it knows some good examples */
+  value += `Here's some example tags: ${getPaletteColorFilter().map(color => color.id).join(',')}`;
+  value += 'Never include "palette" as a tag.';
+  value += `Return ONLY the tags. Create the tags for this palette: "${colors.join(',')}"`;
+
+  return value;
+}

@@ -43,3 +43,7 @@ export const CountPaletteDtoSchema = Type.Object({
 });
 
 export type CountPaletteDto = Static<typeof CountPaletteDtoSchema>;
+
+export const ClonePaletteInputDtoSchema = Type.Pick(PaletteDtoSchema, ['id', 'colors']);
+
+export type ClonePaletteInputDto = Static<typeof ClonePaletteInputDtoSchema>;

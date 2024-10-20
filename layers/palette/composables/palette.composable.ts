@@ -1,12 +1,30 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/vue-query';
 import { useLocalStorage, StorageSerializers } from '@vueuse/core';
-import type { CreatePaletteInputDto, ListPaletteInputDto } from '../server/dtos/palette.dto';
+import type { ClonePaletteInputDto, CreatePaletteInputDto, ListPaletteInputDto } from '../server/dtos/palette.dto';
 import type { PaletteModel } from '../models/palette.model';
 import { PlausibleEventName } from '~/layers/plausible/types';
 import { sendPlausibleEvent } from '~/layers/plausible/utils/plausible.util';
 
 const PALETTE_ROOT_KEY = 'palette';
+
+export function addPaletteToStorage(palette: PaletteModel): void {
+  const session = useLocalStorage<Map<string, PaletteModel>>(
+    'palettes:created',
+    new Map(),
+    { serializer: StorageSerializers.map }
+  );
+
+  session.value?.set(palette.id, palette);
+
+  /** @description delete last if too many saved */
+  if (session.value.size >= 100) {
+    const oldestKey = session.value.keys().next().value;
+    if (oldestKey !== undefined) {
+      session.value.delete(oldestKey);
+    }
+  }
+}
 
 export function usePalette(id: Ref<string | undefined>) {
   return useQuery({
@@ -57,22 +75,26 @@ export function useCreatePalette() {
         }
       });
 
-      const session = useLocalStorage<Map<string, PaletteModel>>(
-        'palettes:created',
-        new Map(),
-        { serializer: StorageSerializers.map }
-      );
+      addPaletteToStorage(response);
+      sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_CREATED);
 
-      session.value?.set(response.id, response);
+      return response;
+    }
+  });
+}
 
-      /** @description delete last if too many saved */
-      if (session.value.size >= 100) {
-        const oldestKey = session.value.keys().next().value;
-        if (oldestKey !== undefined) {
-          session.value.delete(oldestKey);
+export function useClonePalette() {
+  return useMutation({
+    mutationFn: async (params: ClonePaletteInputDto) => {
+      const response = await $fetch('/api/palette/clone', {
+        method: 'POST',
+        body: {
+          id: params.id,
+          colors: params.colors
         }
-      }
+      });
 
+      addPaletteToStorage(response);
       sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_CREATED);
 
       return response;

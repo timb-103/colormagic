@@ -8,61 +8,95 @@
     <div v-else-if="data">
       <div>
         <!-- title -->
-        <h1>{{ data?.text }}</h1>
+        <div class="flex justify-between items-center mb-4">
+          <h1 class="mb-0">
+            {{ data?.text }}
+          </h1>
+
+          <!-- save button -->
+          <div
+            v-if="hasChanges"
+            class="flex items-center gap-2"
+          >
+            <UButton
+              :label="$t('palette.resetLabel')"
+              @click="resetArrange()"
+            />
+            <UButton
+              type="submit"
+              color="primary"
+              :label="$t('palette.saveLabel')"
+              :loading="isCloning"
+              @click="onSave()"
+            />
+          </div>
+        </div>
 
         <!-- list of colors -->
-        <ul class="flex overflow-hidden mb-4 sm:mb-8">
-          <li
-            v-for="(item, index) in arrangedColors"
-            :key="index"
-            class="w-full"
-          >
-            <div class="flex gap-2 items-center mb-1">
-              <!-- color picker -->
-              <ColorPicker
-                :initial-color="item"
-                @select="value => colors[index] = value"
-              />
-
-              <!-- reset color button -->
-              <UButton
-                v-if="colors[index] !== data.colors[index]"
-                icon="i-heroicons-arrow-path"
-                size="xs"
-                @click="colors[index] = data.colors[index]"
-              />
-            </div>
-
-            <!-- color button -->
-            <div
-              :style="{ background: item }"
-              class="w-full h-48 relative"
+        <div class="overflow-hidden mb-4 rounded-xl border border-gray-200 divide-x">
+          <!-- colors -->
+          <ul class="flex">
+            <li
+              v-for="(item, index) in arrangedColors"
+              :key="index"
+              class="w-full relative"
             >
-              <UTooltip
-                :text="`Generate a ${ntc.name(item)[1].toString()} palette`"
-                class="bottom-0 left-0 absolute p-2"
+              <!-- color button -->
+              <div
+                :style="{ background: item }"
+                class="w-full h-48 relative"
               >
-                <UButton
-                  size="2xs"
-                  icon="i-heroicons-sparkles"
-                  truncate
-                  class="max-w-full"
-                  :loading="isPending"
-                  @click="onClickExample(ntc.name(item)[1].toString())"
+                <UTooltip
+                  :text="`Generate a ${ntc.name(item)[1].toString()} palette`"
+                  class="bottom-0 left-0 absolute p-2 w-full"
                 >
-                  <span class="hidden sm:block">{{ ntc.name(item)[1].toString() }}</span>
-                </UButton>
-              </UTooltip>
-            </div>
+                  <UButton
+                    size="2xs"
+                    icon="i-heroicons-sparkles"
+                    truncate
+                    class="max-w-[90%]"
+                    :loading="isCreating"
+                    @click="onClickExample(ntc.name(item)[1].toString())"
+                  >
+                    <span class="hidden sm:block truncate">{{ ntc.name(item)[1].toString() }}</span>
+                  </UButton>
+                </UTooltip>
+              </div>
+            </li>
+          </ul>
 
-            <div class="border-l hidden sm:block border-r border-b py-2">
-              <ColorCopyButtons :hex="item" />
-            </div>
-          </li>
-        </ul>
+          <!-- color codes -->
+          <ul class="hidden sm:flex divide-x">
+            <li
+              v-for="(item, index) in arrangedColors"
+              :key="index"
+              class="w-full relative"
+            >
+              <div class="py-2">
+                <div class="flex gap-2 items-center mb-1 ml-2">
+                  <!-- color picker -->
+                  <ColorPicker
+                    :initial-color="item"
+                    @select="value => colors[index] = value"
+                  />
+
+                  <!-- reset color button -->
+                  <UButton
+                    v-if="colors[index] !== data.colors[index]"
+                    icon="i-heroicons-arrow-path"
+                    size="xs"
+                    @click="colors[index] = data.colors[index]"
+                  />
+                </div>
+
+                <ColorCopyButtons :hex="item" />
+              </div>
+            </li>
+          </ul>
+        </div>
 
         <!-- mobile colors list -->
-        <ul class="sm:hidden flex flex-col mb-4 divide-y">
+        <ul class="sm:hidden flex flex-col mb-2 divide-y">
           <li
             v-for="(item, index) in colors"
             :key="index"
@@ -80,14 +114,9 @@
         </ul>
 
         <!-- arrange sliders-->
-        <ColorArrangeSliders v-model="arrange" />
-
-        <!-- save form -->
-        <CreateColorPaletteFormCard
-          v-if="hasChanges"
-          :colors="arrangedColors"
-          @reset="resetArrange()"
-        />
+        <div class="border border-gray-200 rounded-xl p-4">
+          <ColorArrangeSliders v-model="arrange" />
+        </div>
 
         <!-- share buttons -->
         <div class="mt-8">
@@ -114,7 +143,8 @@ const id = ref(typeof params.id === 'string' ? params.id : undefined);
 const { t } = useI18n();
 const localePath = useLocalePath();
 const { data, suspense, isError } = usePalette(id);
-const { mutate: create, isPending } = useCreatePalette();
+const { mutate: clone, isPending: isCloning } = useClonePalette();
+const { mutate: create, isPending: isCreating } = useCreatePalette();
 const notifications = useNotifications();
 
 await suspense();
@@ -177,6 +207,21 @@ function onClickExample(prompt: string): void {
     },
     onSuccess: (value) => {
       notifications.addSuccess(`Successfully created ${prompt} palette.`);
+      void navigateTo(localePath(`/palette/${value.id}`));
+    }
+  });
+}
+
+function onSave(): void {
+  if (data.value?.id === undefined) {
+    return;
+  }
+
+  clone({ id: data.value?.id, colors: arrangedColors.value }, {
+    onError: (err) => {
+      notifications.addError(err.message ?? 'Error cloning palette.');
+    },
+    onSuccess: (value) => {
       void navigateTo(localePath(`/palette/${value.id}`));
     }
   });
