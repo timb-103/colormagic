@@ -99,7 +99,7 @@ if (filter === undefined) {
 }
 
 const title = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);
-const seoTitle = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} - ${t('explore.colorPalettes')}`);
+const seoTitle = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);
 const seoDescription = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} - ${t('explore.seoDescription')}`);
 
 useSeoMeta({
