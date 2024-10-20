@@ -7,8 +7,13 @@
 
     <div v-else-if="data">
       <div>
+        <!-- tag links -->
+        <div class="mb-2">
+          <PaletteTagLinks :links="paletteTagLinks" />
+        </div>
+
         <!-- title -->
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-4">
           <h1 class="mb-0">
             {{ data?.text }}
           </h1>
@@ -140,7 +145,7 @@ import ntc from '~/layers/palette/utils/ntc.util';
 const { params } = useRoute();
 const id = ref(typeof params.id === 'string' ? params.id : undefined);
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const { data, suspense, isError } = usePalette(id);
 const { mutate: clone, isPending: isCloning } = useClonePalette();
@@ -168,6 +173,12 @@ useSeoMeta({
     noindex: true
   }
 });
+
+const paletteTagLinks = getPaletteColorFilter().map(v => ({
+  label: v.label[getLocale(locale.value)],
+  id: v.id,
+  to: localePath(`/palette/explore/${v.id}`)
+})).filter(v => data.value?.tags.includes(v.id));
 
 const colors = ref<string[]>([]);
 

@@ -12,6 +12,7 @@ export function mapPaletteEntityToDto(entity: PaletteEntity): PaletteDto {
       saturation: 0,
       warmth: 0
     }),
+    tags: entity.tags ?? [],
     /** @description required because older names could be inappropriate */
     text: new Date(entity.createdAt).getTime() > paletteConfig.aiNamesStartDateMs
       ? entity.text

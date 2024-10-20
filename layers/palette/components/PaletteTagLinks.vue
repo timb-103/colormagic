@@ -2,7 +2,7 @@
   <div class="flex flex-wrap gap-2">
     <!-- languages -->
     <NuxtLink
-      v-for="item in colorLinks"
+      v-for="item in links"
       :key="item.id"
       :to="item.to"
       class="font-medium text-sm hover:text-primary text-gray-400"
@@ -13,12 +13,13 @@
 </template>
 
 <script setup lang="ts">
-const localePath = useLocalePath();
-const { locale } = useI18n();
+export interface Props {
+  links: Array<{
+    label: string
+    id: string
+    to: string
+  }>
+}
 
-const colorLinks = getPaletteColorFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
+defineProps<Props>();
 </script>

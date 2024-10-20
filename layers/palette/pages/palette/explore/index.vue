@@ -66,12 +66,12 @@
     <p class="font-semibold mt-8 mb-4">
       {{ $t('explore.byTag') }}
     </p>
-    <PaletteTagLinks />
+    <PaletteTagLinks :links="paletteTagLinks" />
   </div>
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const localePath = useLocalePath();
 
 const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100);
@@ -91,4 +91,10 @@ useSeoMeta({
   ogDescription: t('explore.seoDescription'),
   ogImageUrl: `${useRuntimeConfig().public.siteUrl}/img/og.png`
 });
+
+const paletteTagLinks = getPaletteColorFilter().map(v => ({
+  label: v.label[getLocale(locale.value)],
+  id: v.id,
+  to: localePath(`/palette/explore/${v.id}`)
+}));
 </script>
