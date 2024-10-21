@@ -64,6 +64,9 @@ export default defineI18nConfig(() => ({
         seoDescription: 'Explore all of the latest generated color palettes.',
         colorPalettes: 'Color Palettes',
         color: 'Color',
+        style: 'Style',
+        tone: 'Tone',
+        season: 'Season',
         byTag: 'Explore palettes by tag'
       },
       imageColorPicker: {
@@ -155,6 +158,9 @@ export default defineI18nConfig(() => ({
         seoDescription: '最新に生成されたすべてのカラー パレットを探索する.',
         colorPalettes: 'カラーパレット',
         color: '色',
+        style: 'スタイル',
+        tone: 'トーン',
+        season: '季節',
         byTag: 'タグ別にパレットを探索する'
       },
       imageColorPicker: {
@@ -246,6 +252,9 @@ export default defineI18nConfig(() => ({
         seoDescription: 'Esplora tutte le tavolozze di colori generate più recenti.',
         colorPalettes: 'Tavolozze di colori',
         color: 'Colore',
+        style: 'Stile',
+        tone: 'Tono',
+        season: 'Stagione',
         byTag: 'Esplora le tavolozze per tag'
       },
       imageColorPicker: {

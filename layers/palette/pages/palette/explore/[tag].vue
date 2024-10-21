@@ -92,7 +92,7 @@ await suspense();
 const palettes = computed(() => list.value?.pages.flatMap((items) => items.items));
 const count = computed(() => list.value?.pages[0].count ?? 0);
 
-const filter = getPaletteColorFilter().find(v => v.id === tag.value);
+const filter = getAllPaletteFilters().find(v => v.id === tag.value);
 
 if (filter === undefined) {
   throw createError({ statusCode: 404, statusMessage: 'Tag not found.' });

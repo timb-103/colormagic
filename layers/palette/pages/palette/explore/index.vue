@@ -66,7 +66,12 @@
     <p class="font-semibold mt-8 mb-4">
       {{ $t('explore.byTag') }}
     </p>
-    <PaletteTagLinks :links="paletteTagLinks" />
+    <div class="space-y-4">
+      <PaletteTagLinks :links="paletteColorTagLinks" />
+      <PaletteTagLinks :links="paletteStyleTagLinks" />
+      <PaletteTagLinks :links="paletteToneTagLinks" />
+      <PaletteTagLinks :links="paletteSeasonTagLinks" />
+    </div>
   </div>
 </template>
 
@@ -92,7 +97,25 @@ useSeoMeta({
   ogImageUrl: `${useRuntimeConfig().public.siteUrl}/img/og.png`
 });
 
-const paletteTagLinks = getPaletteColorFilter().map(v => ({
+const paletteColorTagLinks = getPaletteColorFilter().map(v => ({
+  label: v.label[getLocale(locale.value)],
+  id: v.id,
+  to: localePath(`/palette/explore/${v.id}`)
+}));
+
+const paletteStyleTagLinks = getPaletteStyleFilter().map(v => ({
+  label: v.label[getLocale(locale.value)],
+  id: v.id,
+  to: localePath(`/palette/explore/${v.id}`)
+}));
+
+const paletteToneTagLinks = getPaletteToneFilter().map(v => ({
+  label: v.label[getLocale(locale.value)],
+  id: v.id,
+  to: localePath(`/palette/explore/${v.id}`)
+}));
+
+const paletteSeasonTagLinks = getPaletteSeasonFilter().map(v => ({
   label: v.label[getLocale(locale.value)],
   id: v.id,
   to: localePath(`/palette/explore/${v.id}`)
