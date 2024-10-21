@@ -67,9 +67,10 @@ export class OgService {
     const width = 1200;
     const height = 630;
     const numCols = 4;
+    const numRows = Math.ceil(palettes.length / numCols);
     const gap = 40;
-    const paletteWidth = (width - (numCols + 1) * gap) / numCols;
-    const paletteHeight = 110;
+    const paletteWidth = (width - (numCols - 1) * gap) / numCols;
+    const paletteHeight = (height - (numRows - 1) * gap) / numRows;
     const cardWidth = 480;
     const cardHeight = 200;
     const cardX = (width - cardWidth) / 2;
@@ -81,12 +82,9 @@ export class OgService {
     palettes.forEach((palette, paletteIndex) => {
       const rowIndex = Math.floor(paletteIndex / numCols);
       const colIndex = paletteIndex % numCols;
+      const x = colIndex * (paletteWidth + gap);
+      const y = rowIndex * (paletteHeight + gap);
 
-      /** @description calculate x and y positions for this palette */
-      const x = colIndex * (paletteWidth + gap) + gap;
-      const y = rowIndex * (paletteHeight + gap) + gap;
-
-      /** @description create the clip path for the rounded palette */
       const clipPathId = `clip-path-${paletteIndex}`;
       const clipPath = `
         <clipPath id="${clipPathId}">
@@ -94,10 +92,8 @@ export class OgService {
         </clipPath>
       `;
 
-      /** @description reate the rounded rectangle for the entire palette (with clipping) */
       const paletteBackground = `<rect x="${x}" y="${y}" width="${paletteWidth}" height="${paletteHeight}" fill="#fff" rx="12" ry="12" />`;
 
-      /** @description create color bars inside the clipped area */
       const colorBars = palette.map((color, colorIndex) => {
         const barWidth = paletteWidth / palette.length;
         const colorX = x + colorIndex * barWidth;
@@ -107,22 +103,12 @@ export class OgService {
       svgPalettes.push(clipPath + paletteBackground + colorBars);
     });
 
-    /** @description build the svg with white background and grid of palettes */
     const svg = `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
-        <!-- White background -->
         <rect width="${width}" height="${height}" fill="#ffffff" />
-        
-        <!-- Grid of palettes -->
         ${svgPalettes.join('')}
-  
-         <!-- Card (Rounded Rectangle) -->
         <rect x="${cardX}" y="${cardY}" rx="24" ry="24" width="${cardWidth}" height="${cardHeight}" fill="#fff" />
-  
-        <!-- Text -->
         <text x="50%" y="54%" font-size="56" font-weight="bold" font-family="-apple-system, BlinkMacSystemFont, 'Avenir Next', Avenir, 'Nimbus Sans L', Roboto, Noto, 'Segoe UI', Arial, Helvetica, 'Helvetica Neue', sans-serif" fill="#4E5460" text-anchor="middle" dy=".35em">${prompt}</text>
-  
-        <!-- Inline Logo -->
         <g transform="translate(${width / 2 - 125}, ${cardY + 30})">
           ${logoSvg}
         </g>
