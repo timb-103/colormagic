@@ -8,4 +8,6 @@ export enum PlausibleEventName {
   RANDOM_COLOR_GENERATED = 'random-color:generated',
 
   GITHUB_BUTTON_FLOATING_CLICKED = 'github-button:floating:clicked',
+
+  FEEDBACK_SUBMITTED = 'feedback:submitted',
 }

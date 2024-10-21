@@ -122,6 +122,7 @@ function onSubmit(event: FormSubmitEvent<Form>): void {
   create(event.data, {
     onSuccess: () => {
       submited.value = true;
+      sendPlausibleEvent(PlausibleEventName.FEEDBACK_SUBMITTED);
     }
   });
 }
