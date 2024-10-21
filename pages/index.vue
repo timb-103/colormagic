@@ -76,12 +76,6 @@
         </li>
       </ul>
     </div>
-
-    <!-- tag links -->
-    <p class="font-semibold mt-8 mb-4">
-      {{ $t('explore.byTag') }}
-    </p>
-    <PaletteTagLinks :links="paletteTagLinks" />
   </div>
 </template>
 
@@ -107,12 +101,6 @@ useSeoMeta({
 const notifications = useNotifications();
 const { mutate: create, isPending } = useCreatePalette();
 const { data: count, suspense } = usePaletteCount();
-
-const paletteTagLinks = getPaletteColorFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
 
 await suspense();
 
