@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-2">
+  <div class="flex gap-2 flex-wrap">
     <!-- colors -->
     <UButtonGroup>
       <USelectMenu
