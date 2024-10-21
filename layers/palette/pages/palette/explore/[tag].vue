@@ -107,7 +107,7 @@ useSeoMeta({
   description: seoDescription,
   ogTitle: seoTitle,
   ogDescription: seoDescription,
-  ogImageUrl: `${useRuntimeConfig().public.siteUrl}/api/og/get?colors=${filter?.hex.replace('#', '')}&text=${filter?.label[getLocale(locale.value)]}`
+  ogImageUrl: `${useRuntimeConfig().public.siteUrl}/api/og/tag?tag=${filter?.id}&text=${filter?.label[getLocale(locale.value)]}`
 });
 
 const paletteTagLinks = getPaletteColorFilter().map(v => ({
