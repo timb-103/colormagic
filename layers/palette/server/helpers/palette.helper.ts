@@ -2,7 +2,7 @@ import type { PaletteDto } from '../dtos/palette.dto';
 import type { PaletteEntity } from '../entities/palette.entity';
 import { arrangeColors } from '../../utils/color-arrange.util';
 import paletteConfig from '../palette.config';
-import { getPaletteColorFilter } from '../../utils/palette-filters.util';
+import { getAllPaletteFilters } from '../../utils/palette-filters.util';
 
 export function mapPaletteEntityToDto(entity: PaletteEntity): PaletteDto {
   return {
@@ -27,7 +27,7 @@ export function mapCreatePalettePrompt(prompt: string): string {
   value += 'Also create a name for this palette (can use input for it if not rude) and format like this: [name:Beach] or [name:Red Car]';
   value += 'Also create up to 10 tags we can use for filtering, including a tag for each color and format like this: [tags:beach,sand,blue,warm,dark] etc.';
   /** @description use the filter color tags so it knows some good examples */
-  value += `Here's some example tags: ${getPaletteColorFilter().map(color => color.id).join(',')}`;
+  value += `Here's some example tags: ${getAllPaletteFilters().map(color => color.id).join(',')}`;
   value += 'Never include "palette" as a tag.';
   value += `Return ONLY the 5 hex color codes and the name. Create the colors for this: "${prompt}"`;
 
@@ -37,7 +37,7 @@ export function mapCreatePalettePrompt(prompt: string): string {
 export function mapTagsPrompt(colors: string[]): string {
   let value = 'Create up to 10 tags we can use for filtering, including a tag for each color and format like this: [tags:beach,sand,blue,warm,dark] etc.';
   /** @description use the filter color tags so it knows some good examples */
-  value += `Here's some example tags: ${getPaletteColorFilter().map(color => color.id).join(',')}`;
+  value += `Here's some example tags: ${getAllPaletteFilters().map(color => color.id).join(',')}`;
   value += 'Never include "palette" as a tag.';
   value += `Return ONLY the tags. Create the tags for this palette: "${colors.join(',')}"`;
 
