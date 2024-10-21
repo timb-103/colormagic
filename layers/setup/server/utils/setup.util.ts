@@ -32,7 +32,7 @@ export async function setup(): Promise<void> {
     const openai = getOpenAIModule(logger);
     const ai = getAIModule(logger, openai.service);
     const palette = getPaletteModule(db, logger, ai.service);
-    const og = getOgModule(logger);
+    const og = getOgModule(logger, palette.service);
     const feedback = getFeedbackModule(db, logger);
 
     await palette.setup();

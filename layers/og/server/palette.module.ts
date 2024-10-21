@@ -1,6 +1,7 @@
 import type { Logger } from 'pino';
 import { OgService } from './services/og.service';
 import { OgValidation } from './validations/og.validation';
+import type { PaletteService } from '~/layers/palette/server/services/palette.service';
 
 export interface OgModule {
   service: OgService
@@ -13,11 +14,12 @@ export interface OgModule {
  */
 
 export function getOgModule(
-  logger: Logger
+  logger: Logger,
+  paletteService: PaletteService
 ): OgModule {
   logger.info('initializing og module');
 
-  const service = new OgService();
+  const service = new OgService(paletteService);
   const validation = new OgValidation();
 
   return {

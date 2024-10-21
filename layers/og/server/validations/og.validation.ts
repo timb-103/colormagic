@@ -1,5 +1,5 @@
 import { type H3Event } from 'h3';
-import { OgInputDtoSchema, type OgInputDto } from '../dtos/og.dto';
+import { OgInputDtoSchema, OgTagInputDtoSchema, type OgInputDto, type OgTagInputDto } from '../dtos/og.dto';
 import { validateQuery } from '~/layers/common/utils/validate.util';
 
 export class OgValidation {
@@ -15,5 +15,9 @@ export class OgValidation {
     }
 
     return query;
+  }
+
+  public async getTagQuery(event: H3Event): Promise<OgTagInputDto> {
+    return validateQuery(event, OgTagInputDtoSchema);
   }
 }
