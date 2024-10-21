@@ -1,5 +1,6 @@
 import type { Logger } from 'pino';
 import { getAIModule, type AIModule } from '~/layers/ai/server/ai.module';
+import { getFeedbackModule, type FeedbackModule } from '~/layers/feedback/server/feedback.module';
 import { getLoggerModule } from '~/layers/log/server/logger.module';
 import { getMongoModule } from '~/layers/mongo/server/mongo.module';
 import { getOgModule, type OgModule } from '~/layers/og/server/palette.module';
@@ -11,6 +12,7 @@ interface Modules {
   logger: Logger
   palette: PaletteModule
   og: OgModule
+  feedback: FeedbackModule
 }
 
 export let modules: Modules;
@@ -31,6 +33,7 @@ export async function setup(): Promise<void> {
     const ai = getAIModule(logger, openai.service);
     const palette = getPaletteModule(db, logger, ai.service);
     const og = getOgModule(logger);
+    const feedback = getFeedbackModule(db, logger);
 
     await palette.setup();
 
@@ -38,7 +41,8 @@ export async function setup(): Promise<void> {
       ai,
       logger,
       palette,
-      og
+      og,
+      feedback
     };
   } catch (error) {
     logger.warn({ err: error }, 'initializing setup failed');
