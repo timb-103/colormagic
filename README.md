@@ -45,6 +45,7 @@ npm run dev
 - 🎨 [Color Palette Generator](https://colormagic.app/)
 - ❓ [Random Color generator](https://colormagic.app/random-color)
 - 🖼️ [Image Color Picker](https://colormagic.app/image-color-picker)
+- ☀️ [Contrast Checker](https://colormagic.app/contrast-checker)
 
 This is a WIP, more tools coming soon!
 
