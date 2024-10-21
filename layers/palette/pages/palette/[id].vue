@@ -174,7 +174,7 @@ useSeoMeta({
   }
 });
 
-const paletteTagLinks = getPaletteColorFilter().map(v => ({
+const paletteTagLinks = getAllPaletteFilters().map(v => ({
   label: v.label[getLocale(locale.value)],
   id: v.id,
   to: localePath(`/palette/explore/${v.id}`)
