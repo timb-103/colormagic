@@ -10,4 +10,6 @@ export enum PlausibleEventName {
   GITHUB_BUTTON_FLOATING_CLICKED = 'github-button:floating:clicked',
 
   FEEDBACK_SUBMITTED = 'feedback:submitted',
+
+  LIKE_BUTTON_CLICKED = 'like:pre-launch:click'
 }

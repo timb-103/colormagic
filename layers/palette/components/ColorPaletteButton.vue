@@ -10,7 +10,7 @@
       <!-- name -->
       <ColorNameBadge
         :name="name"
-        class="bottom-2 left-2 absolute"
+        class="bottom-1 left-1 absolute"
       />
 
       <!-- colors -->
@@ -22,6 +22,14 @@
         }"
         class="w-full h-20 block"
       />
+
+      <!-- like button -->
+      <div
+        v-if="!isLikeHidden"
+        @click.prevent
+      >
+        <ColorLikeButton class="absolute bottom-1 right-1" />
+      </div>
     </span>
   </UButton>
 </template>
@@ -33,7 +41,13 @@ export interface Props {
   to?: string
   loading?: boolean
   disabled?: boolean
+  isLikeHidden?: boolean
 }
 
-defineProps<Props>();
+withDefaults(defineProps<Props>(), {
+  to: undefined,
+  loading: false,
+  disabled: false,
+  isLikeHidden: false
+});
 </script>

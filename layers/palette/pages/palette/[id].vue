@@ -13,7 +13,7 @@
         </div>
 
         <!-- title -->
-        <div class="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mb-4">
+        <div class="flex gap-4 flex-wrap flex-row justify-between sm:items-center mb-4">
           <h1 class="mb-0">
             {{ data?.text }}
           </h1>
@@ -34,6 +34,9 @@
               :loading="isCloning"
               @click="onSave()"
             />
+          </div>
+          <div v-else>
+            <ColorLikeButton size="md" />
           </div>
         </div>
 

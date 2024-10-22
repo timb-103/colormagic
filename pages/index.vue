@@ -69,9 +69,11 @@
           :key="index"
         >
           <ColorPaletteButton
+            :id="item.id"
             :colors="item.palette"
             :name="item.label[getLocale(locale)]"
             :to="localePath(`/palette/explore/${item.id}`)"
+            is-like-hidden
           />
         </li>
       </ul>

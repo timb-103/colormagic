@@ -46,6 +46,7 @@
           :key="index"
         >
           <ColorPaletteButton
+            :id="item.id"
             :colors="item.colors"
             :name="item.text"
             :to="localePath(`/palette/${item.id}`)"
