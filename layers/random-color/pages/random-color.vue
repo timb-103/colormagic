@@ -13,32 +13,36 @@
       </p>
     </div>
 
-    <!-- color -->
-    <div
-      class="h-44 w-full relative"
-      :style="{ background: arrangedColor[0] }"
-    >
-      <!-- name -->
-      <ColorNameBadge
-        :name="ntc.name(arrangedColor[0])[1].toString()"
-        class="bottom-2 left-2 absolute"
-      />
+    <div class="border border-gray-200 rounded-xl overflow-hidden mb-4">
+      <!-- color -->
+      <div
+        class="h-44 w-full relative"
+        :style="{ background: arrangedColor[0] }"
+      >
+        <!-- name -->
+        <ColorNameBadge
+          :name="ntc.name(arrangedColor[0])[1].toString()"
+          class="bottom-2 left-2 absolute"
+        />
 
-      <!-- reset changes button -->
-      <UButton
-        v-if="hasChanges"
-        :label="$t('palette.resetLabel')"
-        class="absolute bottom-2 right-2"
-        @click="resetArrange()"
-      />
-    </div>
+        <!-- reset changes button -->
+        <UButton
+          v-if="hasChanges"
+          :label="$t('palette.resetLabel')"
+          class="absolute bottom-2 right-2"
+          @click="resetArrange()"
+        />
+      </div>
 
-    <div class="inline-block my-4">
-      <ColorCopyButtons :hex="arrangedColor[0]" />
+      <div class="inline-block p-4">
+        <ColorCopyButtons :hex="arrangedColor[0]" />
+      </div>
     </div>
 
     <!-- arrange sliders-->
-    <ColorArrangeSliders v-model="arrange" />
+    <div class="border border-gray-200 rounded-xl p-4">
+      <ColorArrangeSliders v-model="arrange" />
+    </div>
 
     <!-- generate button -->
     <UButton
