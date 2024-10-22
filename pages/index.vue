@@ -57,24 +57,31 @@
       </p>
     </UForm>
 
-    <!-- examples -->
-    <div class="max-w-3xl mt-8">
+    <!-- palettes -->
+    <div class="mt-8">
       <p class="text-lg font-bold mb-4">
-        {{ $t('home.exampleLabel') }}
+        {{ $t('explore.seoDescription') }}
       </p>
-      <ul class="grid sm:grid-cols-3 gap-4">
+
+      <ul class="grid sm:grid-cols-3 gap-4 mb-4">
         <li
-          v-for="(item, index) in samplePalettes"
+          v-for="(item, index) in getAllPaletteFilters()"
           :key="index"
         >
           <ColorPaletteButton
-            :colors="item.colors"
-            :name="item.text[getLocale(locale)]"
-            :disabled="isPending"
-            @click="onClickExample(item.text[getLocale(locale)])"
+            :colors="item.palette"
+            :name="item.label[getLocale(locale)]"
+            :to="localePath(`/palette/explore/${item.id}`)"
           />
         </li>
       </ul>
+
+      <NuxtLink
+        to="/palette/explore"
+        class="font-medium text-sm hover:text-primary text-gray-400"
+      >
+        Explore more palettes
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -82,7 +89,6 @@
 <script setup lang="ts">
 import { object, type InferType, string } from 'yup';
 import type { FormSubmitEvent } from '#ui/types';
-import { samplePalettes } from '~/layers/common/utils/sample-palettes.util';
 
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
@@ -121,17 +127,6 @@ function generateSamplePrompt(): void {
 
 function onSubmit(event: FormSubmitEvent<Form>): void {
   create({ prompt: event.data.prompt }, {
-    onError: (err) => {
-      notifications.addError(err.message ?? 'Error creating palette.');
-    },
-    onSuccess: (value) => {
-      void navigateTo(localePath(`/palette/${value.id}`));
-    }
-  });
-}
-
-function onClickExample(prompt: string): void {
-  create({ prompt }, {
     onError: (err) => {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
