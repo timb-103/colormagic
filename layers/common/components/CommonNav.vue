@@ -76,6 +76,20 @@
         <!-- lang switcher-->
         <CommonLangSwitcher />
 
+        <!-- login button -->
+        <UButton
+          v-if="!user && !useRoute().path.includes('/login')"
+          label="Login"
+          color="primary"
+          to="/login"
+        />
+        <UButton
+          v-else-if="user"
+          color="primary"
+          icon="i-heroicons-user"
+          to="/profile"
+        />
+
         <!-- mobile bars button -->
         <UButton
           icon="i-heroicons-bars-3"
@@ -123,6 +137,8 @@
 <script setup lang="ts">
 const { t } = useI18n();
 const localePath = useLocalePath();
+
+const { data: user } = useUser();
 
 const isOpen = ref(false);
 
