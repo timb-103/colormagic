@@ -52,6 +52,7 @@
             :palette-id="item.id"
             :is-liked="true"
             :likes-count="item.likesCount"
+            :can-like="user?.id !== undefined"
             :colors="item.colors"
             :name="item.text"
             :to="localePath(`/palette/${item.id}`)"

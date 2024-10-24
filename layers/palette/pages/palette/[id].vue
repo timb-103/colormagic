@@ -39,6 +39,7 @@
             <ColorLikeButton
               :is-liked="likes?.includes(data.id)"
               :likes-count="data.likesCount"
+              :can-like="user?.id !== undefined"
               size="md"
               :palette-id="data.id"
             />
@@ -165,6 +166,7 @@ await suspense();
 const paletteIds = computed(() => data.value?.id !== undefined ? [data.value.id] : []);
 
 const { data: likes } = useListPaletteLikesByIds(paletteIds);
+const { data: user } = useUser();
 
 /** @description redirect home because old palettes will throw 404's otherwise */
 if (data.value === undefined) {
