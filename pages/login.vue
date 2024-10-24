@@ -9,7 +9,7 @@
 
       <!-- description-->
       <p class="text-xl font-medium mb-4 max-w-xl">
-        Get access to likes, favourites and more by logging in to ColorMagic.
+        Get access to likes, favourites and more upcoming features by logging in to ColorMagic.
       </p>
     </div>
 
@@ -22,6 +22,10 @@
     >
       Login with Google
     </UButton>
+
+    <p class="text-xs italic mt-4">
+      *We only store your Google email address & ID to verify your login.
+    </p>
   </div>
 </template>
 

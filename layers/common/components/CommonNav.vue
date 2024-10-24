@@ -83,12 +83,18 @@
           color="primary"
           to="/login"
         />
-        <UButton
+
+        <!-- profile menu -->
+        <UDropdown
           v-else-if="user"
-          color="primary"
-          icon="i-heroicons-user"
-          to="/profile"
-        />
+          :items="userItems"
+          :popper="{ placement: 'bottom-end' }"
+        >
+          <UButton
+            color="primary"
+            icon="i-heroicons-user"
+          />
+        </UDropdown>
 
         <!-- mobile bars button -->
         <UButton
@@ -187,6 +193,18 @@ const toolsLinks = computed(() => [{
   description: t('contrastChecker.seoDescription'),
   icon: 'i-heroicons-sun'
 }]);
+
+const userItems = computed(() => [
+  [{
+    label: user.value?.email ?? 'Unknown email',
+    disabled: true
+  }], [{
+    label: 'Logout',
+    click: () => {
+      useAuthLogout();
+    }
+  }]
+]);
 
 watch(useRoute(), () => {
   isOpen.value = false;

@@ -2,7 +2,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     auth: {
       jwt: {
-        privateKey: process.env.JWT_PRIVATE_KEY ?? '3948ytn398tg-v93yc3q8c3ycr-q98yvtqneh9o-ccon'
+        privateKey: process.env.JWT_PRIVATE_KEY ?? 'not-a-secret'
       }
     },
     oauth: {

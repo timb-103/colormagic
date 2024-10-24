@@ -26,9 +26,9 @@
     "ajv-formats": "3.0.1",
     "color.js": "1.2.0",
     "date-fns": "4.1.0",
-    "google-auth-library": "^9.14.2",
+    "google-auth-library": "9.14.2",
     "got": "11.8.6",
-    "jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "9.0.2",
     "mongodb": "6.9.0",
     "nuxt": "3.13.2",
     "openai": "4.65.0",
@@ -41,7 +41,7 @@
     "vue": "latest"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^9.0.7",
+    "@types/jsonwebtoken": "9.0.7",
     "@types/twitter-text": "3.1.10",
     "@vue/eslint-config-typescript": "12.0.0",
     "eslint": "8.56.0",

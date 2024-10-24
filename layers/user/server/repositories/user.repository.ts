@@ -1,5 +1,5 @@
 import { ObjectId, type Collection, type OptionalUnlessRequiredId } from 'mongodb';
-import type { CreatableUserEntity, UserEntity } from '../entities/user.entity';
+import type { CreatableUserEntity, UpdatableUserEntity, UserEntity } from '../entities/user.entity';
 
 export class UserRepository {
   constructor(private readonly collection: Collection<UserEntity>) {}
@@ -9,19 +9,36 @@ export class UserRepository {
   }
 
   public async getByEmail(email: string): Promise<UserEntity | null> {
-    return await this.collection.findOne({ email });
+    return await this.collection.findOne({ email: email.toLowerCase() });
   }
 
   public async getByGoogleId(googleId: string): Promise<UserEntity | null> {
     return await this.collection.findOne({ googleId });
   }
 
-  public async create(entity: CreatableUserEntity): Promise<UserEntity> {
+  public async create(doc: CreatableUserEntity): Promise<UserEntity> {
+    const entity: CreatableUserEntity = {
+      ...doc,
+      createdAt: new Date()
+    };
+
     const { insertedId } = await this.collection.insertOne(entity as OptionalUnlessRequiredId<UserEntity>);
 
     return {
       _id: insertedId,
       ...entity
     };
+  }
+
+  public async updateById(id: string, entity: Partial<UpdatableUserEntity>): Promise<UserEntity> {
+    const response = await this.collection.findOneAndUpdate({ _id: new ObjectId(id) }, {
+      $set: entity
+    });
+
+    if (response === null) {
+      throw createError({ statusCode: 404 });
+    }
+
+    return response;
   }
 }

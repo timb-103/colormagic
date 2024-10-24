@@ -20,28 +20,46 @@ export class AuthService {
     const expiresDate = addDays(new Date(), 365);
     const expiresInMs = Math.floor(expiresDate.getTime() / 1000);
 
-    const token = jwt.sign({ userId }, authConfig.privateKey, {
-      expiresIn: expiresInMs
-    });
+    try {
+      const token = jwt.sign({ userId }, authConfig.privateKey, {
+        expiresIn: expiresInMs
+      });
 
-    setCookie(event, 'jwt', token, {
-      expires: expiresDate,
-      secure: true
-    });
+      setCookie(event, 'jwt', token, {
+        expires: expiresDate,
+        secure: true
+      });
+    } catch (err) {
+      throw createError({ statusCode: 401, statusMessage: 'Error signing token.' });
+    }
   }
 
   public async loginWithGoogle(event: H3Event, code: string): Promise<UserDto> {
     const googleUser = await this.googleService.getUser(code);
 
-    /** @description login if they have a user */
-    const found = await this.userService.getByGoogleId(googleUser.id);
-    if (found !== null) {
-      this.setAuth(event, found.id);
+    const [foundByGoogle, foundByEmail] = await Promise.all([
+      this.userService.getByGoogleId(googleUser.id),
+      this.userService.getByEmail(googleUser.email)
+    ]);
 
-      return found;
+    /** @description login if they have a user by google id  */
+    if (foundByGoogle !== null) {
+      await this.userService.setLastLoginToNow(foundByGoogle.id);
+      this.setAuth(event, foundByGoogle.id);
+      return foundByGoogle;
     }
 
-    /** @description create a new user */
+    /** @description check if a user exists by email and link the google id */
+    if (foundByEmail !== null) {
+      await Promise.all([
+        this.userService.setLastLoginToNow(foundByEmail.id),
+        this.userService.linkGoogleIdToUser(foundByEmail.id, googleUser.id)
+      ]);
+      this.setAuth(event, foundByEmail.id);
+      return foundByEmail;
+    }
+
+    /** @description create a new user if none exists */
     const entity = await this.userService.createByGoogle(
       googleUser.id,
       googleUser.email

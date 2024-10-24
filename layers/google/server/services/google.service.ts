@@ -1,12 +1,10 @@
 import { OAuth2Client } from 'google-auth-library';
-import got from 'got';
 import googleConfig from '../google.config';
 import authConfig from '~/layers/auth/server/auth.config';
 
 export interface GoogleApiUserEntity {
   id: string
   email: string
-  picture: string
 }
 
 export class GoogleService {
@@ -18,10 +16,10 @@ export class GoogleService {
     );
 
     const url = oauth2Client.generateAuthUrl({
-      scope: ['https://www.googleapis.com/auth/userinfo.email'],
+      scope: [googleConfig.oauth.scopes.email],
       state,
-      access_type: 'offline',
-      prompt: 'consent',
+      access_type: googleConfig.oauth.accessType,
+      prompt: googleConfig.oauth.prompt,
       include_granted_scopes: true
     });
 
@@ -36,15 +34,26 @@ export class GoogleService {
     );
 
     const { tokens } = await oauth2Client.getToken(code);
+    if (tokens.access_token === undefined || tokens.access_token === null) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'No tokens found.'
+      });
+    }
+
     oauth2Client.setCredentials(tokens);
 
-    const user = await got.get({
-      url: 'https://www.googleapis.com/oauth2/v1/userinfo',
-      searchParams: {
-        access_token: tokens.access_token
-      }
-    }).json<GoogleApiUserEntity>();
+    const info = await oauth2Client.getTokenInfo(tokens.access_token);
+    if (info.sub === undefined || info.email === undefined) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'No email or id found.'
+      });
+    }
 
-    return user;
+    return {
+      id: info.sub,
+      email: info.email
+    };
   }
 }

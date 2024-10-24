@@ -11,3 +11,5 @@ export interface UserEntity {
 }
 
 export type CreatableUserEntity = Omit<UserEntity, '_id'>;
+
+export type UpdatableUserEntity = Pick<UserEntity, 'googleId' | 'lastLoginAt'>;
