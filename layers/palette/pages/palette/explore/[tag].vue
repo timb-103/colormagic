@@ -46,7 +46,9 @@
           :key="index"
         >
           <ColorPaletteButton
-            :id="item.id"
+            :palette-id="item.id"
+            :is-liked="likes?.includes(item.id)"
+            :likes-count="item.likesCount"
             :colors="item.colors"
             :name="item.text"
             :to="localePath(`/palette/${item.id}`)"
@@ -90,8 +92,12 @@ const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useList
 
 await suspense();
 
-const palettes = computed(() => list.value?.pages.flatMap((items) => items.items));
+const palettes = computed(() => list.value?.pages.flatMap((items) => items.items) ?? []);
+const paletteIds = computed(() => palettes.value.map(v => v.id));
+
 const count = computed(() => list.value?.pages[0].count ?? 0);
+
+const { data: likes } = useListPaletteLikesByIds(paletteIds);
 
 const filter = getAllPaletteFilters().find(v => v.id === tag.value);
 

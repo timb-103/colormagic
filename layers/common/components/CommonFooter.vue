@@ -144,7 +144,7 @@ const websiteLinks = computed(() => [
   },
   {
     label: t('nav.liked'),
-    to: localePath('/liked')
+    to: localePath('/palette/liked')
   },
   {
     label: t('nav.recent'),

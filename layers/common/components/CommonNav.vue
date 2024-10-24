@@ -93,10 +93,7 @@
           :items="userItems"
           :popper="{ placement: 'bottom-end' }"
         >
-          <UButton
-            color="primary"
-            icon="i-heroicons-user"
-          />
+          <UButton icon="i-heroicons-user" />
         </UDropdown>
 
         <!-- mobile bars button -->
@@ -164,7 +161,7 @@ const links = computed(() => [
   },
   {
     label: t('nav.liked'),
-    to: localePath('/liked')
+    to: localePath('/palette/liked')
   }
 ]);
 
@@ -199,7 +196,7 @@ const userItems = computed(() => [
     disabled: true
   }], [{
     label: t('nav.liked'),
-    to: '/liked',
+    to: '/palette/liked',
     icon: 'i-heroicons-heart'
   }], [{
     label: 'Logout',

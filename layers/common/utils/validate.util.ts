@@ -94,7 +94,7 @@ export function validateParams<T extends TSchema>(event: H3Event, schema: T, opt
   const validate = useValidator(options).compile(schema);
 
   if (!validate(query)) {
-    const betterErrors = betterAjvErrors({ schema, data: query, errors: validate.errors, basePath: 'query' });
+    const betterErrors = betterAjvErrors({ schema, data: query, errors: validate.errors, basePath: 'params' });
     throw createError({ statusCode: 400, statusMessage: betterErrors[0].message });
   }
 
