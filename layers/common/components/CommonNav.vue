@@ -71,6 +71,7 @@
         <UButton
           icon="i-fa6-brands-github"
           to="https://github.com/timb-103/colormagic"
+          class="hidden sm:flex"
         />
 
         <!-- lang switcher-->
@@ -156,16 +157,12 @@ const {
 
 const links = computed(() => [
   {
-    label: t('nav.home'),
-    to: localePath('/')
-  },
-  {
     label: t('nav.explore'),
     to: localePath('/palette/explore')
   },
   {
-    label: t('nav.recent'),
-    to: localePath('/recent')
+    label: t('nav.liked'),
+    to: localePath('/liked')
   }
 ]);
 
@@ -198,6 +195,10 @@ const userItems = computed(() => [
   [{
     label: user.value?.email ?? 'Unknown email',
     disabled: true
+  }], [{
+    label: t('nav.liked'),
+    to: '/liked',
+    icon: 'i-heroicons-heart'
   }], [{
     label: 'Logout',
     click: () => {

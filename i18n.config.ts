@@ -22,6 +22,7 @@ export default defineI18nConfig(() => ({
       nav: {
         home: 'Home',
         recent: 'Recent',
+        liked: 'Liked',
         randomColor: 'Random Color Generator',
         colorPaletteGenrator: 'Color Palette Generator',
         contact: 'Contact',
@@ -37,7 +38,8 @@ export default defineI18nConfig(() => ({
         more: 'More',
         news: 'News',
         api: 'Colors API',
-        contrastChecker: 'Contrast Checker'
+        contrastChecker: 'Contrast Checker',
+        logout: 'Logout'
       },
       palette: {
         seoTitle: 'ColorMagic - AI Color Palette Generator',
@@ -94,6 +96,12 @@ export default defineI18nConfig(() => ({
         uiComponents: 'UI Components',
         exampleText: 'Example Primary text',
         failText: 'Fail'
+      },
+      liked: {
+        title: 'Liked Palettes',
+        seoTitle: 'Liked Palettes - ColorMagic',
+        seoDescription: 'See the palettes you\'ve liked in one place.',
+        comingSoon: 'Coming soon...'
       }
     },
     ja: {
@@ -116,6 +124,7 @@ export default defineI18nConfig(() => ({
       nav: {
         home: 'ホーム',
         recent: '最近',
+        liked: '気に入った',
         contact: 'お問い合わせ',
         terms: '利用規約',
         privacy: 'プライバシー',
@@ -131,7 +140,8 @@ export default defineI18nConfig(() => ({
         more: 'もっと',
         news: 'ニュース',
         api: 'カラーAPI',
-        contrastChecker: 'コントラストチェッカー'
+        contrastChecker: 'コントラストチェッカー',
+        logout: 'ログアウト'
       },
       palette: {
         seoTitle: 'あなたの思い描く色をかんたんに',
@@ -188,6 +198,12 @@ export default defineI18nConfig(() => ({
         uiComponents: 'UIコンポーネント',
         exampleText: 'プライマリテキストの例',
         failText: '不合格'
+      },
+      liked: {
+        title: '気に入ったパレット',
+        seoTitle: '気に入ったパレット - ColorMagic',
+        seoDescription: '気に入ったパレットを 1 か所で確認できます。',
+        comingSoon: '近日公開...'
       }
     },
     it: {
@@ -210,6 +226,7 @@ export default defineI18nConfig(() => ({
       nav: {
         home: 'Home',
         recent: 'Recenti',
+        liked: 'Mi è piaciuto',
         contact: 'Contatti',
         terms: 'Termini di utilizzo',
         privacy: 'Privacy',
@@ -225,7 +242,8 @@ export default defineI18nConfig(() => ({
         more: 'Di più',
         news: 'Notizia',
         api: 'API dei colori',
-        contrastChecker: 'Controllo Contrasto'
+        contrastChecker: 'Controllo Contrasto',
+        logout: 'Esci'
       },
       palette: {
         seoTitle: 'Genera la tua palette di colori ideale',
@@ -282,6 +300,12 @@ export default defineI18nConfig(() => ({
         uiComponents: 'Componenti UI',
         exampleText: 'Esempio di testo primario',
         failText: 'Non riuscito'
+      },
+      liked: {
+        title: 'Tavolozze piaciute',
+        seoTitle: 'Tavolozze piaciute - ColorMagic',
+        seoDescription: 'Guarda le tavolozze che ti sono piaciute in un unico posto.',
+        comingSoon: 'Prossimamente...'
       }
     }
   }
