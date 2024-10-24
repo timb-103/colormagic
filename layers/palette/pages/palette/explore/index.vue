@@ -83,14 +83,18 @@
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
 
-const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100);
+const { data: user, suspense: userSuspense } = useUser();
+const userId = computed(() => user.value?.id);
 
-await suspense();
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(userId, 100);
+
+await Promise.all([
+  userSuspense(),
+  suspense()
+]);
 
 const { params } = useRoute();
 const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
-
-const { data: user } = useUser();
 
 const palettes = computed(() => list.value?.pages.flatMap((items) => items.items) ?? []);
 

@@ -31,8 +31,8 @@ const props = withDefaults(defineProps<Props>(), {
 const localePath = useLocalePath();
 
 const notifications = useNotifications();
-const { mutate: createLike, isPending: isCreating } = useCreatePaletteLike();
-const { mutate: deleteLike, isPending: isDeleting } = useDeletePaletteLike();
+const { mutate: createLike, isPending: isCreating } = useOptimisticCreatePaletteLike();
+const { mutate: deleteLike, isPending: isDeleting } = useOptimisticDeletePaletteLike();
 
 function onCreateLike(): void {
   if (props.canLike !== true) {

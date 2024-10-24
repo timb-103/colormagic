@@ -5,6 +5,7 @@ import type { ClonePaletteInputDto, CreatePaletteInputDto, CreatePaletteLikeInpu
 import type { PaletteModel } from '../models/palette.model';
 import { PlausibleEventName } from '~/layers/plausible/types';
 import { sendPlausibleEvent } from '~/layers/plausible/utils/plausible.util';
+import { useOptimisticMutation } from '~/layers/common/composables/optimistic.composable';
 
 const PALETTE_ROOT_KEY = 'palette';
 
@@ -35,9 +36,9 @@ export function usePalette(id: Ref<string | undefined>) {
   });
 }
 
-export function useListPalettes(size: number = 10, filter?: ListPaletteInputDto['filter']) {
+export function useListPalettes(userId: ComputedRef<string | undefined>, size: number = 10, filter?: ListPaletteInputDto['filter']) {
   return useInfiniteQuery({
-    queryKey: [PALETTE_ROOT_KEY, size, filter],
+    queryKey: [PALETTE_ROOT_KEY, userId, size, filter],
     queryFn: async ({ pageParam: page = 0 }) => {
       const response = await $fetch<ListPaletteDto>('/api/palette/list', {
         method: 'POST',
@@ -159,43 +160,57 @@ export function useListPaletteLikesByIds(paletteIds: ComputedRef<string[]>) {
   });
 }
 
-export function useCreatePaletteLike() {
-  const client = useQueryClient();
-
-  return useMutation({
+export function useOptimisticCreatePaletteLike() {
+  return useOptimisticMutation({
+    queryKey: [PALETTE_ROOT_KEY],
     mutationFn: async (params: CreatePaletteLikeInputDto) => {
-      const response = await $fetch(`/api/palette/like/${params.id}`, {
+      await $fetch(`/api/palette/like/${params.id}`, {
         method: 'PUT'
       });
+    },
+    updateQueryFn: (params: CreatePaletteLikeInputDto, old?: { items: PaletteModel[], count: number }) => {
+      if (old === undefined) {
+        return undefined;
+      }
 
-      await client.invalidateQueries({
-        queryKey: [PALETTE_ROOT_KEY]
-      });
-
-      return response;
+      return {
+        items: old.items.map((item) => ({
+          ...item,
+          isLiked: item.id === params.id ? true : item.isLiked
+        })),
+        count: old.count
+      };
     }
   });
 }
 
-export function useDeletePaletteLike() {
-  const client = useQueryClient();
-
-  return useMutation({
+export function useOptimisticDeletePaletteLike() {
+  return useOptimisticMutation({
+    queryKey: [PALETTE_ROOT_KEY],
     mutationFn: async (params: DeletePaletteLikeInputDto) => {
       await $fetch(`/api/palette/like/${params.id}`, {
         method: 'DELETE'
       });
+    },
+    updateQueryFn: (params: DeletePaletteLikeInputDto, old?: { items: PaletteModel[], count: number }) => {
+      if (old === undefined) {
+        return undefined;
+      }
 
-      await client.invalidateQueries({
-        queryKey: [PALETTE_ROOT_KEY]
-      });
+      return {
+        items: old.items.map((item) => ({
+          ...item,
+          isLiked: item.id === params.id ? false : item.isLiked
+        })),
+        count: old.count
+      };
     }
   });
 }
 
-export function useListPalettesByLiked(size: number = 10) {
+export function useListPalettesByLiked(userId: ComputedRef<string | undefined>, size: number = 10) {
   return useInfiniteQuery({
-    queryKey: [PALETTE_ROOT_KEY, size, 'liked'],
+    queryKey: [PALETTE_ROOT_KEY, userId, size, 'liked'],
     queryFn: async ({ pageParam: page = 0 }) => {
       const response = await $fetch('/api/palette/like/list', {
         method: 'POST',

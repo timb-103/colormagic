@@ -82,7 +82,8 @@ const title = t('liked.seoTitle');
 const description = t('liked.seoDescription');
 
 const { data: user } = useUser();
-const { data: likes, isFetching, hasNextPage, fetchNextPage } = useListPalettesByLiked();
+const userId = computed(() => user.value?.id);
+const { data: likes, isFetching, hasNextPage, fetchNextPage } = useListPalettesByLiked(userId);
 
 const palettes = computed(() => likes.value?.pages.flat() ?? []);
 
