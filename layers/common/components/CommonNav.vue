@@ -70,11 +70,34 @@
       <div class="flex items-center gap-2 sm:gap-4">
         <UButton
           icon="i-fa6-brands-github"
+          variant="ghost"
+          color="gray"
           to="https://github.com/timb-103/colormagic"
+          class="hidden sm:flex"
         />
 
         <!-- lang switcher-->
         <CommonLangSwitcher />
+
+        <!-- login button -->
+        <UButton
+          v-if="!user && !useRoute().path.includes('/login')"
+          label="Login"
+          color="primary"
+          to="/login"
+        />
+
+        <!-- profile menu -->
+        <UDropdown
+          v-else-if="user"
+          :items="userItems"
+          :popper="{ placement: 'bottom-end' }"
+        >
+          <UButton
+            color="primary"
+            icon="i-heroicons-user"
+          />
+        </UDropdown>
 
         <!-- mobile bars button -->
         <UButton
@@ -124,6 +147,8 @@
 const { t } = useI18n();
 const localePath = useLocalePath();
 
+const { data: user } = useUser();
+
 const isOpen = ref(false);
 
 const {
@@ -134,16 +159,12 @@ const {
 
 const links = computed(() => [
   {
-    label: t('nav.home'),
-    to: localePath('/')
-  },
-  {
     label: t('nav.explore'),
     to: localePath('/palette/explore')
   },
   {
-    label: t('nav.recent'),
-    to: localePath('/recent')
+    label: t('nav.liked'),
+    to: localePath('/liked')
   }
 ]);
 
@@ -171,6 +192,22 @@ const toolsLinks = computed(() => [{
   description: t('contrastChecker.seoDescription'),
   icon: 'i-heroicons-sun'
 }]);
+
+const userItems = computed(() => [
+  [{
+    label: user.value?.email ?? 'Unknown email',
+    disabled: true
+  }], [{
+    label: t('nav.liked'),
+    to: '/liked',
+    icon: 'i-heroicons-heart'
+  }], [{
+    label: 'Logout',
+    click: () => {
+      useAuthLogout();
+    }
+  }]
+]);
 
 watch(useRoute(), () => {
   isOpen.value = false;

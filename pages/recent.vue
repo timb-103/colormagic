@@ -8,7 +8,7 @@
       class="grid sm:grid-cols-3 gap-4"
     >
       <li
-        v-for="([key, item]) in Array.from(session)"
+        v-for="([key, item]) in Array.from(session).reverse()"
         :key="key"
       >
         <ColorPaletteButton
