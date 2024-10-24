@@ -4,12 +4,12 @@
     <div class="mb-4">
       <!-- title -->
       <h1>
-        Login
+        {{ $t('login.title') }}
       </h1>
 
       <!-- description-->
       <p class="text-xl font-medium mb-4 max-w-xl">
-        Get access to likes, favourites and more upcoming features by logging in to ColorMagic.
+        {{ description }}
       </p>
     </div>
 
@@ -18,14 +18,9 @@
       color="primary"
       :loading="isGooglePending || isRedirectingToGoogle"
       size="xl"
+      :label="$t('login.google')"
       @click="onGoogleRedirect()"
-    >
-      Login with Google
-    </UButton>
-
-    <p class="text-xs italic mt-4">
-      *We only store your Google email address & ID to verify your login.
-    </p>
+    />
   </div>
 </template>
 
@@ -37,6 +32,16 @@ const { query, path } = useRoute();
 const { mutate: googleAuthLogin, isPending: isGooglePending } = useGoogleAuthLogin();
 const { mutate: redirectToGoogle, isPending: isRedirectingToGoogle } = useGoogleAuthRedirect();
 const notifications = useNotifications();
+
+const { t } = useI18n();
+
+const title = t('login.seoTitle');
+const description = t('login.seoDescription');
+
+useSeoMeta({
+  title,
+  description
+});
 
 function onGoogleRedirect(): void {
   const state = encodeState(path, OAuthProvider.GOOGLE);

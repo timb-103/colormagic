@@ -15,13 +15,13 @@
 
     <p
       v-if="!user"
-      class="text-lg font-bold mb-4"
+      class="text-xl font-bold mb-4"
     >
-      Like palettes to save them to this page. Get started by <NuxtLinkLocale
+      <NuxtLinkLocale
         to="/login"
         class="text-primary underline"
       >
-        logging in.
+        {{ $t('nav.login') }}
       </NuxtLinkLocale>
     </p>
     <p
@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-
 const { t } = useI18n();
 const { data: user } = useUser();
 

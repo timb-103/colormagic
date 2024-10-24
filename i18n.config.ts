@@ -39,7 +39,8 @@ export default defineI18nConfig(() => ({
         news: 'News',
         api: 'Colors API',
         contrastChecker: 'Contrast Checker',
-        logout: 'Logout'
+        logout: 'Logout',
+        login: 'Login'
       },
       palette: {
         seoTitle: 'ColorMagic - AI Color Palette Generator',
@@ -102,6 +103,12 @@ export default defineI18nConfig(() => ({
         seoTitle: 'Liked Palettes - ColorMagic',
         seoDescription: 'See the palettes you\'ve liked in one place.',
         comingSoon: 'Coming soon...'
+      },
+      login: {
+        title: 'Login',
+        seoTitle: 'Login - ColorMagic',
+        seoDescription: 'Get access to likes, favourites and more upcoming features by logging in to ColorMagic.',
+        google: 'Login with Google'
       }
     },
     ja: {
@@ -141,7 +148,8 @@ export default defineI18nConfig(() => ({
         news: 'ニュース',
         api: 'カラーAPI',
         contrastChecker: 'コントラストチェッカー',
-        logout: 'ログアウト'
+        logout: 'ログアウト',
+        login: 'ログイン'
       },
       palette: {
         seoTitle: 'あなたの思い描く色をかんたんに',
@@ -204,6 +212,12 @@ export default defineI18nConfig(() => ({
         seoTitle: '気に入ったパレット - ColorMagic',
         seoDescription: '気に入ったパレットを 1 か所で確認できます。',
         comingSoon: '近日公開...'
+      },
+      login: {
+        title: 'ログイン',
+        seoTitle: 'ログイン - ColorMagic',
+        seoDescription: 'ColorMagicにログインして、いいね、お気に入り、その他の新機能にアクセスしましょう。',
+        google: 'Googleでログイン'
       }
     },
     it: {
@@ -243,7 +257,8 @@ export default defineI18nConfig(() => ({
         news: 'Notizia',
         api: 'API dei colori',
         contrastChecker: 'Controllo Contrasto',
-        logout: 'Esci'
+        logout: 'Esci',
+        login: 'Login'
       },
       palette: {
         seoTitle: 'Genera la tua palette di colori ideale',
@@ -306,6 +321,12 @@ export default defineI18nConfig(() => ({
         seoTitle: 'Tavolozze piaciute - ColorMagic',
         seoDescription: 'Guarda le tavolozze che ti sono piaciute in un unico posto.',
         comingSoon: 'Prossimamente...'
+      },
+      login: {
+        title: 'Accedi',
+        seoTitle: 'Accedi - ColorMagic',
+        seoDescription: 'Accedi a like, preferiti e altre funzionalità in arrivo effettuando il login su ColorMagic.',
+        google: 'Accedi con Google'
       }
     }
   }
