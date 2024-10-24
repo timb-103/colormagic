@@ -25,10 +25,15 @@
 
       <!-- like button -->
       <div
-        v-if="!isLikeHidden"
+        v-if="paletteId"
         @click.prevent
       >
-        <ColorLikeButton class="absolute bottom-1 right-1" />
+        <ColorLikeButton
+          :palette-id="paletteId"
+          :is-liked="isLiked"
+          :likes-count="likesCount"
+          class="absolute bottom-1 right-1"
+        />
       </div>
     </span>
   </UButton>
@@ -41,13 +46,17 @@ export interface Props {
   to?: string
   loading?: boolean
   disabled?: boolean
-  isLikeHidden?: boolean
+  paletteId?: string
+  isLiked?: boolean
+  likesCount?: number
 }
 
 withDefaults(defineProps<Props>(), {
   to: undefined,
   loading: false,
   disabled: false,
-  isLikeHidden: false
+  paletteId: undefined,
+  isLiked: false,
+  likesCount: undefined
 });
 </script>

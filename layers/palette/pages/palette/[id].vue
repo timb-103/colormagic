@@ -36,7 +36,12 @@
             />
           </div>
           <div v-else>
-            <ColorLikeButton size="md" />
+            <ColorLikeButton
+              :is-liked="likes?.includes(data.id)"
+              :likes-count="data.likesCount"
+              size="md"
+              :palette-id="data.id"
+            />
           </div>
         </div>
 
@@ -156,6 +161,10 @@ const { mutate: create, isPending: isCreating } = useCreatePalette();
 const notifications = useNotifications();
 
 await suspense();
+
+const paletteIds = computed(() => data.value?.id !== undefined ? [data.value.id] : []);
+
+const { data: likes } = useListPaletteLikesByIds(paletteIds);
 
 /** @description redirect home because old palettes will throw 404's otherwise */
 if (data.value === undefined) {

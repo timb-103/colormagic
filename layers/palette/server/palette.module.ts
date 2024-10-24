@@ -1,15 +1,20 @@
 import { type Db } from 'mongodb';
 import type { Logger } from 'pino';
-import type { PaletteEntity } from './entities/palette.entity';
+import type { PaletteEntity, PaletteLikeEntity } from './entities/palette.entity';
 import paletteConfig from './palette.config';
 import { PaletteRepository } from './repositories/palette.repository';
 import { PaletteService } from './services/palette.service';
 import { PaletteValidation } from './validations/palette.validation';
+import { PaletteLikeRepository } from './repositories/palette-like.repository';
+import { PaletteLikeService } from './services/palette-like.service';
 import type { AIService } from '~/layers/ai/server/services/ai.service';
 
 export interface PaletteModule {
   service: PaletteService
   validation: PaletteValidation
+  like: {
+    service: PaletteLikeService
+  }
   setup: () => Promise<void>
 }
 
@@ -28,13 +33,24 @@ export function getPaletteModule(
   const collection = db.collection<PaletteEntity>(paletteConfig.collectionName);
   const repository = new PaletteRepository(collection);
   const service = new PaletteService(repository, aiService);
+
+  const likeCollection = db.collection<PaletteLikeEntity>(paletteConfig.likesCollectionName);
+  const likeRepository = new PaletteLikeRepository(likeCollection);
+  const likeService = new PaletteLikeService(likeRepository, service);
+
   const validation = new PaletteValidation();
 
   return {
     service,
     validation,
+    like: {
+      service: likeService
+    },
     setup: async () => {
-      await repository.setup();
+      await Promise.all([
+        repository.setup(),
+        likeRepository.setup()
+      ]);
     }
   };
 }

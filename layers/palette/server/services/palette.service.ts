@@ -34,6 +34,12 @@ export class PaletteService {
     };
   }
 
+  public async listByIds(ids: string[]): Promise<PaletteDto[]> {
+    const entities = await this.repository.listByIds(ids);
+
+    return entities.map(entity => mapPaletteEntityToDto(entity));
+  }
+
   public async getById(id: string): Promise<PaletteDto> {
     const entity = await this.repository.getById(id);
     if (entity === null) {
@@ -101,5 +107,13 @@ export class PaletteService {
     }
 
     return await this.repository.count(filter);
+  }
+
+  public async addLike(id: string): Promise<void> {
+    await this.repository.updateLikesCount(id, 1);
+  }
+
+  public async removeLike(id: string): Promise<void> {
+    await this.repository.updateLikesCount(id, -1);
   }
 }

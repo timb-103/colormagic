@@ -1,5 +1,5 @@
-import type { PaletteDto } from '../dtos/palette.dto';
-import type { PaletteEntity } from '../entities/palette.entity';
+import type { PaletteDto, PaletteLikeDto } from '../dtos/palette.dto';
+import type { PaletteEntity, PaletteLikeEntity } from '../entities/palette.entity';
 import { arrangeColors } from '../../utils/color-arrange.util';
 import paletteConfig from '../palette.config';
 import { getAllPaletteFilters } from '../../utils/palette-filters.util';
@@ -16,7 +16,15 @@ export function mapPaletteEntityToDto(entity: PaletteEntity): PaletteDto {
     /** @description required because older names could be inappropriate */
     text: new Date(entity.createdAt).getTime() > paletteConfig.aiNamesStartDateMs
       ? entity.text
-      : 'Cool Palette'
+      : 'Cool Palette',
+    likesCount: entity.likesCount ?? 0
+  };
+}
+
+export function mapPaletteLikeEntityToDto(entity: PaletteLikeEntity): PaletteLikeDto {
+  return {
+    id: entity._id.toHexString(),
+    paletteId: entity.paletteId.toHexString()
   };
 }
 
