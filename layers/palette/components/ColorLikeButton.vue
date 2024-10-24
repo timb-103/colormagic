@@ -16,6 +16,7 @@ export interface Props {
   paletteId: string
   isLiked?: boolean
   likesCount?: number
+  canLike?: boolean
   size?: '2xs' | 'md' | 'lg'
 }
 
@@ -23,14 +24,22 @@ const props = withDefaults(defineProps<Props>(), {
   id: undefined,
   size: '2xs',
   isLiked: false,
-  likesCount: undefined
+  likesCount: undefined,
+  canLike: undefined
 });
+
+const localePath = useLocalePath();
 
 const notifications = useNotifications();
 const { mutate: createLike, isPending: isCreating } = useCreatePaletteLike();
 const { mutate: deleteLike, isPending: isDeleting } = useDeletePaletteLike();
 
 function onCreateLike(): void {
+  if (props.canLike !== true) {
+    void navigateTo(localePath('/login'));
+    return;
+  }
+
   createLike({ id: props.paletteId }, {
     onError: (err) => {
       notifications.addError(err.message ?? 'Error liking palette.');
@@ -41,6 +50,11 @@ function onCreateLike(): void {
 }
 
 function onDeleteLike(): void {
+  if (props.canLike !== true) {
+    void navigateTo(localePath('/login'));
+    return;
+  }
+
   deleteLike({ id: props.paletteId }, {
     onError: (err) => {
       notifications.addError(err.message ?? 'Error un-liking palette.');

@@ -39,7 +39,7 @@ export function useListPalettes(size: number = 10, filter?: ListPaletteInputDto[
   return useInfiniteQuery({
     queryKey: [PALETTE_ROOT_KEY, size, filter],
     queryFn: async ({ pageParam: page = 0 }) => {
-      return await $fetch('/api/palette/list', {
+      const response = await $fetch<ListPaletteDto>('/api/palette/list', {
         method: 'POST',
         body: {
           page,
@@ -47,6 +47,28 @@ export function useListPalettes(size: number = 10, filter?: ListPaletteInputDto[
           filter
         }
       });
+
+      const palettes: PaletteModel[] = response.items;
+
+      /** @description wrap this so it still works if user is not logged in */
+      try {
+        const likes = await $fetch<ListPaletteLikesDto>('/api/palette/like/list-by-palette-ids', {
+          method: 'POST',
+          body: {
+            paletteIds: palettes.map(v => v.id)
+          }
+        });
+
+        return {
+          items: palettes.map(v => ({ ...v, isLiked: likes.items.includes(v.id) })),
+          count: response.count
+        };
+      } catch {}
+
+      return {
+        items: palettes,
+        count: response.count
+      };
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {

@@ -32,6 +32,7 @@
           :palette-id="paletteId"
           :is-liked="isLiked"
           :likes-count="likesCount"
+          :can-like="canLike"
           class="absolute bottom-1 right-1"
         />
       </div>
@@ -49,6 +50,7 @@ export interface Props {
   paletteId?: string
   isLiked?: boolean
   likesCount?: number
+  canLike?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
@@ -57,6 +59,7 @@ withDefaults(defineProps<Props>(), {
   disabled: false,
   paletteId: undefined,
   isLiked: false,
-  likesCount: undefined
+  likesCount: undefined,
+  canLike: undefined
 });
 </script>

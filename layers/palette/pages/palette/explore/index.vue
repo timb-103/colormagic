@@ -44,10 +44,11 @@
         >
           <ColorPaletteButton
             :palette-id="item.id"
-            :is-liked="likes?.includes(item.id)"
+            :is-liked="item.isLiked ?? false"
             :likes-count="item.likesCount"
             :colors="item.colors"
             :name="item.text"
+            :can-like="user?.id !== undefined"
             :to="localePath(`/palette/${item.id}`)"
           />
         </li>
@@ -89,12 +90,11 @@ await suspense();
 const { params } = useRoute();
 const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
 
+const { data: user } = useUser();
+
 const palettes = computed(() => list.value?.pages.flatMap((items) => items.items) ?? []);
-const paletteIds = computed(() => palettes.value.map(v => v.id));
 
 const count = computed(() => list.value?.pages[0].count ?? 0);
-
-const { data: likes } = useListPaletteLikesByIds(paletteIds);
 
 useSeoMeta({
   title: t('explore.seoTitle'),

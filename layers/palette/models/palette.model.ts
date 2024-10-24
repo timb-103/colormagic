@@ -1,3 +1,5 @@
 import type { PaletteDto } from '../server/dtos/palette.dto';
 
-export type PaletteModel = PaletteDto;
+export type PaletteModel = PaletteDto & {
+  isLiked?: boolean
+};

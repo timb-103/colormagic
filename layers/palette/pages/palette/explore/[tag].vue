@@ -47,10 +47,11 @@
         >
           <ColorPaletteButton
             :palette-id="item.id"
-            :is-liked="likes?.includes(item.id)"
+            :is-liked="item.isLiked ?? false"
             :likes-count="item.likesCount"
             :colors="item.colors"
             :name="item.text"
+            :can-like="user?.id !== undefined"
             :to="localePath(`/palette/${item.id}`)"
           />
         </li>
@@ -93,17 +94,15 @@ const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useList
 await suspense();
 
 const palettes = computed(() => list.value?.pages.flatMap((items) => items.items) ?? []);
-const paletteIds = computed(() => palettes.value.map(v => v.id));
-
 const count = computed(() => list.value?.pages[0].count ?? 0);
-
-const { data: likes } = useListPaletteLikesByIds(paletteIds);
 
 const filter = getAllPaletteFilters().find(v => v.id === tag.value);
 
 if (filter === undefined) {
   throw createError({ statusCode: 404, statusMessage: 'Tag not found.' });
 }
+
+const { data: user } = useUser();
 
 const title = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);
 const seoTitle = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);
