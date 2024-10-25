@@ -11,5 +11,7 @@ export enum PlausibleEventName {
 
   FEEDBACK_SUBMITTED = 'feedback:submitted',
 
-  LIKE_BUTTON_CLICKED = 'like:pre-launch:click'
+  LIKE_BUTTON_CLICKED = 'like:click',
+
+  LOGGED_IN_GOOGLE = 'logged-in:google'
 }

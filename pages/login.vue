@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import { decodeState, OAuthProvider, encodeState } from '~/layers/auth/helpers/oauth.helper';
+import { PlausibleEventName } from '~/layers/plausible/types';
 
 const { query, path } = useRoute();
 
@@ -62,6 +63,7 @@ function handleAuth(encodedState: string): void {
           notifications.addError(err?.message ?? 'Error logging in with Google.');
         },
         onSuccess: () => {
+          sendPlausibleEvent(PlausibleEventName.LOGGED_IN_GOOGLE);
           void navigateTo('/');
         }
       });
