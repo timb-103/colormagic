@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { useMutation, useQuery, useInfiniteQuery, useQueryClient } from '@tanstack/vue-query';
+import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/vue-query';
 import { useLocalStorage, StorageSerializers } from '@vueuse/core';
-import type { ClonePaletteInputDto, CreatePaletteInputDto, CreatePaletteLikeInputDto, DeletePaletteLikeInputDto, ListPaletteDto, ListPaletteInputDto, ListPaletteLikesDto, PaletteLikeDto } from '../server/dtos/palette.dto';
+import type { ClonePaletteInputParamsDto, ClonePaletteInputQueryDto, CountPaletteDto, CreatePaletteInputDto, ListPaletteDto, ListPaletteInputDto } from '../server/dtos/palette.dto';
+import type { CreatePaletteLikeInputDto, DeletePaletteLikeInputDto } from '../server/dtos/palette-like.dto';
 import type { PaletteModel } from '../models/palette.model';
 import { PlausibleEventName } from '~/layers/plausible/types';
 import { sendPlausibleEvent } from '~/layers/plausible/utils/plausible.util';
@@ -31,45 +32,33 @@ export function usePalette(id: Ref<string | undefined>) {
   return useQuery({
     queryKey: [PALETTE_ROOT_KEY, id],
     queryFn: async () => {
-      return await $fetch<PaletteModel>(`/api/palette/${id.value}`);
+      const headers = useRequestHeaders(['cookie']);
+
+      return await $fetch<PaletteModel>(`/api/palettes/${id.value}`, {
+        method: 'GET',
+        headers
+      });
     }
   });
 }
 
-export function useListPalettes(userId: ComputedRef<string | undefined>, size: number = 10, filter?: ListPaletteInputDto['filter']) {
+export function useListPalettes(size: number = 10, filter?: Pick<ListPaletteInputDto, 'tag'>) {
   return useInfiniteQuery({
-    queryKey: [PALETTE_ROOT_KEY, userId, size, filter],
+    queryKey: [PALETTE_ROOT_KEY, size, filter],
     queryFn: async ({ pageParam: page = 0 }) => {
-      const response = await $fetch<ListPaletteDto>('/api/palette/list', {
-        method: 'POST',
-        body: {
-          page,
-          size,
-          filter
-        }
-      });
+      const headers = useRequestHeaders(['cookie']);
 
-      const palettes: PaletteModel[] = response.items;
-
-      /** @description wrap this so it still works if user is not logged in */
-      try {
-        const likes = await $fetch<ListPaletteLikesDto>('/api/palette/like/list-by-palette-ids', {
-          method: 'POST',
-          body: {
-            paletteIds: palettes.map(v => v.id)
-          }
-        });
-
-        return {
-          items: palettes.map(v => ({ ...v, isLiked: likes.items.includes(v.id) })),
-          count: response.count
-        };
-      } catch {}
-
-      return {
-        items: palettes,
-        count: response.count
+      const query: ListPaletteInputDto = {
+        page: page.toString(),
+        size: size.toString(),
+        tag: filter?.tag
       };
+
+      return await $fetch<ListPaletteDto>('/api/palettes', {
+        method: 'GET',
+        query,
+        headers
+      });
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => {
@@ -87,12 +76,46 @@ export function useListPalettes(userId: ComputedRef<string | undefined>, size: n
   });
 }
 
+export function useListLikedPalettes(size: number = 10, retryCount?: number) {
+  return useInfiniteQuery({
+    queryKey: [PALETTE_ROOT_KEY, size, 'liked'],
+    queryFn: async ({ pageParam: page = 0 }) => {
+      const headers = useRequestHeaders(['cookie']);
+
+      const query: ListPaletteInputDto = {
+        page: page.toString(),
+        size: size.toString()
+      };
+
+      return await $fetch<ListPaletteDto>('/api/palettes/liked', {
+        method: 'GET',
+        query,
+        headers
+      });
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+      if (lastPage.items.length < size) {
+        return undefined;
+      }
+      return lastPageParam + 1;
+    },
+    getPreviousPageParam: (_firstPage, _allPages, firstPageParam) => {
+      if (firstPageParam <= 1) {
+        return undefined;
+      }
+      return firstPageParam - 1;
+    },
+    retry: retryCount ?? 3
+  });
+}
+
 export function useCreatePalette() {
   return useMutation({
     mutationFn: async (params: CreatePaletteInputDto) => {
-      const response = await $fetch('/api/palette/create', {
-        method: 'POST',
-        body: {
+      const response = await $fetch<PaletteModel>('/api/palettes', {
+        method: 'PUT',
+        query: {
           prompt: params.prompt,
           colors: params.colors
         }
@@ -106,13 +129,14 @@ export function useCreatePalette() {
   });
 }
 
+export type ClonePaletteParams = ClonePaletteInputQueryDto & ClonePaletteInputParamsDto;
+
 export function useClonePalette() {
   return useMutation({
-    mutationFn: async (params: ClonePaletteInputDto) => {
-      const response = await $fetch('/api/palette/clone', {
-        method: 'POST',
-        body: {
-          id: params.id,
+    mutationFn: async (params: ClonePaletteParams) => {
+      const response = await $fetch<PaletteModel>(`/api/palettes/${params.id}/clone`, {
+        method: 'PUT',
+        query: {
           colors: params.colors
         }
       });
@@ -129,34 +153,10 @@ export function usePaletteCount() {
   return useQuery({
     queryKey: [PALETTE_ROOT_KEY, 'count'],
     queryFn: async () => {
-      return await $fetch('/api/palette/count');
-    }
-  });
-}
-
-export function usePaletteLike(paletteId: Ref<string | undefined>) {
-  return useQuery({
-    queryKey: [PALETTE_ROOT_KEY, paletteId, 'like'],
-    queryFn: async () => {
-      return await $fetch<PaletteLikeDto>(`/api/palette/like/${paletteId.value}`);
-    }
-  });
-}
-
-export function useListPaletteLikesByIds(paletteIds: ComputedRef<string[]>) {
-  return useQuery({
-    queryKey: [PALETTE_ROOT_KEY, paletteIds],
-    queryFn: async () => {
-      const response = await $fetch<ListPaletteLikesDto>('/api/palette/like/list-by-palette-ids', {
-        method: 'POST',
-        body: {
-          paletteIds: paletteIds.value
-        }
+      return await $fetch<CountPaletteDto>('/api/palettes/count', {
+        method: 'GET'
       });
-
-      return response.items;
-    },
-    enabled: () => paletteIds.value.length > 0
+    }
   });
 }
 
@@ -164,11 +164,11 @@ export function useOptimisticCreatePaletteLike() {
   return useOptimisticMutation({
     queryKey: [PALETTE_ROOT_KEY],
     mutationFn: async (params: CreatePaletteLikeInputDto) => {
-      await $fetch(`/api/palette/like/${params.id}`, {
+      await $fetch(`/api/palettes/${params.id}/like`, {
         method: 'PUT'
       });
     },
-    updateQueryFn: (params: CreatePaletteLikeInputDto, old?: { items: PaletteModel[], count: number }) => {
+    updateQueryFn: (params: CreatePaletteLikeInputDto, old?: ListPaletteDto) => {
       if (old === undefined) {
         return undefined;
       }
@@ -188,11 +188,11 @@ export function useOptimisticDeletePaletteLike() {
   return useOptimisticMutation({
     queryKey: [PALETTE_ROOT_KEY],
     mutationFn: async (params: DeletePaletteLikeInputDto) => {
-      await $fetch(`/api/palette/like/${params.id}`, {
+      await $fetch(`/api/palettes/${params.id}/like`, {
         method: 'DELETE'
       });
     },
-    updateQueryFn: (params: DeletePaletteLikeInputDto, old?: { items: PaletteModel[], count: number }) => {
+    updateQueryFn: (params: DeletePaletteLikeInputDto, old?: ListPaletteDto) => {
       if (old === undefined) {
         return undefined;
       }
@@ -205,43 +205,5 @@ export function useOptimisticDeletePaletteLike() {
         count: old.count
       };
     }
-  });
-}
-
-export function useListPalettesByLiked(userId: ComputedRef<string | undefined>, size: number = 10) {
-  return useInfiniteQuery({
-    queryKey: [PALETTE_ROOT_KEY, userId, size, 'liked'],
-    queryFn: async ({ pageParam: page = 0 }) => {
-      const response = await $fetch('/api/palette/like/list', {
-        method: 'POST',
-        body: {
-          page,
-          size
-        }
-      });
-
-      const palettes = await $fetch<ListPaletteDto>('/api/palette/list-by-ids', {
-        method: 'POST',
-        body: {
-          paletteIds: response.items
-        }
-      });
-
-      return palettes.items;
-    },
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
-      if (lastPage.length < size) {
-        return undefined;
-      }
-      return lastPageParam + 1;
-    },
-    getPreviousPageParam: (_firstPage, _allPages, firstPageParam) => {
-      if (firstPageParam <= 1) {
-        return undefined;
-      }
-      return firstPageParam - 1;
-    },
-    retry: 0
   });
 }

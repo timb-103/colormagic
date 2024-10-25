@@ -90,9 +90,8 @@ const listFilter = tag.value !== undefined
   : undefined;
 
 const { data: user } = useUser();
-const userId = computed(() => user.value?.id);
 
-const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(userId, 100, listFilter);
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100, listFilter);
 
 await suspense();
 

@@ -1,25 +1,29 @@
-import type { Filter } from 'mongodb';
+import { ObjectId, type Filter } from 'mongodb';
 import type { ListPaletteDto, ListPaletteInputDto, PaletteDto } from '../dtos/palette.dto';
 import { mapCreatePalettePrompt, mapPaletteEntityToDto, mapTagsPrompt } from '../helpers/palette.helper';
 import type { PaletteRepository } from '../repositories/palette.repository';
 import { arrangeColors } from '../../utils/color-arrange.util';
 import type { PaletteEntity } from '../entities/palette.entity';
+import type { PaletteLikeService } from './palette-like.service';
 import type { AIService } from '~/layers/ai/server/services/ai.service';
+
+export type ListPaletteFilter = Pick<ListPaletteInputDto, 'tag'> & {
+  userId?: string
+};
 
 export class PaletteService {
   constructor(
     private readonly repository: PaletteRepository,
-    private readonly aiService: AIService
+    private readonly aiService: AIService,
+    private readonly likeService: PaletteLikeService
   ) {}
 
-  public async list(page: number, size: number, filter: ListPaletteInputDto['filter']): Promise<ListPaletteDto> {
-    let colFilter: Filter<PaletteEntity> = {};
+  public async list(page: number, size: number, filter: ListPaletteFilter): Promise<ListPaletteDto> {
+    const colFilter: Filter<PaletteEntity> = {};
 
-    if (filter !== undefined) {
-      colFilter = {
-        tags: {
-          $in: [filter.tag]
-        }
+    if (filter.tag !== undefined) {
+      colFilter.tags = {
+        $in: [filter.tag]
       };
     }
 
@@ -28,25 +32,55 @@ export class PaletteService {
       this.repository.count(colFilter)
     ]);
 
+    /** @description link likes to palettes */
+    let likedPaletteIds: string[] = [];
+    if (filter.userId !== undefined) {
+      const paletteIds = entities.map(v => v._id.toHexString());
+      const likes = await this.likeService.listByPaletteIds(filter.userId, paletteIds);
+      likedPaletteIds = likes.map(v => v.paletteId);
+    }
+
     return {
-      items: entities.map(entity => mapPaletteEntityToDto(entity)),
+      items: entities.map(entity => mapPaletteEntityToDto(entity, likedPaletteIds)),
       count
     };
   }
 
-  public async listByIds(ids: string[]): Promise<PaletteDto[]> {
-    const entities = await this.repository.listByIds(ids);
+  public async listLiked(userId: string, page: number, size: number): Promise<ListPaletteDto> {
+    const likes = await this.likeService.listByUserId(userId, page, size);
+    const likedPaletteIds = likes.map(v => v.paletteId);
 
-    return entities.map(entity => mapPaletteEntityToDto(entity));
+    const colFilter: Filter<PaletteEntity> = {
+      _id: {
+        $in: likes.map(v => new ObjectId(v.paletteId))
+      }
+    };
+
+    const [entities, count] = await Promise.all([
+      this.repository.list(0, size, colFilter),
+      this.repository.count(colFilter)
+    ]);
+
+    return {
+      items: entities.map(entity => mapPaletteEntityToDto(entity, likedPaletteIds)),
+      count
+    };
   }
 
-  public async getById(id: string): Promise<PaletteDto> {
+  public async getById(id: string, userId?: string): Promise<PaletteDto> {
     const entity = await this.repository.getById(id);
     if (entity === null) {
       throw createError({ statusCode: 404 });
     }
 
-    return mapPaletteEntityToDto(entity);
+    /** @description link like to palettes */
+    let likedPaletteIds: string[] = [];
+    if (userId !== undefined) {
+      const likes = await this.likeService.listByPaletteIds(userId, [entity._id.toHexString()]);
+      likedPaletteIds = likes.map(v => v.paletteId);
+    }
+
+    return mapPaletteEntityToDto(entity, likedPaletteIds);
   }
 
   public async cloneById(id: string, colors: string[]): Promise<PaletteDto> {
@@ -96,24 +130,44 @@ export class PaletteService {
   }
 
   public async count(from?: Date): Promise<number> {
-    let filter: Filter<PaletteEntity> = {};
+    const filter: Filter<PaletteEntity> = {};
 
     if (from !== undefined) {
-      filter = {
-        createdAt: {
-          $gte: from
-        }
+      filter.createdAt = {
+        $gte: from
       };
     }
 
     return await this.repository.count(filter);
   }
 
-  public async addLike(id: string): Promise<void> {
-    await this.repository.updateLikesCount(id, 1);
+  public async likeById(userId: string, id: string): Promise<void> {
+    const found = await this.likeService.getByPaletteId(userId, id);
+    if (found !== null) {
+      throw createError({
+        statusCode: 409,
+        statusMessage: 'Already liked.'
+      });
+    }
+
+    await Promise.all([
+      this.likeService.create(userId, id),
+      this.repository.updateLikesCount(id, 1)
+    ]);
   }
 
-  public async removeLike(id: string): Promise<void> {
-    await this.repository.updateLikesCount(id, -1);
+  public async deleteLikeById(userId: string, id: string): Promise<void> {
+    const found = await this.likeService.getByPaletteId(userId, id);
+    if (found?.userId !== userId) {
+      throw createError({
+        statusCode: 401,
+        statusMessage: 'Unauthorized.'
+      });
+    }
+
+    await Promise.all([
+      this.likeService.delete(found.id),
+      this.repository.updateLikesCount(id, -1)
+    ]);
   }
 }

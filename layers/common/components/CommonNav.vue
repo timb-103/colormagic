@@ -80,21 +80,23 @@
         <CommonLangSwitcher />
 
         <!-- login button -->
-        <UButton
-          v-if="!user && !useRoute().path.includes('/login')"
-          label="Login"
-          color="primary"
-          to="/login"
-        />
+        <ClientOnly>
+          <UButton
+            v-if="!user && !useRoute().path.includes('/login')"
+            label="Login"
+            color="primary"
+            to="/login"
+          />
 
-        <!-- profile menu -->
-        <UDropdown
-          v-else-if="user"
-          :items="userItems"
-          :popper="{ placement: 'bottom-end' }"
-        >
-          <UButton icon="i-heroicons-user" />
-        </UDropdown>
+          <!-- profile menu -->
+          <UDropdown
+            v-else-if="user"
+            :items="userItems"
+            :popper="{ placement: 'bottom-end' }"
+          >
+            <UButton icon="i-heroicons-user" />
+          </UDropdown>
+        </ClientOnly>
 
         <!-- mobile bars button -->
         <UButton

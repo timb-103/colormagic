@@ -1,17 +1,18 @@
 import { type H3Event } from 'h3';
 import {
-  ClonePaletteInputDtoSchema,
-  CreatePaletteInputDtoSchema, CreatePaletteLikeInputDtoSchema, DeletePaletteLikeInputDtoSchema, ListPalettebyIdsInputDtoSchema, ListPaletteInputDtoSchema, ListPaletteLikesbyIdsInputDtoSchema, ListPaletteLikesInputDtoSchema, PaletteInputDtoSchema,
-  PaletteLikeInputDtoSchema,
-  type ClonePaletteInputDto,
-  type CreatePaletteInputDto, type CreatePaletteLikeInputDto, type DeletePaletteLikeInputDto, type ListPalettebyIdsInputDto, type ListPaletteInputDto, type ListPaletteLikesbyIdsInputDto, type ListPaletteLikesInputDto, type PaletteInputDto,
-  type PaletteLikeInputDto
+  ClonePaletteInputParamsDtoSchema, ClonePaletteInputQueryDtoSchema, CreatePaletteInputDtoSchema,
+  ListPaletteInputDtoSchema, PaletteInputDtoSchema, type ClonePaletteInputParamsDto, type ClonePaletteInputQueryDto,
+  type CreatePaletteInputDto, type ListPaletteInputDto, type PaletteInputDto
 } from '../dtos/palette.dto';
-import { validateBody, validateParams } from '~/layers/common/utils/validate.util';
+import {
+  CreatePaletteLikeInputDtoSchema, DeletePaletteLikeInputDtoSchema,
+  type CreatePaletteLikeInputDto, type DeletePaletteLikeInputDto
+} from '../dtos/palette-like.dto';
+import { validateBody, validateParams, validateQuery } from '~/layers/common/utils/validate.util';
 
 export class PaletteValidation {
-  public async getCreateInputBody(event: H3Event): Promise<CreatePaletteInputDto> {
-    return await validateBody(event, CreatePaletteInputDtoSchema);
+  public async getCreateInputQuery(event: H3Event): Promise<CreatePaletteInputDto> {
+    return validateQuery(event, CreatePaletteInputDtoSchema);
   }
 
   public async getInputBody(event: H3Event): Promise<PaletteInputDto> {
@@ -22,20 +23,26 @@ export class PaletteValidation {
     return validateParams(event, PaletteInputDtoSchema);
   }
 
-  public async getListInputBody(event: H3Event): Promise<ListPaletteInputDto> {
-    return await validateBody(event, ListPaletteInputDtoSchema);
+  public async getListInputQuery(event: H3Event): Promise<ListPaletteInputDto> {
+    const query = validateQuery(event, ListPaletteInputDtoSchema);
+
+    /** @description ensure size limit */
+    if (query.size !== undefined && parseInt(query.size) > 100) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Size must be less than or equal to 100.'
+      });
+    }
+
+    return query;
   }
 
-  public async getListByIdsInputBody(event: H3Event): Promise<ListPalettebyIdsInputDto> {
-    return await validateBody(event, ListPalettebyIdsInputDtoSchema);
+  public async getCloneInputQuery(event: H3Event): Promise<ClonePaletteInputQueryDto> {
+    return validateQuery(event, ClonePaletteInputQueryDtoSchema);
   }
 
-  public async getCloneInputBody(event: H3Event): Promise<ClonePaletteInputDto> {
-    return await validateBody(event, ClonePaletteInputDtoSchema);
-  }
-
-  public async getLikeInputParams(event: H3Event): Promise<PaletteLikeInputDto> {
-    return validateParams(event, PaletteLikeInputDtoSchema);
+  public async getCloneInputParams(event: H3Event): Promise<ClonePaletteInputParamsDto> {
+    return validateParams(event, ClonePaletteInputParamsDtoSchema);
   }
 
   public async getCreateLikeInputParams(event: H3Event): Promise<CreatePaletteLikeInputDto> {
@@ -44,13 +51,5 @@ export class PaletteValidation {
 
   public async getDeleteLikeInputParams(event: H3Event): Promise<DeletePaletteLikeInputDto> {
     return validateParams(event, DeletePaletteLikeInputDtoSchema);
-  }
-
-  public async getListLikesByIdsInputBody(event: H3Event): Promise<ListPaletteLikesbyIdsInputDto> {
-    return await validateBody(event, ListPaletteLikesbyIdsInputDtoSchema);
-  }
-
-  public async getListLikesInputBody(event: H3Event): Promise<ListPaletteLikesInputDto> {
-    return await validateBody(event, ListPaletteLikesInputDtoSchema);
   }
 }

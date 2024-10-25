@@ -83,15 +83,11 @@
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
 
-const { data: user, suspense: userSuspense } = useUser();
-const userId = computed(() => user.value?.id);
+const { data: user } = useUser();
 
-const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(userId, 100);
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100);
 
-await Promise.all([
-  userSuspense(),
-  suspense()
-]);
+await suspense();
 
 const { params } = useRoute();
 const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);

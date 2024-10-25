@@ -1,4 +1,4 @@
-import type { CountPaletteDto } from '../../dtos/palette.dto';
+import type { CountPaletteDto } from '../../../dtos/palette.dto';
 
 /** @description cache this endpoint so it only updates every 5 minutes */
 export default defineCachedEventHandler(async (): Promise<CountPaletteDto> => {
