@@ -1,21 +1,30 @@
 <template>
   <div>
     <!-- header-->
-    <div class="mb-8">
-      <!-- title -->
-      <h1 class="capitalize">
-        {{ title }}
-      </h1>
+    <div class="mb-8 flex flex-col sm:flex-row gap-8">
+      <img
+        :src="thumbnailUrl"
+        width="150px"
+        height="150px"
+        class="max-w-20 sm:max-w-full rounded-xl"
+      >
 
-      <!-- description-->
-      <p class="text-xl font-medium mb-4 max-w-xl">
-        {{ $t('explore.seoDescription') }}
-      </p>
+      <div>
+        <!-- title -->
+        <h1 class="capitalize">
+          {{ title }}
+        </h1>
 
-      <!-- count of palettes generated -->
-      <p class="italic text-sm">
-        {{ count.toLocaleString() }} {{ tag }} color palettes generated
-      </p>
+        <!-- description-->
+        <p class="text-xl font-medium mb-4 max-w-xl">
+          {{ $t('explore.seoDescription') }}
+        </p>
+
+        <!-- count of palettes generated -->
+        <p class="italic text-sm">
+          {{ count.toLocaleString() }} {{ tag }} color palettes generated
+        </p>
+      </div>
     </div>
 
     <!-- loading skeletons -->
@@ -107,6 +116,8 @@ if (filter === undefined) {
 const title = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);
 const seoTitle = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);
 const seoDescription = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} - ${t('explore.seoDescription')}`);
+
+const thumbnailUrl = `${useRuntimeConfig().public.siteUrl}/api/og/thumbnail?colors=${filter.palette.join(':').replace(/#/g, '')}`;
 
 useSeoMeta({
   title: seoTitle,

@@ -3,6 +3,12 @@ import * as path from 'path';
 import sharp from 'sharp';
 import type { PaletteService } from '~/layers/palette/server/services/palette.service';
 
+export interface SvgParams {
+  text?: string
+  width?: number
+  height?: number
+}
+
 export class OgService {
   constructor(private readonly paletteService: PaletteService) {}
 
@@ -18,9 +24,9 @@ export class OgService {
     });
   }
 
-  private async generateSVG(colors: string[], prompt: string): Promise<string> {
-    const width = 1200;
-    const height = 630;
+  private async generateSVG(colors: string[], params: SvgParams): Promise<string> {
+    const width = params.width ?? 1200;
+    const height = params.height ?? 630;
     const cardWidth = 480;
     const cardHeight = 200;
     const cardX = (width - cardWidth) / 2;
@@ -34,6 +40,21 @@ export class OgService {
       return `<rect x="${x}" y="0" width="${rectWidth}" height="${height}" fill="#${color}" />`;
     }).join('');
 
+    const textCard = params.text !== undefined
+      ? `
+      <!-- Card (Rounded Rectangle) -->
+        <rect x="${cardX}" y="${cardY}" rx="24" ry="24" width="${cardWidth}" height="${cardHeight}" fill="#fff" />
+
+        <!-- Text -->
+        <text x="50%" y="54%" font-size="56" font-weight="bold" font-family="-apple-system, BlinkMacSystemFont, 'Avenir Next', Avenir, 'Nimbus Sans L', Roboto, Noto, 'Segoe UI', Arial, Helvetica, 'Helvetica Neue', sans-serif" fill="#4E5460" text-anchor="middle" dy=".35em">${params.text}</text>
+
+        <!-- Inline Logo -->
+        <g transform="translate(${width / 2 - 125}, ${cardY + 30})">
+          ${logoSvg}
+        </g>
+    `
+      : '';
+
     /** @description build the svg */
     const svg = `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
@@ -41,26 +62,11 @@ export class OgService {
         ${colorBars}
         
         <!-- Card (Rounded Rectangle) -->
-        <rect x="${cardX}" y="${cardY}" rx="24" ry="24" width="${cardWidth}" height="${cardHeight}" fill="#fff" />
-
-        <!-- Text -->
-        <text x="50%" y="54%" font-size="56" font-weight="bold" font-family="-apple-system, BlinkMacSystemFont, 'Avenir Next', Avenir, 'Nimbus Sans L', Roboto, Noto, 'Segoe UI', Arial, Helvetica, 'Helvetica Neue', sans-serif" fill="#4E5460" text-anchor="middle" dy=".35em">${prompt}</text>
-
-        <!-- Inline Logo -->
-        <g transform="translate(${width / 2 - 125}, ${cardY + 30})">
-          ${logoSvg}
-        </g>
+        ${textCard}
       </svg>
     `;
 
     return svg;
-  }
-
-  public async generateImage(colors: string[], prompt: string): Promise<Buffer> {
-    const svg = await this.generateSVG(colors, prompt);
-    const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
-
-    return pngBuffer;
   }
 
   private async generateGridBackground(palettes: string[][], prompt: string): Promise<string> {
@@ -124,6 +130,20 @@ export class OgService {
     });
 
     const svg = await this.generateGridBackground(palettes.items.map(v => v.colors), prompt);
+    const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
+
+    return pngBuffer;
+  }
+
+  public async generateImage(colors: string[], prompt: string): Promise<Buffer> {
+    const svg = await this.generateSVG(colors, { text: prompt });
+    const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
+
+    return pngBuffer;
+  }
+
+  public async generateSquareThumbnail(colors: string[]): Promise<Buffer> {
+    const svg = await this.generateSVG(colors, { width: 150, height: 150 });
     const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
 
     return pngBuffer;
