@@ -22,6 +22,7 @@ export function useOptimisticMutation<Q, P = any, K extends QueryKey = QueryKey>
       const snapshot = client.getQueryData<Q>(queryKey);
 
       // locally update query
+      // @ts-expect-error dunno
       client.setQueryData<Q>(queryKey, (old) => updateQueryFn(params, old));
 
       return { snapshot };
@@ -29,6 +30,7 @@ export function useOptimisticMutation<Q, P = any, K extends QueryKey = QueryKey>
     onError: (_, __, context) => {
       // rollback snapshot
       if (context !== undefined) {
+        // @ts-expect-error dunno
         client.setQueryData(queryKey, context.snapshot);
       }
     },
