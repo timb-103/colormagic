@@ -15,7 +15,7 @@
 
     <!-- login prompt -->
     <p
-      v-if="!user"
+      v-if="isUserError"
       class="text-xl font-bold mb-4"
     >
       <NuxtLinkLocale
@@ -27,7 +27,7 @@
     </p>
 
     <!-- loading skeletons -->
-    <div v-else-if="!palettes">
+    <div v-else-if="!list">
       <ul class="grid sm:grid-cols-3 gap-4">
         <li
           v-for="index in 6"
@@ -40,7 +40,7 @@
 
     <!-- palettes -->
     <div
-      v-else
+      v-else-if="palettes"
       class="text-lg font-bold mb-4"
     >
       <ul class="grid sm:grid-cols-3 gap-4">
@@ -50,7 +50,7 @@
         >
           <ColorPaletteButton
             :palette-id="item.id"
-            :is-liked="true"
+            :is-liked="item.isLiked === true"
             :likes-count="item.likesCount"
             :can-like="user?.id !== undefined"
             :colors="item.colors"
@@ -81,10 +81,12 @@ const localePath = useLocalePath();
 const title = t('liked.seoTitle');
 const description = t('liked.seoDescription');
 
-const { data: user } = useUser();
-const { data: likes, isFetching, hasNextPage, fetchNextPage } = useListPalettesByLiked();
+const { data: user, isError: isUserError } = useUser();
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListLikedPalettes(100, 0);
 
-const palettes = computed(() => likes.value?.pages.flat() ?? []);
+await suspense();
+
+const palettes = computed(() => list.value?.pages.flatMap((items) => items.items) ?? undefined);
 
 useSeoMeta({
   title,

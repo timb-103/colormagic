@@ -89,6 +89,8 @@ const listFilter = tag.value !== undefined
   ? { tag: tag.value }
   : undefined;
 
+const { data: user } = useUser();
+
 const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100, listFilter);
 
 await suspense();
@@ -101,8 +103,6 @@ const filter = getAllPaletteFilters().find(v => v.id === tag.value);
 if (filter === undefined) {
   throw createError({ statusCode: 404, statusMessage: 'Tag not found.' });
 }
-
-const { data: user } = useUser();
 
 const title = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);
 const seoTitle = computed(() => `${filter?.label[getLocale(locale.value)] ?? 'Loading...'} ${t('explore.colorPalettes')}`);

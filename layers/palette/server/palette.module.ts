@@ -30,13 +30,13 @@ export function getPaletteModule(
 ): PaletteModule {
   logger.info('initializing palette module');
 
-  const collection = db.collection<PaletteEntity>(paletteConfig.collectionName);
-  const repository = new PaletteRepository(collection);
-  const service = new PaletteService(repository, aiService);
-
   const likeCollection = db.collection<PaletteLikeEntity>(paletteConfig.likesCollectionName);
   const likeRepository = new PaletteLikeRepository(likeCollection);
-  const likeService = new PaletteLikeService(likeRepository, service);
+  const likeService = new PaletteLikeService(likeRepository);
+
+  const collection = db.collection<PaletteEntity>(paletteConfig.collectionName);
+  const repository = new PaletteRepository(collection);
+  const service = new PaletteService(repository, aiService, likeService);
 
   const validation = new PaletteValidation();
 

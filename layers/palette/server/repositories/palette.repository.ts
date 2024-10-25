@@ -20,16 +20,6 @@ export class PaletteRepository {
       .toArray();
   }
 
-  public async listByIds(ids: string[]): Promise<PaletteEntity[]> {
-    return await this.collection.find({
-      _id: {
-        $in: ids.map(v => new ObjectId(v))
-      }
-    })
-      .sort({ createdAt: -1 })
-      .toArray();
-  }
-
   public async count(filter?: Filter<PaletteEntity>): Promise<number> {
     return await this.collection.countDocuments(filter);
   }

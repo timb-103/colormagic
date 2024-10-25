@@ -83,14 +83,14 @@
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
 
+const { data: user } = useUser();
+
 const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100);
 
 await suspense();
 
 const { params } = useRoute();
 const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
-
-const { data: user } = useUser();
 
 const palettes = computed(() => list.value?.pages.flatMap((items) => items.items) ?? []);
 

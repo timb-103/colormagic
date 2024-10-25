@@ -8,7 +8,9 @@ export function useUser(retryCount?: number) {
   return useQuery({
     queryKey: [USER_ROOT_KEY],
     queryFn: async () => {
-      return await $fetch<UserDto>('/api/user/get');
+      const headers = useRequestHeaders(['cookie']);
+
+      return await $fetch<UserDto>('/api/user/get', { headers });
     },
     retry: retryCount ?? 0
   });

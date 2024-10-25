@@ -5,7 +5,8 @@ export const PaletteDtoSchema = Type.Object({
   colors: Type.Array(Type.String(), { minItems: 5, maxItems: 5 }),
   text: Type.String(),
   tags: Type.Array(Type.String()),
-  likesCount: Type.Number()
+  likesCount: Type.Number(),
+  isLiked: Type.Optional(Type.Boolean())
 });
 
 export type PaletteDto = Static<typeof PaletteDtoSchema>;
@@ -24,11 +25,9 @@ export const CreatePaletteInputDtoSchema = Type.Object({
 export type CreatePaletteInputDto = Static<typeof CreatePaletteInputDtoSchema>;
 
 export const ListPaletteInputDtoSchema = Type.Object({
-  page: Type.Number(),
-  size: Type.Number({ maximum: 100 }),
-  filter: Type.Optional(Type.Object({
-    tag: Type.String()
-  }))
+  page: Type.String({ pattern: '^[0-9]+$' }),
+  size: Type.Optional(Type.String({ pattern: '^[0-9]+$', maxLength: 3 })),
+  tag: Type.Optional(Type.String())
 });
 
 export type ListPaletteInputDto = Static<typeof ListPaletteInputDtoSchema>;
@@ -40,67 +39,16 @@ export const ListPaletteDtoSchema = Type.Object({
 
 export type ListPaletteDto = Static<typeof ListPaletteDtoSchema>;
 
-export const ListPalettebyIdsInputDtoSchema = Type.Object({
-  paletteIds: Type.Array(PaletteDtoSchema.properties.id, {
-    maxItems: 200
-  })
-});
-
-export type ListPalettebyIdsInputDto = Static<typeof ListPalettebyIdsInputDtoSchema>;
-
 export const CountPaletteDtoSchema = Type.Object({
   count: Type.Number()
 });
 
 export type CountPaletteDto = Static<typeof CountPaletteDtoSchema>;
 
-export const ClonePaletteInputDtoSchema = Type.Pick(PaletteDtoSchema, ['id', 'colors']);
+export const ClonePaletteInputParamsDtoSchema = Type.Pick(PaletteDtoSchema, ['id']);
 
-export type ClonePaletteInputDto = Static<typeof ClonePaletteInputDtoSchema>;
+export type ClonePaletteInputParamsDto = Static<typeof ClonePaletteInputParamsDtoSchema>;
 
-/** @description likes */
-export const PaletteLikeDtoSchema = Type.Object({
-  id: Type.String({ pattern: '^[0-9a-fA-F]{24}$' }),
-  paletteId: Type.String({ pattern: '^[0-9a-fA-F]{24}$' })
-});
+export const ClonePaletteInputQueryDtoSchema = Type.Pick(PaletteDtoSchema, ['colors']);
 
-export type PaletteLikeDto = Static<typeof PaletteLikeDtoSchema>;
-
-export const PaletteLikeInputDtoSchema = Type.Object({
-  id: Type.String({ pattern: '^[0-9a-fA-F]{24}$' })
-});
-
-export type PaletteLikeInputDto = Static<typeof PaletteLikeInputDtoSchema>;
-
-export const CreatePaletteLikeInputDtoSchema = Type.Object({
-  id: Type.String({ pattern: '^[0-9a-fA-F]{24}$' })
-});
-
-export type CreatePaletteLikeInputDto = Static<typeof CreatePaletteLikeInputDtoSchema>;
-
-export const DeletePaletteLikeInputDtoSchema = Type.Object({
-  id: PaletteLikeDtoSchema.properties.paletteId
-});
-
-export type DeletePaletteLikeInputDto = Static<typeof DeletePaletteLikeInputDtoSchema>;
-
-export const ListPaletteLikesbyIdsInputDtoSchema = Type.Object({
-  paletteIds: Type.Array(PaletteLikeDtoSchema.properties.paletteId, {
-    maxItems: 200
-  })
-});
-
-export type ListPaletteLikesbyIdsInputDto = Static<typeof ListPaletteLikesbyIdsInputDtoSchema>;
-
-export const ListPaletteLikesDtoSchema = Type.Object({
-  items: Type.Array(PaletteLikeDtoSchema.properties.paletteId)
-});
-
-export type ListPaletteLikesDto = Static<typeof ListPaletteLikesDtoSchema>;
-
-export const ListPaletteLikesInputDtoSchema = Type.Object({
-  page: Type.Number(),
-  size: Type.Number({ maximum: 200 })
-});
-
-export type ListPaletteLikesInputDto = Static<typeof ListPaletteLikesInputDtoSchema>;
+export type ClonePaletteInputQueryDto = Static<typeof ClonePaletteInputQueryDtoSchema>;

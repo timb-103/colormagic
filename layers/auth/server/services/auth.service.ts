@@ -80,7 +80,15 @@ export class AuthService {
     }
 
     try {
-      return jwt.verify(token, authConfig.privateKey) as JwtPayload;
+      const payload = jwt.verify(token, authConfig.privateKey) as JwtPayload;
+
+      /** @description check the user exists */
+      const found = await this.userService.getById(payload.userId);
+      if (found === null) {
+        throw new Error('User not found.');
+      }
+
+      return payload;
     } catch (err) {
       throw createError({
         statusCode: 401,

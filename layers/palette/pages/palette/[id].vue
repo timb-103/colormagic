@@ -37,7 +37,7 @@
           </div>
           <div v-else>
             <ColorLikeButton
-              :is-liked="likes?.includes(data.id)"
+              :is-liked="data.isLiked === true"
               :likes-count="data.likesCount"
               :can-like="user?.id !== undefined"
               size="md"
@@ -163,9 +163,6 @@ const notifications = useNotifications();
 
 await suspense();
 
-const paletteIds = computed(() => data.value?.id !== undefined ? [data.value.id] : []);
-
-const { data: likes } = useListPaletteLikesByIds(paletteIds);
 const { data: user } = useUser();
 
 /** @description redirect home because old palettes will throw 404's otherwise */
