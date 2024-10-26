@@ -1,4 +1,5 @@
 import { type Static, Type } from '@sinclair/typebox';
+import { PaletteSortBy } from '../../types';
 
 export const PaletteDtoSchema = Type.Object({
   id: Type.String({ pattern: '^[0-9a-fA-F]{24}$' }),
@@ -27,7 +28,8 @@ export type CreatePaletteInputDto = Static<typeof CreatePaletteInputDtoSchema>;
 export const ListPaletteInputDtoSchema = Type.Object({
   page: Type.String({ pattern: '^[0-9]+$' }),
   size: Type.Optional(Type.String({ pattern: '^[0-9]+$', maxLength: 3 })),
-  tag: Type.Optional(Type.String())
+  tag: Type.Optional(Type.String()),
+  sortBy: Type.Enum(PaletteSortBy)
 });
 
 export type ListPaletteInputDto = Static<typeof ListPaletteInputDtoSchema>;

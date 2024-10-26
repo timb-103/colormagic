@@ -1,4 +1,4 @@
-import { ObjectId, type Collection, type Filter, type OptionalUnlessRequiredId } from 'mongodb';
+import { ObjectId, type Collection, type Filter, type OptionalUnlessRequiredId, type Sort } from 'mongodb';
 import type { CreatablePaletteEntity, PaletteEntity } from '../entities/palette.entity';
 
 export class PaletteRepository {
@@ -12,9 +12,9 @@ export class PaletteRepository {
     }], { background: true });
   }
 
-  public async list(page: number, size: number, filter: Filter<PaletteEntity>): Promise<PaletteEntity[]> {
+  public async list(page: number, size: number, filter: Filter<PaletteEntity>, sort: Sort): Promise<PaletteEntity[]> {
     return await this.collection.find(filter)
-      .sort({ createdAt: -1 })
+      .sort(sort)
       .skip(page * size)
       .limit(size)
       .toArray();

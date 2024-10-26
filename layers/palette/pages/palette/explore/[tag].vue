@@ -42,10 +42,15 @@
     <!-- palettes -->
     <div v-if="palettes">
       <!-- filters -->
-      <div class="mb-4">
+      <div class="mb-4 flex justify-between gap-4 items-center flex-wrap">
         <PaletteFilters
           :tag="tag"
           :filter="filter"
+        />
+
+        <PaletteSortSelectMenu
+          :initial-sort-by="sortBy"
+          @change="value => sortBy = value"
         />
       </div>
 
@@ -87,6 +92,8 @@
 </template>
 
 <script setup lang="ts">
+import { PaletteSortBy } from '~/layers/palette/types';
+
 const { t } = useI18n();
 const localePath = useLocalePath();
 
@@ -94,9 +101,16 @@ const { locale } = useI18n();
 const { params } = useRoute();
 const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
 
-const listFilter = tag.value !== undefined
-  ? { tag: tag.value }
-  : undefined;
+const sortBy = ref<PaletteSortBy>(PaletteSortBy.RECENT);
+
+const listFilter = computed(() =>
+  tag.value !== undefined
+    ? {
+        tag: tag.value,
+        sortBy: sortBy.value
+      }
+    : undefined
+);
 
 const { data: user } = useUser();
 

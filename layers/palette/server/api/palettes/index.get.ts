@@ -17,7 +17,8 @@ export default defineEventHandler(async (event): Promise<ListPaletteDto> => {
 
   const response = await modules.palette.service.list(page, size, {
     tag: query.tag,
-    userId
+    userId,
+    sortBy: query.sortBy
   });
 
   return response;

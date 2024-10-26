@@ -1,13 +1,14 @@
-import { ObjectId, type Filter } from 'mongodb';
+import { ObjectId, type Filter, type Sort } from 'mongodb';
 import type { ListPaletteDto, ListPaletteInputDto, PaletteDto } from '../dtos/palette.dto';
 import { mapCreatePalettePrompt, mapPaletteEntityToDto, mapTagsPrompt } from '../helpers/palette.helper';
 import type { PaletteRepository } from '../repositories/palette.repository';
 import { arrangeColors } from '../../utils/color-arrange.util';
 import type { PaletteEntity } from '../entities/palette.entity';
+import { PaletteSortBy } from '../../types';
 import type { PaletteLikeService } from './palette-like.service';
 import type { AIService } from '~/layers/ai/server/services/ai.service';
 
-export type ListPaletteFilter = Pick<ListPaletteInputDto, 'tag'> & {
+export type ListPaletteFilter = Pick<ListPaletteInputDto, 'tag' | 'sortBy'> & {
   userId?: string
 };
 
@@ -20,6 +21,7 @@ export class PaletteService {
 
   public async list(page: number, size: number, filter: ListPaletteFilter): Promise<ListPaletteDto> {
     const colFilter: Filter<PaletteEntity> = {};
+    let sort: Sort = { createdAt: -1 };
 
     if (filter.tag !== undefined) {
       colFilter.tags = {
@@ -27,8 +29,12 @@ export class PaletteService {
       };
     }
 
+    if (filter.sortBy === PaletteSortBy.POPULAR) {
+      sort = { likesCount: -1 };
+    }
+
     const [entities, count] = await Promise.all([
-      this.repository.list(page, size, colFilter),
+      this.repository.list(page, size, colFilter, sort),
       this.repository.count(colFilter)
     ]);
 
@@ -57,7 +63,7 @@ export class PaletteService {
     };
 
     const [entities, count] = await Promise.all([
-      this.repository.list(0, size, colFilter),
+      this.repository.list(0, size, colFilter, { createdAt: -1 }),
       this.repository.count(colFilter)
     ]);
 

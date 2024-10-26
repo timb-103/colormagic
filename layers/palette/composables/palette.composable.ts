@@ -4,6 +4,7 @@ import { useLocalStorage, StorageSerializers } from '@vueuse/core';
 import type { ClonePaletteInputParamsDto, ClonePaletteInputQueryDto, CountPaletteDto, CreatePaletteInputDto, ListPaletteDto, ListPaletteInputDto } from '../server/dtos/palette.dto';
 import type { CreatePaletteLikeInputDto, DeletePaletteLikeInputDto } from '../server/dtos/palette-like.dto';
 import type { PaletteModel } from '../models/palette.model';
+import { PaletteSortBy } from '../types';
 import { PlausibleEventName } from '~/layers/plausible/types';
 import { sendPlausibleEvent } from '~/layers/plausible/utils/plausible.util';
 import { useOptimisticMutation } from '~/layers/common/composables/optimistic.composable';
@@ -42,7 +43,9 @@ export function usePalette(id: Ref<string | undefined>) {
   });
 }
 
-export function useListPalettes(size: number = 10, filter?: Pick<ListPaletteInputDto, 'tag'>) {
+export type ListPaletteFilterParams = Pick<ListPaletteInputDto, 'tag' | 'sortBy'>;
+
+export function useListPalettes(size: number, filter: ComputedRef<ListPaletteFilterParams | undefined>) {
   return useInfiniteQuery({
     queryKey: [PALETTE_ROOT_KEY, size, filter],
     queryFn: async ({ pageParam: page = 0 }) => {
@@ -50,8 +53,9 @@ export function useListPalettes(size: number = 10, filter?: Pick<ListPaletteInpu
 
       const query: ListPaletteInputDto = {
         page: page.toString(),
-        size: size.toString(),
-        tag: filter?.tag
+        size: size?.toString(),
+        tag: filter.value?.tag,
+        sortBy: filter.value?.sortBy ?? PaletteSortBy.RECENT
       };
 
       return await $fetch<ListPaletteDto>('/api/palettes', {
@@ -84,7 +88,8 @@ export function useListLikedPalettes(size: number = 10, retryCount?: number) {
 
       const query: ListPaletteInputDto = {
         page: page.toString(),
-        size: size.toString()
+        size: size.toString(),
+        sortBy: PaletteSortBy.RECENT
       };
 
       return await $fetch<ListPaletteDto>('/api/palettes/liked', {

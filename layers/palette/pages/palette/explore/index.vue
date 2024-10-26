@@ -33,8 +33,13 @@
     <!-- palettes -->
     <div v-if="palettes">
       <!-- filters -->
-      <div class="mb-4">
+      <div class="mb-4 flex justify-between gap-4 items-center flex-wrap">
         <PaletteFilters :tag="tag" />
+
+        <PaletteSortSelectMenu
+          :initial-sort-by="sortBy"
+          @change="value => sortBy = value"
+        />
       </div>
 
       <ul class="grid sm:grid-cols-3 gap-4">
@@ -80,12 +85,20 @@
 </template>
 
 <script setup lang="ts">
+import { PaletteSortBy } from '~/layers/palette/types';
+
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
 
+const sortBy = ref<PaletteSortBy>(PaletteSortBy.RECENT);
+
+const listFilter = computed(() => ({
+  sortBy: sortBy.value
+}));
+
 const { data: user } = useUser();
 
-const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100);
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100, listFilter);
 
 await suspense();
 

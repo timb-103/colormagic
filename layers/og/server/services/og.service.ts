@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import sharp from 'sharp';
 import type { PaletteService } from '~/layers/palette/server/services/palette.service';
+import { PaletteSortBy } from '~/layers/palette/types';
 
 export interface SvgParams {
   text?: string
@@ -126,7 +127,8 @@ export class OgService {
 
   public async generateGridImageFromTags(tag: string, prompt: string): Promise<Buffer> {
     const palettes = await this.paletteService.list(0, 16, {
-      tag
+      tag,
+      sortBy: PaletteSortBy.RECENT
     });
 
     const svg = await this.generateGridBackground(palettes.items.map(v => v.colors), prompt);
