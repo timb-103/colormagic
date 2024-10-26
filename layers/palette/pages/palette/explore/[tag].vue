@@ -101,7 +101,7 @@ const { locale } = useI18n();
 const { params } = useRoute();
 const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
 
-const sortBy = ref<PaletteSortBy>(PaletteSortBy.RECENT);
+const sortBy = ref<PaletteSortBy>(PaletteSortBy.POPULAR);
 
 const listFilter = computed(() =>
   tag.value !== undefined

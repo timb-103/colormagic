@@ -90,7 +90,7 @@ import { PaletteSortBy } from '~/layers/palette/types';
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
 
-const sortBy = ref<PaletteSortBy>(PaletteSortBy.RECENT);
+const sortBy = ref<PaletteSortBy>(PaletteSortBy.POPULAR);
 
 const listFilter = computed(() => ({
   sortBy: sortBy.value
