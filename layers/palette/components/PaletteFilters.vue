@@ -4,22 +4,35 @@
       <!-- colors -->
       <UButtonGroup>
         <USelectMenu
-          v-model="selectedColor"
+          v-model="selectedColors"
           size="sm"
           by="id"
           :placeholder="$t('explore.color')"
           searchable
-          :options="props.colorOptions"
+          :options="props.colorOptions.map(v => ({
+            ...v,
+            disabled: isNavigating || checkIfColorsDisabled(v.id)
+          }))"
           :popper="{
             placement: 'bottom-start'
           }"
+          multiple
           :ui-menu="{container: 'min-w-36'}"
-          @change="value => navigateTo(value.to)"
-        />
+        >
+          <template #label>
+            <span
+              v-if="selectedColors.length"
+              class="truncate"
+            >
+              {{ selectedColors.map(v => v.label).join(', ') }}
+            </span>
+            <span v-else>Color</span>
+          </template>
+        </USelectMenu>
         <UButton
-          v-if="selectedColor && selectedColor.id !== ''"
+          v-if="selectedColors.length > 0"
           icon="i-heroicons-x-mark"
-          :to="localePath(mapRemovePath(selectedColor.id))"
+          :to="localePath(mapRemoveAllColorPaths())"
         />
       </UButtonGroup>
 
@@ -93,6 +106,7 @@
 </template>
 
 <script setup lang="ts">
+import { differenceWith, isEqual } from 'lodash';
 import { type PaletteFilterOption } from '~/layers/palette/composables/filters.composable';
 
 export interface Props {
@@ -108,10 +122,21 @@ const props = defineProps<Props>();
 const localePath = useLocalePath();
 const { t } = useI18n();
 
-const selectedColor = ref(findFilter(props.colorOptions));
+const isNavigating = ref(false);
+
+const selectedColors = ref(findMultipleFilter(props.colorOptions));
 const selectedStyle = ref(findFilter(props.styleOptions));
 const selectedTone = ref(findFilter(props.toneOptions));
 const selectedSeason = ref(findFilter(props.seasonOptions));
+
+function checkIfColorsDisabled(id: string): boolean {
+  const index = selectedColors.value.findIndex(v => v.id === id);
+  if (index >= 0) {
+    return false;
+  }
+
+  return selectedColors.value.length >= 5;
+}
 
 function findFilter(links: PaletteFilterOption[]): PaletteFilterOption | undefined {
   const index = links.findIndex(v => props.tags?.some(x => x === v.id));
@@ -122,6 +147,15 @@ function findFilter(links: PaletteFilterOption[]): PaletteFilterOption | undefin
       label: links[index].label
     };
   }
+}
+
+function findMultipleFilter(links: PaletteFilterOption[]): PaletteFilterOption[] {
+  const found = links.filter(v => props.tags?.some(x => x === v.id));
+
+  return found.map(v => ({
+    ...v,
+    label: v.label
+  }));
 }
 
 function mapRemovePath(id?: string): string {
@@ -136,4 +170,28 @@ function mapRemovePath(id?: string): string {
 
   return `/palette/explore/${tagsNew.join('-')}`;
 }
+
+function mapRemoveAllColorPaths(): string {
+  const tagsNew = props.tags.filter(v => !props.colorOptions.some(x => x.id === v));
+
+  if (props.tags.length === 0 || tagsNew.length === 0) {
+    return '/palette/explore';
+  }
+
+  return `/palette/explore/${tagsNew.join('-')}`;
+}
+
+watch(selectedColors, (newValue, oldValue) => {
+  const added = differenceWith(newValue, oldValue, isEqual);
+  const removed = differenceWith(oldValue, newValue, isEqual);
+
+  if (added.length > 0) {
+    isNavigating.value = true;
+    void navigateTo(added[0].to);
+  }
+  if (removed.length > 0) {
+    isNavigating.value = true;
+    void navigateTo(removed[0].to);
+  }
+});
 </script>

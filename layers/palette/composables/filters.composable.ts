@@ -25,6 +25,19 @@ function mapToPath(id: string, tags: string[], filters: PaletteFilter[]): string
   return pathTags.join('-');
 }
 
+function mapToPathMultiple(id: string, tags: string[]): string {
+  const pathTags = [...tags];
+  const index = pathTags.findIndex(v => v === id);
+
+  if (index >= 0) {
+    pathTags.splice(index, 1);
+  } else {
+    pathTags.push(id);
+  }
+
+  return pathTags.join('-');
+}
+
 function mapToLabel(path: string, filters: PaletteFilter[], locale: string): string {
   const tags = path.split('-');
   const value = [];
@@ -56,20 +69,13 @@ export function usePaletteFilterOptions(tags: string[]): PaletteFilters {
     ...seasonFilters
   ];
 
-  const colorOptions = computed<PaletteFilterOption[]>(() => [
-    /** @description stupid hack for nuxt ui bug */
-    {
-      label: t('explore.color'),
-      id: '',
-      to: localePath('/palette/explore')
-    },
-    ...colorFilters.map(v => ({
+  const colorOptions = computed<PaletteFilterOption[]>(() =>
+    colorFilters.map(v => ({
       label: v.label[getLocale(locale.value)],
       fullLabel: mapToLabel(mapToPath(v.id, tags, colorFilters), allFilters, locale.value),
       id: v.id,
-      to: localePath(`/palette/explore/${mapToPath(v.id, tags, colorFilters)}`)
-    }))
-  ]);
+      to: localePath(`/palette/explore/${mapToPathMultiple(v.id, tags)}`)
+    })));
 
   const toneOptions = computed<PaletteFilterOption[]>(() => [
     /** @description stupid hack for nuxt ui bug */
