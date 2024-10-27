@@ -154,7 +154,7 @@ const seoDescription = computed(() => `${title.value} ${t('explore.seoDescriptio
 const thumbnailUrl = `${useRuntimeConfig().public.siteUrl}/api/og/thumbnail?colors=${filters[0].palette.join(':').replace(/#/g, '')}`;
 
 useSeoMeta({
-  title,
+  title: seoTitle,
   description: seoDescription,
   ogTitle: title,
   ogDescription: seoDescription,
