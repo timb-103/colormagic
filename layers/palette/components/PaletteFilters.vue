@@ -17,7 +17,7 @@
             placement: 'bottom-start'
           }"
           multiple
-          :ui-menu="{container: 'min-w-36'}"
+          :ui-menu="{container: 'w-36'}"
         >
           <template #label>
             <span
