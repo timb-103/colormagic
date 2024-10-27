@@ -44,7 +44,11 @@
       <!-- filters -->
       <div class="mb-4 flex justify-between gap-4 items-center flex-wrap">
         <PaletteFilters
-          :filters="filters"
+          :tags="tags"
+          :color-options="paletteFilterOptions.color.value"
+          :style-options="paletteFilterOptions.style.value"
+          :tone-options="paletteFilterOptions.tone.value"
+          :season-options="paletteFilterOptions.season.value"
         />
 
         <PaletteSortSelectMenu
@@ -66,6 +70,7 @@
             :name="item.text"
             :can-like="user?.id !== undefined"
             :to="localePath(`/palette/${item.id}`)"
+            no-follow
           />
         </li>
       </ul>
@@ -87,11 +92,17 @@
       {{ $t('explore.byTag') }}
     </p>
     <div class="space-y-4">
-      <PaletteTagLinks :links="paletteColorTagLinks" />
-      <PaletteTagLinks :links="paletteStyleTagLinks" />
-      <PaletteTagLinks :links="paletteToneTagLinks" />
-      <PaletteTagLinks :links="paletteSeasonTagLinks" />
+      <PaletteTagLinks :links="paletteFilterOptions.color.value" />
+      <PaletteTagLinks :links="paletteFilterOptions.style.value" />
+      <PaletteTagLinks :links="paletteFilterOptions.tone.value" />
+      <PaletteTagLinks :links="paletteFilterOptions.season.value" />
     </div>
+    <!-- <div class="space-y-4">
+      <PaletteTagLinks :links="colorOptions" />
+      <PaletteTagLinks :links="styleOptions" />
+      <PaletteTagLinks :links="toneOptions" />
+      <PaletteTagLinks :links="seasonOptions" />
+    </div> -->
   </div>
 </template>
 
@@ -101,7 +112,6 @@ import { type ListPaletteFilterParams } from '~/layers/palette/composables/palet
 
 const { t } = useI18n();
 const localePath = useLocalePath();
-
 const { locale } = useI18n();
 const { params } = useRoute();
 
@@ -109,7 +119,6 @@ const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
 const tags = computed<string[]>(() => tag.value?.split('-') ?? []);
 
 const sortBy = ref<PaletteSortBy>(PaletteSortBy.POPULAR);
-
 const listFilter = computed<ListPaletteFilterParams | undefined>(() =>
   tag.value !== undefined
     ? {
@@ -120,8 +129,8 @@ const listFilter = computed<ListPaletteFilterParams | undefined>(() =>
 );
 
 const { data: user } = useUser();
-
 const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100, listFilter);
+const paletteFilterOptions = usePaletteFilterOptions(tags.value);
 
 await suspense();
 
@@ -151,28 +160,4 @@ useSeoMeta({
   ogDescription: seoDescription,
   ogImageUrl: `${useRuntimeConfig().public.siteUrl}/api/og/tag?tag=${filters[0]?.id}&text=${title.value}`
 });
-
-const paletteColorTagLinks = getPaletteColorFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
-
-const paletteStyleTagLinks = getPaletteStyleFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
-
-const paletteToneTagLinks = getPaletteToneFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
-
-const paletteSeasonTagLinks = getPaletteSeasonFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
 </script>

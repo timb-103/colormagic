@@ -34,7 +34,13 @@
     <div v-if="palettes">
       <!-- filters -->
       <div class="mb-4 flex justify-between gap-4 items-center flex-wrap">
-        <PaletteFilters :tag="tag" />
+        <PaletteFilters
+          :tags="[]"
+          :color-options="paletteFilterOptions.color.value"
+          :style-options="paletteFilterOptions.style.value"
+          :tone-options="paletteFilterOptions.tone.value"
+          :season-options="paletteFilterOptions.season.value"
+        />
 
         <PaletteSortSelectMenu
           :initial-sort-by="sortBy"
@@ -55,6 +61,7 @@
             :name="item.text"
             :can-like="user?.id !== undefined"
             :to="localePath(`/palette/${item.id}`)"
+            no-follow
           />
         </li>
       </ul>
@@ -76,10 +83,10 @@
       {{ $t('explore.byTag') }}
     </p>
     <div class="space-y-4">
-      <PaletteTagLinks :links="paletteColorTagLinks" />
-      <PaletteTagLinks :links="paletteStyleTagLinks" />
-      <PaletteTagLinks :links="paletteToneTagLinks" />
-      <PaletteTagLinks :links="paletteSeasonTagLinks" />
+      <PaletteTagLinks :links="paletteFilterOptions.color.value" />
+      <PaletteTagLinks :links="paletteFilterOptions.style.value" />
+      <PaletteTagLinks :links="paletteFilterOptions.tone.value" />
+      <PaletteTagLinks :links="paletteFilterOptions.season.value" />
     </div>
   </div>
 </template>
@@ -87,26 +94,21 @@
 <script setup lang="ts">
 import { PaletteSortBy } from '~/layers/palette/types';
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
 const localePath = useLocalePath();
 
 const sortBy = ref<PaletteSortBy>(PaletteSortBy.POPULAR);
-
 const listFilter = computed(() => ({
   sortBy: sortBy.value
 }));
 
 const { data: user } = useUser();
-
 const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100, listFilter);
+const paletteFilterOptions = usePaletteFilterOptions([]);
 
 await suspense();
 
-const { params } = useRoute();
-const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
-
 const palettes = computed(() => list.value?.pages.flatMap((items) => items.items) ?? []);
-
 const count = computed(() => list.value?.pages[0].count ?? 0);
 
 useSeoMeta({
@@ -116,28 +118,4 @@ useSeoMeta({
   ogDescription: t('explore.seoDescription'),
   ogImageUrl: `${useRuntimeConfig().public.siteUrl}/img/og.png`
 });
-
-const paletteColorTagLinks = getPaletteColorFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
-
-const paletteStyleTagLinks = getPaletteStyleFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
-
-const paletteToneTagLinks = getPaletteToneFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
-
-const paletteSeasonTagLinks = getPaletteSeasonFilter().map(v => ({
-  label: v.label[getLocale(locale.value)],
-  id: v.id,
-  to: localePath(`/palette/explore/${v.id}`)
-}));
 </script>

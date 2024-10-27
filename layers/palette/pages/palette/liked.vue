@@ -56,6 +56,7 @@
             :colors="item.colors"
             :name="item.text"
             :to="localePath(`/palette/${item.id}`)"
+            no-follow
           />
         </li>
       </ul>
