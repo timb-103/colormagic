@@ -106,7 +106,8 @@
 </template>
 
 <script setup lang="ts">
-import { differenceWith, isEqual } from 'lodash';
+import differenceWith from 'lodash/differenceWith';
+import isEqual from 'lodash/isEqual';
 import { type PaletteFilterOption } from '~/layers/palette/composables/filters.composable';
 
 export interface Props {
