@@ -43,6 +43,7 @@ export function getPaletteColorFilter(): PaletteFilter[] {
     { id: 'magenta', label: { en: 'Magenta', ja: 'マゼンタ', it: 'Magenta' }, palette: ['#FF00FF', '#FF77FF', '#FF44FF', '#FF99FF', '#FF66CC'] },
     { id: 'maroon', label: { en: 'Maroon', ja: '栗色', it: 'Bordeaux' }, palette: ['#800000', '#5C0000', '#3C0000', '#4E0505', '#720707'] },
     { id: 'mint', label: { en: 'Mint', ja: 'ミント', it: 'Menta' }, palette: ['#98FF98', '#90EE90', '#8FBC8F', '#98FB98', '#66CDAA'] },
+    { id: 'orange', label: { en: 'Orange', ja: 'オレンジ', it: 'Arancio' }, palette: ['#FFA500', '#FF8C00', '#FF7F50', '#FF6347', '#FF4500'] },
     { id: 'peach', label: { en: 'Peach', ja: 'ピーチ', it: 'Pesca' }, palette: ['#FFDAB9', '#FFE4B5', '#FFDEAD', '#F5DEB3', '#FAF0E6'] },
     { id: 'pink', label: { en: 'Pink', ja: 'ピンク', it: 'Rosa' }, palette: ['#FFC0CB', '#FFB6C1', '#FF69B4', '#FF1493', '#FF6EB4'] },
     { id: 'purple', label: { en: 'Purple', ja: '紫', it: 'Viola' }, palette: ['#800080', '#6A0DAD', '#9400D3', '#8A2BE2', '#9370DB'] },
