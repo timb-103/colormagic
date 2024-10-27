@@ -5,6 +5,7 @@
       v-for="item in links"
       :key="item.id"
       :to="item.to"
+      active-class="text-primary"
       class="font-medium text-sm hover:text-primary text-gray-400"
     >
       {{ item.label }}

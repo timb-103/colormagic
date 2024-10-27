@@ -127,7 +127,7 @@ export class OgService {
 
   public async generateGridImageFromTags(tag: string, prompt: string): Promise<Buffer> {
     const palettes = await this.paletteService.list(0, 16, {
-      tag,
+      tags: [tag],
       sortBy: PaletteSortBy.RECENT
     });
 

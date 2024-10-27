@@ -43,7 +43,9 @@ export function usePalette(id: Ref<string | undefined>) {
   });
 }
 
-export type ListPaletteFilterParams = Pick<ListPaletteInputDto, 'tag' | 'sortBy'>;
+export type ListPaletteFilterParams = Pick<ListPaletteInputDto, 'sortBy'> & {
+  tags?: string[]
+};
 
 export function useListPalettes(size: number, filter: ComputedRef<ListPaletteFilterParams | undefined>) {
   return useInfiniteQuery({
@@ -54,7 +56,7 @@ export function useListPalettes(size: number, filter: ComputedRef<ListPaletteFil
       const query: ListPaletteInputDto = {
         page: page.toString(),
         size: size?.toString(),
-        tag: filter.value?.tag,
+        tags: filter.value?.tags?.join(','),
         sortBy: filter.value?.sortBy ?? PaletteSortBy.RECENT
       };
 

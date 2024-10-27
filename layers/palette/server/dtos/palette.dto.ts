@@ -28,7 +28,7 @@ export type CreatePaletteInputDto = Static<typeof CreatePaletteInputDtoSchema>;
 export const ListPaletteInputDtoSchema = Type.Object({
   page: Type.String({ pattern: '^[0-9]+$' }),
   size: Type.Optional(Type.String({ pattern: '^[0-9]+$', maxLength: 3 })),
-  tag: Type.Optional(Type.String()),
+  tags: Type.Optional(Type.String({ maxLength: 500 })),
   sortBy: Type.Enum(PaletteSortBy)
 });
 

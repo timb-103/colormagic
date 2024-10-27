@@ -8,7 +8,8 @@ import { PaletteSortBy } from '../../types';
 import type { PaletteLikeService } from './palette-like.service';
 import type { AIService } from '~/layers/ai/server/services/ai.service';
 
-export type ListPaletteFilter = Pick<ListPaletteInputDto, 'tag' | 'sortBy'> & {
+export type ListPaletteFilter = Pick<ListPaletteInputDto, 'sortBy'> & {
+  tags?: string[]
   userId?: string
 };
 
@@ -23,9 +24,9 @@ export class PaletteService {
     const colFilter: Filter<PaletteEntity> = {};
     let sort: Sort = { createdAt: -1 };
 
-    if (filter.tag !== undefined) {
+    if (filter.tags !== undefined) {
       colFilter.tags = {
-        $in: [filter.tag]
+        $all: filter.tags
       };
     }
 

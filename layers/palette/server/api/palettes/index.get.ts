@@ -6,6 +6,7 @@ export default defineEventHandler(async (event): Promise<ListPaletteDto> => {
   /** @descritpion as its a get request we must parse some numbers */
   const page = parseInt(query.page);
   const size = parseInt(query.size ?? '20');
+  const tags = query.tags?.split(',') ?? undefined;
 
   let userId: string | undefined;
 
@@ -16,7 +17,7 @@ export default defineEventHandler(async (event): Promise<ListPaletteDto> => {
   } catch {}
 
   const response = await modules.palette.service.list(page, size, {
-    tag: query.tag,
+    tags,
     userId,
     sortBy: query.sortBy
   });

@@ -16,9 +16,9 @@
         @change="value => navigateTo(value.to)"
       />
       <UButton
-        v-if="selectedColor"
+        v-if="selectedColor && selectedColor.id !== ''"
         icon="i-heroicons-x-mark"
-        :to="localePath('/palette/explore')"
+        :to="localePath(mapRemovePath(selectedColor.id))"
       />
     </UButtonGroup>
 
@@ -38,9 +38,9 @@
         @change="value => navigateTo(value.to)"
       />
       <UButton
-        v-if="selectedTone"
+        v-if="selectedTone && selectedTone.id !== ''"
         icon="i-heroicons-x-mark"
-        :to="localePath('/palette/explore')"
+        :to="localePath(mapRemovePath(selectedTone.id))"
       />
     </UButtonGroup>
 
@@ -60,9 +60,9 @@
         @change="value => navigateTo(value.to)"
       />
       <UButton
-        v-if="selectedStyle"
+        v-if="selectedStyle && selectedStyle.id !== ''"
         icon="i-heroicons-x-mark"
-        :to="localePath('/palette/explore')"
+        :to="localePath(mapRemovePath(selectedStyle.id))"
       />
     </UButtonGroup>
 
@@ -82,9 +82,9 @@
         @change="value => navigateTo(value.to)"
       />
       <UButton
-        v-if="selectedSeason"
+        v-if="selectedSeason && selectedSeason.id !== ''"
         icon="i-heroicons-x-mark"
-        :to="localePath('/palette/explore')"
+        :to="localePath(mapRemovePath(selectedSeason.id))"
       />
     </UButtonGroup>
   </div>
@@ -94,14 +94,31 @@
 import { type PaletteFilter } from '~/layers/palette/utils/palette-filters.util';
 
 export interface Props {
-  tag?: string
-  filter?: PaletteFilter
+  filters?: PaletteFilter[]
+}
+
+export interface FilterLink {
+  label: string
+  id: string
+  to: string
 }
 
 const props = defineProps<Props>();
 
+const { params } = useRoute();
+const tag = computed(() => typeof params.tag === 'string' ? params.tag : undefined);
+
+const tags = computed<string[]>(() => {
+  return tag.value?.split('-') ?? [];
+});
+
 const localePath = useLocalePath();
 const { locale, t } = useI18n();
+
+const colorFilters = getPaletteColorFilter();
+const toneFilters = getPaletteToneFilter();
+const styleFilters = getPaletteStyleFilter();
+const seasonFilters = getPaletteSeasonFilter();
 
 const colorLinks = computed(() => [
   /** @description stupid hack for nuxt ui bug */
@@ -110,10 +127,10 @@ const colorLinks = computed(() => [
     id: '',
     to: localePath('/palette/explore')
   },
-  ...getPaletteColorFilter().map(v => ({
+  ...colorFilters.map(v => ({
     label: v.label[getLocale(locale.value)],
     id: v.id,
-    to: localePath(`/palette/explore/${v.id}`)
+    to: mapToPath(v.id, tags.value, colorFilters)
   }))
 ]);
 
@@ -124,10 +141,10 @@ const toneLinks = computed(() => [
     id: '',
     to: localePath('/palette/explore')
   },
-  ...getPaletteToneFilter().map(v => ({
+  ...toneFilters.map(v => ({
     label: v.label[getLocale(locale.value)],
     id: v.id,
-    to: localePath(`/palette/explore/${v.id}`)
+    to: mapToPath(v.id, tags.value, toneFilters)
   }))
 ]);
 
@@ -138,10 +155,10 @@ const styleLinks = computed(() => [
     id: '',
     to: localePath('/palette/explore')
   },
-  ...getPaletteStyleFilter().map(v => ({
+  ...styleFilters.map(v => ({
     label: v.label[getLocale(locale.value)],
     id: v.id,
-    to: localePath(`/palette/explore/${v.id}`)
+    to: mapToPath(v.id, tags.value, styleFilters)
   }))
 ]);
 
@@ -152,30 +169,54 @@ const seasonLinks = computed(() => [
     id: '',
     to: localePath('/palette/explore')
   },
-  ...getPaletteSeasonFilter().map(v => ({
+  ...seasonFilters.map(v => ({
     label: v.label[getLocale(locale.value)],
     id: v.id,
-    to: localePath(`/palette/explore/${v.id}`)
+    to: mapToPath(v.id, tags.value, seasonFilters)
   }))
 ]);
 
-const selectedColor = ref(
-  colorLinks.value.find(v => v.id === props.filter?.id) !== undefined
-    ? { ...props.filter, label: props.filter?.label[getLocale(locale.value)] }
-    : undefined);
+const selectedColor = ref(findFilter(colorLinks.value));
+const selectedStyle = ref(findFilter(styleLinks.value));
+const selectedTone = ref(findFilter(toneLinks.value));
+const selectedSeason = ref(findFilter(seasonLinks.value));
 
-const selectedStyle = ref(
-  styleLinks.value.find(v => v.id === props.filter?.id) !== undefined
-    ? { ...props.filter, label: props.filter?.label[getLocale(locale.value)] }
-    : undefined);
+function mapToPath(id: string, tags: string[], filters: PaletteFilter[]): string {
+  const pathTags = [...tags];
+  const existingTagIndex = pathTags.findIndex(tag => filters.some(filter => filter.id === tag));
 
-const selectedTone = ref(
-  toneLinks.value.find(v => v.id === props.filter?.id) !== undefined
-    ? { ...props.filter, label: props.filter?.label[getLocale(locale.value)] }
-    : undefined);
+  if (existingTagIndex >= 0) {
+    pathTags[existingTagIndex] = id;
+  } else {
+    pathTags.push(id);
+  }
 
-const selectedSeason = ref(
-  seasonLinks.value.find(v => v.id === props.filter?.id) !== undefined
-    ? { ...props.filter, label: props.filter?.label[getLocale(locale.value)] }
-    : undefined);
+  const tagPath = localePath(`/palette/explore/${pathTags.join('-')}`);
+
+  return tagPath;
+}
+
+function mapRemovePath(id?: string): string {
+  if (id === undefined) {
+    return `/palette/explore/${tags.value.join('-')}`;
+  }
+
+  const tagsNew = tags.value.filter(v => v !== id);
+  if (tags.value.length === 0 || tagsNew.length === 0) {
+    return '/palette/explore';
+  }
+
+  return `/palette/explore/${tagsNew.join('-')}`;
+}
+
+function findFilter(links: FilterLink[]): FilterLink | undefined {
+  const index = links.findIndex(v => props.filters?.some(x => x.id === v.id));
+
+  if (index >= 0) {
+    return {
+      ...links[index],
+      label: links[index].label
+    };
+  }
+}
 </script>
