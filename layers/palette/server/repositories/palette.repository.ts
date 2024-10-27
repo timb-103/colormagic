@@ -9,6 +9,8 @@ export class PaletteRepository {
       key: { createdAt: -1 }
     }, {
       key: { tags: -1 }
+    }, {
+      key: { likesCount: -1 }
     }], { background: true });
   }
 
