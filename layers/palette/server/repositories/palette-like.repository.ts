@@ -9,6 +9,11 @@ export class PaletteLikeRepository {
       key: { createdAt: -1 }
     }, {
       key: { userId: -1 }
+    }, {
+      key: {
+        userId: -1,
+        paletteId: -1
+      }
     }], { background: true });
   }
 
