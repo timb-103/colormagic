@@ -148,7 +148,7 @@ if (filters.length === 0) {
 }
 
 const title = computed(() => filters.map(v => v.label[getLocale(locale.value)]).join(' '));
-const seoTitle = computed(() => `${title.value} ${t('explore.colorPalettes')}`);
+const seoTitle = computed(() => `${title.value} ${t('explore.colorPalettes')} - ColorMagic`);
 const seoDescription = computed(() => `${title.value} ${t('explore.seoDescription')}`);
 
 const thumbnailUrl = `${useRuntimeConfig().public.siteUrl}/api/og/thumbnail?colors=${filters[0].palette.join(':').replace(/#/g, '')}`;
