@@ -1,3 +1,5 @@
+import uniqBy from 'lodash/uniqBy';
+
 export interface PaletteFilterOption {
   label: string
   fullLabel?: string
@@ -13,40 +15,57 @@ export interface PaletteFilters {
 }
 
 function mapToPath(id: string, tags: string[], filters: PaletteFilter[]): string {
-  const pathTags = [...tags];
-  const existingTagIndex = pathTags.findIndex(tag => filters.some(filter => filter.id === tag));
+  const tagString = tags.join('-');
+  const existingFilter = filters.find(filter => tagString.includes(filter.id));
 
-  if (existingTagIndex >= 0) {
-    pathTags[existingTagIndex] = id;
-  } else {
-    pathTags.push(id);
+  if (existingFilter !== undefined) {
+    return tagString.replace(existingFilter.id, id);
+  }
+  if (tags.length === 0) {
+    return id;
   }
 
-  return pathTags.join('-');
+  return `${tagString}-${id}`;
 }
 
-function mapToPathMultiple(id: string, tags: string[]): string {
-  const pathTags = [...tags];
-  const index = pathTags.findIndex(v => v === id);
+/** @description used for the color filter which allows multiple of the same filter */
+function mapToPathMultiple(id: string, tags: string[], filters: PaletteFilter[]): string {
+  const tagString = tags.join('-');
+  const tagsCount = tags.filter(v => filters.some(x => x.id === v)).length;
 
-  if (index >= 0) {
-    pathTags.splice(index, 1);
-  } else {
-    pathTags.push(id);
+  if (tagsCount === 1 && tags[0] === id) {
+    return id;
+  }
+  if (tagsCount === 5) {
+    return tags.filter(v => v !== id).join('-');
+  }
+  if (tags.includes(id)) {
+    return tags.filter(v => v !== id).join('-');
+  }
+  if (tags.length === 0) {
+    return id;
   }
 
-  return pathTags.join('-');
+  return `${tagString}-${id}`;
 }
 
 function mapToLabel(path: string, filters: PaletteFilter[], locale: string): string {
   const tags = path.split('-');
-  const value = [];
+  const value: string[] = [];
+  let currentTag = '';
 
   for (const tag of tags) {
-    const filter = filters.find(v => v.id === tag);
+    currentTag = currentTag.length > 0 ? `${currentTag}-${tag}` : tag;
+
+    const filter = filters.find(v => v.id === currentTag);
     if (filter !== undefined) {
       value.push(filter.label[getLocale(locale)]);
+      currentTag = '';
     }
+  }
+
+  if (currentTag.length > 0) {
+    value.push(currentTag);
   }
 
   return value.join(' ');
@@ -69,13 +88,16 @@ export function usePaletteFilterOptions(tags: string[]): PaletteFilters {
     ...seasonFilters
   ];
 
-  const colorOptions = computed<PaletteFilterOption[]>(() =>
-    colorFilters.map(v => ({
+  const colorOptions = computed<PaletteFilterOption[]>(() => {
+    const values = colorFilters.map(v => ({
       label: v.label[getLocale(locale.value)],
-      fullLabel: mapToLabel(mapToPath(v.id, tags, colorFilters), allFilters, locale.value),
+      fullLabel: mapToLabel(mapToPathMultiple(v.id, tags, colorFilters), allFilters, locale.value),
       id: v.id,
-      to: localePath(`/palette/explore/${mapToPathMultiple(v.id, tags)}`)
-    })));
+      to: localePath(`/palette/explore/${mapToPathMultiple(v.id, tags, colorFilters)}`)
+    }));
+
+    return uniqBy(values, 'to');
+  });
 
   const toneOptions = computed<PaletteFilterOption[]>(() => [
     /** @description stupid hack for nuxt ui bug */
