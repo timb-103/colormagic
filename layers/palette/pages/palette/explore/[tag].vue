@@ -12,7 +12,7 @@
       <div>
         <!-- title -->
         <h1 class="capitalize">
-          {{ seoTitle }}
+          {{ title }}
         </h1>
 
         <!-- description-->
@@ -22,7 +22,7 @@
 
         <!-- count of palettes generated -->
         <p class="italic text-sm">
-          {{ count.toLocaleString() }} {{ tags.join (' ') }} color palettes generated
+          {{ count.toLocaleString() }} {{ tags.join(' ').replace(/-/g, ' ') }} color palettes generated
         </p>
       </div>
     </div>
@@ -97,12 +97,6 @@
       <PaletteTagLinks :links="paletteFilterOptions.tone.value" />
       <PaletteTagLinks :links="paletteFilterOptions.season.value" />
     </div>
-    <!-- <div class="space-y-4">
-      <PaletteTagLinks :links="colorOptions" />
-      <PaletteTagLinks :links="styleOptions" />
-      <PaletteTagLinks :links="toneOptions" />
-      <PaletteTagLinks :links="seasonOptions" />
-    </div> -->
   </div>
 </template>
 
@@ -116,8 +110,17 @@ const { locale } = useI18n();
 const { params } = useRoute();
 
 const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
-const tags = computed<string[]>(() => tag.value?.split('-') ?? []);
 
+/** @description filters must be sorted in same order as tags for titles and links to work properly */
+const filters = getAllPaletteFilters()
+  .filter(v => tag.value?.includes(v.id))
+  .sort((a, b) => {
+    const indexA = tag.value?.indexOf(a.id) ?? -1;
+    const indexB = tag.value?.indexOf(b.id) ?? -1;
+    return indexA - indexB;
+  });
+
+const tags = computed<string[]>(() => filters.map(v => v.id));
 const sortBy = ref<PaletteSortBy>(PaletteSortBy.POPULAR);
 const listFilter = computed<ListPaletteFilterParams | undefined>(() =>
   tag.value !== undefined
@@ -137,17 +140,11 @@ await suspense();
 const palettes = computed(() => list.value?.pages.flatMap((items) => items.items) ?? []);
 const count = computed(() => list.value?.pages[0].count ?? 0);
 
-const paletteFilters = getAllPaletteFilters();
-
-const filters = tags.value
-  .map(tag => paletteFilters.find(v => tag === v.id))
-  .filter(v => v !== undefined);
-
 if (filters.length === 0) {
   throw createError({ statusCode: 404, statusMessage: 'Tag not found.' });
 }
 
-const title = computed(() => filters.map(v => v.label[getLocale(locale.value)]).join(' '));
+const title = computed(() => `${filters.map(v => v.label[getLocale(locale.value)]).join(' ')} ${t('explore.colorPalettes')}`);
 const seoTitle = computed(() => `${title.value} ${t('explore.colorPalettes')} - ColorMagic`);
 const seoDescription = computed(() => `${title.value} ${t('explore.seoDescription')}`);
 
