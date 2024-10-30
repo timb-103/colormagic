@@ -144,16 +144,17 @@ if (filters.length === 0) {
   throw createError({ statusCode: 404, statusMessage: 'Tag not found.' });
 }
 
+
 const title = computed(() => `${filters.map(v => v.label[getLocale(locale.value)]).join(' ')} ${t('explore.colorPalettes')}`);
-const seoTitle = computed(() => `${title.value} ${t('explore.colorPalettes')} - ColorMagic`);
+const seoTitle = computed(() => `${title.value} - ColorMagic`);
 const seoDescription = computed(() => `${title.value} ${t('explore.seoDescription')}`);
 
 const thumbnailUrl = `${useRuntimeConfig().public.siteUrl}/api/og/thumbnail?colors=${filters[0].palette.join(':').replace(/#/g, '')}`;
 
 useSeoMeta({
-  title,
+  title: seoTitle,
   description: seoDescription,
-  ogTitle: title,
+  ogTitle: seoTitle,
   ogDescription: seoDescription,
   ogImageUrl: `${useRuntimeConfig().public.siteUrl}/api/og/tag?tag=${filters[0]?.id}&text=${title.value}`
 });
