@@ -1,4 +1,4 @@
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const query = await modules.og.validation.getThumbnailInputQuery(event);
 
   const response = await modules.og.service.generateSquareThumbnail(
@@ -8,4 +8,4 @@ export default defineCachedEventHandler(async (event) => {
   setResponseHeader(event, 'Content-Type', 'image/png');
 
   return response;
-}, { maxAge: 86400 });
+});
