@@ -8,6 +8,7 @@ export interface Log {
     rateLimitPayload: unknown
     body: unknown
     ip?: string
+    userAgent?: string
   }
   res: {
     statusCode: number
