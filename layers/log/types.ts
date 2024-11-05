@@ -7,6 +7,7 @@ export interface Log {
     url: string | undefined
     rateLimitPayload: unknown
     body: unknown
+    ip?: string
   }
   res: {
     statusCode: number

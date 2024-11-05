@@ -12,7 +12,8 @@ export function mapEventToLog(event: H3Event, err?: H3Error | null | any): Log {
       method: event.node.req.method,
       url: event.node.req.url,
       rateLimitPayload: event.context.payload,
-      body: event.context.body
+      body: event.context.body,
+      ip: getRequestIP(event)
     },
     res: {
       statusCode: err?.statusCode ?? event.node.res.statusCode
