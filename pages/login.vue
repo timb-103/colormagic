@@ -63,6 +63,8 @@ function handleAuth(encodedState: string): void {
           notifications.addError(err?.message ?? 'Error logging in with Google.');
         },
         onSuccess: () => {
+          /** @description must refresh as cookies are not reactive by default */
+          refreshCookie('jwt')
           sendPlausibleEvent(PlausibleEventName.LOGGED_IN_GOOGLE);
           void navigateTo('/');
         }

@@ -16,6 +16,7 @@ export function useUser() {
     retry: false,
     retryOnMount: false,
     refetchOnWindowFocus: false,
-    staleTime: USER_TTL
+    staleTime: USER_TTL,
+    enabled: () => useCookie('jwt').value !== null && useCookie('jwt').value !== undefined
   });
 }
