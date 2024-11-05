@@ -132,7 +132,7 @@ const listFilter = computed<ListPaletteFilterParams | undefined>(() =>
 );
 
 const { data: user } = useUser();
-const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100, listFilter);
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(50, listFilter);
 const paletteFilterOptions = usePaletteFilterOptions(tags.value);
 
 await suspense();

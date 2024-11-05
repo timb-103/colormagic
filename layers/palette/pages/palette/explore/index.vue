@@ -103,7 +103,7 @@ const listFilter = computed(() => ({
 }));
 
 const { data: user } = useUser();
-const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(100, listFilter);
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(50, listFilter);
 const paletteFilterOptions = usePaletteFilterOptions([]);
 
 await suspense();
