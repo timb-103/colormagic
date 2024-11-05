@@ -1,6 +1,6 @@
 import type { PaletteDto } from '../../../dtos/palette.dto';
 
-export default defineEventHandler(async (event): Promise<PaletteDto> => {
+export default defineCachedEventHandler(async (event): Promise<PaletteDto> => {
   const params = await modules.palette.validation.getInputParams(event);
 
   let userId: string | undefined;
@@ -14,4 +14,4 @@ export default defineEventHandler(async (event): Promise<PaletteDto> => {
   const response = await modules.palette.service.getById(params.id, userId);
 
   return response;
-});
+}, { maxAge: 60 * 60 });
