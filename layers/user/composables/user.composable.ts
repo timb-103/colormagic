@@ -4,7 +4,7 @@ import type { UserDto } from '../server/dtos/user.dto';
 
 const USER_ROOT_KEY = 'user';
 
-export function useUser(retryCount?: number) {
+export function useUser() {
   return useQuery({
     queryKey: [USER_ROOT_KEY],
     queryFn: async () => {
@@ -12,6 +12,6 @@ export function useUser(retryCount?: number) {
 
       return await $fetch<UserDto>('/api/user/get', { headers });
     },
-    retry: retryCount ?? 0
+    retry: false
   });
 }
