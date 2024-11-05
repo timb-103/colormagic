@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/vue-query';
 import type { UserDto } from '../server/dtos/user.dto';
 
 const USER_ROOT_KEY = 'user';
+const USER_TTL = 60e3 * 10;
 
 export function useUser() {
   return useQuery({
@@ -12,6 +13,9 @@ export function useUser() {
 
       return await $fetch<UserDto>('/api/user/get', { headers });
     },
-    retry: false
+    retry: false,
+    retryOnMount: false,
+    refetchOnWindowFocus: false,
+    staleTime: USER_TTL
   });
 }
