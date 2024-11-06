@@ -31,6 +31,7 @@ export default defineI18nConfig(() => ({
         suggestIdea: 'Suggest an Idea',
         free: 'ColorMagic is now 100% free',
         explore: 'Explore',
+        exploreTags: 'Explore Tags',
         imageColorPicker: 'Image Color Picker',
         tools: 'Tools',
         website: 'Website',
@@ -71,6 +72,11 @@ export default defineI18nConfig(() => ({
         tone: 'Tone',
         season: 'Season',
         byTag: 'Explore palettes by tag'
+      },
+      exploreTags: {
+        title: 'Explore Tags',
+        seoTitle: 'Explore Tags - ColorMagic',
+        seoDescription: 'Explore color palettes by tag.',
       },
       imageColorPicker: {
         title: 'Image Color Picker',
@@ -140,6 +146,7 @@ export default defineI18nConfig(() => ({
         suggestIdea: 'アイデアを提案',
         free: 'ColorMagicが今なら完全無料です！詳しくはこちら',
         explore: '探検する',
+        exploreTags: 'タグを調べる',
         imageColorPicker: '画像カラーピッカー',
         tools: 'ツール',
         website: 'Webサイト',
@@ -180,6 +187,11 @@ export default defineI18nConfig(() => ({
         tone: 'トーン',
         season: '季節',
         byTag: 'タグ別にパレットを探索する'
+      },
+      exploreTags: {
+        title: 'タグを探索',
+        seoTitle: 'タグを探索 - ColorMagic',
+        seoDescription: 'タグ別にカラーパレットを探索します。'
       },
       imageColorPicker: {
         title: '画像カラーピッカー',
@@ -249,6 +261,7 @@ export default defineI18nConfig(() => ({
         suggestIdea: 'Suggerisci un\'idea',
         free: 'ColorMagic è ora completamente gratuito! Leggi di più qui',
         explore: 'Esplorare',
+        exploreTags: 'Esplora i tag',
         imageColorPicker: 'Selettore colore immagine',
         tools: 'Utensili',
         website: 'Sito web',
@@ -289,6 +302,11 @@ export default defineI18nConfig(() => ({
         tone: 'Tono',
         season: 'Stagione',
         byTag: 'Esplora le tavolozze per tag'
+      },
+      exploreTags: {
+        title: 'Esplora Tag',
+        seoTitle: 'Esplora Tag - ColorMagic',
+        seoDescription: 'Esplora palette di colori per tag.'
       },
       imageColorPicker: {
         title: 'Selettore colore immagine',

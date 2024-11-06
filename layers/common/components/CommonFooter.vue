@@ -143,6 +143,10 @@ const websiteLinks = computed(() => [
     to: localePath('/palette/explore')
   },
   {
+    label: t('nav.exploreTags'),
+    to: localePath('/palette/explore/tags')
+  },
+  {
     label: t('nav.liked'),
     to: localePath('/palette/liked')
   },

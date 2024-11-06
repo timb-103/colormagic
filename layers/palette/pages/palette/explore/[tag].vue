@@ -86,17 +86,6 @@
         />
       </div>
     </div>
-
-    <!-- tag links -->
-    <p class="font-semibold mt-8 mb-4">
-      {{ $t('explore.byTag') }}
-    </p>
-    <div class="space-y-4">
-      <PaletteTagLinks :links="paletteFilterOptions.color.value" />
-      <PaletteTagLinks :links="paletteFilterOptions.style.value" />
-      <PaletteTagLinks :links="paletteFilterOptions.tone.value" />
-      <PaletteTagLinks :links="paletteFilterOptions.season.value" />
-    </div>
   </div>
 </template>
 
@@ -143,7 +132,6 @@ const count = computed(() => list.value?.pages[0].count ?? 0);
 if (filters.length === 0) {
   throw createError({ statusCode: 404, statusMessage: 'Tag not found.' });
 }
-
 
 const title = computed(() => `${filters.map(v => v.label[getLocale(locale.value)]).join(' ')} ${t('explore.colorPalettes')}`);
 const seoTitle = computed(() => `${title.value} - ColorMagic`);
