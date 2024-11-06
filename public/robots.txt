@@ -1,2 +1,19 @@
-User-agent: meta-externalagent
+# Block all bots except Googlebot, Bingbot, and other search engines
+
+User-agent: *
 Disallow: /
+
+User-agent: Googlebot
+Disallow:
+
+User-agent: Googlebot-Image
+Disallow:
+
+User-agent: Bingbot
+Disallow:
+
+User-agent: DuckDuckBot
+Disallow:
+
+User-agent: AhrefsSiteAudit
+Disallow:
