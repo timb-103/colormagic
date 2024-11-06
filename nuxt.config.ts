@@ -59,7 +59,10 @@ export default defineNuxtConfig({
   routeRules: {
     /** @description add cache time for images to make pagespeed insights happy */
     '/_nuxt/**': { headers: { 'cache-control': 'max-age=31536000' } },
-    '/img/**': { headers: { 'cache-control': 'max-age=31536000' } }
+    '/img/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    '/palette/explore': { headers: { 'cache-control': 'max-age=0' } },
+    '/palette/explore/*': { headers: { 'cache-control': 'max-age=0' } },
+    '/palette/*': { headers: { 'cache-control': 'max-age=2592000' } }
   },
   compatibilityDate: '2024-09-23',
   i18n: {
