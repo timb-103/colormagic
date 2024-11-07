@@ -144,6 +144,10 @@ useSeoMeta({
   description: seoDescription,
   ogTitle: seoTitle,
   ogDescription: seoDescription,
-  ogImageUrl: `${useRuntimeConfig().public.siteUrl}/api/og/tag?tag=${filters[0]?.id}&text=${title.value}`
+  ogImageUrl: `${useRuntimeConfig().public.siteUrl}/api/og/tag?tag=${filters[0]?.id}&text=${title.value}`,
+  robots: {
+    noindex: tags.value.length > 2,
+    nofollow: tags.value.length > 2
+  }
 });
 </script>
