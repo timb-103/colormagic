@@ -4,6 +4,16 @@ import type { CreatableUserEntity, UpdatableUserEntity, UserEntity } from '../en
 export class UserRepository {
   constructor(private readonly collection: Collection<UserEntity>) {}
 
+  public async setup(): Promise<void> {
+    await this.collection.createIndexes([{
+      key: { createdAt: -1 }
+    }, {
+      key: { email: -1 }
+    }, {
+      key: { googleId: -1 }
+    }], { background: true });
+  }
+
   public async getById(id: string): Promise<UserEntity | null> {
     return await this.collection.findOne({ _id: new ObjectId(id) });
   }

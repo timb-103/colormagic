@@ -7,6 +7,7 @@ import { UserRepository } from './repositories/user.repository';
 
 export interface UserModule {
   service: UserService
+  setup: () => Promise<void>
 }
 
 /**
@@ -25,6 +26,9 @@ export function getUserModule(
   const service = new UserService(repository);
 
   return {
-    service
+    service,
+    setup: async () => {
+      await repository.setup();
+    }
   };
 }

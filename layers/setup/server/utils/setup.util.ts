@@ -41,7 +41,10 @@ export async function setup(): Promise<void> {
     const google = getGoogleModule(logger);
     const auth = getAuthModule(logger, user.service, google.service);
 
-    await palette.setup();
+    await Promise.all([
+      palette.setup(),
+      user.setup()
+    ]);
 
     modules = {
       ai,
