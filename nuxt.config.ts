@@ -12,8 +12,8 @@ export default defineNuxtConfig({
       meta: [
         { name: 'robots', content: 'index, follow' },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'googlebot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
-        { name: 'bingbot', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
+        { name: 'googlebot', content: 'max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
+        { name: 'bingbot', content: 'max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
         { property: 'og:site_name', content: 'ColorMagic' }
       ]
     }
