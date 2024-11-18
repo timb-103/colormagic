@@ -61,6 +61,10 @@ onMounted(() => {
   const colorMode = useLocalStorage('nuxt-color-mode', 'light');
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
+
+  if (process.client && window?._carbonads?.init !== undefined) {
+    window._carbonads.init(document.getElementById('carbonad'));
+  }
 });
 </script>
 
