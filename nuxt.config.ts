@@ -15,9 +15,6 @@ export default defineNuxtConfig({
         { name: 'googlebot', content: 'max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
         { name: 'bingbot', content: 'max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
         { property: 'og:site_name', content: 'ColorMagic' }
-      ],
-      script: [
-        { src: process.env.CARBONADS_SCRIPT, type: 'text/javascript', id: '_carbonads_js' }
       ]
     }
   },
@@ -56,7 +53,8 @@ export default defineNuxtConfig({
       siteUrl: process.env.SITE_URL ?? 'http://localhost:3000',
       apiUrl: process.env.SITE_URL !== undefined
         ? `${process.env.SITE_URL}/api`
-        : 'http://localhost:3000/api'
+        : 'http://localhost:3000/api',
+      carbonAdsScriptUrl: process.env.CARBONADS_SCRIPT ?? ''
     }
   },
   routeRules: {
