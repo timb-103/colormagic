@@ -62,8 +62,8 @@ onMounted(() => {
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
 
-  if (_carbonads?.init !== undefined) {
-    _carbonads.init(document.getElementById('carbonad'));
+  if (window?._carbonads?.init !== undefined) {
+    window._carbonads.init(document.getElementById('carbonad'));
   }
 });
 </script>
