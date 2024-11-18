@@ -1,4 +1,4 @@
-export function initCarbonAds(el: HTMLDivElement): void {
+export function initCarbonAds(el: HTMLElement): void {
   if (window._carbonads !== true) {
     const script = document.createElement('script');
     script.id = '_carbonads_js';
