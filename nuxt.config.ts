@@ -15,6 +15,9 @@ export default defineNuxtConfig({
         { name: 'googlebot', content: 'max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
         { name: 'bingbot', content: 'max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
         { property: 'og:site_name', content: 'ColorMagic' }
+      ],
+      script: [
+        { src: process.env.CARBONADS_SCRIPT, type: 'text/javascript', id: '_carbonads_js' }
       ]
     }
   },
