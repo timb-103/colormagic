@@ -6,7 +6,9 @@
     <div
       id="carbonad"
       class="fixed bottom-4 right-4 z-10"
-    />
+    >
+      <CarbonAds />
+    </div>
 
     <!-- nav -->
     <CommonNav />
@@ -61,22 +63,5 @@ onMounted(() => {
   const colorMode = useLocalStorage('nuxt-color-mode', 'light');
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
-
-  const adEl = document.getElementById('carbonad');
-  if (adEl !== null) {
-    initCarbonAds(adEl);
-  }
 });
 </script>
-
-<style>
-@media (max-width: 768px) {
-  .carbon-responsive-wrap {
-    display: flex;
-    flex-wrap: nowrap !important;
-    gap: 4px;
-    max-width: 80%;
-    margin-left: auto !important;
-  }
-}
-</style>
