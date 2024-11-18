@@ -62,7 +62,10 @@ onMounted(() => {
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
 
-  initCarbonAds(document.getElementById('carbonad'));
+  const adEl = document.getElementById('carbonad');
+  if (adEl !== null) {
+    initCarbonAds(adEl);
+  }
 });
 </script>
 
