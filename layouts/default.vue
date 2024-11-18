@@ -1,7 +1,12 @@
 <template>
   <!-- add padding at bottom for floating button -->
-  <div class="pb-16">
+  <div class="pb-44">
     <NuxtLoadingIndicator color="#5576ff" />
+
+    <div
+      id="carbonad"
+      class="fixed bottom-4 right-4 z-10"
+    />
 
     <!-- nav -->
     <CommonNav />
@@ -15,9 +20,6 @@
 
     <!-- footer -->
     <CommonFooter />
-
-    <!-- floating donate button -->
-    <CommonFloatingButton />
 
     <!-- global notifications -->
     <UNotifications>
@@ -59,5 +61,21 @@ onMounted(() => {
   const colorMode = useLocalStorage('nuxt-color-mode', 'light');
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
+
+  if (_carbonads?.init !== undefined) {
+    _carbonads.init(document.getElementById('carbonad'));
+  }
 });
 </script>
+
+<style>
+@media (max-width: 768px) {
+  .carbon-responsive-wrap {
+    display: flex;
+    flex-wrap: nowrap !important;
+    gap: 4px;
+    max-width: 80%;
+    margin-left: auto !important;
+  }
+}
+</style>
