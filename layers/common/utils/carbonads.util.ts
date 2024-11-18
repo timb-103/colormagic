@@ -5,7 +5,5 @@ export function initCarbonAds(el: HTMLDivElement): void {
     script.async = true;
     script.src = useRuntimeConfig().public.carbonAdsScriptUrl;
     el.appendChild(script);
-
-    console.log('initialized!!s');
   }
 }
