@@ -21,9 +21,6 @@
     <!-- footer -->
     <CommonFooter />
 
-    <!-- floating donate button -->
-    <!-- <CommonFloatingButton /> -->
-
     <!-- global notifications -->
     <UNotifications>
       <template #description="{ description }">
@@ -73,15 +70,12 @@ onMounted(() => {
 
 <style>
 @media (max-width: 768px) {
-.carbon-responsive-wrap {
-  display: flex;
-  flex-wrap: nowrap !important;
-  gap: 4px;
-  max-width: 80%;
-  margin-left: auto !important;
-}
-.carbon-img > img {
-  /* width: 50px; */
-}
+  .carbon-responsive-wrap {
+    display: flex;
+    flex-wrap: nowrap !important;
+    gap: 4px;
+    max-width: 80%;
+    margin-left: auto !important;
+  }
 }
 </style>
