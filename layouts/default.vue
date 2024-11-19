@@ -3,12 +3,16 @@
   <div class="pb-44">
     <NuxtLoadingIndicator color="#5576ff" />
 
+    <!-- floating bottom ad -->
     <div
       id="carbonad"
       class="fixed bottom-4 right-4 z-10"
     >
       <CarbonAds />
     </div>
+
+    <!-- top banner ad -->
+    <CarbonAdsBanner />
 
     <!-- nav -->
     <CommonNav />
