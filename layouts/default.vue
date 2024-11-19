@@ -11,11 +11,11 @@
       <CarbonAds />
     </div>
 
-    <!-- top banner ad -->
-    <CarbonAdsBanner />
-
     <!-- nav -->
     <CommonNav />
+
+    <!-- top banner ad -->
+    <CarbonAdsBanner />
 
     <!-- content -->
     <main>

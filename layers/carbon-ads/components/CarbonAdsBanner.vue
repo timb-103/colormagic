@@ -1,7 +1,7 @@
 <template>
   <div
     id="responsive_colormagicapp"
-    class="border-b border-gray-200  hidden sm:flex justify-center"
+    class="mt-4 border border-gray-200  hidden sm:flex justify-center rounded-md max-w-3xl mx-auto overflow-hidden"
   />
 </template>
 
@@ -29,7 +29,7 @@ onMounted(() => {
     max-inline-size: 100%;
 }
 #responsive_colormagicapp ._responsive_ .native-banner {
-    padding: 5px 10px 5px 10px;
+    /* padding: 5px 10px 5px 10px; */
     box-shadow: none;
 }
 
@@ -40,6 +40,7 @@ onMounted(() => {
 #responsive_colormagicapp ._responsive_ .native-cta {
     background-color: transparent !important;
     color: blue !important;
+    display: none;
 }
 
 #responsive_colormagicapp ._responsive_ .native-details {
