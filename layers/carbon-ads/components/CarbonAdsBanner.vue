@@ -13,7 +13,7 @@ function init(): void {
   s.src = '//m.servedby-buysellads.com/monetization.js';
   document.head.appendChild(s);
   s.onload = () => {
-    window._bsa.init('responsive', id, placement, { target: '#responsive_colormagicapp' });
+    window._bsa.init('stickybox', id, placement, { target: '#responsive_colormagicapp' });
   };
 }
 

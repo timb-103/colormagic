@@ -57,6 +57,10 @@
       </p>
     </UForm>
 
+    <div class="mt-4">
+      <CarbonAds />
+    </div>
+
     <!-- palettes -->
     <div class="mt-8">
       <p class="text-lg font-bold mb-4">

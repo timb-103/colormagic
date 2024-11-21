@@ -1,7 +1,7 @@
 <template>
   <div
     ref="container"
-    class="carbon"
+    class="carbon h-[154px]"
   />
 </template>
 
