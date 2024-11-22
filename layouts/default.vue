@@ -5,7 +5,7 @@
 
     <!-- floating bottom ad -->
     <!-- <div
-      class="fixed bottom-4 left-4 z-10"
+      class="fixed top-24 left-4 z-10"
     >
       <CarbonAds />
     </div> -->

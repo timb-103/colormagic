@@ -17,9 +17,9 @@ function init(): void {
   };
 }
 
-watch(useRoute(), () => {
-  window?._carbonads?.refresh();
-});
+// watch(useRoute(), () => {
+//   window?._bsa?.reload();
+// });
 
 onMounted(() => {
   init();
