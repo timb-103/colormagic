@@ -1,7 +1,7 @@
 <template>
   <div
     ref="container"
-    class="carbon h-[154px]"
+    class="carbon min-h-[154px]"
   />
 </template>
 
@@ -36,7 +36,7 @@ onMounted(() => {
 </script>
 
 <style>
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .carbon .carbon-responsive-wrap {
     display: flex;
     flex-wrap: nowrap !important;
@@ -44,5 +44,5 @@ onMounted(() => {
     max-width: 80%;
     margin-left: auto !important;
   }
-}
+} */
 </style>
