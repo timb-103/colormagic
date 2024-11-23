@@ -24,25 +24,11 @@ function init(): void {
   }
 }
 
-// watch(useRoute(), () => {
-//   if (isInitialized.value) {
-//     window?._carbonads?.refresh();
-//   }
-// });
+watch(useRoute(), () => {
+  window?._carbonads?.refresh();
+});
 
 onMounted(() => {
   init();
 });
 </script>
-
-<style>
-/* @media (max-width: 768px) {
-  .carbon .carbon-responsive-wrap {
-    display: flex;
-    flex-wrap: nowrap !important;
-    gap: 4px;
-    max-width: 80%;
-    margin-left: auto !important;
-  }
-} */
-</style>

@@ -132,11 +132,6 @@
           <ColorArrangeSliders v-model="arrange" />
         </div>
 
-        <!-- ad -->
-        <div class="my-4">
-          <CarbonAds />
-        </div>
-
         <!-- share buttons -->
         <div class="mt-8">
           <p class="text-sm font-semibold mb-2">

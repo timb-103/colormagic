@@ -18,11 +18,6 @@
       </p>
     </div>
 
-    <!-- ad -->
-    <div class="my-4">
-      <CarbonAds />
-    </div>
-
     <!-- loading skeletons -->
     <div v-if="!palettes">
       <ul class="grid sm:grid-cols-3 gap-4">

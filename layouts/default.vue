@@ -4,11 +4,11 @@
     <NuxtLoadingIndicator color="#5576ff" />
 
     <!-- floating bottom ad -->
-    <!-- <div
-      class="fixed top-24 left-4 z-10"
+    <div
+      class="fixed bottom-4 left-4 z-10"
     >
       <CarbonAds />
-    </div> -->
+    </div>
 
     <!-- nav -->
     <CommonNav />
@@ -23,9 +23,7 @@
     <!-- footer -->
     <CommonFooter />
 
-    <div>
-      <CarbonAdsBanner />
-    </div>
+    <CarbonAdsStickyBox />
 
     <!-- global notifications -->
     <UNotifications>
