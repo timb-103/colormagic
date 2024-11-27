@@ -42,7 +42,7 @@ export class PaletteService {
 
     const [entities, count] = await Promise.all([
       this.repository.list(page, size, colFilter, sort),
-      this.repository.count(colFilter)
+      this.repository.count(colFilter.tags !== undefined ? { tags: { $all: filter.tags } } : {})
     ]);
 
     /** @description link likes to palettes */
