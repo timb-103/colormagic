@@ -9,6 +9,7 @@
 function init(): void {
   const s = document.createElement('script');
   s.src = '//m.servedby-buysellads.com/monetization.js';
+  s.defer = true;
   document.head.appendChild(s);
 
   s.onload = () => {

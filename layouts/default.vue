@@ -5,12 +5,17 @@
 
     <!-- floating bottom ad -->
     <div
+      class="fixed bottom-4 left-4 z-10"
+    >
+      <CarbonAds />
+    </div>
+    <!-- <div
       class="fixed bottom-8 z-10 w-full flex justify-center pointer-events-none px-4"
     >
       <div class="pointer-events-auto">
         <CommonBannerAd />
       </div>
-    </div>
+    </div> -->
 
     <!-- nav -->
     <CommonNav />
@@ -25,7 +30,7 @@
     <!-- footer -->
     <CommonFooter />
 
-    <!-- <CarbonAdsStickyBox /> -->
+    <CarbonAdsStickyBox />
 
     <!-- global notifications -->
     <UNotifications>

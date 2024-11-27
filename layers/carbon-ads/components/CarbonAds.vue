@@ -16,8 +16,8 @@ function init(): void {
     isInitialized.value = true;
     const s = document.createElement('script');
     s.id = '_carbonads_js';
-    s.src = `//cdn.carbonads.com/carbon.js?serve=${id}&placement=${placement}&format=cover`;
-    s.async = true;
+    s.src = `//cdn.carbonads.com/carbon.js?serve=${id}&placement=${placement}&format=responsive`;
+    s.defer = true;
     if (container.value !== undefined) {
       container.value.appendChild(s);
     }

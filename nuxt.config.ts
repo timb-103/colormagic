@@ -61,8 +61,7 @@ export default defineNuxtConfig({
     '/img/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/palette/explore': { headers: { 'cache-control': 'max-age=0' } },
     '/palette/explore/*': { headers: { 'cache-control': 'max-age=0' } },
-    '/palette/*': { headers: { 'cache-control': 'max-age=2592000' } },
-    '/ads.txt': { redirect: { to: 'https://srv.adstxtmanager.com/19390/colormagic.app', statusCode: 301 } }
+    '/palette/*': { headers: { 'cache-control': 'max-age=2592000' } }
   },
   compatibilityDate: '2024-09-23',
   i18n: {
