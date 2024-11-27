@@ -19,10 +19,8 @@ const props = defineProps<Props>();
 
 defineEmits<(e: 'change', value: PaletteSortBy) => void>();
 
-// const localePath = useLocalePath();
-// const { locale, t } = useI18n();
-
 const sortOptions: Array<{ label: string, id: PaletteSortBy }> = [
+  { label: 'Trending', id: PaletteSortBy.TRENDING },
   { label: 'Popular', id: PaletteSortBy.POPULAR },
   { label: 'Recent', id: PaletteSortBy.RECENT }
 ];
