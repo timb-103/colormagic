@@ -1,4 +1,5 @@
 export enum PaletteSortBy {
   RECENT = 'RECENT',
-  POPULAR = 'POPULAR'
+  POPULAR = 'POPULAR',
+  TRENDING = 'TRENDING'
 }

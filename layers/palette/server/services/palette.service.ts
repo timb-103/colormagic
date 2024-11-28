@@ -1,4 +1,5 @@
 import { ObjectId, type Filter, type Sort } from 'mongodb';
+import { subDays } from 'date-fns';
 import type { ListPaletteDto, ListPaletteInputDto, PaletteDto } from '../dtos/palette.dto';
 import { mapCreatePalettePrompt, mapPaletteEntityToDto, mapTagsPrompt } from '../helpers/palette.helper';
 import type { PaletteRepository } from '../repositories/palette.repository';
@@ -34,9 +35,14 @@ export class PaletteService {
       sort = { likesCount: -1 };
     }
 
+    if (filter.sortBy === PaletteSortBy.TRENDING) {
+      sort = { likesCount: -1 };
+      colFilter.createdAt = { $gte: subDays(new Date(), 2) };
+    }
+
     const [entities, count] = await Promise.all([
       this.repository.list(page, size, colFilter, sort),
-      this.repository.count(colFilter)
+      this.repository.count(colFilter.tags !== undefined ? { tags: { $all: filter.tags } } : {})
     ]);
 
     /** @description link likes to palettes */

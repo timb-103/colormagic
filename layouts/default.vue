@@ -1,7 +1,21 @@
 <template>
   <!-- add padding at bottom for floating button -->
-  <div class="pb-16">
+  <div class="pb-44">
     <NuxtLoadingIndicator color="#5576ff" />
+
+    <!-- floating bottom ad -->
+    <div
+      class="fixed bottom-4 left-4 z-10"
+    >
+      <CarbonAds />
+    </div>
+    <!-- <div
+      class="fixed bottom-8 z-10 w-full flex justify-center pointer-events-none px-4"
+    >
+      <div class="pointer-events-auto">
+        <CommonBannerAd />
+      </div>
+    </div> -->
 
     <!-- nav -->
     <CommonNav />
@@ -16,8 +30,7 @@
     <!-- footer -->
     <CommonFooter />
 
-    <!-- floating donate button -->
-    <CommonFloatingButton />
+    <CarbonAdsStickyBox />
 
     <!-- global notifications -->
     <UNotifications>

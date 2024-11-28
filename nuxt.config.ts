@@ -27,12 +27,10 @@ export default defineNuxtConfig({
   extends: [
     '@nuxt/ui-pro'
   ],
-  modules: [
-    '@nuxtjs/google-fonts',
-    '@nuxt/ui',
-    '@nuxtjs/plausible',
-    '@nuxtjs/i18n'
-  ],
+  modules: ['@nuxtjs/google-fonts', '@nuxt/ui', '@nuxtjs/i18n', 'nuxt-gtag', '@nuxtjs/plausible'],
+  gtag: {
+    id: 'G-HPJXMCVC3V'
+  },
   tailwindcss: {
     viewer: false
   },
@@ -53,7 +51,8 @@ export default defineNuxtConfig({
       siteUrl: process.env.SITE_URL ?? 'http://localhost:3000',
       apiUrl: process.env.SITE_URL !== undefined
         ? `${process.env.SITE_URL}/api`
-        : 'http://localhost:3000/api'
+        : 'http://localhost:3000/api',
+      carbonAdsScriptUrl: process.env.CARBONADS_SCRIPT ?? ''
     }
   },
   routeRules: {

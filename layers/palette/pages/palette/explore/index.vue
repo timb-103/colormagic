@@ -42,10 +42,17 @@
           :season-options="paletteFilterOptions.season.value"
         />
 
-        <PaletteSortSelectMenu
-          :initial-sort-by="sortBy"
-          @change="value => sortBy = value"
-        />
+        <div class="flex items-center gap-2">
+          <PaletteSortSelectMenu
+            :initial-sort-by="sortBy"
+            @change="value => sortBy = value"
+          />
+          <UButton
+            icon="i-heroicons-arrow-path-solid"
+            :loading="isFetching"
+            @click="refetch()"
+          />
+        </div>
       </div>
 
       <ul class="grid sm:grid-cols-3 gap-4">
@@ -97,13 +104,13 @@ import { PaletteSortBy } from '~/layers/palette/types';
 const { t } = useI18n();
 const localePath = useLocalePath();
 
-const sortBy = ref<PaletteSortBy>(PaletteSortBy.POPULAR);
+const sortBy = ref<PaletteSortBy>(PaletteSortBy.TRENDING);
 const listFilter = computed(() => ({
   sortBy: sortBy.value
 }));
 
 const { data: user } = useUser();
-const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(50, listFilter);
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense, refetch } = useListPalettes(50, listFilter);
 const paletteFilterOptions = usePaletteFilterOptions([]);
 
 await suspense();

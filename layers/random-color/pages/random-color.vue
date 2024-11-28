@@ -83,6 +83,15 @@
         </p>
       </div>
     </ClientOnly>
+
+    <p class="mt-8">
+      Looking for a better random color generator? Try our partner site <NuxtLink
+        class="text-blue-500"
+        to="https://randomcolor.com"
+      >
+        random color
+      </NuxtLink>
+    </p>
   </div>
 </template>
 
