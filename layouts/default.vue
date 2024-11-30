@@ -1,6 +1,6 @@
 <template>
   <!-- add padding at bottom for floating button -->
-  <div class="pb-44">
+  <div class="pb-32 h-dvh overflow-auto">
     <NuxtLoadingIndicator color="#5576ff" />
 
     <!-- floating bottom ad -->
@@ -12,7 +12,7 @@
 
     <!-- header banner ad (codefast) -->
     <div
-      class="w-full flex justify-center"
+      class="w-full flex justify-center sm:sticky top-0 z-10"
     >
       <HeaderAd
         logo-url="/img/ads/codefast.png"
