@@ -9,6 +9,21 @@
     >
       <CarbonAds />
     </div> -->
+
+    <!-- header banner ad (codefast) -->
+    <div
+      class="w-full flex justify-center"
+    >
+      <HeaderAd
+        logo-url="/img/ads/codefast.png"
+        name="CodeFast"
+        text="Learn to code in weeks, not months. 50% off sale ends soon."
+        cta="Get instant access"
+        to="https://codefa.st/?via=colormagic"
+      />
+    </div>
+
+    <!-- sticky bottom center banner ad (codefast) -->
     <div
       class="fixed bottom-8 z-10 w-full flex justify-center pointer-events-none px-4"
     >
