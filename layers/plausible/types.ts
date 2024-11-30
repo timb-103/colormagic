@@ -13,5 +13,8 @@ export enum PlausibleEventName {
 
   LIKE_BUTTON_CLICKED = 'like:click',
 
-  LOGGED_IN_GOOGLE = 'logged-in:google'
+  LOGGED_IN_GOOGLE = 'logged-in:google',
+
+  HEADER_AD_CLICKED = 'ads:header:clicked',
+  STICKY_BOTTOM_AD_CLICKED = 'ads:sticky-bottom:clicked'
 }

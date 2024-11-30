@@ -3,6 +3,7 @@
     :to="to"
     target="_blank"
     class="p-2 bg-black flex justify-center items-center gap-2 hover:bg-default-black-800 border border-gray-600 group w-full"
+    @click="onClick()"
   >
     <img
       width="24px"
@@ -19,6 +20,8 @@
 </template>
 
 <script setup lang="ts">
+import { PlausibleEventName } from '~/layers/plausible/types';
+
 export interface Props {
   logoUrl: string
   name: string
@@ -30,4 +33,8 @@ export interface Props {
 withDefaults(defineProps<Props>(), {
   cta: 'Start free trial'
 });
+
+function onClick(): void {
+  sendPlausibleEvent(PlausibleEventName.HEADER_AD_CLICKED);
+}
 </script>
