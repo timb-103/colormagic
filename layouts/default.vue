@@ -4,14 +4,14 @@
     <NuxtLoadingIndicator color="#5576ff" />
 
     <!-- floating bottom ad -->
-    <!-- <div
+    <div
       class="fixed bottom-4 left-4 z-10"
     >
       <CarbonAds />
-    </div> -->
+    </div>
 
     <!-- header banner ad (codefast) -->
-    <div
+    <!-- <div
       class="w-full flex justify-center sm:sticky top-0 z-10"
     >
       <HeaderAd
@@ -21,10 +21,10 @@
         cta="Get instant access"
         to="https://codefa.st/?via=colormagic"
       />
-    </div>
+    </div> -->
 
     <!-- sticky bottom center banner ad (codefast) -->
-    <div
+    <!-- <div
       class="fixed bottom-8 z-10 w-full flex justify-center pointer-events-none px-4"
     >
       <div class="pointer-events-auto">
@@ -36,7 +36,7 @@
           to="https://codefa.st/?via=colormagic"
         />
       </div>
-    </div>
+    </div> -->
 
     <!-- nav -->
     <CommonNav />
@@ -51,7 +51,7 @@
     <!-- footer -->
     <CommonFooter />
 
-    <!-- <CarbonAdsStickyBox /> -->
+    <CarbonAdsStickyBox />
 
     <!-- global notifications -->
     <UNotifications>
