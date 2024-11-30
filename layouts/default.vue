@@ -4,18 +4,24 @@
     <NuxtLoadingIndicator color="#5576ff" />
 
     <!-- floating bottom ad -->
-    <div
+    <!-- <div
       class="fixed bottom-4 left-4 z-10"
     >
       <CarbonAds />
-    </div>
-    <!-- <div
+    </div> -->
+    <div
       class="fixed bottom-8 z-10 w-full flex justify-center pointer-events-none px-4"
     >
       <div class="pointer-events-auto">
-        <CommonBannerAd />
+        <BannerAd
+          logo-url="/img/ads/codefast.png"
+          name="CodeFast"
+          text="Learn to code in weeks, not months. 50% off sale ends soon."
+          cta="Get instant access"
+          to="https://codefa.st/?via=colormagic"
+        />
       </div>
-    </div> -->
+    </div>
 
     <!-- nav -->
     <CommonNav />
@@ -30,7 +36,7 @@
     <!-- footer -->
     <CommonFooter />
 
-    <CarbonAdsStickyBox />
+    <!-- <CarbonAdsStickyBox /> -->
 
     <!-- global notifications -->
     <UNotifications>
