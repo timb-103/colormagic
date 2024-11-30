@@ -2,6 +2,7 @@
   <NuxtLink
     :to="to"
     target="_blank"
+    rel="nofollow sponsored noopener noreferrer"
     class="p-2 bg-black flex justify-center items-center gap-2 hover:bg-default-black-800 border border-gray-600 group w-full"
     @click="onClick()"
   >
