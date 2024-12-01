@@ -96,3 +96,9 @@ onMounted(() => {
   document.documentElement.classList.remove('dark');
 });
 </script>
+
+<style>
+#grow-me-root {
+  display: none;
+}
+</style>
