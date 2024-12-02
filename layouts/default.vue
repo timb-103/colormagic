@@ -82,8 +82,8 @@ useHead({
   link: [...(head.value.link ?? [])],
   meta: [...(head.value.meta ?? [])],
   script: [
-    { 'data-grow-initializer': '', children: '!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTplMzFkMDUxNC0zOWE2LTRjZDMtOTE3NS0xNDEzMDBiNDRkMmU=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();' },
-    { src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6330271543159498', crossorigin: 'anonymous', async: true }
+    { 'data-grow-initializer': '', children: '!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTplMzFkMDUxNC0zOWE2LTRjZDMtOTE3NS0xNDEzMDBiNDRkMmU=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();' }
+    // { src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6330271543159498', crossorigin: 'anonymous', async: true }
   ]
 });
 
@@ -97,19 +97,8 @@ onMounted(() => {
   const colorMode = useLocalStorage('nuxt-color-mode', 'light');
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
-
-  window.googletag = window.googletag !== undefined ? window.googletag : { cmd: [] };
 });
 
-/** @description refresh ads on page change */
-watch(useRoute(), () => {
-  if (window?.googletag?.cmd !== undefined) {
-    window.googletag.cmd.push(() => {
-      window.googletag.pubads().clear();
-      window.googletag.pubads().refresh();
-    });
-  }
-});
 </script>
 
 <style>
