@@ -29,6 +29,7 @@
                 variant="soft"
                 class="hover:text-primary font-semibold"
                 size="md"
+                @click.prevent="navigateToWithRefresh(item.to)"
               />
             </li>
           </ul>

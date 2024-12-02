@@ -131,12 +131,8 @@ function onSubmit(event: FormSubmitEvent<Form>): void {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
     onSuccess: (value) => {
-      void navigateTo(localePath(`/palette/${value.id}`));
+      navigateToWithRefresh(localePath(`/palette/${value.id}`));
     }
   });
 }
-
-onMounted(() => {
-  refreshGoogleAds();
-});
 </script>

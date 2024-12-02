@@ -254,8 +254,4 @@ watch(data, (newValue) => {
     colors.value = [...newValue.colors];
   }
 }, { immediate: true });
-
-onMounted(() => {
-  refreshGoogleAds();
-});
 </script>

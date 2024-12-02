@@ -150,8 +150,4 @@ useSeoMeta({
     nofollow: tags.value.length > 2
   }
 });
-
-onMounted(() => {
-  refreshGoogleAds();
-});
 </script>

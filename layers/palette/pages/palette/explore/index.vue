@@ -125,8 +125,4 @@ useSeoMeta({
   ogDescription: t('explore.seoDescription'),
   ogImageUrl: `${useRuntimeConfig().public.siteUrl}/img/og.png`
 });
-
-onMounted(() => {
-  refreshGoogleAds();
-});
 </script>
