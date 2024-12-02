@@ -103,9 +103,11 @@ onMounted(() => {
 
 /** @description refresh ads on page change */
 watch(useRoute(), () => {
-  window.googletag.cmd.push(() => {
-    window.googletag.pubads().refresh();
-  });
+  if (window?.googletag?.cmd !== undefined) {
+    window.googletag.cmd.push(() => {
+      window.googletag?.pubads().refresh();
+    });
+  }
 });
 </script>
 
