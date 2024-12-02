@@ -27,11 +27,7 @@ export default defineNuxtConfig({
   extends: [
     '@nuxt/ui-pro'
   ],
-  modules: ['@nuxtjs/google-fonts', '@nuxt/ui', '@nuxtjs/i18n', 'nuxt-gtag', '@nuxtjs/plausible', '@nuxtjs/google-adsense'],
-  googleAdsense: {
-    id: 'ca-pub-6330271543159498',
-    adFormat: 'auto'
-  },
+  modules: ['@nuxtjs/google-fonts', '@nuxt/ui', '@nuxtjs/i18n', 'nuxt-gtag', '@nuxtjs/plausible'],
   gtag: {
     id: 'G-HPJXMCVC3V'
   },
