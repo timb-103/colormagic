@@ -6,5 +6,6 @@ declare global {
     _bsa: any
     dataLayer: any
     gtag: any
+    googletag: any
   }
 }

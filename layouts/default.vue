@@ -97,6 +97,15 @@ onMounted(() => {
   const colorMode = useLocalStorage('nuxt-color-mode', 'light');
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
+
+  window.googletag = window.googletag ?? { cmd: [] };
+});
+
+/** @description refresh ads on page change */
+watch(useRoute(), () => {
+  window.googletag.cmd.push(() => {
+    window.googletag.pubads().refresh();
+  });
 });
 </script>
 
