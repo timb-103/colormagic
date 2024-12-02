@@ -104,13 +104,17 @@ watch(useRoute(), () => {
   const els = document.getElementsByClassName('adsbygoogle');
 
   for (const el of els) {
-    el.removeAttribute('data-ad-status');
-    el.removeAttribute('data-adsbygoogle-status');
-    el.innerHTML = '';
+    if (el.getAttribute('data-vignette-loaded') !== null) {
+      el.removeAttribute('data-ad-status');
+      el.removeAttribute('data-adsbygoogle-status');
+      el.innerHTML = '';
+    }
   }
 
-  for (let i = 0; i < els.length; i += 1) {
-    window.adsbygoogle.push({});
+  for (const el of els) {
+    if (el.getAttribute('data-vignette-loaded') !== null) {
+      window.adsbygoogle.push({});
+    }
   }
 });
 </script>
