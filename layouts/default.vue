@@ -98,25 +98,6 @@ onMounted(() => {
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
 });
-
-/** @description reload ads on route change */
-watch(useRoute(), () => {
-  const els = document.getElementsByClassName('adsbygoogle');
-
-  for (const el of els) {
-    if (el.getAttribute('data-vignette-loaded') === null) {
-      el.removeAttribute('data-ad-status');
-      el.removeAttribute('data-adsbygoogle-status');
-      el.innerHTML = '';
-    }
-  }
-
-  for (const el of els) {
-    if (el.getAttribute('data-vignette-loaded') === null) {
-      window.adsbygoogle.push({});
-    }
-  }
-});
 </script>
 
 <style>

@@ -135,4 +135,8 @@ function onSubmit(event: FormSubmitEvent<Form>): void {
     }
   });
 }
+
+onMounted(() => {
+  refreshGoogleAds();
+});
 </script>
