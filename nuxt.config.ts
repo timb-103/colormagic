@@ -30,7 +30,8 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/google-fonts', '@nuxt/ui', '@nuxtjs/i18n', 'nuxt-gtag', '@nuxtjs/plausible', '@nuxtjs/google-adsense'],
   googleAdsense: {
     id: 'ca-pub-6330271543159498',
-    adFormat: 'auto'
+    adFormat: 'auto',
+    onPageLoad: true
   },
   gtag: {
     id: 'G-HPJXMCVC3V'
