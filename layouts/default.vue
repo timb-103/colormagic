@@ -104,7 +104,7 @@ watch(useRoute(), () => {
   const els = document.getElementsByClassName('adsbygoogle');
 
   for (const el of els) {
-    if (el.getAttribute('data-vignette-loaded') !== null) {
+    if (el.getAttribute('data-vignette-loaded') === null) {
       el.removeAttribute('data-ad-status');
       el.removeAttribute('data-adsbygoogle-status');
       el.innerHTML = '';
@@ -112,7 +112,7 @@ watch(useRoute(), () => {
   }
 
   for (const el of els) {
-    if (el.getAttribute('data-vignette-loaded') !== null) {
+    if (el.getAttribute('data-vignette-loaded') === null) {
       window.adsbygoogle.push({});
     }
   }
