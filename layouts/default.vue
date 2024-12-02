@@ -1,6 +1,6 @@
 <template>
   <!-- add padding at bottom for floating button -->
-  <div class="pb-32 h-dvh overflow-auto">
+  <div>
     <NuxtLoadingIndicator color="#5576ff" />
 
     <!-- floating bottom ad -->
