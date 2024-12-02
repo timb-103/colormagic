@@ -4,6 +4,7 @@
       <div class="flex items-center">
         <!-- logo -->
         <NuxtLinkLocale
+          external
           to="/"
           aria-label="Home"
         >
@@ -23,13 +24,13 @@
               :key="index"
             >
               <UButton
+                external
                 :to="item.to"
                 :label="item.label"
                 active-class="text-primary"
                 variant="soft"
                 class="hover:text-primary font-semibold"
                 size="md"
-                @click.prevent="navigateToWithRefresh(item.to)"
               />
             </li>
           </ul>
