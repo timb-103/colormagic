@@ -4,7 +4,6 @@
       <div class="flex items-center">
         <!-- logo -->
         <NuxtLinkLocale
-          external
           to="/"
           aria-label="Home"
         >
@@ -24,7 +23,6 @@
               :key="index"
             >
               <UButton
-                external
                 :to="item.to"
                 :label="item.label"
                 active-class="text-primary"

@@ -131,7 +131,7 @@ function onSubmit(event: FormSubmitEvent<Form>): void {
       notifications.addError(err.message ?? 'Error creating palette.');
     },
     onSuccess: (value) => {
-      navigateToWithRefresh(localePath(`/palette/${value.id}`));
+      void navigateTo(localePath(`/palette/${value.id}`));
     }
   });
 }

@@ -49,7 +49,7 @@
             placement: 'bottom-start'
           }"
           :ui-menu="{container: 'min-w-36'}"
-          @change="value => navigateToWithRefresh(value.to)"
+          @change="value => navigateTo(value.to)"
         />
         <UButton
           v-if="selectedTone && selectedTone.id !== ''"
@@ -71,7 +71,7 @@
             placement: 'bottom-start'
           }"
           :ui-menu="{container: 'min-w-36'}"
-          @change="value => navigateToWithRefresh(value.to)"
+          @change="value => navigateTo(value.to)"
         />
         <UButton
           v-if="selectedStyle && selectedStyle.id !== ''"
@@ -93,7 +93,7 @@
             placement: 'bottom-start'
           }"
           :ui-menu="{container: 'min-w-36'}"
-          @change="value => navigateToWithRefresh(value.to)"
+          @change="value => navigateTo(value.to)"
         />
         <UButton
           v-if="selectedSeason && selectedSeason.id !== ''"
@@ -188,11 +188,11 @@ watch(selectedColors, (newValue, oldValue) => {
 
   if (added.length > 0) {
     isNavigating.value = true;
-    navigateToWithRefresh(added[0].to);
+    void navigateTo(added[0].to);
   }
   if (removed.length > 0) {
     isNavigating.value = true;
-    navigateToWithRefresh(removed[0].to);
+    void navigateTo(removed[0].to);
   }
 });
 </script>
