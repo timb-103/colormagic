@@ -98,14 +98,15 @@ onMounted(() => {
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
 
-  window.googletag = window.googletag ?? { cmd: [] };
+  window.googletag = window.googletag !== undefined ? window.googletag : { cmd: [] };
 });
 
 /** @description refresh ads on page change */
 watch(useRoute(), () => {
   if (window?.googletag?.cmd !== undefined) {
     window.googletag.cmd.push(() => {
-      window.googletag?.pubads().refresh();
+      window.googletag.pubads().clear();
+      window.googletag.pubads().refresh();
     });
   }
 });
