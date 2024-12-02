@@ -82,8 +82,8 @@ useHead({
   link: [...(head.value.link ?? [])],
   meta: [...(head.value.meta ?? [])],
   script: [
-    { 'data-grow-initializer': '', children: '!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTplMzFkMDUxNC0zOWE2LTRjZDMtOTE3NS0xNDEzMDBiNDRkMmU=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();' },
-    { src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6330271543159498', crossorigin: 'anonymous', async: true }
+    { 'data-grow-initializer': '', children: '!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTplMzFkMDUxNC0zOWE2LTRjZDMtOTE3NS0xNDEzMDBiNDRkMmU=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();' }
+    // { src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6330271543159498', crossorigin: 'anonymous', async: true }
   ]
 });
 
@@ -92,13 +92,33 @@ useServerSeoMeta({
   ogType: 'website'
 });
 
+function loadAdSense(): void {
+  const scriptId = 'adsense';
+  const existingScript = document.getElementById(scriptId);
+
+  if (existingScript !== null) {
+    existingScript.remove();
+  }
+
+  const script = document.createElement('script');
+  script.id = scriptId;
+  script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6330271543159498';
+  script.async = true;
+  script.crossOrigin = 'anonymous';
+  document.body.appendChild(script);
+}
+
 onMounted(() => {
   /** @description hack to always set to light mode until we add dark mode properly */
   const colorMode = useLocalStorage('nuxt-color-mode', 'light');
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
+  loadAdSense();
 });
 
+watch(useRoute(), () => {
+  loadAdSense();
+});
 </script>
 
 <style>
