@@ -7,5 +7,6 @@ declare global {
     dataLayer: any
     gtag: any
     googletag: any
+    adsbygoogle: any
   }
 }

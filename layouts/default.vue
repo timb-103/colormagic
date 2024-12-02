@@ -98,6 +98,21 @@ onMounted(() => {
   colorMode.value = 'light';
   document.documentElement.classList.remove('dark');
 });
+
+/** @description reload ads on route change */
+watch(useRoute(), () => {
+  const els = document.getElementsByClassName('adsbygoogle');
+
+  for (const el of els) {
+    el.removeAttribute('data-ad-status');
+    el.removeAttribute('data-adsbygoogle-status');
+    el.innerHTML = '';
+  }
+
+  for (let i = 0; i < els.length; i += 1) {
+    window.adsbygoogle.push({});
+  }
+});
 </script>
 
 <style>
