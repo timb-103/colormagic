@@ -4,9 +4,9 @@ export default defineI18nConfig(() => ({
   messages: {
     en: {
       home: {
-        title: 'Generate your ideal color palette',
-        seoTitle: 'ColorMagic - AI Color Palette Generator',
-        seoDescription: 'ColorMagic is a color palette generator with AI. Enter any keyword and generate a matching color palette.',
+        title: 'Color Palette Generator',
+        seoTitle: 'ColorMagic - Color Palette Generator',
+        seoDescription: 'Generate color palettes with AI. Enter any keyword and generate a matching color palette.',
         exampleLabel: 'Try an example:'
       },
       recent: {
@@ -76,7 +76,7 @@ export default defineI18nConfig(() => ({
       exploreTags: {
         title: 'Explore Tags',
         seoTitle: 'Explore Tags - ColorMagic',
-        seoDescription: 'Explore color palettes by tag.',
+        seoDescription: 'Explore color palettes by tag.'
       },
       imageColorPicker: {
         title: 'Image Color Picker',
@@ -119,9 +119,9 @@ export default defineI18nConfig(() => ({
     },
     ja: {
       home: {
-        title: 'あなたの思い描く色をかんたんに',
-        seoTitle: 'あなたの思い描く色をかんたんに',
-        seoDescription: 'ColorMagicは、AIでオリジナルのカラーパレットをつくれるサービスです。\n雰囲気やイメージのキーワードから、今すぐ使える配色を簡単に生成できます',
+        title: 'カラーパレットジェネレーター',
+        seoTitle: 'ColorMagic - カラーパレットジェネレーター',
+        seoDescription: 'AIでカラーパレットを生成。任意のキーワードを入力して、一致するカラー パレットを生成します。',
         exampleLabel: '例を試してみてください:'
       },
       recent: {
@@ -234,9 +234,9 @@ export default defineI18nConfig(() => ({
     },
     it: {
       home: {
-        title: 'Genera la tua palette di colori ideale',
-        seoTitle: 'Genera la tua palette di colori ideale',
-        seoDescription: 'ColorMagic è un generatore di palette di colori con IA. Inserisci qualsiasi parola chiave e genera una palette corrispondente.',
+        title: 'Generatore di tavolozze di colori',
+        seoTitle: 'ColorMagic - Generatore di tavolozze di colori',
+        seoDescription: 'Genera tavolozze di colori con l\'intelligenza artificiale. Inserisci qualsiasi parola chiave e genera una tavolozza di colori corrispondente.',
         exampleLabel: 'Prova un esempio:'
       },
       recent: {
