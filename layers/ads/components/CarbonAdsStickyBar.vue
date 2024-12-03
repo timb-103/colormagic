@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mt-4 justify-center max-w-3xl mx-auto sticky-js"
+    class="mt-4 justify-center max-w-3xl mx-auto sticky-js border-gray-200"
   />
 </template>
 
@@ -49,6 +49,9 @@ onMounted(() => {
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+  }
+  .sticky-bar {
+    border:  1px solid #7a7a7a;
   }
 
   @media (max-width: 500px) {
