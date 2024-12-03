@@ -10,6 +10,15 @@
       <CarbonAds />
     </div>
 
+    <a
+      href="https://colormagic.canny.io/feature-requests"
+      class="w-full flex justify-center sticky top-0 z-10 border-b border-gray-200 px-4 py-2 bg-gray-50 hover:bg-gray-100"
+    >
+      <p class="text-sm">
+        ❤️ ColorMagic? <span class="text-blue-400">Suggest a feature</span>
+      </p>
+    </a>
+
     <!-- header banner ad (codefast) -->
     <!-- <div
       class="w-full flex justify-center sm:sticky top-0 z-10"

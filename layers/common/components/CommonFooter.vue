@@ -70,26 +70,6 @@
             </li>
           </ul>
         </div>
-
-        <!-- news -->
-        <div>
-          <p class="text-sm font-semibold mb-2">
-            {{ $t('nav.news') }}
-          </p>
-          <ul>
-            <li>
-              <UButton
-                variant="soft"
-                class="text-gray-400 hover:text-primary"
-                size="md"
-                :padded="false"
-                @click="openModal()"
-              >
-                {{ $t('nav.free') }}
-              </UButton>
-            </li>
-          </ul>
-        </div>
       </div>
 
       <!-- copyright banner -->
@@ -114,11 +94,6 @@
         </NuxtLink>
       </div>
     </div>
-
-    <!-- free modal -->
-    <UModal v-model="isModalOpen">
-      <CommonFreeInfoCard @cancel="closeModal()" />
-    </UModal>
   </footer>
 </template>
 
@@ -126,12 +101,6 @@
 const { locales, locale, t } = useI18n();
 const localePath = useLocalePath();
 const switchLocalePath = useSwitchLocalePath();
-
-const {
-  isOpen: isModalOpen,
-  open: openModal,
-  close: closeModal
-} = useModalV2();
 
 const websiteLinks = computed(() => [
   {
