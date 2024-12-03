@@ -28,7 +28,7 @@ function init(): void {
             <span class="native-cta" style="color: ##ctaTextColor##; background-color: ##ctaBackgroundColor##;">##callToAction##</span>
           </div>
         </a>
-        <div class="native-hide" style="background-color: ##textColor##; color: ##backgroundColor##; border: solid 1px ##backgroundColor##;" onclick="_bsa.close('sticky-js')">✕</div>
+        
         `
       });
     }

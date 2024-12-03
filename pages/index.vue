@@ -7,7 +7,7 @@
         {{ $t('home.title') }}
       </h1>
 
-      <!-- description-->
+      <!-- description -->
       <p class="text-xl font-medium mb-4 max-w-xl">
         {{ description }}
       </p>
@@ -56,6 +56,10 @@
         {{ count?.count.toLocaleString() ?? 0 }} color palettes generated since yesterday
       </p>
     </UForm>
+
+    <div class="my-4">
+      <CarbonAds />
+    </div>
 
     <!-- palettes -->
     <div class="mt-8">

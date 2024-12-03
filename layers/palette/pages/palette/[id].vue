@@ -7,6 +7,10 @@
 
     <div v-else-if="data">
       <div>
+        <div class="mb-4">
+          <CarbonAds />
+        </div>
+
         <!-- tag links -->
         <div class="mb-2">
           <PaletteTagLinks :links="paletteTagLinks" />

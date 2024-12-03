@@ -12,6 +12,11 @@ const isInitialized = ref(false);
 const container = ref<HTMLElement>();
 
 function init(): void {
+  const existing = document.getElementById('_carbonads_js');
+  if (existing !== null) {
+    existing.remove();
+  }
+
   if (!isInitialized.value) {
     isInitialized.value = true;
     const s = document.createElement('script');
@@ -25,7 +30,7 @@ function init(): void {
 }
 
 watch(useRoute(), () => {
-  window?._carbonads?.refresh();
+  // window?._carbonads?.refresh();
 });
 
 onMounted(() => {
