@@ -1,6 +1,6 @@
 <template>
   <div
-    class="mt-4 justify-center rounded-md max-w-3xl mx-auto sticky-js"
+    class="mt-4 justify-center max-w-3xl mx-auto sticky-js"
   />
 </template>
 
@@ -43,3 +43,24 @@ onMounted(() => {
   init();
 });
 </script>
+
+<style>
+  #sticky-js {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  @media (max-width: 500px) {
+    #sticky-js {
+      bottom: 0px !important;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .sticky-bar {
+      border-bottom-left-radius: 0px !important;
+      border-bottom-right-radius: 0px !important;
+    }
+  }
+
+</style>
