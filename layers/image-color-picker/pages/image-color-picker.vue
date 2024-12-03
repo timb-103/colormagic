@@ -13,6 +13,10 @@
       </p>
     </div>
 
+    <div class="mb-4">
+      <CarbonAds />
+    </div>
+
     <!-- form -->
     <UForm
       :state="state"

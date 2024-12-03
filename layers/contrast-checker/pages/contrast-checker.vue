@@ -13,6 +13,10 @@
       </p>
     </div>
 
+    <div class="mb-4">
+      <CarbonAds />
+    </div>
+
     <!-- color -->
     <div class="overflow-hidden border border-gray-200 rounded-2xl mb-4">
       <!-- the color block -->

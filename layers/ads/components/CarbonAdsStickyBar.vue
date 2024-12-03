@@ -35,9 +35,9 @@ function init(): void {
   };
 }
 
-watch(useRoute(), () => {
-  window?._bsa?.reload();
-});
+// watch(useRoute(), () => {
+//   window?._bsa?.reload('#sticky-js');
+// });
 
 onMounted(() => {
   init();
