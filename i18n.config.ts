@@ -65,7 +65,7 @@ export default defineI18nConfig(() => ({
       explore: {
         title: 'Explore Color Palettes',
         seoTitle: 'Explore Color Palettes - ColorMagic',
-        seoDescription: 'Explore all of the latest generated color palettes.',
+        seoDescription: 'Explore user generated {tag} color palettes to use in your next design or project.',
         colorPalettes: 'Color Palettes',
         color: 'Color',
         style: 'Style',
@@ -180,7 +180,7 @@ export default defineI18nConfig(() => ({
       explore: {
         title: 'カラーパレットを探索する',
         seoTitle: 'カラーパレットを探索する - ColorMagic',
-        seoDescription: '最新に生成されたすべてのカラー パレットを探索する.',
+        seoDescription: 'ユーザーが生成した {tag} カラー パレットを調べて、次のデザインやプロジェクトで使用します。',
         colorPalettes: 'カラーパレット',
         color: '色',
         style: 'スタイル',
@@ -295,7 +295,7 @@ export default defineI18nConfig(() => ({
       explore: {
         title: 'Esplora le tavolozze dei colori',
         seoTitle: 'Esplora le tavolozze dei colori - ColorMagic',
-        seoDescription: 'Esplora tutte le tavolozze di colori generate più recenti.',
+        seoDescription: 'Esplora le tavolozze di colori {tag} generate dagli utenti da utilizzare nel tuo prossimo disegno o progetto.',
         colorPalettes: 'Tavolozze di colori',
         color: 'Colore',
         style: 'Stile',

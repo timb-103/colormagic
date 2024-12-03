@@ -17,7 +17,7 @@
 
         <!-- description-->
         <p class="text-xl font-medium mb-4 max-w-xl">
-          {{ $t('explore.seoDescription') }}
+          {{ $t('explore.seoDescription', {tag: tags.join(' ').replace(/-/g, ' ')}) }}
         </p>
 
         <!-- count of palettes generated -->
@@ -135,7 +135,7 @@ if (filters.length === 0) {
 
 const title = computed(() => `${filters.map(v => v.label[getLocale(locale.value)]).join(' ')} ${t('explore.colorPalettes')}`);
 const seoTitle = computed(() => `${title.value} - ColorMagic`);
-const seoDescription = computed(() => `${title.value} ${t('explore.seoDescription')}`);
+const seoDescription = computed(() => `${t('explore.seoDescription', { tag: tags.value.join(' ').replace(/-/g, ' ') })}`);
 
 const thumbnailUrl = `${useRuntimeConfig().public.siteUrl}/api/og/thumbnail?colors=${filters[0].palette.join(':').replace(/#/g, '')}`;
 
