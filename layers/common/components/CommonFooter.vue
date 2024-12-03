@@ -1,5 +1,5 @@
 <template>
-  <footer class="border-t mt-8">
+  <footer class="border-t mt-8 mb-44">
     <div class="max-w-3xl mx-auto px-4 py-8">
       <div class="mb-8 grid grid-cols-2 sm:grid-cols-[repeat(4,auto)] gap-4 justify-between">
         <!-- website -->
