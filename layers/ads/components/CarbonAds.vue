@@ -29,9 +29,9 @@ function init(): void {
   }
 }
 
-watch(useRoute(), () => {
-  // window?._carbonads?.refresh();
-});
+// watch(useRoute(), () => {
+//   window?._carbonads?.refresh();
+// });
 
 onMounted(() => {
   init();
