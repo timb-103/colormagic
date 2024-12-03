@@ -12,6 +12,7 @@
 
     <a
       href="https://colormagic.canny.io/feature-requests"
+      target="_blank"
       class="w-full flex justify-center sticky top-0 z-10 border-b border-gray-200 px-4 py-2 bg-gray-50 hover:bg-gray-100"
     >
       <p class="text-sm">
