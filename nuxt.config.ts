@@ -27,7 +27,11 @@ export default defineNuxtConfig({
   extends: [
     '@nuxt/ui-pro'
   ],
-  modules: ['@nuxtjs/google-fonts', '@nuxt/ui', '@nuxtjs/i18n', 'nuxt-gtag', '@nuxtjs/plausible'],
+  modules: ['@nuxtjs/google-fonts', '@nuxt/ui', '@nuxtjs/i18n', 'nuxt-gtag', '@nuxtjs/plausible', '@nuxtjs/sitemap'],
+  site: {
+    url: 'https://colormagic.app.com',
+    name: 'ColorMagic'
+  },
   gtag: {
     id: 'G-HPJXMCVC3V'
   },
@@ -59,14 +63,12 @@ export default defineNuxtConfig({
     /** @description add cache time for images to make pagespeed insights happy */
     '/_nuxt/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/img/**': { headers: { 'cache-control': 'max-age=31536000' } },
-    '/palette/explore': { headers: { 'cache-control': 'max-age=0' } },
-    '/palette/explore/*': { headers: { 'cache-control': 'max-age=0' } },
-    '/palette/*': { headers: { 'cache-control': 'max-age=2592000' } },
     '/favorites': { redirect: { to: '/palette/liked', statusCode: 301 } },
     '/history': { redirect: { to: '/palette/liked', statusCode: 301 } }
   },
   compatibilityDate: '2024-09-23',
   i18n: {
+    lazy: true,
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
     baseUrl: process.env.SITE_URL ?? 'http://localhost:3000',
@@ -76,19 +78,22 @@ export default defineNuxtConfig({
         code: 'en',
         language: 'en-US',
         name: 'English',
-        flag: '🇬🇧'
+        flag: '🇬🇧',
+        file: 'i18n/locales/en-US.ts'
       },
       {
         code: 'ja',
         language: 'ja-JP',
         name: 'Japanese',
-        flag: '🇯🇵'
+        flag: '🇯🇵',
+        file: 'i18n/locales/ja-JP.ts'
       },
       {
         code: 'it',
         language: 'it-IT',
         name: 'Italian',
-        flag: '🇮🇹'
+        flag: '🇮🇹',
+        file: 'i18n/locales/it-IT.ts'
       }
     ]
   }
