@@ -13,7 +13,8 @@ export function getAllPaletteFilters(): PaletteFilter[] {
     ...getPaletteColorFilter(),
     ...getPaletteSeasonFilter(),
     ...getPaletteStyleFilter(),
-    ...getPaletteToneFilter()
+    ...getPaletteToneFilter(),
+    ...getPaletteCombosFilter()
   ].sort((a, b) => a.id.localeCompare(b.id));
 }
 
@@ -139,5 +140,36 @@ export function getPaletteSeasonFilter(): PaletteFilter[] {
     { id: 'autumn', label: { en: 'Autumn', ja: 'オータム', it: 'Autunno' }, palette: ['#FF8C00', '#D2691E', '#CD853F', '#A0522D', '#8B4513'] },
     { id: 'spring', label: { en: 'Spring', ja: 'スプリング', it: 'Primavera' }, palette: ['#00FF7F', '#FFD700', '#FFB6C1', '#FF69B4', '#ADFF2F'] },
     { id: 'summer', label: { en: 'Summer', ja: 'サマー', it: 'Estate' }, palette: ['#FFD700', '#FFA07A', '#00BFFF', '#4682B4', '#87CEEB'] }
+  ].sort((a, b) => a.id.localeCompare(b.id));
+}
+
+export function getPaletteCombosFilter(): PaletteFilter[] {
+  return [
+    { id: 'deep-winter', label: { en: 'Deep Winter', ja: 'ディープウィンター', it: 'Inverno Profondo' }, palette: ['#1C1C1C', '#00008B', '#4682B4', '#708090', '#A9A9A9'] },
+    { id: 'soft-summer', label: { en: 'Soft Summer', ja: 'ソフトサマー', it: 'Estate Soft' }, palette: ['#B0C4DE', '#87CEEB', '#5F9EA0', '#4682B4', '#A9A9A9'] },
+    { id: 'deep-autumn', label: { en: 'Deep Autumn', ja: 'ディープオータム', it: 'Autunno Profondo' }, palette: ['#8B4513', '#A0522D', '#CD853F', '#D2691E', '#FF4500'] },
+    { id: 'cool-winter', label: { en: 'Cool Winter', ja: 'クールウィンター', it: 'Inverno Freddo' }, palette: ['#4682B4', '#00008B', '#191970', '#B0C4DE', '#F8F8FF'] },
+    { id: 'cool-summer', label: { en: 'Cool Summer', ja: 'クールサマー', it: 'Estate Fresca' }, palette: ['#87CEFA', '#4682B4', '#5F9EA0', '#B0C4DE', '#DCDCDC'] }
+    // { id: 'warm-spring', label: { en: 'Warm Spring', ja: 'ウォームスプリング', it: 'Primavera Calda' }, palette: ['#FFD700', '#FFB6C1', '#FFA07A', '#FF69B4', '#ADFF2F'] },
+    // { id: 'warm-autumn', label: { en: 'Warm Autumn', ja: 'ウォームオータム', it: 'Autunno Caldo' }, palette: ['#D2691E', '#FF8C00', '#8B4513', '#CD853F', '#A0522D'] },
+    // { id: 'dark-autumn', label: { en: 'Dark Autumn', ja: 'ダークオータム', it: 'Autunno Scuro' }, palette: ['#654321', '#8B4513', '#A0522D', '#CD853F', '#D2691E'] },
+    // { id: 'light-spring', label: { en: 'Light Spring', ja: 'ライトスプリング', it: 'Primavera Chiara' }, palette: ['#FFB6C1', '#FFD700', '#ADFF2F', '#FF69B4', '#FFF8DC'] },
+    // { id: 'dark-winter', label: { en: 'Dark Winter', ja: 'ダークウィンター', it: 'Inverno Scuro' }, palette: ['#000000', '#191970', '#4B0082', '#2F4F4F', '#708090'] },
+    // { id: 'light-summer', label: { en: 'Light Summer', ja: 'ライトサマー', it: 'Estate Chiara' }, palette: ['#B0E0E6', '#ADD8E6', '#87CEFA', '#5F9EA0', '#DCDCDC'] },
+    // { id: 'bright-spring', label: { en: 'Bright Spring', ja: 'ブライトスプリング', it: 'Primavera Brillante' }, palette: ['#FFD700', '#FFA500', '#FF69B4', '#ADFF2F', '#FF4500'] },
+    // { id: 'bright-winter', label: { en: 'Bright Winter', ja: 'ブライトウィンター', it: 'Inverno Brillante' }, palette: ['#4682B4', '#00BFFF', '#FFD700', '#FF69B4', '#FFF8DC'] },
+    // { id: 'clear-winter', label: { en: 'Clear Winter', ja: 'クリアウィンター', it: 'Inverno Limpido' }, palette: ['#00008B', '#4682B4', '#B0C4DE', '#F8F8FF', '#708090'] },
+    // { id: 'clear-spring', label: { en: 'Clear Spring', ja: 'クリアスプリング', it: 'Primavera Limpida' }, palette: ['#FFD700', '#FFA07A', '#FF69B4', '#FF4500', '#FFB6C1'] },
+    // { id: 'warm-summer', label: { en: 'Warm Summer', ja: 'ウォームサマー', it: 'Estate Calda' }, palette: ['#FFD700', '#FFA500', '#FFB6C1', '#FF69B4', '#ADFF2F'] },
+    // { id: 'soft-winter', label: { en: 'Soft Winter', ja: 'ソフトウィンター', it: 'Inverno Soft' }, palette: ['#708090', '#4682B4', '#00008B', '#F8F8FF', '#DCDCDC'] },
+    // { id: 'cool-autumn', label: { en: 'Cool Autumn', ja: 'クールオータム', it: 'Autunno Freddo' }, palette: ['#8B4513', '#A0522D', '#CD853F', '#D2691E', '#FFD700'] },
+    // { id: 'warm-fall', label: { en: 'Warm Fall', ja: 'ウォームフォール', it: 'Autunno Caldo' }, palette: ['#FF8C00', '#D2691E', '#A0522D', '#CD853F', '#8B4513'] },
+    // { id: 'cold-summer', label: { en: 'Cold Summer', ja: 'コールドサマー', it: 'Estate Fredda' }, palette: ['#5F9EA0', '#4682B4', '#00008B', '#B0C4DE', '#708090'] },
+    // { id: 'light-autumn', label: { en: 'Light Autumn', ja: 'ライトオータム', it: 'Autunno Chiaro' }, palette: ['#FFDAB9', '#FF8C00', '#D2691E', '#CD853F', '#FFFACD'] },
+    // { id: 'dark-summer', label: { en: 'Dark Summer', ja: 'ダークサマー', it: 'Estate Scura' }, palette: ['#00008B', '#4682B4', '#5F9EA0', '#708090', '#A9A9A9'] },
+    // { id: 'muted-autumn', label: { en: 'Muted Autumn', ja: 'ミューテッドオータム', it: 'Autunno Smorzato' }, palette: ['#8B4513', '#A0522D', '#CD853F', '#D2691E', '#B22222'] },
+    // { id: 'bright-autumn', label: { en: 'Bright Autumn', ja: 'ブライトオータム', it: 'Autunno Brillante' }, palette: ['#FF8C00', '#FFA500', '#FF4500', '#FFD700', '#FFB6C1'] },
+    // { id: 'light-winter', label: { en: 'Light Winter', ja: 'ライトウィンター', it: 'Inverno Chiaro' }, palette: ['#B0C4DE', '#ADD8E6', '#4682B4', '#DCDCDC', '#F8F8FF'] },
+    // { id: 'bright-summer', label: { en: 'Bright Summer', ja: 'ブライトサマー', it: 'Estate Brillante' }, palette: ['#FFD700', '#FFB6C1', '#87CEFA', '#ADFF2F', '#FF69B4'] }
   ].sort((a, b) => a.id.localeCompare(b.id));
 }

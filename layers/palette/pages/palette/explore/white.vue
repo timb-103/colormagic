@@ -5,7 +5,6 @@
       :title="title"
       :description="description"
       :tags="tags"
-      :palette="palette"
     />
 
     <!-- palettes -->
@@ -17,7 +16,6 @@
 
 <script setup lang="ts">
 const tags = ['white'];
-const palette = ['#FFFFFF', '#F8F8FF', '#F5F5F5', '#F0F0F0', '#FAFAFA'];
 
 const { title, description } = useExploreSeo({ tags });
 </script>

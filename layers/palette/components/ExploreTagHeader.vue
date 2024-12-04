@@ -35,12 +35,14 @@ export interface Props {
   title: string
   description: string
   tags?: string[]
-  palette?: string[]
 }
 
 const props = defineProps<Props>();
 
-const colorsHexFormatted = props.palette?.join(':').replace(/#/g, '');
+const tagsString = props.tags?.join('-');
+const palette = getAllPaletteFilters().find(v => tagsString?.includes(v.id))?.palette;
+
+const colorsHexFormatted = palette?.join(':').replace(/#/g, '');
 
 const thumbnailBaseUrl = `${useRuntimeConfig().public.siteUrl}/api/og/thumbnail.png`;
 const thumbnailUrl = `${thumbnailBaseUrl}?colors=${colorsHexFormatted}`;

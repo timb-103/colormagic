@@ -220,6 +220,12 @@ export default {
     fall: 'フォール',
     autumn: 'オータム',
     spring: 'スプリング',
-    summer: 'サマー'
+    summer: 'サマー',
+    // combos
+    'deep-winter': 'ディープウィンター',
+    'soft-summer': 'ソフトサマー',
+    'deep-autumn': 'ディープオータム',
+    'cool-winter': 'クールウィンター',
+    'cool-summer': 'クールサマー'
   }
 };

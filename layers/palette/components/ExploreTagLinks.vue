@@ -4,6 +4,7 @@
     <PaletteTagLinks :links="styleLinks" />
     <PaletteTagLinks :links="toneLinks" />
     <PaletteTagLinks :links="seasonLinks" />
+    <PaletteTagLinks :links="comboLinks" />
   </div>
 </template>
 
@@ -23,6 +24,7 @@ const colorLinks = formatLinks(getPaletteColorFilter());
 const toneLinks = formatLinks(getPaletteToneFilter());
 const styleLinks = formatLinks(getPaletteStyleFilter());
 const seasonLinks = formatLinks(getPaletteSeasonFilter());
+const comboLinks = formatLinks(getPaletteCombosFilter());
 
 function formatLinks(links: PaletteFilter[]): Link[] {
   return links.map(v => ({

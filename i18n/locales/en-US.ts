@@ -220,6 +220,12 @@ export default {
     fall: 'Fall',
     autumn: 'Autumn',
     spring: 'Spring',
-    summer: 'Summer'
+    summer: 'Summer',
+    // combos
+    'deep-winter': 'Deep Winter',
+    'soft-summer': 'Soft Summer',
+    'deep-autumn': 'Deep Autumn',
+    'cool-winter': 'Cool Winter',
+    'cool-summer': 'Cool Summer'
   }
 };
