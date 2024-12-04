@@ -25,6 +25,15 @@ export function useExploreSeo(params: ExploreSeoParams): { title: string, descri
     ogImageUrl: params.ogImageUrl ?? ogImageUrl
   });
 
+  if (params.tags !== undefined && params.tags.length > 2) {
+    useSeoMeta({
+      robots: {
+        noindex: true,
+        nofollow: true
+      }
+    });
+  }
+
   return {
     title: params.title ?? title,
     description: params.description ?? description
