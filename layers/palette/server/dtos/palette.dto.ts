@@ -35,8 +35,7 @@ export const ListPaletteInputDtoSchema = Type.Object({
 export type ListPaletteInputDto = Static<typeof ListPaletteInputDtoSchema>;
 
 export const ListPaletteDtoSchema = Type.Object({
-  items: Type.Array(PaletteDtoSchema),
-  count: Type.Number()
+  items: Type.Array(PaletteDtoSchema)
 });
 
 export type ListPaletteDto = Static<typeof ListPaletteDtoSchema>;

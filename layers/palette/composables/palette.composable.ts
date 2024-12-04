@@ -184,8 +184,7 @@ export function useOptimisticCreatePaletteLike() {
         items: old.items.map((item) => ({
           ...item,
           isLiked: item.id === params.id ? true : item.isLiked
-        })),
-        count: old.count
+        }))
       };
     }
   });
@@ -208,8 +207,7 @@ export function useOptimisticDeletePaletteLike() {
         items: old.items.map((item) => ({
           ...item,
           isLiked: item.id === params.id ? false : item.isLiked
-        })),
-        count: old.count
+        }))
       };
     }
   });

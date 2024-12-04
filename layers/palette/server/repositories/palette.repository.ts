@@ -8,6 +8,10 @@ export class PaletteRepository {
     await this.collection.createIndexes([{
       key: { createdAt: -1 }
     }, {
+      key: { createdAt: -1, likesCount: -1 }
+    }, {
+      key: { likesCount: -1, createdAt: -1 }
+    }, {
       key: { tags: 1 }
     }, {
       key: { likesCount: -1 }

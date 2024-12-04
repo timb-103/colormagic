@@ -40,10 +40,7 @@ export class PaletteService {
       colFilter.createdAt = { $gte: subDays(new Date(), 2) };
     }
 
-    const [entities, count] = await Promise.all([
-      this.repository.list(page, size, colFilter, sort),
-      this.repository.count(colFilter.tags !== undefined ? { tags: { $all: filter.tags } } : {})
-    ]);
+    const entities = await this.repository.list(page, size, colFilter, sort);
 
     /** @description link likes to palettes */
     let likedPaletteIds: string[] = [];
@@ -54,8 +51,7 @@ export class PaletteService {
     }
 
     return {
-      items: entities.map(entity => mapPaletteEntityToDto(entity, likedPaletteIds)),
-      count
+      items: entities.map(entity => mapPaletteEntityToDto(entity, likedPaletteIds))
     };
   }
 
@@ -69,14 +65,10 @@ export class PaletteService {
       }
     };
 
-    const [entities, count] = await Promise.all([
-      this.repository.list(0, size, colFilter, { createdAt: -1 }),
-      this.repository.count(colFilter)
-    ]);
+    const entities = await this.repository.list(0, size, colFilter, { createdAt: -1 });
 
     return {
-      items: entities.map(entity => mapPaletteEntityToDto(entity, likedPaletteIds)),
-      count
+      items: entities.map(entity => mapPaletteEntityToDto(entity, likedPaletteIds))
     };
   }
 
