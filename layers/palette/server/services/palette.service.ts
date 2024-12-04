@@ -25,7 +25,7 @@ export class PaletteService {
     const colFilter: Filter<PaletteEntity> = {};
     let sort: Sort = { createdAt: -1 };
 
-    if (filter.tags !== undefined) {
+    if (filter.tags !== undefined && filter.tags.length > 0) {
       colFilter.tags = {
         $all: filter.tags
       };
