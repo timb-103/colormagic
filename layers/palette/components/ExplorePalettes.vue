@@ -74,7 +74,7 @@ export interface Props {
 
 const props = defineProps<Props>();
 
-const sortBy = ref<PaletteSortBy>(PaletteSortBy.TRENDING);
+const sortBy = ref<PaletteSortBy>(props.tags.length === 0 ? PaletteSortBy.TRENDING : PaletteSortBy.POPULAR);
 const listFilter = computed<ListPaletteFilterParams | undefined>(() => ({
   tags: props.tags.length > 0 ? props.tags : undefined,
   sortBy: sortBy.value
