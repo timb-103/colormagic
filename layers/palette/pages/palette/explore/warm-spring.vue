@@ -4,21 +4,20 @@
     <ExploreTagHeader
       :title="title"
       :description="description"
+      :tags="tags"
+      :palette="palette"
     />
 
     <!-- palettes -->
     <ExplorePalettes
-      :tags="[]"
+      :tags="tags"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n();
+const tags = ['warm', 'spring'];
+const palette = ['#ff8b6b', '#ffb580', '#ffcdad', '#fadfcc', '#f6c5ac'];
 
-const { title, description } = useExploreSeo({
-  title: t('explore.title'),
-  description: t('explore.seoDescription'),
-  ogImageUrl: `${useRuntimeConfig().public.siteUrl}/img/og.png`
-});
+const { title, description } = useExploreSeo({ tags });
 </script>

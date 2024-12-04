@@ -74,7 +74,7 @@
         >
           <ColorPaletteButton
             :colors="item.palette"
-            :name="item.label[getLocale(locale)]"
+            :name="$t(`colors.${item.id}`)"
             :to="localePath(`/palette/explore/${item.id}`)"
           />
         </li>
@@ -94,7 +94,7 @@
 import { object, type InferType, string } from 'yup';
 import type { FormSubmitEvent } from '#ui/types';
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
 const localePath = useLocalePath();
 
 const title = t('home.seoTitle');

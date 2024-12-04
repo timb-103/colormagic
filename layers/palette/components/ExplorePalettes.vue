@@ -59,6 +59,9 @@
         />
       </div>
     </div>
+
+    <!-- tag links -->
+    <ExploreTagLinks class="mt-8" />
   </div>
 </template>
 
