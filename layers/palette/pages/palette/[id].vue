@@ -158,7 +158,7 @@ import ntc from '~/layers/palette/utils/ntc.util';
 const { params } = useRoute();
 const id = ref(typeof params.id === 'string' ? params.id : undefined);
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
 const localePath = useLocalePath();
 const { data, suspense, isError } = usePalette(id);
 const { mutate: clone, isPending: isCloning } = useClonePalette();
@@ -190,7 +190,7 @@ useSeoMeta({
 });
 
 const paletteTagLinks = getAllPaletteFilters().map(v => ({
-  label: v.label[getLocale(locale.value)],
+  label: t(`colors.${v.id}`),
   id: v.id,
   to: localePath(`/palette/explore/${v.id}`)
 })).filter(v => data.value?.tags.includes(v.id));

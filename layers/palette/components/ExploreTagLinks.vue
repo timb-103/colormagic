@@ -1,12 +1,34 @@
 <template>
   <div class="space-y-4">
-    <PaletteTagLinks :links="paletteFilterOptions.color.value" />
-    <PaletteTagLinks :links="paletteFilterOptions.style.value" />
-    <PaletteTagLinks :links="paletteFilterOptions.tone.value" />
-    <PaletteTagLinks :links="paletteFilterOptions.season.value" />
+    <PaletteTagLinks :links="colorLinks" />
+    <PaletteTagLinks :links="styleLinks" />
+    <PaletteTagLinks :links="toneLinks" />
+    <PaletteTagLinks :links="seasonLinks" />
   </div>
 </template>
 
 <script setup lang="ts">
-const paletteFilterOptions = usePaletteFilterOptions([]);
+import { type PaletteFilter } from '~/layers/palette/utils/palette-filters.util';
+
+interface Link {
+  label: string
+  id: string
+  to: string
+}
+
+const { t } = useI18n();
+const localePath = useLocalePath();
+
+const colorLinks = formatLinks(getPaletteColorFilter());
+const toneLinks = formatLinks(getPaletteToneFilter());
+const styleLinks = formatLinks(getPaletteStyleFilter());
+const seasonLinks = formatLinks(getPaletteSeasonFilter());
+
+function formatLinks(links: PaletteFilter[]): Link[] {
+  return links.map(v => ({
+    label: t(`colors.${v.id}`),
+    to: localePath(`/palette/explore/${v.id}`),
+    id: v.id
+  }));
+}
 </script>

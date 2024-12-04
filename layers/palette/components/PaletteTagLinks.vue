@@ -8,7 +8,7 @@
       active-class="text-primary"
       class="font-medium text-sm hover:text-primary text-gray-400"
     >
-      {{ item.fullLabel ?? item.label }}
+      {{ item.label }}
     </NuxtLink>
   </div>
 </template>
@@ -19,7 +19,6 @@ export interface Props {
     label: string
     id: string
     to: string
-    fullLabel?: string
   }>
 }
 

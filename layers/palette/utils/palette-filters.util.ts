@@ -116,7 +116,7 @@ export function getPaletteStyleFilter(): PaletteFilter[] {
     { id: 'masculine', label: { en: 'Masculine', ja: 'マスキュリン', it: 'Maschile' }, palette: ['#2F4F4F', '#696969', '#808080', '#A9A9A9', '#000000'] },
     { id: 'mountain', label: { en: 'Mountain', ja: 'マウンテン', it: 'Montagna' }, palette: ['#2E8B57', '#006400', '#228B22', '#556B2F', '#8B4513'] },
     { id: 'midnight', label: { en: 'Midnight', ja: 'ミッドナイト', it: 'Mezzanotte' }, palette: ['#191970', '#000080', '#4682B4', '#2F4F4F', '#6A5ACD'] },
-    { id: 'Scandinavian', label: { en: 'Scandinavian', ja: 'スカンジナビア', it: 'Scandinavo' }, palette: ['#D3D3D3', '#A9A9A9', '#808080', '#F5F5F5', '#696969'] },
+    { id: 'scandinavian', label: { en: 'Scandinavian', ja: 'スカンジナビア', it: 'Scandinavo' }, palette: ['#D3D3D3', '#A9A9A9', '#808080', '#F5F5F5', '#696969'] },
     { id: 'wood', label: { en: 'Wood', ja: 'ウッド', it: 'Legno' }, palette: ['#8B4513', '#A0522D', '#D2691E', '#DEB887', '#F4A460'] },
     { id: 'garden', label: { en: 'Garden', ja: 'ガーデン', it: 'Giardino' }, palette: ['#228B22', '#32CD32', '#006400', '#556B2F', '#8B4513'] },
     { id: 'elegant', label: { en: 'Elegant', ja: 'エレガント', it: 'Elegante' }, palette: ['#DAA520', '#B8860B', '#FFD700', '#D2B48C', '#F4A460'] },

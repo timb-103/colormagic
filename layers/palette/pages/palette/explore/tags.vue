@@ -14,19 +14,12 @@
     </div>
 
     <!-- tag links -->
-    <div class="space-y-4">
-      <PaletteTagLinks :links="paletteFilterOptions.color.value" />
-      <PaletteTagLinks :links="paletteFilterOptions.style.value" />
-      <PaletteTagLinks :links="paletteFilterOptions.tone.value" />
-      <PaletteTagLinks :links="paletteFilterOptions.season.value" />
-    </div>
+    <ExploreTagLinks />
   </div>
 </template>
 
 <script setup lang="ts">
 const { t } = useI18n();
-
-const paletteFilterOptions = usePaletteFilterOptions([]);
 
 useSeoMeta({
   title: t('exploreTags.seoTitle'),
