@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-const tags = ['warm', 'spring'];
+const tags = ['dark', 'summer'];
 
 const { title, description } = useExploreSeo({ tags });
 </script>

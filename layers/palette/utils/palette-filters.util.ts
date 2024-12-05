@@ -118,10 +118,35 @@ export function getAllPaletteFilters(): PaletteFilter[] {
 
 export function getPaletteCombos(): string[][] {
   return [
-    ['deep', 'winter'],
     ['soft', 'summer'],
+    ['soft', 'winter'],
+
+    ['deep', 'winter'],
     ['deep', 'autumn'],
+
     ['cool', 'winter'],
-    ['cool', 'summer']
+    ['cool', 'summer'],
+    ['cool', 'autumn'],
+
+    ['warm', 'spring'],
+    ['warm', 'autumn'],
+    ['warm', 'summer'],
+    ['warm', 'fall'],
+
+    ['dark', 'autumn'],
+    ['dark', 'winter'],
+    ['dark', 'summer'],
+
+    ['light', 'spring'],
+    ['light', 'summer'],
+    ['light', 'autumn'],
+    ['light', 'winter'],
+
+    ['bright', 'spring'],
+    ['bright', 'winter'],
+    ['bright', 'autumn'],
+    ['bright', 'summer'],
+
+    ['muted', 'autumn']
   ];
 }
