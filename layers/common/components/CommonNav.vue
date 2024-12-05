@@ -68,8 +68,13 @@
 
       <!-- right -->
       <div class="flex items-center gap-2 sm:gap-4">
-        <!-- lang switcher-->
-        <CommonLangSwitcher />
+        <UButton
+          icon="i-fa6-brands-instagram"
+          to="https://www.instagram.com/colormagic_app"
+          target="_blank"
+          title="Follow ColorMagic on Instagram"
+          aria-label="Follow ColorMagic on Instagram"
+        />
 
         <!-- login button -->
         <ClientOnly>
@@ -89,6 +94,11 @@
             <UButton icon="i-heroicons-user" />
           </UDropdown>
         </ClientOnly>
+
+        <!-- lang switcher-->
+        <div class="hidden sm:block">
+          <CommonLangSwitcher />
+        </div>
 
         <!-- mobile bars button -->
         <UButton

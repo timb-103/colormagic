@@ -8,6 +8,7 @@
         width="150px"
         height="150px"
         class="max-w-20 sm:max-w-full rounded-xl"
+        :alt="title"
       >
 
       <div>

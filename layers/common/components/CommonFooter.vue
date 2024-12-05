@@ -152,6 +152,10 @@ const toolsLinks = computed(() => [{
 
 const moreLinks = computed(() => [
   {
+    label: 'Instagram',
+    to: 'https://www.instagram.com/colormagic_app'
+  },
+  {
     label: t('nav.contact'),
     to: 'mailto:hello@colormagic.app'
   },
