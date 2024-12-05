@@ -18,10 +18,6 @@
       <div class="mb-4 flex justify-between gap-4 items-center flex-wrap">
         <PaletteFilters
           :tags="tags"
-          :color-options="paletteFilterOptions.color.value"
-          :style-options="paletteFilterOptions.style.value"
-          :tone-options="paletteFilterOptions.tone.value"
-          :season-options="paletteFilterOptions.season.value"
         />
 
         <PaletteSortSelectMenu
@@ -85,7 +81,6 @@ const listFilter = computed<ListPaletteFilterParams | undefined>(() => ({
 
 const { data: user } = useUser();
 const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(50, listFilter);
-const paletteFilterOptions = usePaletteFilterOptions(props.tags);
 
 await suspense();
 

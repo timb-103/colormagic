@@ -20,7 +20,12 @@ const { params } = useRoute();
 const filters = getAllPaletteFilters();
 
 const tag = ref(typeof params.tag === 'string' ? params.tag : undefined);
-const tags = filters.filter(v => tag.value?.includes(v.id)).map(v => v.id);
+const tags = tag.value !== undefined
+  ? tag.value
+    .split('-')
+    .map(id => filters.find(filter => filter.id === id)?.id)
+    .filter((id) => id !== undefined)
+  : [];
 
 const palette = filters.find(v => v.id === tags[0])?.palette ?? undefined;
 

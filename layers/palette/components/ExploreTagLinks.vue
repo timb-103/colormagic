@@ -1,10 +1,7 @@
 <template>
   <div class="space-y-4">
     <PaletteTagLinks :links="colorLinks" />
-    <PaletteTagLinks :links="styleLinks" />
-    <PaletteTagLinks :links="toneLinks" />
-    <PaletteTagLinks :links="seasonLinks" />
-    <!-- <PaletteTagLinks :links="comboLinks" /> -->
+    <PaletteTagLinks :links="comboLinks" />
   </div>
 </template>
 
@@ -20,11 +17,16 @@ interface Link {
 const { t } = useI18n();
 const localePath = useLocalePath();
 
-const colorLinks = formatLinks(getPaletteColorFilter());
-const toneLinks = formatLinks(getPaletteToneFilter());
-const styleLinks = formatLinks(getPaletteStyleFilter());
-const seasonLinks = formatLinks(getPaletteSeasonFilter());
-// const comboLinks = formatLinks(getPaletteCombosFilter());
+const colorLinks = formatLinks(getAllPaletteFilters());
+const comboLinks = formatComboLinks(getPaletteCombos());
+
+function formatComboLinks(links: string[][]): Link[] {
+  return links.map(tags => ({
+    label: tags.map(v => t(`colors.${v}`)).join(' '),
+    to: localePath(`/palette/explore/${tags.join('-')}`),
+    id: tags.join('-')
+  }));
+}
 
 function formatLinks(links: PaletteFilter[]): Link[] {
   return links.map(v => ({
