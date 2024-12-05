@@ -64,7 +64,8 @@ export default defineNuxtConfig({
     '/_nuxt/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/img/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/favorites': { redirect: { to: '/palette/liked', statusCode: 301 } },
-    '/history': { redirect: { to: '/palette/liked', statusCode: 301 } }
+    '/history': { redirect: { to: '/palette/liked', statusCode: 301 } },
+    '/recent': { redirect: { to: '/palette/liked', statusCode: 301 } }
   },
   compatibilityDate: '2024-09-23',
   i18n: {

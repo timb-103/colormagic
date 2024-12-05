@@ -27,7 +27,7 @@ export default {
     suggestIdea: 'Suggerisci un\'idea',
     free: 'ColorMagic è ora completamente gratuito! Leggi di più qui',
     explore: 'Esplorare',
-    exploreTags: 'Esplora i tag',
+    exploreTags: 'Tag',
     imageColorPicker: 'Selettore colore immagine',
     tools: 'Utensili',
     website: 'Sito web',
@@ -70,8 +70,8 @@ export default {
     byTag: 'Esplora le tavolozze per tag'
   },
   exploreTags: {
-    title: 'Esplora Tag',
-    seoTitle: 'Esplora Tag - ColorMagic',
+    title: 'Tag',
+    seoTitle: 'Tag - ColorMagic',
     seoDescription: 'Esplora palette di colori per tag.'
   },
   imageColorPicker: {

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/vue-query';
-import { useLocalStorage, StorageSerializers } from '@vueuse/core';
 import type { ClonePaletteInputParamsDto, ClonePaletteInputQueryDto, CountPaletteDto, CreatePaletteInputDto, ListPaletteDto, ListPaletteInputDto } from '../server/dtos/palette.dto';
 import type { CreatePaletteLikeInputDto, DeletePaletteLikeInputDto } from '../server/dtos/palette-like.dto';
 import type { PaletteModel } from '../models/palette.model';
@@ -10,24 +9,6 @@ import { sendPlausibleEvent } from '~/layers/plausible/utils/plausible.util';
 import { useOptimisticMutation } from '~/layers/common/composables/optimistic.composable';
 
 const PALETTE_ROOT_KEY = 'palette';
-
-export function addPaletteToStorage(palette: PaletteModel): void {
-  const session = useLocalStorage<Map<string, PaletteModel>>(
-    'palettes:created',
-    new Map(),
-    { serializer: StorageSerializers.map }
-  );
-
-  session.value?.set(palette.id, palette);
-
-  /** @description delete last if too many saved */
-  if (session.value.size >= 100) {
-    const oldestKey = session.value.keys().next().value;
-    if (oldestKey !== undefined) {
-      session.value.delete(oldestKey);
-    }
-  }
-}
 
 export function usePalette(id: Ref<string | undefined>) {
   return useQuery({
@@ -128,7 +109,6 @@ export function useCreatePalette() {
         }
       });
 
-      addPaletteToStorage(response);
       sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_CREATED);
 
       return response;
@@ -148,7 +128,6 @@ export function useClonePalette() {
         }
       });
 
-      addPaletteToStorage(response);
       sendPlausibleEvent(PlausibleEventName.COLOR_PALETTE_CREATED);
 
       return response;

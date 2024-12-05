@@ -27,7 +27,7 @@ export default {
     suggestIdea: 'アイデアを提案',
     free: 'ColorMagicが今なら完全無料です！詳しくはこちら',
     explore: '探検する',
-    exploreTags: 'タグを調べる',
+    exploreTags: 'タグ',
     imageColorPicker: '画像カラーピッカー',
     tools: 'ツール',
     website: 'Webサイト',
@@ -70,8 +70,8 @@ export default {
     byTag: 'タグ別にパレットを探索する'
   },
   exploreTags: {
-    title: 'タグを探索',
-    seoTitle: 'タグを探索 - ColorMagic',
+    title: 'タグ',
+    seoTitle: 'タグ - ColorMagic',
     seoDescription: 'タグ別にカラーパレットを探索します。'
   },
   imageColorPicker: {

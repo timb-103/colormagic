@@ -120,10 +120,6 @@ const websiteLinks = computed(() => [
     to: localePath('/palette/liked')
   },
   {
-    label: t('nav.recent'),
-    to: localePath('/recent')
-  },
-  {
     label: t('nav.terms'),
     to: localePath('/terms')
   },
