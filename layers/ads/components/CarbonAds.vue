@@ -1,7 +1,7 @@
 <template>
   <div
     ref="container"
-    class="carbon min-h-[154px]"
+    class="carbon min-h-[154px] fixed bottom-4 right-4 z-10 sm:relative"
   />
 </template>
 
