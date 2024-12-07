@@ -1,44 +1,58 @@
 <template>
-  <div>
-    <!-- header-->
-    <div class="mb-8">
-      <!-- title -->
-      <h1>
-        {{ $t('api.title') }}
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Header -->
+    <div class="mb-8 space-y-4">
+      <!-- Title -->
+      <h1 class="text-3xl md:text-4xl font-bold">
+        {{ $t("api.title") }}
       </h1>
 
-      <!-- description-->
-      <p class="text-xl font-medium mb-4 max-w-xl">
+      <!-- Description -->
+      <p class="text-lg md:text-xl font-medium max-w-xl">
         {{ description }}
       </p>
     </div>
 
-    <!-- get color palette -->
-    <div class="mb-4 space-y-2">
-      <p class="font-semibold">
-        [GET] color palette:
-      </p>
-      <pre class="border bg-gray-50 rounded-sm px-1">{{ getPaletteUrl }}</pre>
+    <!-- API Endpoints Section -->
+    <div class="space-y-8">
+      <!-- GET Color Palette -->
+      <div class="space-y-2">
+        <p class="font-semibold text-base md:text-lg">
+          [GET] color palette:
+        </p>
+        <pre
+          class="border bg-gray-50 rounded-lg p-3 overflow-x-auto text-sm md:text-base"
+        >{{ getPaletteUrl }}</pre>
+      </div>
+
+      <!-- POST List Color Palettes -->
+      <div class="space-y-2">
+        <p class="font-semibold text-base md:text-lg">
+          [POST] list color palettes:
+        </p>
+        <pre
+          class="border bg-gray-50 rounded-lg p-3 overflow-x-auto text-sm md:text-base"
+        >{{ listPalettesUrl }}</pre>
+        <pre
+          class="border bg-gray-50 rounded-lg p-3 overflow-x-auto text-xs md:text-sm"
+        >body: { "page": number, "size": number }</pre>
+      </div>
+
+      <!-- POST Create Color Palette -->
+      <div class="space-y-2">
+        <p class="font-semibold text-base md:text-lg">
+          [POST] create color palette:
+        </p>
+        <pre
+          class="border bg-gray-50 rounded-lg p-3 overflow-x-auto text-sm md:text-base"
+        >{{ createPaletteUrl }}</pre>
+        <pre
+          class="border bg-gray-50 rounded-lg p-3 overflow-x-auto text-xs md:text-sm"
+        >body: { "prompt": string }</pre>
+      </div>
     </div>
 
-    <!-- list color palettes -->
-    <div class="mb-4 space-y-2">
-      <p class="font-semibold">
-        [POST] list color palettes:
-      </p>
-      <pre class="border bg-gray-50 rounded-sm px-1">{{ listPalettesUrl }}</pre>
-      <pre class="border bg-gray-50 rounded-sm px-1 text-sm">body: { "page": number, "size": number }</pre>
-    </div>
-
-    <!-- create color palette -->
-    <div class="mb-4 space-y-2">
-      <p class="font-semibold">
-        [POST] create color palette:
-      </p>
-      <pre class="border bg-gray-50 rounded-sm px-1">{{ createPaletteUrl }}</pre>
-      <pre class="border bg-gray-50 rounded-sm px-1 text-sm">body: { "prompt": string }</pre>
-    </div>
-
+    <!-- Disclaimer Alert -->
     <UAlert
       class="mt-8"
       color="yellow"
