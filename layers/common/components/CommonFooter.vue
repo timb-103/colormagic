@@ -94,6 +94,13 @@
         </NuxtLink>
       </div>
     </div>
+
+    <p class="text-center">
+      Built by <a
+        class="text-blue-400 underline"
+        href="https://timb.com"
+      >timb.com</a>
+    </p>
   </footer>
 </template>
 
