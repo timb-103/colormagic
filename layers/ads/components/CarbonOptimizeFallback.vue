@@ -38,7 +38,7 @@ onMounted(() => {
   }
   @media only screen and (min-width: 737px) and (min-height: 0px) {
     div[id^="bsa-zone_1733305888482-6_123456"] {
-      min-width: 320px;
+      min-width: 100%;
       min-height: 100px;
     }
   }
