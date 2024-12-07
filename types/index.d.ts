@@ -8,5 +8,6 @@ declare global {
     gtag: any
     googletag: any
     adsbygoogle: any
+    optimize: any
   }
 }

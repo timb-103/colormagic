@@ -25,9 +25,9 @@
     </div>
 
     <!-- ads -->
-    <div class="mb-4">
+    <!-- <div class="mb-4">
       <CarbonAds />
-    </div>
+    </div> -->
   </div>
 </template>
 

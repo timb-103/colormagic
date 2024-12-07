@@ -28,4 +28,7 @@ onMounted(() => {
 #_stickybox_ .native-hide {
   display: none !important;
 }
+#_stickybox_ .stickybox-outer {
+  left: 20px;
+}
 </style>
