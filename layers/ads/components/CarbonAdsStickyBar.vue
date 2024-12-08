@@ -74,13 +74,13 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
   }
 };
 
-// watch(useRoute(), () => {
-//   if (window.optimize.queue !== undefined) {
-//     window.optimize.queue.push(() => {
-//       window.optimize.pushAll();
-//     });
-//   }
-// });
+watch(useRoute(), () => {
+  if (window.optimize.queue !== undefined) {
+    window.optimize.queue.push(() => {
+      window.optimize.pushAll();
+    });
+  }
+});
 
 onMounted(() => {
   init();
@@ -108,10 +108,15 @@ onMounted(() => {
 
   #bsa-zone_1733486229130-2_123456 {
     min-width: 100%;
-    min-height: 70px;
+    min-height: 50px;
     position: sticky;
     bottom: 0;
   }
+
+  #bsa-zone_1733486229130-2_123456:not(:empty) {
+    backdrop-filter: blur(3px);
+    background-color: hsla(0, 0%, 5%, .8);
+}
 
   @media (min-width: 768px) {
     #bsa-zone_1733486229130-2_123456 {

@@ -26,12 +26,12 @@ function init(): void {
     if (container.value !== undefined) {
       container.value.appendChild(s);
     }
-    s.onload = () => {
-      window.optimize = window.optimize ?? { queue: [] };
-      window.optimize.queue.push(() => {
-        window.optimize.pushAll();
-      });
-    };
+    // s.onload = () => {
+    //   window.optimize = window.optimize ?? { queue: [] };
+    //   window.optimize.queue.push(() => {
+    //     window.optimize.pushAll();
+    //   });
+    // };
   }
 }
 
