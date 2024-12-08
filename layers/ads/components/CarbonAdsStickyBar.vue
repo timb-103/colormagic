@@ -78,7 +78,6 @@ watch(useRoute(), () => {
   if (window.optimize.queue !== undefined) {
     window.optimize.queue.push(() => {
       window.optimize.pushAll();
-      window.optimize.refreshAll();
     });
   }
 });
