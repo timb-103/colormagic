@@ -1,8 +1,10 @@
 <template>
-  <div
-    :id="zoneId"
-    class="sticky-js"
-  />
+  <div class="hidden sm:flex bottom sticky">
+    <div
+      :id="zoneId"
+      class="sticky-js"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">

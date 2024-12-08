@@ -63,9 +63,7 @@
 
     <!-- <CarbonAdsFlexBar /> -->
 
-    <div class="hidden sm:flex">
-      <CarbonAdsStickyBar />
-    </div>
+    <CarbonAdsStickyBar />
 
     <!-- global notifications -->
     <UNotifications>
