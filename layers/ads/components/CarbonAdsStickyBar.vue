@@ -74,13 +74,13 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
   }
 };
 
-watch(useRoute(), () => {
-  if (window.optimize.queue !== undefined) {
-    window.optimize.queue.push(() => {
-      window.optimize.pushAll();
-    });
-  }
-});
+// watch(useRoute(), () => {
+//   if (window.optimize.queue !== undefined) {
+//     window.optimize.queue.push(() => {
+//       window.optimize.pushAll();
+//     });
+//   }
+// });
 
 onMounted(() => {
   init();
@@ -111,6 +111,8 @@ onMounted(() => {
     min-height: 70px;
     position: sticky;
     bottom: 0;
+    background-color: #fff;
+    border-top:  1px solid #7a7a7a;
   }
 
   #bsa-zone_1733486229130-2_123456_direct_iframe {
