@@ -111,8 +111,8 @@ onMounted(() => {
     min-height: 70px;
     position: sticky;
     bottom: 0;
-    background-color: #fff;
-    border-top:  1px solid #7a7a7a;
+    /* background-color: #fff;
+    border-top:  1px solid #7a7a7a; */
   }
 
   #bsa-zone_1733486229130-2_123456_direct_iframe {
