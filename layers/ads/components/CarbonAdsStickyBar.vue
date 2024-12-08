@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky-js"
+    class="bsa-zone_1733486229130-2_123456"
   />
 </template>
 
@@ -15,9 +15,9 @@ function init(): void {
   s.onload = () => {
     if (window._bsa !== 'undefined') {
       window._bsa.init('custom', id, `${placement}-stickybar`, {
-        target: '.sticky-js',
+        target: '#bsa-zone_1733486229130-2_123456',
         zone: 'bsa-zone_1733486229130-2_123456',
-        id: 'sticky-js',
+        id: 'bsa-zone_1733486229130-2_123456',
         template: `
         <a class="sticky-bar" style="background-color: ##backgroundColor##; color: ##textColor##" href="##link##" rel="sponsored noopener" target="_blank" title="##company## — ##tagline##">
           <div class="native-main">
@@ -50,7 +50,7 @@ async function isOptimizeInitialized(): Promise<void> {
 async function BSANativeCallback(req: { ads: any[], options: { target: string } }): Promise<void> {
   window.isOptimizeLoaded = window.isOptimizeLoaded ?? false;
   window.optimizeTargetIds = window.optimizeTargetIds ?? [];
-  window.optimizeTargetIds.push(req.options.target.replace('#', '').replace('.', ''));
+  window.optimizeTargetIds.push(req.options.target.replace('#', ''));
 
   if (!window.isOptimizeLoaded) {
     const bsaOptimize = document.createElement('script');
