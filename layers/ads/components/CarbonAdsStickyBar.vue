@@ -67,7 +67,6 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
         await isOptimizeInitialized();
         window.optimize = window.optimize ?? { queue: [] };
         window.optimize.queue.push(() => {
-          console.log('pushed!');
           window.optimize.pushAll();
         });
       };
@@ -78,7 +77,6 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
 watch(useRoute(), () => {
   if (window.optimize.queue !== undefined) {
     window.optimize.queue.push(() => {
-      // console.log('pushing:', zoneId);
       window.optimize.pushAll();
       window.optimize.refreshAll();
     });
@@ -104,18 +102,11 @@ onMounted(() => {
     box-shadow: none !important;
   }
 
-  @media only screen and (min-width: 0px) and (min-height: 0px) {
-    div[id^="bsa-zone_1733486229130-2_123456"] {
-      min-width: 100%;
-      min-height: 70px;
-    }
-  }
-
-  @media only screen and (min-width: 737px) and (min-height: 0px) {
-    div[id^="bsa-zone_1733486229130-2_123456"] {
-      min-width: 100%;
-      min-height: 70px;
-    }
+  div[id^="bsa-zone_1733486229130-2_123456"] {
+    min-width: 100%;
+    min-height: 70px;
+    position: sticky;
+    bottom: 0;
   }
 
   @media (max-width: 500px) {
