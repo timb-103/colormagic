@@ -38,34 +38,43 @@ function init(): void {
   };
 }
 
+async function isOptimizeInitialized(): Promise<void> {
+  let count = 0;
+  const max = 100;
+  while (window.optimize.isInitialized === undefined && count < max) {
+    count += 1;
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+}
+
 async function BSANativeCallback(req: { ads: any[], options: { target: string } }): Promise<void> {
-  if (req.ads.length === 0) {
-    window.isOptimizeLoaded = window.isOptimizeLoaded ?? false;
-    window.optimizeTargetIds = window.optimizeTargetIds ?? [];
-    window.optimizeTargetIds.push(req.options.target.replace('#', '').replace('.', ''));
+  window.isOptimizeLoaded = window.isOptimizeLoaded ?? false;
+  window.optimizeTargetIds = window.optimizeTargetIds ?? [];
+  window.optimizeTargetIds.push(req.options.target.replace('#', '').replace('.', ''));
 
-    if (!window.isOptimizeLoaded) {
-      const bsaOptimize = document.createElement('script');
-      bsaOptimize.type = 'text/javascript';
-      bsaOptimize.async = true;
-      bsaOptimize.src = `https://cdn4.buysellads.net/pub/colormagic.js?${new Date().getTime() - new Date().getTime() % 600000}`;
-      (document.getElementsByTagName('head')[0] ?? document.getElementsByTagName('body')[0]).appendChild(bsaOptimize);
+  if (!window.isOptimizeLoaded) {
+    const bsaOptimize = document.createElement('script');
+    bsaOptimize.type = 'text/javascript';
+    bsaOptimize.async = true;
+    bsaOptimize.src = `https://cdn4.buysellads.net/pub/colormagic.js?${new Date().getTime() - new Date().getTime() % 600000}`;
+    (document.getElementsByTagName('head')[0] ?? document.getElementsByTagName('body')[0]).appendChild(bsaOptimize);
 
-      window.isOptimizeLoaded = true;
+    window.isOptimizeLoaded = true;
 
-      bsaOptimize.onload = async () => {
-        window.optimize = window.optimize ?? { queue: [] };
-        window.optimize.queue.push(() => {
-          window.optimize.push(window.optimizeTargetIds);
-        });
-      };
-    }
+    bsaOptimize.onload = async () => {
+      await isOptimizeInitialized();
+      window.optimize = window.optimize ?? { queue: [] };
+      window.optimize.queue.push(() => {
+        window.optimize.push(window.optimizeTargetIds);
+      });
+    };
   }
 };
 
 watch(useRoute(), () => {
   if (window.optimize.queue !== undefined) {
     window.optimize.queue.push(() => {
+      console.log('pushing:', window.optimizeTargetIds);
       window.optimize.push(window.optimizeTargetIds);
     });
   }
