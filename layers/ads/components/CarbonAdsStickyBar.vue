@@ -1,11 +1,13 @@
 <template>
   <div
-    class="bsa-zone_1733486229130-2_123456"
+    class="sticky-js"
   />
 </template>
 
 <script setup lang="ts">
 const { id, placement } = useRuntimeConfig().public.bsa;
+
+const zoneId = 'bsa-zone_1733486229130-2_123456';
 
 function init(): void {
   const s = document.createElement('script');
@@ -15,9 +17,9 @@ function init(): void {
   s.onload = () => {
     if (window._bsa !== 'undefined') {
       window._bsa.init('custom', id, `${placement}-stickybar`, {
-        target: '#bsa-zone_1733486229130-2_123456',
-        zone: 'bsa-zone_1733486229130-2_123456',
-        id: 'bsa-zone_1733486229130-2_123456',
+        target: '.sticky-js',
+        zone: zoneId,
+        id: 'sticky-js',
         template: `
         <a class="sticky-bar" style="background-color: ##backgroundColor##; color: ##textColor##" href="##link##" rel="sponsored noopener" target="_blank" title="##company## — ##tagline##">
           <div class="native-main">
@@ -49,8 +51,8 @@ async function isOptimizeInitialized(): Promise<void> {
 
 async function BSANativeCallback(req: { ads: any[], options: { target: string } }): Promise<void> {
   window.isOptimizeLoaded = window.isOptimizeLoaded ?? false;
-  window.optimizeTargetIds = window.optimizeTargetIds ?? [];
-  window.optimizeTargetIds.push(req.options.target.replace('#', ''));
+  // window.optimizeTargetIds = window.optimizeTargetIds ?? [];
+  // window.optimizeTargetIds.push(req.options.target.replace('#', '').replace('.', ''));
 
   if (!window.isOptimizeLoaded) {
     const bsaOptimize = document.createElement('script');
@@ -65,7 +67,8 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
       await isOptimizeInitialized();
       window.optimize = window.optimize ?? { queue: [] };
       window.optimize.queue.push(() => {
-        window.optimize.push(window.optimizeTargetIds);
+        console.log('pushed!');
+        window.optimize.push(zoneId);
       });
     };
   }
@@ -74,8 +77,8 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
 watch(useRoute(), () => {
   if (window.optimize.queue !== undefined) {
     window.optimize.queue.push(() => {
-      console.log('pushing:', window.optimizeTargetIds);
-      window.optimize.push(window.optimizeTargetIds);
+      console.log('pushing:', zoneId);
+      window.optimize.push(zoneId);
     });
   }
 });
