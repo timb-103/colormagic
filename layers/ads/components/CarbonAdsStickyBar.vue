@@ -1,5 +1,6 @@
 <template>
   <div
+    :id="zoneId"
     class="sticky-js"
   />
 </template>
