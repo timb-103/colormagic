@@ -93,32 +93,23 @@ onMounted(() => {
     bottom: 0px !important;
     width: 100%;
     min-width: 100%;
-    min-height: 70px;
+    min-height: 50px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
+
   .sticky-bar {
+    bottom: 0px !important;
     border-radius: 0px !important;
     border-top:  1px solid #7a7a7a;
     max-width: 100% !important;
     box-shadow: none !important;
   }
 
-  div[id^="bsa-zone_1733486229130-2_123456"] {
+  #bsa-zone_1733486229130-2_123456 {
     min-width: 100%;
     min-height: 70px;
     position: sticky;
     bottom: 0;
   }
-
-  @media (max-width: 500px) {
-    #sticky-js {
-      bottom: 0px !important;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    .sticky-bar {
-      border-bottom-left-radius: 0px !important;
-      border-bottom-right-radius: 0px !important;
-    }
-  }
-
-</style>
+  </style>
