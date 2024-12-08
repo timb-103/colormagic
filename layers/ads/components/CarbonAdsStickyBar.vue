@@ -96,12 +96,13 @@ onMounted(() => {
     min-height: 50px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    border-top:  1px solid #7a7a7a;
+    background: #fff;
   }
 
   .sticky-bar {
     bottom: 0px !important;
     border-radius: 0px !important;
-    border-top:  1px solid #7a7a7a;
     max-width: 100% !important;
     box-shadow: none !important;
   }
@@ -111,5 +112,10 @@ onMounted(() => {
     min-height: 70px;
     position: sticky;
     bottom: 0;
+  }
+
+  #bsa-zone_1733486229130-2_123456_direct_iframe {
+    margin-left: auto;
+    margin-right: auto;
   }
   </style>
