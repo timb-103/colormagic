@@ -9,5 +9,8 @@ declare global {
     googletag: any
     adsbygoogle: any
     optimize: any
+    BSANativeCallback: any
+    isOptimizeLoaded: boolean
+    optimizeTargetIds: string[]
   }
 }
