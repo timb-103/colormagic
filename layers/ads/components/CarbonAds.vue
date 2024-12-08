@@ -26,11 +26,18 @@ function init(): void {
     if (container.value !== undefined) {
       container.value.appendChild(s);
     }
+    s.onload = () => {
+      window.optimize = window.optimize ?? { queue: [] };
+    };
   }
 }
 
 watch(useRoute(), () => {
   window?._carbonads?.refresh();
+
+  window.optimize.queue.push(() => {
+    window.optimize.pushAll();
+  });
 });
 
 onMounted(() => {
