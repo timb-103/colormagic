@@ -52,34 +52,35 @@ async function isOptimizeInitialized(): Promise<void> {
 
 async function BSANativeCallback(req: { ads: any[], options: { target: string } }): Promise<void> {
   window.isOptimizeLoaded = window.isOptimizeLoaded ?? false;
-  // window.optimizeTargetIds = window.optimizeTargetIds ?? [];
-  // window.optimizeTargetIds.push(req.options.target.replace('#', '').replace('.', ''));
 
-  if (!window.isOptimizeLoaded) {
-    const bsaOptimize = document.createElement('script');
-    bsaOptimize.type = 'text/javascript';
-    bsaOptimize.async = true;
-    bsaOptimize.src = `https://cdn4.buysellads.net/pub/colormagic.js?${new Date().getTime() - new Date().getTime() % 600000}`;
-    (document.getElementsByTagName('head')[0] ?? document.getElementsByTagName('body')[0]).appendChild(bsaOptimize);
+  if (req.ads.length === 0) {
+    if (!window.isOptimizeLoaded) {
+      const bsaOptimize = document.createElement('script');
+      bsaOptimize.type = 'text/javascript';
+      bsaOptimize.async = true;
+      bsaOptimize.src = `https://cdn4.buysellads.net/pub/colormagic.js?${new Date().getTime() - new Date().getTime() % 600000}`;
+      (document.getElementsByTagName('head')[0] ?? document.getElementsByTagName('body')[0]).appendChild(bsaOptimize);
 
-    window.isOptimizeLoaded = true;
+      window.isOptimizeLoaded = true;
 
-    bsaOptimize.onload = async () => {
-      await isOptimizeInitialized();
-      window.optimize = window.optimize ?? { queue: [] };
-      window.optimize.queue.push(() => {
-        console.log('pushed!');
-        window.optimize.push(zoneId);
-      });
-    };
+      bsaOptimize.onload = async () => {
+        await isOptimizeInitialized();
+        window.optimize = window.optimize ?? { queue: [] };
+        window.optimize.queue.push(() => {
+          console.log('pushed!');
+          window.optimize.pushAll();
+        });
+      };
+    }
   }
 };
 
 watch(useRoute(), () => {
   if (window.optimize.queue !== undefined) {
     window.optimize.queue.push(() => {
-      console.log('pushing:', zoneId);
-      window.optimize.push(zoneId);
+      // console.log('pushing:', zoneId);
+      window.optimize.pushAll();
+      window.optimize.refreshAll();
     });
   }
 });
@@ -93,12 +94,28 @@ onMounted(() => {
   #sticky-js {
     bottom: 0px !important;
     width: 100%;
+    min-width: 100%;
+    min-height: 70px;
   }
   .sticky-bar {
     border-radius: 0px !important;
     border-top:  1px solid #7a7a7a;
     max-width: 100% !important;
     box-shadow: none !important;
+  }
+
+  @media only screen and (min-width: 0px) and (min-height: 0px) {
+    div[id^="bsa-zone_1733486229130-2_123456"] {
+      min-width: 100%;
+      min-height: 70px;
+    }
+  }
+
+  @media only screen and (min-width: 737px) and (min-height: 0px) {
+    div[id^="bsa-zone_1733486229130-2_123456"] {
+      min-width: 100%;
+      min-height: 70px;
+    }
   }
 
   @media (max-width: 500px) {
