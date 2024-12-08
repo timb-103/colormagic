@@ -3,51 +3,6 @@
   <div>
     <NuxtLoadingIndicator color="#5576ff" />
 
-    <!-- floating bottom ad -->
-    <!-- <div
-      class="fixed bottom-4 left-4 z-10"
-    >
-      <CarbonAds />
-    </div> -->
-
-    <!-- <a
-      href="https://colormagic.canny.io/feature-requests"
-      target="_blank"
-      class="w-full flex justify-center sticky top-0 z-10 border-b border-gray-200 px-4 py-2 bg-gray-50 hover:bg-gray-100"
-    >
-      <p class="text-sm">
-        ❤️ ColorMagic? <span class="text-blue-400">Suggest a feature</span>
-      </p>
-    </a> -->
-
-    <!-- header banner ad (codefast) -->
-    <!-- <div
-      class="w-full flex justify-center sm:sticky top-0 z-10"
-    >
-      <HeaderAd
-        logo-url="/img/ads/codefast.png"
-        name="CodeFast"
-        text="Learn to code in weeks, not months. 50% off sale ends soon."
-        cta="Get instant access"
-        to="https://codefa.st/?via=colormagic"
-      />
-    </div> -->
-
-    <!-- sticky bottom center banner ad (codefast) -->
-    <!-- <div
-      class="fixed bottom-8 z-10 w-full flex justify-center pointer-events-none px-4"
-    >
-      <div class="pointer-events-auto">
-        <BannerAd
-          logo-url="/img/ads/codefast.png"
-          name="CodeFast"
-          text="Learn to code in weeks, not months. 50% off sale ends soon."
-          cta="Get instant access"
-          to="https://codefa.st/?via=colormagic"
-        />
-      </div>
-    </div> -->
-
     <!-- nav -->
     <CommonNav />
 
@@ -60,8 +15,6 @@
 
     <!-- footer -->
     <CommonFooter />
-
-    <!-- <CarbonAdsFlexBar /> -->
 
     <CarbonAdsStickyBar />
 
