@@ -57,9 +57,9 @@
       </p>
     </UForm>
 
-    <!-- <div class="my-4">
-      <CarbonOptimizeFallback />
-    </div> -->
+    <div class="my-4">
+      <CarbonAds />
+    </div>
 
     <!-- palettes -->
     <div class="mt-8">

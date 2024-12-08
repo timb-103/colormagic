@@ -4,11 +4,11 @@
     <NuxtLoadingIndicator color="#5576ff" />
 
     <!-- floating bottom ad -->
-    <div
+    <!-- <div
       class="fixed bottom-4 left-4 z-10"
     >
       <CarbonAds />
-    </div>
+    </div> -->
 
     <!-- <a
       href="https://colormagic.canny.io/feature-requests"
@@ -63,7 +63,7 @@
 
     <!-- <CarbonAdsFlexBar /> -->
 
-    <CarbonAdsStickyBox />
+    <CarbonAdsStickyBar />
 
     <!-- global notifications -->
     <UNotifications>

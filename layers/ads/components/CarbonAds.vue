@@ -1,7 +1,7 @@
 <template>
   <div
     ref="container"
-    class="carbon min-h-[154px] fixed bottom-4 right-4 z-10"
+    class="carbon min-h-[154px] fixed bottom-4 right-4 z-10 sm:relative sm:bottom-auto sm:right-auto"
   />
 </template>
 
@@ -28,17 +28,16 @@ function init(): void {
     }
     s.onload = () => {
       window.optimize = window.optimize ?? { queue: [] };
+      window.optimize.queue.push(() => {
+        window.optimize.pushAll();
+      });
     };
   }
 }
 
-watch(useRoute(), () => {
-  window?._carbonads?.refresh();
-
-  window.optimize.queue.push(() => {
-    window.optimize.pushAll();
-  });
-});
+// watch(useRoute(), () => {
+//   window?._carbonads?.refresh();
+// });
 
 onMounted(() => {
   init();
