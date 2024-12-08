@@ -64,9 +64,11 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
 };
 
 watch(useRoute(), () => {
-  window.optimize.queue.push(() => {
-    window.optimize.pushAll();
-  });
+  if (window.optimize.queue !== undefined) {
+    window.optimize.queue.push(() => {
+      window.optimize.pushAll();
+    });
+  }
 });
 
 onMounted(() => {
