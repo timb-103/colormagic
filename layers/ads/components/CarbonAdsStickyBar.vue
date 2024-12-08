@@ -41,8 +41,8 @@ function init(): void {
 async function BSANativeCallback(req: { ads: any[], options: { target: string } }): Promise<void> {
   if (req.ads.length === 0) {
     window.isOptimizeLoaded = window.isOptimizeLoaded ?? false;
-    // window.optimizeTargetIds = window.optimizeTargetIds ?? [];
-    // window.optimizeTargetIds.push(req.options.target.replace('#', '').replace('.', ''));
+    window.optimizeTargetIds = window.optimizeTargetIds ?? [];
+    window.optimizeTargetIds.push(req.options.target.replace('#', '').replace('.', ''));
 
     if (!window.isOptimizeLoaded) {
       const bsaOptimize = document.createElement('script');
@@ -56,7 +56,7 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
       bsaOptimize.onload = async () => {
         window.optimize = window.optimize ?? { queue: [] };
         window.optimize.queue.push(() => {
-          window.optimize.pushAll();
+          window.optimize.push(window.optimizeTargetIds);
         });
       };
     }
