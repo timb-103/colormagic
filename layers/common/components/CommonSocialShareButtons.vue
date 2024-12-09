@@ -10,15 +10,16 @@
       v-for="(item, index) in links"
       :key="index"
     >
-      <UButton
-        size="lg"
-        :icon="item.icon"
-        :to="item.to"
-        variant="solid"
-        target="_blank"
-        :aria-label="item.label"
-        @click="onClick()"
-      />
+      <UTooltip :text="`Share to ${item.label}`">
+        <UButton
+          :icon="item.icon"
+          :to="item.to"
+          variant="solid"
+          target="_blank"
+          :aria-label="item.label"
+          @click="onClick()"
+        />
+      </UTooltip>
     </li>
   </ul>
 </template>

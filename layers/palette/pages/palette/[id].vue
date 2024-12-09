@@ -5,8 +5,19 @@
       <USkeleton class="w-full h-12 mt-4" />
     </div>
 
-    <div v-else-if="data">
-      <div>
+    <div
+      v-else-if="data"
+      class="flex gap-8"
+    >
+      <div class="sticky top-8 items-start hidden sm:flex">
+        <CommonSocialShareButtons
+          type="text"
+          orientation="vertical"
+          :text="`${t('palette.shareText')} ${data.text ?? ''} with ColorMagic AI!`"
+        />
+      </div>
+
+      <div class="w-full">
         <div class="mb-4">
           <CarbonAds />
         </div>
@@ -137,7 +148,7 @@
         </div>
 
         <!-- share buttons -->
-        <div class="mt-8">
+        <div class="mt-8 sm:hidden">
           <p class="text-sm font-semibold mb-2">
             {{ $t('palette.shareLabel') }}
           </p>
