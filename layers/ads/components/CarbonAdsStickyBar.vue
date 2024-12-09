@@ -1,7 +1,7 @@
 <template>
   <div
     :id="zoneId"
-    class="sticky-js"
+    class="sticky-js z-10"
   />
 </template>
 
