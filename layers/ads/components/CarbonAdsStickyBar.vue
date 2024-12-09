@@ -75,7 +75,7 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
 };
 
 watch(useRoute(), () => {
-  if (window.optimize.queue !== undefined) {
+  if (window.optimize?.queue !== undefined) {
     window.optimize.queue.push(() => {
       window.optimize.pushAll();
     });
