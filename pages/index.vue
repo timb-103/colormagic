@@ -92,6 +92,7 @@
 
 <script setup lang="ts">
 import { object, type InferType, string } from 'yup';
+import { subDays, startOfDay } from 'date-fns';
 import type { FormSubmitEvent } from '#ui/types';
 
 const { t } = useI18n();
@@ -110,7 +111,7 @@ useSeoMeta({
 
 const notifications = useNotifications();
 const { mutate: create, isPending } = useCreatePalette();
-const { data: count, suspense } = usePaletteCount();
+const { data: count, suspense } = usePaletteCount(startOfDay(subDays(new Date(), 1)));
 
 await suspense();
 
