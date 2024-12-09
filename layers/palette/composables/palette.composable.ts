@@ -135,14 +135,14 @@ export function useClonePalette() {
   });
 }
 
-export function usePaletteCount(fromDate: Date) {
+export function usePaletteCount(fromDate?: Date) {
   return useQuery({
     queryKey: [PALETTE_ROOT_KEY, 'count', fromDate],
     queryFn: async () => {
       return await $fetch<CountPaletteDto>('/api/palettes/count', {
         method: 'GET',
         query: {
-          fromDate: fromDate.toISOString()
+          fromDate: fromDate?.toISOString()
         }
       });
     }

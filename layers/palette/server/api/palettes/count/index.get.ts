@@ -6,7 +6,7 @@ export default defineCachedEventHandler(async (event): Promise<CountPaletteDto> 
   const query = await modules.palette.validation.getCountInputQuery(event);
   const fromDate = query.fromDate !== undefined
     ? new Date(query.fromDate)
-    : new Date(0);
+    : undefined;
 
   const response = await modules.palette.service.count(fromDate);
 
