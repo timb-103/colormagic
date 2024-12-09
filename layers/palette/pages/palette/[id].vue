@@ -9,12 +9,14 @@
       v-else-if="data"
       class="flex gap-8"
     >
-      <div class="sticky top-8 items-start hidden sm:flex">
-        <CommonSocialShareButtons
-          type="text"
-          orientation="vertical"
-          :text="`${t('palette.shareText')} ${data.text ?? ''} with ColorMagic AI!`"
-        />
+      <div class="items-start hidden sm:flex">
+        <div class="sticky top-8">
+          <CommonSocialShareButtons
+            type="text"
+            orientation="vertical"
+            :text="`${t('palette.shareText')} ${data.text ?? ''} with ColorMagic AI!`"
+          />
+        </div>
       </div>
 
       <div class="w-full">
