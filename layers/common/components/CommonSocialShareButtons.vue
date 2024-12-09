@@ -11,6 +11,7 @@
       :key="index"
     >
       <UButton
+        size="lg"
         :icon="item.icon"
         :to="item.to"
         variant="solid"
