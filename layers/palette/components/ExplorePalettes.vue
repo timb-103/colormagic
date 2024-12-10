@@ -39,7 +39,6 @@
             :name="item.text"
             :can-like="user?.id !== undefined"
             :to="localePath(`/palette/${item.id}`)"
-            no-follow
           />
         </li>
       </ul>
