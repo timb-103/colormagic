@@ -56,7 +56,9 @@ export default {
     title: 'Random Color Generator',
     seoTitle: 'Random Color Generator - ColorMagic',
     seoDescription: 'Find interesting and random colors instantly with just a click (or space bar hit).',
-    generateLabel: 'Generate Random Color'
+    generateLabel: 'Generate Random Color',
+    whatIsTitle: 'What is a Random Color Generator?',
+    whatIsDescription: 'Looking for inspiration or just want to explore the vibrant world of colors? Our Random Color Generator is the perfect tool for discovering unique shades and combinations with a single click. Whether you\'re designing a project, decorating a space, or simply exploring the beauty of color, this generator provides endless possibilities. Each generated color includes its hex code, RGB values, and even complementary color suggestions to spark your creativity. Try it now and find your next favorite hue!'
   },
   explore: {
     title: 'Explore',

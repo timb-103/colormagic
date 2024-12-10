@@ -53,40 +53,18 @@
       size="xl"
       block
       :label="$t('randomColor.generateLabel')"
+      :title="$t('randomColor.generateLabel')"
+      :aria-label="$t('randomColor.generateLabel')"
       class="mt-4"
       @click="generateColor()"
     />
 
-    <!-- recents -->
-    <ClientOnly>
-      <div class="mt-4">
-        <!-- label -->
-        <p class="text-lg font-bold mb-4">
-          {{ $t('recent.topLabel') }}
-        </p>
-
-        <!-- colors list -->
-        <ul
-          v-if="session.length"
-          class="grid sm:grid-cols-3 gap-4"
-        >
-          <li
-            v-for="(item, index) in session"
-            :key="index"
-          >
-            <ColorPaletteButton
-              :colors="[item]"
-              :name="ntc.name(item)[1].toString()"
-              @click="viewRecentColor(item)"
-            />
-          </li>
-        </ul>
-
-        <p v-else>
-          {{ $t('recent.noneFound') }}
-        </p>
-      </div>
-    </ClientOnly>
+    <h2 class="mt-8">
+      {{ $t('randomColor.whatIsTitle') }}
+    </h2>
+    <p>
+      {{ $t('randomColor.whatIsDescription') }}
+    </p>
 
     <p class="mt-8">
       Looking for a better random color generator? Try our partner site <NuxtLink
@@ -100,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { whenever, useMagicKeys, useLocalStorage, StorageSerializers } from '@vueuse/core';
+import { whenever, useMagicKeys } from '@vueuse/core';
 import ntc from '~/layers/palette/utils/ntc.util';
 import { PlausibleEventName } from '~/layers/plausible/types';
 
@@ -118,12 +96,6 @@ useSeoMeta({
   ogDescription: description,
   ogImageUrl: `${useRuntimeConfig().public.siteUrl}${formatOgUrl([ogImageColor], ntc.name(ogImageColor)[1].toString())}`
 });
-
-const session = useLocalStorage<string[]>(
-  'random-color:created',
-  [],
-  { serializer: StorageSerializers.object }
-);
 
 const { SPACE } = useMagicKeys({
   passive: false,
@@ -162,13 +134,6 @@ function resetArrange(): void {
 
 function generateColor(): void {
   const newColor = getRandomHexColor();
-
-  session.value = [newColor, ...session.value];
-
-  /** @description delete last if too many saved */
-  if (session.value.length > 100) {
-    session.value.shift();
-  }
 
   color.value = newColor;
 

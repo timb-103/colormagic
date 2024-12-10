@@ -56,7 +56,9 @@ export default {
     title: 'Generatore di Colori Casuali',
     seoTitle: 'Generatore di Colori Casuali - ColorMagic',
     seoDescription: 'Genera colori casuali all\'istante con un semplice clic (o con la barra spaziatrice).',
-    generateLabel: 'Genera Colore Casuale'
+    generateLabel: 'Genera Colore Casuale',
+    whatIsTitle: 'Cos\'è un generatore di colori casuali?',
+    whatIsDescription: 'Cerchi ispirazione o vuoi semplicemente esplorare il vibrante mondo dei colori? Il nostro generatore di colori casuali è lo strumento perfetto per scoprire sfumature e combinazioni uniche con un solo clic. Che tu stia progettando un progetto, decorando uno spazio o semplicemente esplorando la bellezza del colore, questo generatore offre infinite possibilità. Ogni colore generato include il proprio codice esadecimale, valori RGB e persino suggerimenti di colori complementari per stimolare la tua creatività. Provalo subito e trova la tua prossima tonalità preferita!'
   },
   explore: {
     title: 'Esplorare',
