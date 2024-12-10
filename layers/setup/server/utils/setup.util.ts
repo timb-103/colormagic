@@ -21,6 +21,8 @@ interface Modules {
 
 export let modules: Modules;
 
+export let isModulesReady = false;
+
 export async function setup(): Promise<void> {
   const logger = getLoggerModule();
 
@@ -55,6 +57,8 @@ export async function setup(): Promise<void> {
       user,
       google
     };
+
+    isModulesReady = true;
   } catch (error) {
     logger.warn({ err: error }, 'initializing setup failed');
   }
