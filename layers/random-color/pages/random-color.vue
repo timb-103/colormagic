@@ -140,14 +140,6 @@ function generateColor(): void {
   sendPlausibleEvent(PlausibleEventName.RANDOM_COLOR_GENERATED);
 }
 
-function viewRecentColor(value: string): void {
-  color.value = value;
-
-  if (window !== undefined) {
-    window.scrollTo({ top: 0 });
-  }
-}
-
 whenever(SPACE, () => {
   generateColor();
 });
