@@ -15,7 +15,7 @@
 
     <ul class="flex flex-col gap-2">
       <li
-        v-for="(item, index) in tags"
+        v-for="(item, index) in shadeTags"
         :key="index"
       >
         <NuxtLinkLocale
@@ -35,12 +35,7 @@ const { t } = useI18n();
 const title = t('shades.seoTitle');
 const description = t('shades.seoDescription');
 
-const tags = [
-  'yellow',
-  'light-yellow',
-  'sage',
-  'cream'
-];
+const shadeTags = getShadeTags();
 
 useSeoMeta({
   title,

@@ -51,7 +51,8 @@ export default {
     createLabel: 'パレットを作成',
     resetLabel: 'リセット',
     shareLabel: 'このパレットを共有する先：',
-    shareText: '私は〜のためにカラーパレットを生成しました'
+    shareText: '私は〜のためにカラーパレットを生成しました',
+    relatedShades: 'このカラーパレットに関連する色合い'
   },
   randomColor: {
     title: 'ランダムカラージェネレーター',

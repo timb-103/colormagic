@@ -160,6 +160,13 @@
             :text="`${t('palette.shareText')} ${data.text ?? ''} with ColorMagic AI!`"
           />
         </div>
+
+        <!-- related shades -->
+        <ExploreRelatedShadesLinks
+          v-if="shadeTags.length > 0"
+          :tags="shadeTags"
+          class="mt-8"
+        />
       </div>
     </div>
   </div>
@@ -201,6 +208,10 @@ useSeoMeta({
     noindex: true
   }
 });
+
+const shadeTags = getShadeTags()
+  .filter(v => data.value?.tags.some(y => y === v))
+  .filter(v => v !== undefined);
 
 const paletteTagLinks = getAllPaletteFilters().map(v => ({
   label: t(`colors.${v.id}`),

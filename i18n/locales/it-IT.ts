@@ -51,7 +51,8 @@ export default {
     createLabel: 'Crea Palette',
     resetLabel: 'Reimposta',
     shareLabel: 'Condividi questa palette a:',
-    shareText: 'Ho generato una palette di colori per ~'
+    shareText: 'Ho generato una palette di colori per ~',
+    relatedShades: 'Tonalità correlate a questa palette di colori'
   },
   randomColor: {
     title: 'Generatore di Colori Casuali',

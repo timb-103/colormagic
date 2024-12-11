@@ -51,7 +51,8 @@ export default {
     createLabel: 'Create Palette',
     resetLabel: 'Reset',
     shareLabel: 'Share this palette to:',
-    shareText: 'I generated a color palette for'
+    shareText: 'I generated a color palette for',
+    relatedShades: 'Shades related to this color palette'
   },
   randomColor: {
     title: 'Random Color Generator',
