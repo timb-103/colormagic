@@ -4,11 +4,13 @@
       :style="{background: color}"
       class="p-4"
     >
-      <Sketch
-        v-model="color"
-        :preset-colors="shades"
-        @update:model-value="item => update(item.hex as HexColor)"
-      />
+      <ClientOnly>
+        <Sketch
+          v-model="color"
+          :preset-colors="shades"
+          @update:model-value="item => update(item.hex as HexColor)"
+        />
+      </ClientOnly>
     </div>
 
     <h2 class="mt-8 font-semibold text-lg">
