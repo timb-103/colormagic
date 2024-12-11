@@ -2,6 +2,7 @@ import type { Logger } from 'pino';
 import { getAIModule, type AIModule } from '~/layers/ai/server/ai.module';
 import { getAuthModule, type AuthModule } from '~/layers/auth/server/auth.module';
 import { getGoogleModule, type GoogleModule } from '~/layers/google/server/google.module';
+import { getHealthModule, type HealthModule } from '~/layers/health/server/health.module';
 import { getLoggerModule } from '~/layers/log/server/logger.module';
 import { getMongoModule } from '~/layers/mongo/server/mongo.module';
 import { getOgModule, type OgModule } from '~/layers/og/server/og.module';
@@ -17,6 +18,7 @@ interface Modules {
   auth: AuthModule
   user: UserModule
   google: GoogleModule
+  health: HealthModule
 }
 
 export let modules: Modules;
@@ -42,6 +44,7 @@ export async function setup(): Promise<void> {
     const user = getUserModule(db, logger);
     const google = getGoogleModule(logger);
     const auth = getAuthModule(logger, user.service, google.service);
+    const health = getHealthModule(db, logger);
 
     await Promise.all([
       palette.setup(),
@@ -55,7 +58,8 @@ export async function setup(): Promise<void> {
       og,
       auth,
       user,
-      google
+      google,
+      health
     };
 
     isModulesReady = true;
