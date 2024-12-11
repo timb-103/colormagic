@@ -1,6 +1,7 @@
 import { type H3Event } from 'h3';
 import { OgInputDtoSchema, OgTagInputDtoSchema, OgThumbnailInputDtoSchema, type OgInputDto, type OgTagInputDto, type OgThumbnailInputDto } from '../dtos/og.dto';
 import { validateQuery } from '~/layers/common/utils/validate.util';
+import { escapeSvgText } from '~/layers/og/utils/og.util';
 
 export class OgValidation {
   public async getInputQuery(event: H3Event): Promise<OgInputDto> {
@@ -14,7 +15,11 @@ export class OgValidation {
       });
     }
 
-    return query;
+    return {
+      ...query,
+      /** @description encode as it can include bad characters */
+      text: escapeSvgText(query.text)
+    };
   }
 
   public async getThumbnailInputQuery(event: H3Event): Promise<OgThumbnailInputDto> {
