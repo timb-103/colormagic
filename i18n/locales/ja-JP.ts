@@ -37,7 +37,8 @@ export default {
     api: 'カラーAPI',
     contrastChecker: 'コントラストチェッカー',
     logout: 'ログアウト',
-    login: 'ログイン'
+    login: 'ログイン',
+    shades: '色のシェード'
   },
   palette: {
     seoTitle: 'あなたの思い描く色をかんたんに',
@@ -229,5 +230,19 @@ export default {
     'deep-autumn': 'ディープオータム',
     'cool-winter': 'クールウィンター',
     'cool-summer': 'クールサマー'
+  },
+  shades: {
+    title: '色のシェード',
+    seoTitle: 'シェード - ColorMagic',
+    seoDescription: '厳選された色のシェード一覧をご覧ください。デザイナー、アーティスト、そして色彩愛好家に最適です。'
+  },
+  shade: {
+    title: '{color}の色合い',
+    seoTitle: '{color}の色合い - ColorMagic',
+    seoDescription: '{color}の色合いをプロジェクトで活用しましょう。明るい{color}と暗い{color}の色合いを確認し、好きな色をクリックしてHEXコードをコピーできます。',
+    lighter: '明るい{color}の色合い',
+    darker: '暗い{color}の色合い',
+    palettes: '{color}の色合いを使ったカラーパレット',
+    similar: '似た色合いを使ったカラーパレット'
   }
 };

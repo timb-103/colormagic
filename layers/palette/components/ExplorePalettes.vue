@@ -15,7 +15,10 @@
     <!-- palettes -->
     <div v-if="palettes">
       <!-- filters -->
-      <div class="mb-4 flex justify-between gap-4 items-center flex-wrap">
+      <div
+        v-if="!isFiltersHidden"
+        class="mb-4 flex justify-between gap-4 items-center flex-wrap"
+      >
         <PaletteFilters
           :tags="tags"
         />
@@ -44,7 +47,10 @@
       </ul>
 
       <!-- load more button -->
-      <div class="mt-8 text-center">
+      <div
+        v-if="!isPaginationHidden"
+        class="mt-8 text-center"
+      >
         <UButton
           v-if="palettes.length"
           :label="hasNextPage ? 'Load more...' : 'No more results'"
@@ -56,7 +62,10 @@
     </div>
 
     <!-- tag links -->
-    <ExploreTagLinks class="mt-8" />
+    <ExploreTagLinks
+      v-if="!isFiltersHidden"
+      class="mt-8"
+    />
   </div>
 </template>
 
@@ -68,9 +77,16 @@ const localePath = useLocalePath();
 
 export interface Props {
   tags: string[]
+  isFiltersHidden?: boolean
+  isPaginationHidden?: boolean
+  limit?: number
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  isFiltersHidden: false,
+  isPaginationHidden: false,
+  limit: 50
+});
 
 const sortBy = ref<PaletteSortBy>(props.tags.length === 0 ? PaletteSortBy.TRENDING : PaletteSortBy.POPULAR);
 const listFilter = computed<ListPaletteFilterParams | undefined>(() => ({
@@ -79,7 +95,7 @@ const listFilter = computed<ListPaletteFilterParams | undefined>(() => ({
 }));
 
 const { data: user } = useUser();
-const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(50, listFilter);
+const { data: list, isFetching, hasNextPage, fetchNextPage, suspense } = useListPalettes(props.limit, listFilter);
 
 await suspense();
 

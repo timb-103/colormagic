@@ -37,7 +37,8 @@ export default {
     api: 'API dei colori',
     contrastChecker: 'Controllo Contrasto',
     logout: 'Esci',
-    login: 'Login'
+    login: 'Login',
+    shades: 'Tonalità di Colore'
   },
   palette: {
     seoTitle: 'Genera la tua palette di colori ideale',
@@ -229,5 +230,19 @@ export default {
     'deep-autumn': 'Autunno Profondo',
     'cool-winter': 'Inverno Freddo',
     'cool-summer': 'Estate Fresca'
+  },
+  shades: {
+    title: 'Tonalità di Colore',
+    seoTitle: 'Tonalità - ColorMagic',
+    seoDescription: 'Esplora la nostra lista curata di tonalità di colore. Perfetta per designer, artisti e appassionati di colori.'
+  },
+  shade: {
+    title: 'Tonalità di {color}',
+    seoTitle: 'Tonalità di {color} - ColorMagic',
+    seoDescription: 'Esplora le tonalità di {color} per i tuoi progetti. Scopri tonalità più chiare e più scure di {color} e clicca su una tonalità per copiarne il codice HEX.',
+    lighter: 'Tonalità più chiare di {color}',
+    darker: 'Tonalità più scure di {color}',
+    palettes: 'Palette di colori con tonalità di {color}',
+    similar: 'Palette di colori con tonalità simili'
   }
 };

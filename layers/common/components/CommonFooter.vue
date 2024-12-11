@@ -127,6 +127,10 @@ const websiteLinks = computed(() => [
     to: localePath('/palette/liked')
   },
   {
+    label: t('nav.shades'),
+    to: localePath('/shades')
+  },
+  {
     label: t('nav.terms'),
     to: localePath('/terms')
   },

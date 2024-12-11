@@ -16,7 +16,7 @@
     <!-- footer -->
     <CommonFooter />
 
-    <CarbonAdsStickyBar />
+    <CarbonAdsStickyBar v-if="useRoute().path.includes('shade') === false" />
 
     <!-- global notifications -->
     <UNotifications>

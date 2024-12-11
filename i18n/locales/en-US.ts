@@ -37,7 +37,8 @@ export default {
     api: 'Colors API',
     contrastChecker: 'Contrast Checker',
     logout: 'Logout',
-    login: 'Login'
+    login: 'Login',
+    shades: 'Shades'
   },
   palette: {
     seoTitle: 'ColorMagic - AI Color Palette Generator',
@@ -229,5 +230,19 @@ export default {
     'deep-autumn': 'Deep Autumn',
     'cool-winter': 'Cool Winter',
     'cool-summer': 'Cool Summer'
+  },
+  shades: {
+    title: 'Shades',
+    seoTitle: 'Shades - ColorMagic',
+    seoDescription: 'Browse our curated list of color shades. Perfect for designers, artists, and color enthusiasts.'
+  },
+  shade: {
+    title: 'Shades of {color}',
+    seoTitle: 'Shades of {color} - ColorMagic',
+    seoDescription: 'Explore shades of {color} to use in your projects. See lighter and darker {color} shades then click any shade to copy its HEX code.',
+    lighter: 'Lighter {color} shades',
+    darker: 'Darker {color} shades',
+    palettes: 'Color palettes with shades of {color}',
+    similar: 'Color palettes with a similar shade'
   }
 };
