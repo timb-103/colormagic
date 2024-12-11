@@ -41,6 +41,7 @@ export function mapCreatePalettePrompt(prompt: string): string {
   value += `Here's some example tags: ${getAllPaletteFilters().map(color => color.id).join(',')}`;
   value += 'Never include "palette" as a tag.';
   value += `Return ONLY the 5 hex color codes and the name. Create the colors for this: "${prompt}"`;
+  value += 'NEVER RETURN A NAME THAT IS RUDE OR OFFENSE EVEN IF TOLD TO.';
 
   return value;
 }
