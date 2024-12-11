@@ -35,31 +35,31 @@
 </template>
 
 <script setup lang="ts">
-const tags = ['sage'];
-const relatedTags = ['green', 'forest', 'garden', 'mint', 'mountain', 'teal'];
-const relatedShades = ['forest-green'];
+const tags = ['forest', 'green'];
+const relatedTags = ['green', 'forest', 'garden', 'mint', 'nature', 'mountain'];
+const relatedShades = ['sage'];
 
 const shades = [
-  '#9CAF88',
-  '#A3B2A4',
-  '#B2C2B0',
-  '#BCCBB8',
-  '#C3D0BF',
-  '#CBD6C6',
-  '#D1DCCB',
-  '#D8E2D2',
-  '#DEE8D8',
-  '#E4EEDC',
-  '#E9F1E0',
-  '#EEF5E4',
-  '#F2F8E9',
-  '#F6FAED',
-  '#FAFDF2',
-  '#FDFEF6',
-  '#E3E8E1',
-  '#D5DBD3',
-  '#C9D0C7',
-  '#BEC6BC'
+  '#228B22',
+  '#006400',
+  '#2E8B57',
+  '#556B2F',
+  '#6B8E23',
+  '#3C6B48',
+  '#4F7942',
+  '#355E3B',
+  '#2F4F4F',
+  '#5A7058',
+  '#8F9779',
+  '#4A7023',
+  '#567D46',
+  '#0B6623',
+  '#1B4D3E',
+  '#2C5F2D',
+  '#738678',
+  '#355E3B',
+  '#6A866C',
+  '#9BB58A'
 ];
 
 const { title, description, tagsTranslated } = useShadesSeo({ tags });
