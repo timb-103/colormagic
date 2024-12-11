@@ -13,6 +13,7 @@ const zoneId = 'bsa-zone_1733486229130-2_123456';
 function init(): void {
   const s = document.createElement('script');
   s.src = '//m.servedby-buysellads.com/monetization.js';
+  s.defer = true;
   document.head.appendChild(s);
 
   s.onload = () => {
@@ -57,7 +58,7 @@ async function BSANativeCallback(req: { ads: any[], options: { target: string } 
     if (!window.isOptimizeLoaded) {
       const bsaOptimize = document.createElement('script');
       bsaOptimize.type = 'text/javascript';
-      bsaOptimize.async = true;
+      bsaOptimize.defer = true;
       bsaOptimize.src = `https://cdn4.buysellads.net/pub/colormagic.js?${new Date().getTime() - new Date().getTime() % 600000}`;
       (document.getElementsByTagName('head')[0] ?? document.getElementsByTagName('body')[0]).appendChild(bsaOptimize);
 

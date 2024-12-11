@@ -10,7 +10,7 @@
 function init(): void {
   const bsaOptimize = document.createElement('script');
   bsaOptimize.type = 'text/javascript';
-  bsaOptimize.async = true;
+  bsaOptimize.defer = true;
   bsaOptimize.src = `https://cdn4.buysellads.net/pub/colormagic.js?${new Date().getTime() - new Date().getTime() % 600000}`;
   (document.getElementsByTagName('head')[0] ?? document.getElementsByTagName('body')[0]).appendChild(bsaOptimize);
   bsaOptimize.onload = () => {
