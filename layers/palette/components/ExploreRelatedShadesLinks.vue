@@ -6,7 +6,7 @@
 
     <ul class="flex flex-wrap gap-2">
       <li
-        v-for="(item, index) in shadeTags"
+        v-for="(item, index) in shadeTagsFiltered"
         :key="index"
       >
         <NuxtLinkLocale
@@ -29,7 +29,13 @@ const props = defineProps<Props>();
 
 const { t } = useI18n();
 
-const shadeTags = getShadeTags()
-  .filter(v => props.tags?.some(y => y === v))
-  .filter(v => v !== undefined);
+const shadeTags = getShadeTags();
+const shadeTagsFiltered = new Set([
+  ...[
+    ...shadeTags,
+    ...shadeTags.map(v => v.split('-')).flat()
+  ]
+    .filter(v => props.tags?.some(y => v.includes(y)))
+    .filter(v => v !== undefined && shadeTags.includes(v))
+]);
 </script>

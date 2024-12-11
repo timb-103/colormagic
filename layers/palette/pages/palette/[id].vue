@@ -210,6 +210,8 @@ useSeoMeta({
 });
 
 const shadeTags = getShadeTags()
+  .map(v => v.split('-'))
+  .flat()
   .filter(v => data.value?.tags.some(y => y === v))
   .filter(v => v !== undefined);
 
