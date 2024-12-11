@@ -33,7 +33,6 @@
     "lodash": "4.17.21",
     "mongodb": "6.9.0",
     "nuxt": "3.13.2",
-    "nuxt-gtag": "^3.0.2",
     "openai": "4.65.0",
     "pino": "8.16.1",
     "pino-pretty": "10.2.3",

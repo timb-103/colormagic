@@ -27,13 +27,10 @@ export default defineNuxtConfig({
   extends: [
     '@nuxt/ui-pro'
   ],
-  modules: ['@nuxtjs/google-fonts', '@nuxt/ui', '@nuxtjs/i18n', 'nuxt-gtag', '@nuxtjs/plausible', '@nuxtjs/sitemap'],
+  modules: ['@nuxtjs/google-fonts', '@nuxt/ui', '@nuxtjs/i18n', '@nuxtjs/plausible', '@nuxtjs/sitemap'],
   site: {
-    url: 'https://colormagic.app.com',
+    url: 'https://colormagic.app',
     name: 'ColorMagic'
-  },
-  gtag: {
-    id: 'G-HPJXMCVC3V'
   },
   tailwindcss: {
     viewer: false
@@ -72,7 +69,7 @@ export default defineNuxtConfig({
     lazy: true,
     strategy: 'prefix_except_default',
     defaultLocale: 'en',
-    baseUrl: process.env.SITE_URL ?? 'http://localhost:3000',
+    baseUrl: 'https://colormagic.app',
     detectBrowserLanguage: false,
     locales: [
       {
