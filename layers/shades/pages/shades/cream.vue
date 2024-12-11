@@ -35,31 +35,31 @@
 </template>
 
 <script setup lang="ts">
-const tags = ['yellow'];
-const relatedTags = ['yellow', 'gold', 'orange', 'autumn', 'amber', 'warm'];
-const relatedShades = ['light-yellow', 'cream'];
+const tags = ['cream'];
+const relatedTags = ['beige', 'ivory', 'peach', 'skin', 'yellow', 'tan'];
+const relatedShades = ['light-yellow', 'yellow'];
 
 const shades = [
-  '#FFFF00',
-  '#FFEE00',
-  '#FFF700',
-  '#FFFA66',
-  '#FFFF66',
-  '#FFFF99',
-  '#FFFFB3',
-  '#FFFFCC',
-  '#FFFFE0',
-  '#FFFACD',
-  '#FDFD96',
-  '#F6E05E',
-  '#F5DE42',
-  '#FFE135',
-  '#FFD700',
-  '#FFED47',
-  '#F3E151',
-  '#FAFAD2',
-  '#FFFB7D',
-  '#FFFFE6'
+  '#FFFDD0',
+  '#FAF3E0',
+  '#F5F5DC',
+  '#FFF8E7',
+  '#FFFBF0',
+  '#FDF5E6',
+  '#FFFAF0',
+  '#FFF5E1',
+  '#FAF0E6',
+  '#F8F0E3',
+  '#FDFBF1',
+  '#FFF9E3',
+  '#FDF6E4',
+  '#FFFDE6',
+  '#FFF8DC',
+  '#FFF4E0',
+  '#FFFAE8',
+  '#FEF7E5',
+  '#FFFCEA',
+  '#FFF8E1'
 ];
 
 const { title, description, tagsTranslated } = useShadesSeo({ tags });

@@ -37,7 +37,7 @@
 <script setup lang="ts">
 const tags = ['light', 'yellow'];
 const relatedTags = ['light', 'yellow', 'gold', 'orange', 'autumn', 'amber', 'warm'];
-const relatedShades = ['yellow'];
+const relatedShades = ['yellow', 'cream'];
 
 const shades = [
   '#FFFFE0',

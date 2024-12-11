@@ -38,7 +38,8 @@ const description = t('shades.seoDescription');
 const tags = [
   'yellow',
   'light-yellow',
-  'sage'
+  'sage',
+  'cream'
 ];
 
 useSeoMeta({
