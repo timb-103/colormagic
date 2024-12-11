@@ -69,7 +69,7 @@
 
       <ul class="grid sm:grid-cols-3 gap-4 mb-4">
         <li
-          v-for="(item, index) in getAllPaletteFilters()"
+          v-for="(item, index) in getAllPaletteFilters().splice(0, 30)"
           :key="index"
         >
           <ColorPaletteButton
@@ -80,12 +80,14 @@
         </li>
       </ul>
 
-      <NuxtLink
+      <UButton
+        block
         to="/palette/explore"
+        title="Explore all palettes"
         class="font-medium text-sm hover:text-primary text-gray-400"
       >
-        Explore more palettes
-      </NuxtLink>
+        Explore all palettes
+      </UButton>
     </div>
   </div>
 </template>

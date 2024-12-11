@@ -14,12 +14,24 @@
     </div>
 
     <!-- tag links -->
-    <ExploreTagLinks />
+    <ul class="grid sm:grid-cols-3 gap-4 mb-4">
+      <li
+        v-for="(item, index) in getAllPaletteFilters()"
+        :key="index"
+      >
+        <ColorPaletteButton
+          :colors="item.palette"
+          :name="$t(`colors.${item.id}`)"
+          :to="localePath(`/palette/explore/${item.id}`)"
+        />
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup lang="ts">
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 useSeoMeta({
   title: t('exploreTags.seoTitle'),
