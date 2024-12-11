@@ -243,6 +243,7 @@ export default {
     lighter: 'Tonalità più chiare di {color}',
     darker: 'Tonalità più scure di {color}',
     palettes: 'Palette di colori con tonalità di {color}',
-    similar: 'Palette di colori con tonalità simili'
+    similarPalette: 'Palette di colori con tonalità simili',
+    similar: 'Tonalità simili a {color}'
   }
 };

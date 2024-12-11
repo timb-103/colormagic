@@ -243,6 +243,7 @@ export default {
     lighter: 'Lighter {color} shades',
     darker: 'Darker {color} shades',
     palettes: 'Color palettes with shades of {color}',
-    similar: 'Color palettes with a similar shade'
+    similarPalette: 'Color palettes with a similar shade',
+    similar: 'Similar shades to {color}'
   }
 };

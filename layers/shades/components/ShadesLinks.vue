@@ -1,35 +1,37 @@
 <template>
   <div>
     <h2 class="font-semibold text-lg">
-      {{ $t('shade.similar') }}
+      {{ $t('shade.similar', { color: tagsTranslated.join(' ').toLowerCase() }) }}
     </h2>
 
-    <!-- palettes -->
-    <div class="mt-4">
-      <ul class="grid sm:grid-cols-3 gap-4 mb-4">
-        <li
-          v-for="(item, index) in links"
-          :key="index"
+    <ul class="mt-4">
+      <li
+        v-for="(item, index) in links"
+        :key="index"
+      >
+        <NuxtLinkLocale
+          :to="`/shades/${item.to}`"
+          class="text-blue-400 underline"
         >
-          <ColorPaletteButton
-            :colors="item.palette"
-            :name="$t(`colors.${item.id}`)"
-            :to="localePath(`/palette/explore/${item.id}`)"
-          />
-        </li>
-      </ul>
-    </div>
+          {{ $t('shade.title', {color: item.label }) }}
+        </NuxtLinkLocale>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup lang="ts">
 export interface Props {
   tags: string[]
+  tagsTranslated: string[]
 }
 
 const props = defineProps<Props>();
 
-const localePath = useLocalePath();
+const { t } = useI18n();
 
-const links = getAllPaletteFilters().filter(v => props.tags.some(y => v.id === y));
+const links = props.tags.map(v => ({
+  to: v,
+  label: v.split('-').map(y => t(`colors.${y}`)).join(' ')
+}));
 </script>

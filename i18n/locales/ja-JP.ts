@@ -243,6 +243,7 @@ export default {
     lighter: '明るい{color}の色合い',
     darker: '暗い{color}の色合い',
     palettes: '{color}の色合いを使ったカラーパレット',
-    similar: '似た色合いを使ったカラーパレット'
+    similarPalette: '似た色合いを使ったカラーパレット',
+    similar: '{color}に似た色合い'
   }
 };

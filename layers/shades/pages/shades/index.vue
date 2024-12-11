@@ -13,13 +13,16 @@
       </p>
     </div>
 
-    <ul>
-      <li>
+    <ul class="flex flex-col gap-2">
+      <li
+        v-for="(item, index) in tags"
+        :key="index"
+      >
         <NuxtLinkLocale
-          to="/shades/yellow"
+          :to="`/shades/${item}`"
           class="text-blue-400 underline"
         >
-          Shades of Yellow
+          {{ $t('shade.title', { color: item.split('-').map(v => t(`colors.${v}`)).join(' ') }) }}
         </NuxtLinkLocale>
       </li>
     </ul>
@@ -31,6 +34,11 @@ const { t } = useI18n();
 
 const title = t('shades.seoTitle');
 const description = t('shades.seoDescription');
+
+const tags = [
+  'yellow',
+  'light-yellow'
+];
 
 useSeoMeta({
   title,
