@@ -37,7 +37,7 @@
 <script setup lang="ts">
 const tags = ['bright', 'blue'];
 const relatedTags = ['blue', 'aqua', 'coastal', 'midnight', 'night-sky', 'ocean'];
-const relatedShades = ['royal-blue'];
+const relatedShades = ['royal-blue', 'indigo'];
 
 const shades = [
   '#0000FF',

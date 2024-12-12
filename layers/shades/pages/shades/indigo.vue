@@ -35,31 +35,31 @@
 </template>
 
 <script setup lang="ts">
-const tags = ['royal', 'blue'];
-const relatedTags = ['blue', 'royal', 'space', 'indigo', 'winter'];
-const relatedShades = ['bright-blue', 'indigo'];
+const tags = ['indigo'];
+const relatedTags = ['lilac', 'deep', 'crimson', 'fuschia', 'lavendar', 'lilac', 'midnight'];
+const relatedShades = ['bright-blue', 'royal-blue'];
 
 const shades = [
-  '#4169E1',
-  '#27408B',
-  '#2B60DE',
-  '#3A5FCD',
-  '#2C2F8C',
-  '#2447D8',
-  '#1F45FC',
-  '#4876FF',
-  '#4267B2',
-  '#3B52DA',
-  '#365FDC',
-  '#2548A8',
-  '#1034A6',
-  '#273BE2',
-  '#355EBA',
-  '#1C39BB',
-  '#4166F5',
-  '#3759C7',
-  '#4C69FF',
-  '#2A57EB'
+  '#3730A3',
+  '#333FFF',
+  '#4C5AFF',
+  '#4338CA',
+  '#C7D2FE',
+  '#808FFF',
+  '#0000CC',
+  '#0000E6',
+  '#6675FF',
+  '#E0E7FF',
+  '#4F46E5',
+  '#818CF8',
+  '#A5B4FC',
+  '#6366F1',
+  '#312E81',
+  '#99A8FF',
+  '#1E1B4B',
+  '#1A24FF',
+  '#000AFF',
+  '#B2BFFF'
 ];
 
 const { title, description, tagsTranslated } = useShadesSeo({ tags });

@@ -8,6 +8,7 @@ export function getShadeTags(): string[] {
     'bright-blue',
     'royal-blue',
     'light-red',
-    'plum'
+    'plum',
+    'indigo'
   ];
 }
