@@ -3,7 +3,10 @@ export default {
     title: 'Generatore di tavolozze di colori',
     seoTitle: 'ColorMagic - Generatore di tavolozze di colori',
     seoDescription: 'Genera tavolozze di colori con l\'intelligenza artificiale. Inserisci qualsiasi parola chiave e genera una tavolozza di colori corrispondente.',
-    exampleLabel: 'Prova un esempio:'
+    exampleLabel: 'Prova un esempio:',
+    popularPalettes: 'Palette di colori popolari',
+    trendingPalettes: 'Palette di colori di tendenza',
+    paletteTags: 'Palette di colori per tag'
   },
   recent: {
     seoTitle: 'Recenti - ColorMagic - AI Color Palette Generator',

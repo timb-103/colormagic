@@ -3,7 +3,10 @@ export default {
     title: 'カラーパレットジェネレーター',
     seoTitle: 'ColorMagic - カラーパレットジェネレーター',
     seoDescription: 'AIでカラーパレットを生成。任意のキーワードを入力して、一致するカラー パレットを生成します。',
-    exampleLabel: '例を試してみてください:'
+    exampleLabel: '例を試してみてください:',
+    popularPalettes: '人気のカラーパレット',
+    trendingPalettes: 'トレンドのカラーパレット',
+    paletteTags: 'タグ別カラーパレット'
   },
   recent: {
     seoTitle: '最近 あなたの思い描く色をかんたんに',
