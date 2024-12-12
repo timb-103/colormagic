@@ -80,7 +80,7 @@
           title="Explore all palettes"
           trailing-icon="i-heroicons-arrow-right"
         >
-          More popular color palettes
+          {{ $t('home.popularPalettes') }}
         </UButton>
       </div>
     </div>
@@ -104,7 +104,7 @@
           title="Explore all palettes"
           trailing-icon="i-heroicons-arrow-right"
         >
-          More trending color palettes
+          {{ $t('home.trendingPalettes') }}
         </UButton>
       </div>
     </div>
@@ -134,7 +134,7 @@
           title="Explore all palettes"
           trailing-icon="i-heroicons-arrow-right"
         >
-          More color palette tags
+          {{ $t('home.paletteTags') }}
         </UButton>
       </div>
     </div>
