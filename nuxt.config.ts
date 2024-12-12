@@ -58,7 +58,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     /** @description add cache time for images to make pagespeed insights happy */
-    '/_nuxt/**': { headers: { 'cache-control': 'max-age=31536000' } },
+    // '/_nuxt/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/img/**': { headers: { 'cache-control': 'max-age=31536000' } },
     '/favorites': { redirect: { to: '/palette/liked', statusCode: 301 } },
     '/history': { redirect: { to: '/palette/liked', statusCode: 301 } },
