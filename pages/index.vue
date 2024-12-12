@@ -61,13 +61,61 @@
       <CarbonAds />
     </div>
 
+    <!-- popular palettes -->
+    <div class="mt-8">
+      <h2 class="font-semibold text-lg">
+        {{ $t('home.popularPalettes') }}
+      </h2>
+      <ExplorePalettes
+        :tags="[]"
+        :limit="6"
+        :sort-by="PaletteSortBy.POPULAR"
+        is-filters-hidden
+        is-pagination-hidden
+      />
+
+      <div class="text-center mt-4">
+        <UButton
+          :to="localePath('/palette/explore')"
+          title="Explore all palettes"
+          trailing-icon="i-heroicons-arrow-right"
+        >
+          More popular color palettes
+        </UButton>
+      </div>
+    </div>
+
+    <!-- trending palettes -->
+    <div class="mt-8">
+      <h2 class="font-semibold text-lg">
+        {{ $t('home.trendingPalettes') }}
+      </h2>
+      <ExplorePalettes
+        :tags="[]"
+        :limit="6"
+        :sort-by="PaletteSortBy.TRENDING"
+        is-filters-hidden
+        is-pagination-hidden
+      />
+
+      <div class="text-center mt-4">
+        <UButton
+          :to="localePath(`/palette/explore?sort=${PaletteSortBy.TRENDING}`)"
+          title="Explore all palettes"
+          trailing-icon="i-heroicons-arrow-right"
+        >
+          More trending color palettes
+        </UButton>
+      </div>
+    </div>
+
     <!-- palettes -->
     <div class="mt-8">
-      <p class="text-lg font-bold mb-4">
-        {{ $t('explore.seoDescription') }}
-      </p>
+      <h2 class="font-semibold text-lg">
+        {{ $t('home.paletteTags') }}
+      </h2>
 
-      <ul class="grid sm:grid-cols-3 gap-4 mb-4">
+      <ul class="grid sm:grid-cols-3 gap-4">
         <li
           v-for="(item, index) in getAllPaletteFilters().splice(0, 30)"
           :key="index"
@@ -80,14 +128,15 @@
         </li>
       </ul>
 
-      <UButton
-        block
-        to="/palette/explore"
-        title="Explore all palettes"
-        class="font-medium text-sm hover:text-primary text-gray-400"
-      >
-        Explore all palettes
-      </UButton>
+      <div class="text-center mt-4">
+        <UButton
+          :to="localePath('/palette/explore/tags')"
+          title="Explore all palettes"
+          trailing-icon="i-heroicons-arrow-right"
+        >
+          More color palette tags
+        </UButton>
+      </div>
     </div>
   </div>
 </template>
@@ -96,6 +145,7 @@
 import { object, type InferType, string } from 'yup';
 import { subDays, startOfHour } from 'date-fns';
 import type { FormSubmitEvent } from '#ui/types';
+import { PaletteSortBy } from '~/layers/palette/types';
 
 const { t } = useI18n();
 const localePath = useLocalePath();

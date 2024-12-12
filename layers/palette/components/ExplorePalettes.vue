@@ -80,15 +80,17 @@ export interface Props {
   isFiltersHidden?: boolean
   isPaginationHidden?: boolean
   limit?: number
+  sortBy?: PaletteSortBy
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isFiltersHidden: false,
   isPaginationHidden: false,
-  limit: 50
+  limit: 50,
+  sortBy: undefined
 });
 
-const sortBy = ref<PaletteSortBy>(props.tags.length === 0 ? PaletteSortBy.TRENDING : PaletteSortBy.POPULAR);
+const sortBy = ref<PaletteSortBy>(props.sortBy ?? (props.tags.length === 0 ? PaletteSortBy.TRENDING : PaletteSortBy.POPULAR));
 const listFilter = computed<ListPaletteFilterParams | undefined>(() => ({
   tags: props.tags.length > 0 ? props.tags : undefined,
   sortBy: sortBy.value

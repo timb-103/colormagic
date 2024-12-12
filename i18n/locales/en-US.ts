@@ -3,7 +3,10 @@ export default {
     title: 'Color Palette Generator',
     seoTitle: 'ColorMagic - Color Palette Generator',
     seoDescription: 'Generate color palettes with AI. Enter any keyword and generate a matching color palette.',
-    exampleLabel: 'Try an example:'
+    exampleLabel: 'Try an example:',
+    popularPalettes: 'Popular color palettes',
+    trendingPalettes: 'Trending color palettes',
+    paletteTags: 'Color palettes by tag'
   },
   recent: {
     seoTitle: 'Recent - ColorMagic - AI Color Palette Generator',
