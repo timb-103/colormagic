@@ -6,6 +6,8 @@ export function getShadeTags(): string[] {
     'cream',
     'forest-green',
     'bright-blue',
-    'royal-blue'
+    'royal-blue',
+    'light-red',
+    'plum'
   ];
 }

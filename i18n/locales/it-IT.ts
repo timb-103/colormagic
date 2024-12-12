@@ -52,7 +52,8 @@ export default {
     resetLabel: 'Reimposta',
     shareLabel: 'Condividi questa palette a:',
     shareText: 'Ho generato una palette di colori per ~',
-    relatedShades: 'Tonalità correlate a questa palette di colori'
+    relatedShades: 'Tonalità correlate a questa palette di colori',
+    similar: 'Tavolozze di colori simili'
   },
   randomColor: {
     title: 'Generatore di Colori Casuali',
@@ -144,6 +145,7 @@ export default {
     orange: 'Arancio',
     peach: 'Pesca',
     pink: 'Rosa',
+    plum: 'Prugna',
     purple: 'Viola',
     red: 'Rosso',
     sage: 'Salvia',

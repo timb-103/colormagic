@@ -32,6 +32,7 @@ export function getAllPaletteFilters(): PaletteFilter[] {
     { id: 'orange', palette: ['#FFA500', '#FF8C00', '#FF7F50', '#FF6347', '#FF4500'] },
     { id: 'peach', palette: ['#FFDAB9', '#FFE4B5', '#FFDEAD', '#F5DEB3', '#FAF0E6'] },
     { id: 'pink', palette: ['#FFC0CB', '#FFB6C1', '#FF69B4', '#FF1493', '#FF6EB4'] },
+    { id: 'plum', palette: ['#DDA0DD', '#9932CC', '#8B008B', '#D8BFD8', '#4B0082'] },
     { id: 'purple', palette: ['#800080', '#6A0DAD', '#9400D3', '#8A2BE2', '#9370DB'] },
     { id: 'red', palette: ['#FF0000', '#DC143C', '#B22222', '#CD5C5C', '#E9967A'] },
     { id: 'sage', palette: ['#BCB88A', '#B2AC75', '#A9A26B', '#9F9760', '#8E8B4E'] },
@@ -41,6 +42,7 @@ export function getAllPaletteFilters(): PaletteFilter[] {
     { id: 'violet', palette: ['#EE82EE', '#DA70D6', '#DDA0DD', '#E6E6FA', '#BA55D3'] },
     { id: 'white', palette: ['#FFFFFF', '#F8F8FF', '#F5F5F5', '#F0F0F0', '#FAFAFA'] },
     { id: 'yellow', palette: ['#FFFF00', '#FFD700', '#FFA500', '#FFAE42', '#FFE135'] },
+
     // tones
     { id: 'warm', palette: ['#FF7F50', '#FF6347', '#FF4500', '#FF8C00', '#FFD700'] },
     { id: 'cool', palette: ['#4682B4', '#5F9EA0', '#6495ED', '#00CED1', '#20B2AA'] },

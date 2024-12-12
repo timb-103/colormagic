@@ -161,6 +161,23 @@
           />
         </div>
 
+        <!-- similar palettes -->
+        <div
+          v-if="data?.tags.length > 0"
+          class="mt-8"
+        >
+          <h2 class="font-semibold text-lg">
+            {{ $t('palette.similar') }}
+          </h2>
+
+          <ExplorePalettes
+            :tags="data.tags.slice(0, 2)"
+            :limit="6"
+            is-filters-hidden
+            is-pagination-hidden
+          />
+        </div>
+
         <!-- related shades -->
         <ExploreRelatedShadesLinks
           v-if="shadeTags.length > 0"

@@ -52,7 +52,8 @@ export default {
     resetLabel: 'Reset',
     shareLabel: 'Share this palette to:',
     shareText: 'I generated a color palette for',
-    relatedShades: 'Shades related to this color palette'
+    relatedShades: 'Shades related to this color palette',
+    similar: 'Similar color palettes'
   },
   randomColor: {
     title: 'Random Color Generator',
@@ -153,6 +154,7 @@ export default {
     violet: 'Violet',
     white: 'White',
     yellow: 'Yellow',
+    plum: 'Plum',
     // Tones
     warm: 'Warm',
     cool: 'Cool',

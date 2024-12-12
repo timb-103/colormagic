@@ -52,7 +52,8 @@ export default {
     resetLabel: 'リセット',
     shareLabel: 'このパレットを共有する先：',
     shareText: '私は〜のためにカラーパレットを生成しました',
-    relatedShades: 'このカラーパレットに関連する色合い'
+    relatedShades: 'このカラーパレットに関連する色合い',
+    similar: '似たようなカラーパレット'
   },
   randomColor: {
     title: 'ランダムカラージェネレーター',
@@ -144,6 +145,7 @@ export default {
     orange: 'オレンジ',
     peach: 'ピーチ',
     pink: 'ピンク',
+    plum: '梅',
     purple: '紫',
     red: '赤',
     sage: 'セージ',
