@@ -20,7 +20,7 @@ import { PaletteSortBy } from '~/layers/palette/types';
 const { t } = useI18n();
 const { query } = useRoute();
 
-const sortBy = query?.sort as PaletteSortBy ?? PaletteSortBy.POPULAR;
+const sortBy = query?.sort as PaletteSortBy ?? PaletteSortBy.TRENDING;
 
 const { title, description } = useExploreSeo({
   title: t('explore.title'),
