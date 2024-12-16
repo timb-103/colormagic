@@ -177,6 +177,18 @@ const moreLinks = computed(() => [
   {
     label: 'GitHub',
     to: 'https://github.com/timb-103/colormagic'
+  },
+  {
+    label: 'Color Wheel',
+    to: 'https://colorwheel.co?ref=colormagic'
+  },
+  {
+    label: 'RGB HEX Code',
+    to: 'https://rgbhexcode.com?ref=colormagic'
+  },
+  {
+    label: 'Random Color',
+    to: 'https://randomcolor.com?ref=colormagic'
   }
 ]);
 </script>
