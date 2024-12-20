@@ -189,6 +189,10 @@ const moreLinks = computed(() => [
   {
     label: 'Random Color',
     to: 'https://randomcolor.com?ref=colormagic'
+  },
+  {
+    label: 'Color Palettes Inspiration',
+    to: 'https://colordrop.io?ref=colormagic'
   }
 ]);
 </script>
