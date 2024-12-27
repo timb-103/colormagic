@@ -183,16 +183,20 @@ const moreLinks = computed(() => [
     to: 'https://colorwheel.co?ref=colormagic'
   },
   {
-    label: 'RGB HEX Code',
+    label: 'Hex Code Color Picker',
     to: 'https://rgbhexcode.com?ref=colormagic'
   },
   {
-    label: 'Random Color',
+    label: 'Random Color Generator',
     to: 'https://randomcolor.com?ref=colormagic'
   },
   {
     label: 'Color Palettes Inspiration',
     to: 'https://colordrop.io?ref=colormagic'
+  },
+  {
+    label: 'Color Converter',
+    to: 'https://convertacolor.com?ref=colormagic'
   }
 ]);
 </script>
