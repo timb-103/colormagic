@@ -172,7 +172,7 @@
 
           <ExplorePalettes
             :tags="data.tags.slice(0, 2)"
-            :limit="6"
+            :limit="30"
             is-filters-hidden
             is-pagination-hidden
           />
@@ -211,19 +211,21 @@ if (data.value === undefined) {
   await navigateTo('/', { replace: true });
 }
 
-const title = computed(() => `${data.value?.text ?? 'Loading...'} - ${t('palette.seoTitle')}`);
+const title = computed(() => t('palette.seoTitle', {
+  name: data.value?.text ?? 'Loading...'
+}));
 const ogImageUrl = computed(() => (data.value !== undefined ? formatOgUrl(data.value.colors, data.value.text) : ''));
-const description = t('palette.seoDescription');
+const description = t('palette.seoDescription', {
+  name: data.value?.text.toLowerCase().trim() ?? 'Loading...',
+  colors: data.value?.colors.map(v => `${ntc.name(v)[1].toString().toLowerCase()} ${v}`).join(', ') ?? ''
+});
 
 useSeoMeta({
   title,
   description,
   ogTitle: title.value,
   ogDescription: description,
-  ogImageUrl: `${useRuntimeConfig().public.siteUrl}${ogImageUrl.value}`,
-  robots: {
-    noindex: true
-  }
+  ogImageUrl: `${useRuntimeConfig().public.siteUrl}${ogImageUrl.value}`
 });
 
 const shadeTags = getShadeTags()

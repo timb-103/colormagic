@@ -44,8 +44,8 @@ export default {
     shades: '色のシェード'
   },
   palette: {
-    seoTitle: 'あなたの思い描く色をかんたんに',
-    seoDescription: 'ColorMagicは、AIでオリジナルのカラーパレットをつくれるサービスです。\n雰囲気やイメージのキーワードから、今すぐ使える配色を簡単に生成できます',
+    seoTitle: '{name} カラーパレット',
+    seoDescription: '{colors} 色で構成される美しい {name} カラー パレット。',
     brightness: '明るさ',
     saturation: '彩度',
     warmth: '暖かさ',

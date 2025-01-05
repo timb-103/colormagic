@@ -44,8 +44,8 @@ export default {
     shades: 'Shades'
   },
   palette: {
-    seoTitle: 'ColorMagic - AI Color Palette Generator',
-    seoDescription: 'ColorMagic is a color palette generator with AI. Enter any keyword and generate a matching color palette.',
+    seoTitle: '{name} Color Palette',
+    seoDescription: 'A beautiful {name} color palette consisting of {colors}.',
     brightness: 'Brightness',
     saturation: 'Saturation',
     warmth: 'Warmth',

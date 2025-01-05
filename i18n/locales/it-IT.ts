@@ -44,8 +44,8 @@ export default {
     shades: 'Tonalità di Colore'
   },
   palette: {
-    seoTitle: 'Genera la tua palette di colori ideale',
-    seoDescription: 'ColorMagic è un generatore di palette di colori con IA. Inserisci qualsiasi parola chiave e genera una palette corrispondente.',
+    seoTitle: '{name} Tavolozza dei colori',
+    seoDescription: 'Una bellissima tavolozza di colori {name} composta da colori {colors}.',
     brightness: 'Luminosità',
     saturation: 'Saturazione',
     warmth: 'Calore',
