@@ -164,7 +164,7 @@
         <!-- download landscape PNG -->
         <div class="mt-8">
           <h2 class="font-semibold text-lg">
-            Download {{ data?.text.toLowerCase() }} color palette PNG image (landscape)
+            Download {{ data?.text.toLowerCase() }} color palette PNG image
           </h2>
 
           <img
@@ -173,18 +173,11 @@
             class="rounded-xl"
             :alt="`Download ${data?.text.toLowerCase()} color palette PNG image (landscape)`"
           >
-        </div>
-
-        <!-- download square PNG -->
-        <div class="mt-8">
-          <h2 class="font-semibold text-lg">
-            Download {{ data?.text.toLowerCase() }} color palette PNG image (square)
-          </h2>
 
           <img
             loading="lazy"
             :src="squareImageUrl"
-            class="rounded-xl max-w-md w-full"
+            class="rounded-xl max-w-md w-full mt-4"
             :alt="`Download ${data?.text.toLowerCase()} color palette PNG image (square)`"
           >
         </div>
