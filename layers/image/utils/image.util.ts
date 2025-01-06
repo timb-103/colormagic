@@ -1,5 +1,5 @@
 export function formatOgUrl(colors: string[], text: string): string {
-  return `/api/og?colors=${colors.join(':').replace(/#/g, '')}&text=${encodeURIComponent(text)}`;
+  return `/api/image?colors=${colors.join(':').replace(/#/g, '')}&text=${encodeURIComponent(text)}`;
 }
 
 export function escapeSvgText(unsafe: string): string {

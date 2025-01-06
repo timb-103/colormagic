@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
-  const query = await modules.og.validation.getThumbnailInputQuery(event);
+  const query = await modules.image.validation.getInputQuery(event);
 
-  const response = await modules.og.service.generateSquareThumbnail(
+  const response = await modules.image.service.generateSquareThumbnail(
     query.colors.split(':')
   );
 

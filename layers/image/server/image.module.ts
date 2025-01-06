@@ -1,11 +1,11 @@
 import type { Logger } from 'pino';
-import { OgService } from './services/og.service';
-import { OgValidation } from './validations/og.validation';
+import { ImageService } from './services/image.service';
+import { ImageValidation } from './validations/image.validation';
 import type { PaletteService } from '~/layers/palette/server/services/palette.service';
 
-export interface OgModule {
-  service: OgService
-  validation: OgValidation
+export interface ImageModule {
+  service: ImageService
+  validation: ImageValidation
 }
 
 /**
@@ -13,14 +13,14 @@ export interface OgModule {
  * - can be used in api globally eg. `modules.notification.service.getById()`
  */
 
-export function getOgModule(
+export function getImageModule(
   logger: Logger,
   paletteService: PaletteService
-): OgModule {
-  logger.info('initializing og module');
+): ImageModule {
+  logger.info('initializing image module');
 
-  const service = new OgService(paletteService);
-  const validation = new OgValidation();
+  const service = new ImageService(paletteService);
+  const validation = new ImageValidation();
 
   return {
     service,

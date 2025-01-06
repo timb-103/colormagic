@@ -161,6 +161,19 @@
           />
         </div>
 
+        <!-- download PNG -->
+        <div class="mt-8">
+          <h2 class="font-semibold text-lg">
+            Download {{ data?.text }} PNG (1200W x 630H)
+          </h2>
+
+          <img
+            :src="ogImageUrl"
+            class="rounded-xl"
+            :alt="`Download {{ data?.text }} PNG (1200W x 630H)`"
+          >
+        </div>
+
         <!-- similar palettes -->
         <div
           v-if="data?.tags.length > 0"
@@ -214,10 +227,14 @@ if (data.value === undefined) {
 const title = computed(() => t('palette.seoTitle', {
   name: data.value?.text ?? 'Loading...'
 }));
-const ogImageUrl = computed(() => (data.value !== undefined ? formatOgUrl(data.value.colors, data.value.text) : ''));
+
+const ogImageUrl = `${useRuntimeConfig().public.siteUrl}/api/image/id/${id.value}`;
+
 const description = t('palette.seoDescription', {
   name: data.value?.text.toLowerCase().trim() ?? 'Loading...',
-  colors: data.value?.colors.map(v => `${ntc.name(v)[1].toString().toLowerCase()} ${v}`).join(', ') ?? ''
+  colors: data.value?.colors
+    .map(v => `${ntc.name(v)[1].toString().toLowerCase()} ${v}`)
+    .join(', ') ?? ''
 });
 
 useSeoMeta({
@@ -225,7 +242,7 @@ useSeoMeta({
   description,
   ogTitle: title.value,
   ogDescription: description,
-  ogImageUrl: `${useRuntimeConfig().public.siteUrl}${ogImageUrl.value}`
+  ogImageUrl
 });
 
 const shadeTags = getShadeTags()

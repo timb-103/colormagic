@@ -1,17 +1,13 @@
 <template>
   <div>
-    <!-- header-->
-    <div class="mb-8 flex flex-col sm:flex-row gap-8">
-      <img
-        v-if="palette !== undefined"
-        :src="thumbnailUrl"
-        width="150px"
-        height="150px"
-        class="max-w-20 sm:max-w-full rounded-xl"
-        :alt="title"
-      >
+    <!-- ads -->
+    <div class="mb-4">
+      <CarbonAds />
+    </div>
 
-      <div>
+    <!-- header-->
+    <div class="mb-8 flex flex-col gap-8">
+      <div class="">
         <!-- title -->
         <h1 class="capitalize">
           {{ title }}
@@ -28,11 +24,6 @@
         </p>
       </div>
     </div>
-
-    <!-- ads -->
-    <div class="mb-4">
-      <CarbonAds />
-    </div>
   </div>
 </template>
 
@@ -43,15 +34,7 @@ export interface Props {
   tags?: string[]
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const { data: count } = usePaletteCount();
-
-const tagsString = props.tags?.join('-');
-const palette = getAllPaletteFilters().find(v => tagsString?.includes(v.id))?.palette;
-
-const colorsHexFormatted = palette?.join(':').replace(/#/g, '');
-
-const thumbnailBaseUrl = `${useRuntimeConfig().public.siteUrl}/api/og/thumbnail.png`;
-const thumbnailUrl = `${thumbnailBaseUrl}?colors=${colorsHexFormatted}`;
 </script>

@@ -14,8 +14,7 @@ export function useExploreSeo(params: ExploreSeoParams): { title: string, descri
 
   const description = t('explore.seoDescription', { tag: tagsTranslated.join(' ').toLowerCase() });
 
-  const ogImageBaseUrl = `${useRuntimeConfig().public.siteUrl}/api/og/tag`;
-  const ogImageUrl = `${ogImageBaseUrl}?tag=${params.tags?.[0] ?? ''}&text=${title}`;
+  const ogImageUrl = `${useRuntimeConfig().public.siteUrl}/api/image/tag/${params.tags?.[0]}`;
 
   useSeoMeta({
     title: `${params.title ?? title} - ColorMagic`,
