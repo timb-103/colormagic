@@ -21,7 +21,11 @@ export class ImageValidation {
     return validateParams(event, ImageByTagInputDtoSchema);
   }
 
-  public async getByIdParams(event: H3Event): Promise<ImageByIdInputDto> {
-    return validateParams(event, ImageByIdInputDtoSchema);
+  public async getByIdParams(event: H3Event): Promise<ImageByIdInputDto['params']> {
+    return validateParams(event, ImageByIdInputDtoSchema.properties.params);
+  }
+
+  public async getByIdQuery(event: H3Event): Promise<ImageByIdInputDto['query']> {
+    return validateQuery(event, ImageByIdInputDtoSchema.properties.query);
   }
 }

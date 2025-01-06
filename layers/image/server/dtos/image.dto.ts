@@ -8,7 +8,13 @@ export const ImageByColorsInputDtoSchema = Type.Object({
 export type ImageByColorsInputDto = Static<typeof ImageByColorsInputDtoSchema>;
 
 export const ImageByIdInputDtoSchema = Type.Object({
-  id: Type.String()
+  params: Type.Object({
+    id: Type.String()
+  }),
+  query: Type.Optional(Type.Object({
+    width: Type.Optional(Type.String()),
+    height: Type.Optional(Type.String())
+  }))
 });
 
 export type ImageByIdInputDto = Static<typeof ImageByIdInputDtoSchema>;

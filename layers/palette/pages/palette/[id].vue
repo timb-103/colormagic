@@ -161,16 +161,31 @@
           />
         </div>
 
-        <!-- download PNG -->
+        <!-- download landscape PNG -->
         <div class="mt-8">
           <h2 class="font-semibold text-lg">
-            Download {{ data?.text }} PNG (1200W x 630H)
+            Download {{ data?.text.toLowerCase() }} color palette PNG image (landscape)
           </h2>
 
           <img
-            :src="ogImageUrl"
+            loading="lazy"
+            :src="landscapeImageUrl"
             class="rounded-xl"
-            :alt="`Download {{ data?.text }} PNG (1200W x 630H)`"
+            :alt="`Download ${data?.text.toLowerCase()} color palette PNG image (landscape)`"
+          >
+        </div>
+
+        <!-- download square PNG -->
+        <div class="mt-8">
+          <h2 class="font-semibold text-lg">
+            Download {{ data?.text.toLowerCase() }} color palette PNG image (square)
+          </h2>
+
+          <img
+            loading="lazy"
+            :src="squareImageUrl"
+            class="rounded-xl max-w-md w-full"
+            :alt="`Download ${data?.text.toLowerCase()} color palette PNG image (square)`"
           >
         </div>
 
@@ -228,7 +243,8 @@ const title = computed(() => t('palette.seoTitle', {
   name: data.value?.text ?? 'Loading...'
 }));
 
-const ogImageUrl = `${useRuntimeConfig().public.siteUrl}/api/image/id/${id.value}`;
+const landscapeImageUrl = `${useRuntimeConfig().public.siteUrl}/api/image/id/${id.value}`;
+const squareImageUrl = `${useRuntimeConfig().public.siteUrl}/api/image/id/${id.value}?width=1080&height=1080`;
 
 const description = t('palette.seoDescription', {
   name: data.value?.text.toLowerCase().trim() ?? 'Loading...',
@@ -242,7 +258,7 @@ useSeoMeta({
   description,
   ogTitle: title.value,
   ogDescription: description,
-  ogImageUrl
+  ogImageUrl: landscapeImageUrl
 });
 
 const shadeTags = getShadeTags()

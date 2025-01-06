@@ -32,10 +32,10 @@ export class ImageService {
     return svg;
   }
 
-  public async generateById(id: string): Promise<Buffer> {
+  public async generateById(id: string, params?: { width: number, height: number }): Promise<Buffer> {
     const palette = await this.paletteService.getById(id);
 
-    const svg = await this.generateSVG(palette.colors);
+    const svg = await this.generateSVG(palette.colors, params);
     const pngBuffer = await sharp(Buffer.from(svg)).png().toBuffer();
 
     return pngBuffer;
