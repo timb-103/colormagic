@@ -165,7 +165,7 @@ const notifications = useNotifications();
 const { mutate: create, isPending } = useCreatePalette();
 // const { data: count, suspense } = usePaletteCount(startOfHour(subDays(new Date(), 1)));
 
-await suspense();
+// await suspense();
 
 const state = ref({
   prompt: ''
