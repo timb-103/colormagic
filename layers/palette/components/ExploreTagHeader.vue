@@ -19,9 +19,9 @@
         </p>
 
         <!-- count of palettes generated -->
-        <p class="italic text-xs">
+        <!-- <p class="italic text-xs">
           {{ count?.count.toLocaleString() ?? 0 }} color palettes generated
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
@@ -36,5 +36,5 @@ export interface Props {
 
 defineProps<Props>();
 
-const { data: count } = usePaletteCount();
+// const { data: count } = usePaletteCount();
 </script>

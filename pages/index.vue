@@ -52,9 +52,9 @@
       />
 
       <!-- count of palettes generated -->
-      <p class="italic text-xs text-center">
+      <!-- <p class="italic text-xs text-center">
         {{ count?.count.toLocaleString() ?? 0 }} color palettes generated since yesterday
-      </p>
+      </p> -->
     </UForm>
 
     <div class="my-4">
@@ -143,7 +143,7 @@
 
 <script setup lang="ts">
 import { object, type InferType, string } from 'yup';
-import { subDays, startOfHour } from 'date-fns';
+// import { subDays, startOfHour } from 'date-fns';
 import type { FormSubmitEvent } from '#ui/types';
 import { PaletteSortBy } from '~/layers/palette/types';
 
@@ -163,7 +163,7 @@ useSeoMeta({
 
 const notifications = useNotifications();
 const { mutate: create, isPending } = useCreatePalette();
-const { data: count, suspense } = usePaletteCount(startOfHour(subDays(new Date(), 1)));
+// const { data: count, suspense } = usePaletteCount(startOfHour(subDays(new Date(), 1)));
 
 await suspense();
 
