@@ -25,9 +25,10 @@ export class PaletteService {
     const colFilter: Filter<PaletteEntity> = {};
     let sort: Sort = { createdAt: -1 };
 
+    /** @todo fix frontend to only allow 3 tags at a time */
     if (filter.tags !== undefined && filter.tags.length > 0) {
       colFilter.tags = {
-        $all: filter.tags
+        $all: filter.tags.slice(0, 3)
       };
     }
 
