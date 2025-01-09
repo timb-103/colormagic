@@ -40,12 +40,6 @@ export const ListPaletteDtoSchema = Type.Object({
 
 export type ListPaletteDto = Static<typeof ListPaletteDtoSchema>;
 
-export const CountPaletteInputDtoSchema = Type.Object({
-  fromDate: Type.Optional(Type.String({ format: 'date-time' }))
-});
-
-export type CountPaletteInputDto = Static<typeof CountPaletteInputDtoSchema>;
-
 export const CountPaletteDtoSchema = Type.Object({
   count: Type.Number()
 });

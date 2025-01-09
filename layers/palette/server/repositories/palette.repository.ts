@@ -28,8 +28,8 @@ export class PaletteRepository {
       .toArray();
   }
 
-  public async count(filter?: Filter<PaletteEntity>): Promise<number> {
-    return await this.collection.countDocuments(filter);
+  public async count(): Promise<number> {
+    return await this.collection.estimatedDocumentCount();
   }
 
   public async getById(id: string): Promise<PaletteEntity | null> {

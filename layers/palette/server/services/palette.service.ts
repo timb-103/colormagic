@@ -135,16 +135,8 @@ export class PaletteService {
     return mapPaletteEntityToDto(entity);
   }
 
-  public async count(from?: Date): Promise<number> {
-    const filter: Filter<PaletteEntity> = {};
-
-    if (from !== undefined) {
-      filter.createdAt = {
-        $gte: from
-      };
-    }
-
-    return await this.repository.count(filter);
+  public async count(): Promise<number> {
+    return await this.repository.count();
   }
 
   public async likeById(userId: string, id: string): Promise<void> {

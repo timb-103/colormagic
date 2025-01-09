@@ -1,8 +1,7 @@
 import { type H3Event } from 'h3';
 import {
-  ClonePaletteInputParamsDtoSchema, ClonePaletteInputQueryDtoSchema, CountPaletteInputDtoSchema, CreatePaletteInputDtoSchema,
+  ClonePaletteInputParamsDtoSchema, ClonePaletteInputQueryDtoSchema, CreatePaletteInputDtoSchema,
   ListPaletteInputDtoSchema, PaletteInputDtoSchema, type ClonePaletteInputParamsDto, type ClonePaletteInputQueryDto,
-  type CountPaletteInputDto,
   type CreatePaletteInputDto, type ListPaletteInputDto, type PaletteInputDto
 } from '../dtos/palette.dto';
 import {
@@ -14,10 +13,6 @@ import { validateBody, validateParams, validateQuery } from '~/layers/common/uti
 export class PaletteValidation {
   public async getCreateInputQuery(event: H3Event): Promise<CreatePaletteInputDto> {
     return validateQuery(event, CreatePaletteInputDtoSchema);
-  }
-
-  public async getCountInputQuery(event: H3Event): Promise<CountPaletteInputDto> {
-    return validateQuery(event, CountPaletteInputDtoSchema, { includeAjvFormats: true });
   }
 
   public async getInputBody(event: H3Event): Promise<PaletteInputDto> {

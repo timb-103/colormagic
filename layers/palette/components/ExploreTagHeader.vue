@@ -17,11 +17,6 @@
         <p class="text-xl font-medium mb-4 max-w-xl">
           {{ description }}
         </p>
-
-        <!-- count of palettes generated -->
-        <!-- <p class="italic text-xs">
-          {{ count?.count.toLocaleString() ?? 0 }} color palettes generated
-        </p> -->
       </div>
     </div>
   </div>
@@ -35,6 +30,4 @@ export interface Props {
 }
 
 defineProps<Props>();
-
-// const { data: count } = usePaletteCount();
 </script>
