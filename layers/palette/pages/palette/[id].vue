@@ -35,24 +35,7 @@
             {{ data?.text }}
           </h1>
 
-          <!-- save button -->
-          <div
-            v-if="hasChanges"
-            class="flex items-center gap-2"
-          >
-            <UButton
-              :label="$t('palette.resetLabel')"
-              @click="resetArrange()"
-            />
-            <UButton
-              type="submit"
-              color="primary"
-              :label="$t('palette.saveLabel')"
-              :loading="isCloning"
-              @click="onSave()"
-            />
-          </div>
-          <div v-else>
+          <div>
             <ColorLikeButton
               :is-liked="data.isLiked === true"
               :likes-count="data.likesCount"
@@ -147,6 +130,24 @@
         <!-- arrange sliders-->
         <div class="border border-gray-200 rounded-xl p-4">
           <ColorArrangeSliders v-model="arrange" />
+
+          <!-- save button -->
+          <div
+            v-if="hasChanges"
+            class="flex items-center gap-2 mt-2 justify-end"
+          >
+            <UButton
+              :label="$t('palette.resetLabel')"
+              @click="resetArrange()"
+            />
+            <UButton
+              type="submit"
+              color="primary"
+              :label="$t('palette.saveLabel')"
+              :loading="isCloning"
+              @click="onSave()"
+            />
+          </div>
         </div>
 
         <!-- share buttons -->
@@ -163,7 +164,7 @@
 
         <!-- download landscape PNG -->
         <div class="mt-8">
-          <h2 class="font-semibold text-lg">
+          <h2 class="font-semibold text-lg capitalize">
             {{ $t('palette.png', { name: data?.text }) }}
           </h2>
 
@@ -184,7 +185,7 @@
 
         <!-- CSS -->
         <div class="mt-8">
-          <h2 class="font-semibold text-lg">
+          <h2 class="font-semibold text-lg capitalize">
             {{ $t('palette.css', { name: data?.text }) }}
           </h2>
 
@@ -193,7 +194,7 @@
 
         <!-- Grdadient background CSS -->
         <div class="mt-8">
-          <h2 class="font-semibold text-lg">
+          <h2 class="font-semibold text-lg capitalize">
             {{ $t('palette.gradientCss', { name: data?.text }) }}
           </h2>
 
@@ -205,7 +206,7 @@
           v-if="data?.tags.length > 0"
           class="mt-8"
         >
-          <h2 class="font-semibold text-lg">
+          <h2 class="font-semibold text-lg capitalize">
             {{ $t('palette.similar') }}
           </h2>
 

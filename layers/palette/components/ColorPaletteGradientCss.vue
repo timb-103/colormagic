@@ -1,43 +1,60 @@
 <template>
-  <div class="border bg-gray-50 border-gray-300 text-gray-800 p-4 rounded-lg">
-    <code
-      id="gradient-css-codeblock"
-      class="block text-sm"
-    >
-
-      <!-- Linear Gradient -->
-      <span class="text-green-600">/* Linear Gradient */</span><br><br>
-
+  <div>
+    <div class="border border-gray-300 rounded-lg overflow-hidden">
       <div
-        class="w-full h-16 rounded"
-        :style="{ background: `linear-gradient(to right, ${colors.join(', ')})` }"
-      /><br>
+        class="w-full h-24 border-b border-gray-300"
+        :style="{ background: `linear-gradient(0.25turn, ${colors.join(', ')})` }"
+      />
 
-      <span class="text-purple-600">.linear-gradient</span> {<br>
-      <span class="whitespace-pre">{{ `  ` }}</span>background:
-      <span class="text-blue-600">linear-gradient(to right, {{ colors.join(', ') }});</span><br>
-      }<br><br>
+      <div class=" bg-gray-50  text-gray-800 p-4">
+        <code
+          id="linear-gradient-css-codeblock"
+          class="block text-sm"
+        >
+          <!-- Linear Gradient -->
+          <span class="text-green-600">/* Linear Gradient */</span><br>
+          <span class="text-purple-600">.linear-gradient</span> {<br>
+          <span class="whitespace-pre">{{ `  ` }}</span>background:
+          <span class="text-blue-600">linear-gradient(0.25turn, {{ colors.join(', ') }});</span><br>
+          }
+        </code>
 
-      <!-- Radial Gradient -->
-      <span class="text-green-600">/* Radial Gradient */</span><br><br>
+        <UButton
+          class="mt-4"
+          label="Copy Linear Gradient CSS"
+          block
+          @click="copyCss('linear-gradient-css-codeblock')"
+        />
+      </div>
+    </div>
 
+    <div class="border border-gray-300 rounded-lg overflow-hidden mt-4">
       <div
-        class="w-full h-16 rounded"
+        class="w-full h-24 border-b border-gray-300"
         :style="{ background: `radial-gradient(circle, ${colors.join(', ')})` }"
-      /><br>
+      />
 
-      <span class="text-purple-600">.radial-gradient</span> {<br>
-      <span class="whitespace-pre">{{ `  ` }}</span>background:
-      <span class="text-blue-600">radial-gradient(circle, {{ colors.join(', ') }});</span><br>
-      }<br>
-    </code>
+      <div class="bg-gray-50 text-gray-800 p-4">
+        <code
+          id="radial-gradient-css-codeblock"
+          class="block text-sm"
+        >
+          <!-- Radial Gradient -->
+          <span class="text-green-600">/* Radial Gradient */</span><br>
+          <span class="text-purple-600">.radial-gradient</span> {<br>
+          <span class="whitespace-pre">{{ `  ` }}</span>background:
+          <span class="text-blue-600">radial-gradient(circle, {{ colors.join(', ') }});</span><br>
+          }
+        </code>
 
-    <UButton
-      class="mt-4"
-      label="Copy Gradient CSS"
-      block
-      @click="copyCss()"
-    />
+        <UButton
+          class="mt-4"
+          label="Copy Radial Gradient CSS"
+          block
+          @click="copyCss('radial-gradient-css-codeblock')"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -53,8 +70,8 @@ defineProps<Props>();
 const { copy } = useClipboard();
 const notifications = useNotifications();
 
-async function copyCss(): Promise<void> {
-  const el = document.getElementById('gradient-css-codeblock');
+async function copyCss(id: string): Promise<void> {
+  const el = document.getElementById(id);
   if (el !== null) {
     const text = el.innerText;
     await copy(text);

@@ -58,7 +58,7 @@ export default {
     relatedShades: 'このカラーパレットに関連する色合い',
     similar: '似たようなカラーパレット',
     css: '{name} カラーパレット CSS',
-    gradientCss: '{name} カラー パレット グラデーション CSS',
+    gradientCss: '{name}のグラデーションCSS',
     png: '{name} カラー パレット PNG 画像'
   },
   randomColor: {
