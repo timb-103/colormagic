@@ -28,7 +28,7 @@ export class PaletteService {
     /** @todo fix frontend to only allow 3 tags at a time */
     if (filter.tags !== undefined && filter.tags.length > 0) {
       colFilter.tags = {
-        $all: filter.tags.slice(0, 3)
+        $all: filter.tags.slice(0, 2)
       };
     }
 

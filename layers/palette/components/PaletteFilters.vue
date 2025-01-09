@@ -9,7 +9,10 @@
           by="id"
           :placeholder="$t('explore.color')"
           searchable
-          :options="options"
+          :options="options.map(v => ({
+            ...v,
+            disabled: !selected.some(y => y.id === v.id) && selected.length >= 2
+          }))"
           :popper="{
             placement: 'bottom-start'
           }"
