@@ -36,7 +36,7 @@ export function mapCreatePalettePrompt(prompt: string): string {
   value += 'Align the tones. Avoid really close hues (can be a bit close). Eg. "sunset" would be #1e507b #4f6187 #8587a3 #f1b341 #d63f2e';
   value += 'If the input is hex colors then generate a similar palette. Doesn\'t have to be exactly the same, make it nicer.';
   value += 'Also create a name for this palette (can use input for it if not rude) and format like this: [name:Beach] or [name:Red Car]';
-  value += 'Also create up to 10 tags we can use for filtering, including a tag for each color and format like this: [tags:beach,sand,blue,warm,dark] etc.';
+  value += 'Also create up to 5 tags we can use for filtering, including a tag for each color and format like this: [tags:beach,sand,blue,warm,dark] etc.';
   /** @description use the filter color tags so it knows some good examples */
   value += `Here's some example tags: ${getAllPaletteFilters().map(color => color.id).join(',')}`;
   value += 'Never include "palette" as a tag.';
