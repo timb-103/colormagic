@@ -168,19 +168,33 @@
             {{ $t('palette.png', { name: data?.text }) }}
           </h2>
 
-          <img
-            loading="lazy"
-            :src="landscapeImageUrl"
-            class="rounded-xl"
-            :alt="`Download ${data?.text.toLowerCase()} color palette PNG image (landscape)`"
-          >
+          <div class="relative">
+            <img
+              loading="lazy"
+              :src="landscapeImageUrl"
+              class="rounded-xl"
+              :alt="`Download ${data?.text.toLowerCase()} color palette PNG image (landscape)`"
+            >
+            <UButton
+              label="Download PNG"
+              class="absolute bottom-4 right-4"
+              @click="downloadImage(landscapeImageUrl)"
+            />
+          </div>
 
-          <img
-            loading="lazy"
-            :src="squareImageUrl"
-            class="rounded-xl max-w-md w-full mt-4"
-            :alt="`Download ${data?.text.toLowerCase()} color palette PNG image (square)`"
-          >
+          <div class="relative max-w-md w-full">
+            <img
+              loading="lazy"
+              :src="squareImageUrl"
+              class="rounded-xl w-full mt-4"
+              :alt="`Download ${data?.text.toLowerCase()} color palette PNG image (square)`"
+            >
+            <UButton
+              label="Download PNG"
+              class="absolute bottom-4 right-4"
+              @click="downloadImage(squareImageUrl)"
+            />
+          </div>
         </div>
 
         <!-- CSS -->
@@ -305,6 +319,16 @@ const arrangedColors = computed(() => arrangeColors(colors.value, {
   saturation: arrange.value.saturation,
   warmth: arrange.value.warmth
 }));
+
+function downloadImage(imageUrl: string): void {
+  const link = document.createElement('a');
+  link.href = imageUrl;
+  link.download = 'palette.png';
+  link.target = '_blank';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
 function resetArrange(): void {
   arrange.value.brightness = 0;
