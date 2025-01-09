@@ -18,5 +18,8 @@ Disallow:
 User-agent: AhrefsSiteAudit
 Disallow:
 
+User-agent: AhrefsBot
+​Disallow:
+
 User-agent: archive.org_bot
 Disallow:
