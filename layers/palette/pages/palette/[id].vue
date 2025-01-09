@@ -211,8 +211,8 @@
           </h2>
 
           <ExplorePalettes
-            :tags="data.tags.slice(0, 2)"
-            :limit="30"
+            :tags="data.tags.slice(0, 1)"
+            :limit="18"
             is-filters-hidden
             is-pagination-hidden
           />
