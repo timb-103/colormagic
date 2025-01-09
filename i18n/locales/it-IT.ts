@@ -58,6 +58,7 @@ export default {
     relatedShades: 'Tonalità correlate a questa palette di colori',
     similar: 'Tavolozze di colori simili',
     css: 'tavolozza dei colori {name} CSS',
+    gradientCss: '{name} tavolozza colori gradiente CSS',
     png: 'Immagine PNG della tavolozza dei colori {name}'
   },
   randomColor: {

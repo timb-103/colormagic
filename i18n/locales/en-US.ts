@@ -58,6 +58,7 @@ export default {
     relatedShades: 'Shades related to this color palette',
     similar: 'Similar color palettes',
     css: '{name} color palette CSS',
+    gradientCss: '{name} color palette gradient CSS',
     png: '{name} color palette PNG image'
   },
   randomColor: {

@@ -191,6 +191,15 @@
           <ColorPaletteCss :colors="data.colors" />
         </div>
 
+        <!-- Grdadient background CSS -->
+        <div class="mt-8">
+          <h2 class="font-semibold text-lg">
+            {{ $t('palette.gradientCss', { name: data?.text }) }}
+          </h2>
+
+          <ColorPaletteGradientCss :colors="data.colors" />
+        </div>
+
         <!-- similar palettes -->
         <div
           v-if="data?.tags.length > 0"

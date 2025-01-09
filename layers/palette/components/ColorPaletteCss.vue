@@ -69,30 +69,3 @@ async function copyCss(): Promise<void> {
   }
 }
 </script>
-
-<style>/* CSS */
-.color-0 {
-  color: #f8ccb9;
-}
-.color-1 {
-  color: #f1a7c8;
-}
-.color-2 {
-  color: #e698b4;
-}
-.color-3 {
-  color: #d599eb;
-}
-.color-4 {
-  color: #a4c4e5;
-}
-
-/* CSS Variables */
-:root {
-  --color-0: #f8ccb9;
-  --color-1: #f1a7c8;
-  --color-2: #e698b4;
-  --color-3: #d599eb;
-  --color-4: #a4c4e5;
-}
-</style>
