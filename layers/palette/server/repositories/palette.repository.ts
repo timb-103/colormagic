@@ -17,15 +17,18 @@ export class PaletteRepository {
       key: { likesCount: -1 }
     }, {
       key: { tags: 1, createdAt: -1 }
+    }, {
+      key: { tags: 1, likesCount: -1 }
     }], { background: true });
   }
 
   public async list(page: number, size: number, filter: Filter<PaletteEntity>, sort: Sort): Promise<PaletteEntity[]> {
-    return await this.collection.find(filter)
-      .sort(sort)
-      .skip(page * size)
-      .limit(size)
-      .toArray();
+    return await this.collection.aggregate<PaletteEntity>([
+      { $match: filter },
+      { $sort: sort },
+      { $skip: page * size },
+      { $limit: size }
+    ]).toArray();
   }
 
   public async count(): Promise<number> {
