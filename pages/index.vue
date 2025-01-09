@@ -52,9 +52,9 @@
       />
 
       <!-- count of palettes generated -->
-      <p class="italic text-xs text-center">
+      <!-- <p class="italic text-xs text-center">
         {{ count?.count.toLocaleString() ?? 0 }} color palettes generated
-      </p>
+      </p> -->
     </UForm>
 
     <div class="my-4">
@@ -162,9 +162,9 @@ useSeoMeta({
 
 const notifications = useNotifications();
 const { mutate: create, isPending } = useCreatePalette();
-const { data: count, suspense } = usePaletteCount();
+// const { data: count, suspense } = usePaletteCount();
 
-await suspense();
+// await suspense();
 
 const state = ref({
   prompt: ''
