@@ -212,7 +212,7 @@
 
           <ExplorePalettes
             :tags="data.tags.slice(0, 2)"
-            :limit="30"
+            :limit="9"
             is-filters-hidden
             is-pagination-hidden
           />
