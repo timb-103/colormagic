@@ -56,7 +56,9 @@ export default {
     shareLabel: 'Share this palette to:',
     shareText: 'I generated a color palette for',
     relatedShades: 'Shades related to this color palette',
-    similar: 'Similar color palettes'
+    similar: 'Similar color palettes',
+    css: '{name} color palette CSS',
+    png: '{name} color palette PNG image'
   },
   randomColor: {
     title: 'Random Color Generator',

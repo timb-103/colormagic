@@ -56,7 +56,9 @@ export default {
     shareLabel: 'このパレットを共有する先：',
     shareText: '私は〜のためにカラーパレットを生成しました',
     relatedShades: 'このカラーパレットに関連する色合い',
-    similar: '似たようなカラーパレット'
+    similar: '似たようなカラーパレット',
+    css: '{name} カラーパレット CSS',
+    png: '{name} カラー パレット PNG 画像'
   },
   randomColor: {
     title: 'ランダムカラージェネレーター',

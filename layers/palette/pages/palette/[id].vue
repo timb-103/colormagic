@@ -164,7 +164,7 @@
         <!-- download landscape PNG -->
         <div class="mt-8">
           <h2 class="font-semibold text-lg">
-            Download {{ data?.text.toLowerCase() }} color palette PNG image
+            {{ $t('palette.png', { name: data?.text }) }}
           </h2>
 
           <img
@@ -180,6 +180,15 @@
             class="rounded-xl max-w-md w-full mt-4"
             :alt="`Download ${data?.text.toLowerCase()} color palette PNG image (square)`"
           >
+        </div>
+
+        <!-- CSS -->
+        <div class="mt-8">
+          <h2 class="font-semibold text-lg">
+            {{ $t('palette.css', { name: data?.text }) }}
+          </h2>
+
+          <ColorPaletteCss :colors="data.colors" />
         </div>
 
         <!-- similar palettes -->

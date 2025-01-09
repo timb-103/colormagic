@@ -56,7 +56,9 @@ export default {
     shareLabel: 'Condividi questa palette a:',
     shareText: 'Ho generato una palette di colori per ~',
     relatedShades: 'Tonalità correlate a questa palette di colori',
-    similar: 'Tavolozze di colori simili'
+    similar: 'Tavolozze di colori simili',
+    css: 'tavolozza dei colori {name} CSS',
+    png: 'Immagine PNG della tavolozza dei colori {name}'
   },
   randomColor: {
     title: 'Generatore di Colori Casuali',
